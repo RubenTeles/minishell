@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 19:03:04 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/19 19:35:58 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/19 19:38:06 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ struct s_terminal {
 	int		(*count_env)();
 	void	(*unset)(char *input);
 	void	(*destroy)();
-
-
 };
 
 //----Utils----//
