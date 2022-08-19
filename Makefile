@@ -6,7 +6,7 @@
 #    By: rteles <rteles@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 18:52:37 by ede-alme          #+#    #+#              #
-#    Updated: 2022/08/19 00:00:27 by rteles           ###   ########.fr        #
+#    Updated: 2022/08/19 18:29:29 by rteles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ INC_PATH = ./includes/
 SRC_NAME = 	main.c \
 			ft_split.c \
 			ft_strnstr.c \
+			create_terminal.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

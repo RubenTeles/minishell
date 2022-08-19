@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 18:50:21 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/18 23:59:20 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/19 18:37:38 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ char	*ft_creatword(char const *s, int lenword, int index)
 	int		i;
 
 	i = 0;
-	substr = (char *)malloc((lenword + 1) * sizeof(char));
+	substr = (char *)malloc((lenword + 2) * sizeof(char));
 	if (substr == 0)
 		return (0);
-	substr[lenword] = '\0';
+	substr[lenword] = '/';
+	substr[lenword + 1] = '\0';
 	index -= lenword;
 	while (i < lenword)
 	{

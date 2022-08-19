@@ -21,3 +21,11 @@ return:
 0 = significando esperar por qualquer processo filho cujo ID do grupo de processos seja igual ao do processo de chamada.
 
 > 0 = significando esperar pelo filho cujo ID do processo é igual ao valor de pid .
+---------
+access - verifica se existe no path;
+
+
+----
+Divisao do Trabalho
+
+https://mywiki.wooledge.org/BashParser

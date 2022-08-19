@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include <minishell.h>
 
 size_t	ft_strlen(const char *string)
 {
@@ -31,4 +31,47 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (0);
+}
+
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size == 0)
+	{
+		while (src[i])
+			i++;
+		return (i);
+	}
+	while (i < size - 1 && src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	if (i < size)
+		dest[i] = '\0';
+	while (src[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	int		i;
+	int		a;
+	int		len;
+
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	i = ft_strlen(s1);
+	a = ft_strlen(s2);
+	len = a + i;
+	str = (char *)malloc((len + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	ft_strlcpy(&str[0], s1, i + 1);
+	ft_strlcpy(&str[i], s2, a + 1);
+	return (str);
 }
