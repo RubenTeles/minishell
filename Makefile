@@ -3,23 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+         #
+#    By: rteles <rteles@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 18:52:37 by ede-alme          #+#    #+#              #
-#    Updated: 2022/08/19 19:57:55 by ede-alme         ###   ########.fr        #
+#    Updated: 2022/08/20 20:29:49 by rteles           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC_PATH = ./srcs/
+SRC_PATH_TERM = ./srcs/terminal/
+SRC_PATH_STRING = ./srcs/string/
 OBJ_PATH = ./objs/
 INC_PATH = ./includes/
 
 SRC_NAME = 	main.c \
-			#ft_split.c \
-			#ft_strnstr.c \
-			#create_terminal.c \
+			ft_string.c \
+			ft_string_2.c \
+			ft_string_4.c \
+			ft_string_3.c \
+			create_terminal.c \
+			terminal_methods.c \
+			terminal_methods_2.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

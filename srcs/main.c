@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/19 19:58:06 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/08/20 20:52:27 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
+#include <ft_string.h>
 
 /*void	create_path_comands(t_terminal *rules, char **env, int i)
 {
@@ -27,7 +27,7 @@
 	}
 	rules->comands_path = 0;
 }*/
-/*
+
 void	execute(t_terminal *rules, char **env)
 {
 	int		pid_t;
@@ -42,24 +42,29 @@ void	execute(t_terminal *rules, char **env)
 	else
 		exit(1);
 }
-*/
+
 int	main(int argc, char **argv, char **env)
 {
-	//t_terminal rules;
+	t_terminal rules;
 	char	*line;
-	//int		i;
+	char	*var;
+	char	*var2;
+	int		i;
 
 	(void)argc;
 	(void)argv;
-	line = NULL;
-	//new_terminal("The Best: ", env);
+	new_terminal("The Best: ", env);
 	while (1)
 	{
-		line = readline("Teste_prompt$ ");
-		if (line)
-			break;
+		line = readline(terminal()->title);
+		var = string()->sub_str_chars(line, 'o', '$');
+		printf("%s \n", var);
+		var2 = string()->sub_str_chars(line, '$', '$');
+		printf("%s \n", var2);
+		free(var);
+		free(var2);
 	}
-	printf("%s\n", line);
+	
 	/*while(terminal()->path[++i])
 		printf("%s \n", terminal()->path[i]);*/
 
@@ -68,6 +73,7 @@ int	main(int argc, char **argv, char **env)
 	//execute(&rules, env);
 	/*while (rules.comands_path[++i])
 		printf("%s \n", rules.comands_path[i]);*/
+	terminal()->destroy();
 	return (0);
 }
 /*
