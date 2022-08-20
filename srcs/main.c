@@ -6,7 +6,7 @@
 /*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/20 20:02:46 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/08/20 21:27:02 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ char	*ft_get_string(t_input *input, int *i)
 	len = 0;
 	while (input->line[*i + len] && input->line[*i + len] != ' ')
 	{
-		if (input->line[*i + len] == '"')
-			while (input->line[*i + len] && input->line[*i + len] != '"')
-				len++;
-		else
-			len++;
+		len++;
+		if (input->line[*i + len - 1] == 39)
+			while (input->line[*i + len] && input->line[*i + len++] != 39)
+				;
 	}
 	out = malloc(sizeof(char) * len + 1);
 	out[len] = '\0';
@@ -39,17 +38,22 @@ char	*ft_get_string(t_input *input, int *i)
 void	ft_split_prompt(t_input *input)
 {
 	int		i;
-	//char	*temp;
+	char	*temp;
 
-	//temp = NULL;
+	temp = NULL;
 	input->objects = 0;
 	i = 0;
-	while (input->line[i])
+	while (input->line[i] != '\0')
 	{
 		if (input->line[i] != '\t' && input->line[i] != ' ')
-			printf("%s\n", ft_get_string(input, &i));
+		{
+			temp = ft_get_string(input, &i);
+			printf("%s\n", temp);
+			free (temp);
+		}
+		if (!input->line[i])
+			break ;
 		i++;
-		printf("Imprimiu objeto\n");
 	}
 }
 
@@ -65,7 +69,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		input.line = readline("BASHINA$ ");
 		ft_split_prompt(&input);
-		printf("terminou funçao de objetos\n");
 	}
+	free (input.line);
 	return (0);
 }
