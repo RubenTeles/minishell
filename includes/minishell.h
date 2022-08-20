@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 19:03:04 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/20 18:10:14 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/20 22:11:55 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ struct s_terminal {
 	char	**path;
 	char	**export;
 	int		(*count_env)();
-	int		(*is_variable)(char *var);
+	char	*(*variable_env)(char *var);
 	void	(*unset)(char *input);
 	void	(*export_var)(char *var);
 	void	(*destroy)();
@@ -47,7 +47,7 @@ t_terminal	*terminal();
 void		new_terminal(char *title, char **env);
 
 //----Terminal Methods----//
-int __count_env(void);
-int	is_variable_env(char *var);
+int 	__count_env(void);
+char	*variable_env(char *var);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/20 20:52:27 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/20 22:01:17 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		line = readline(terminal()->title);
-		var = string()->sub_str_chars(line, 'o', '$');
-		printf("%s \n", var);
-		var2 = string()->sub_str_chars(line, '$', '$');
-		printf("%s \n", var2);
-		free(var);
-		free(var2);
+		terminal()->is_variable(line);
 	}
 	
 	/*while(terminal()->path[++i])

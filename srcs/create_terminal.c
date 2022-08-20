@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:37:10 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/20 19:25:29 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/20 22:11:46 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	create_env(char **env)
 	while (env[++i])
 	{
 		if (!terminal()->path)
-			path = ft_strnstr(env[i], "PATH=", 6);
+			path = string()->n_str(env[i], "PATH=", 6);
 		if (path && !terminal()->path)
-			terminal()->path = ft_split(path, ':');
+			terminal()->path = string()->split(path, ':');
 	}
 	terminal()->env_count = i;
 	terminal()->env_m = malloc(sizeof(char *) * i + 1);
@@ -63,8 +63,9 @@ void new_terminal(char *title, char **env)
 	terminal()->env_m = 0;
 	terminal()->export = 0;
 	terminal()->path = 0;
-	terminal()->destroy = __destroy;
 	terminal()->count_env = __count_env;
+	terminal()->variable_env = variable_env;
+	terminal()->destroy = __destroy;
 	create_env(env);
 }
 

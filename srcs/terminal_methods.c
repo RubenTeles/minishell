@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:02:33 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/20 20:26:51 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/20 22:12:16 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,24 @@ int __count_env(void)
 	return (i);
 }
 
-int	is_variable_env(char *var)
+char	*variable_env(char *str)
 {
 	int		i;
+	int		len;
+	char	*var;
 	char	*aux;
 
 	i = -1;
 	aux = 0;
+	var = string()->join(str, "=");
+	len = string()->len(var);
 	printf("%s \n", var);
-	/*aux = string()->duplicate(string()->pos_char(var, '$'));
-
-	string()->split(var, '.');
-	while (terminal()->env_m[++i])
-	{
-		path = ft_strnstr(env_m[i], "PATH=", 6);
-	}
-
-*/
-	return (0);
+	while (terminal()->env_m[++i] && !aux)
+		aux = string()->n_str(terminal()->env_m[++i], var, len);
+	printf("%s \n", aux);
+	free(var);
+	if (!aux)
+		return (0);
+	return (string()->duplicate(aux));
+	//* DAR FREE*//
 }
