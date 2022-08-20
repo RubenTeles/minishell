@@ -6,7 +6,7 @@
 #    By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 18:52:37 by ede-alme          #+#    #+#              #
-#    Updated: 2022/08/19 19:57:55 by ede-alme         ###   ########.fr        #
+#    Updated: 2022/08/20 19:59:21 by ede-alme         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,6 @@ OBJ_PATH = ./objs/
 INC_PATH = ./includes/
 
 SRC_NAME = 	main.c \
-			#ft_split.c \
-			#ft_strnstr.c \
-			#create_terminal.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -27,7 +24,7 @@ SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 CC = gcc
-CFLAGS = -g -lreadline #-fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -g -lreadline -fsanitize=address -Wall -Wextra -Werror
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
