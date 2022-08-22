@@ -1,16 +1,3 @@
-	fork() -> é como se fosse uma pthread é considerado 
-erro = -1
-child = 0
-parent > 0
-	wait() -> espera ate acabar igual ao mutex mas sem unlock, apenas afeta o child
-retorna:
--1 se nao tiver nada que esperar
-PID 
-	get
-
-
-
-
 ---------
 waitpid () suspende a execução do processo de chamada até que um filho especificado pelo argumento pid mude de estado.
 return:
@@ -21,3 +8,21 @@ return:
 0 = significando esperar por qualquer processo filho cujo ID do grupo de processos seja igual ao do processo de chamada.
 
 > 0 = significando esperar pelo filho cujo ID do processo é igual ao valor de pid .
+---------
+access - verifica se existe no path;
+
+fork() -> é como se fosse uma pthread é considerado 
+erro = -1
+child = 0
+parent > 0
+	wait() -> espera ate acabar igual ao mutex mas sem unlock, apenas afeta o child
+retorna:
+-1 se nao tiver nada que esperar
+PID 
+	get
+
+----
+Divisao do Trabalho
+
+https://mywiki.wooledge.org/BashParser
+>>>>>>> 31da1419c73a91340de275601719067191ffd244

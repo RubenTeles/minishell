@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 19:03:04 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/19 00:11:07 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/23 00:17:06 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,42 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <unistd.h>
+# include <ft_string.h>
+
 /* Para incluir readline passos:
 sudo apt-get install libreadline-dev
 
 https://vcpkg.io/en/getting-started.html
 */
 
-typedef struct i_rules {
-	char **comands_path;
-}				t_rules;
+typedef struct s_terminal 			t_terminal;
 
+struct s_terminal {
+	char	*title;
+	int		env_count;
+	char	**env_m;
+	char	**path;
+	char	**export;
+	void	(*execute)(char *path_command);
+	int		(*count_env)();
+	char	*(*variable_env)(char *var);
+	void	(*unset)(char *input);
+	void	(*export_var)(char *var);
+	void	(*destroy)();
+};
 
 //----Utils----//
-char	**ft_split(char const *s, char c);
-size_t	ft_strlen(const char *string);
-char	*ft_strnstr(const char *s1, const char *s2, size_t n);
+t_terminal	*terminal();
+void		new_terminal(char *title, char **env);
+
+//----Terminal Methods----//
+int 	__count_env(void);
+char	*variable_env(char *var);
+void	ft_execute(char *path_command);
+
+//----Commands----//
+char	*path_command(char *command);
 
 #endif

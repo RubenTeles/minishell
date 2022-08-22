@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Aug 22 23:18:37 2022
+# Make data base, printed on Tue Aug 23 00:12:35 2022
 
 # Variables
 
@@ -18,9 +18,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 WSLENV = ELECTRON_RUN_AS_NODE/w:
 # default
 .SHELLFLAGS := -c
-# makefile (from 'Makefile', line 26)
+# makefile (from 'Makefile', line 33)
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-# makefile (from 'Makefile', line 25)
+# makefile (from 'Makefile', line 32)
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
@@ -36,8 +36,8 @@ SHELL = /bin/sh
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
 _ = /mnt/c/Users/ruben/AppData/Local/Programs/Microsoft VS Code/bin/code
-# makefile (from 'Makefile', line 29)
-CFLAGS = -g 
+# makefile (from 'Makefile', line 36)
+CFLAGS = -g -lreadline 
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -64,6 +64,8 @@ VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-4cc9417c-ca16-4209-b670-aeccdcbd210c.sock
 LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
 # automatic
 %F = $(notdir $%)
+# makefile (from 'Makefile', line 17)
+SRC_PATH_STRING = ./srcs/string/
 # environment
 PWD = /mnt/c/Users/ruben/OneDrive/Área de Trabalho/42Lisboa/minishell
 # default
@@ -90,10 +92,10 @@ MAKE = $(MAKE_COMMAND)
 MAKECMDGOALS := all
 # environment
 SHLVL = 1
-# makefile (from 'Makefile', line 28)
+# makefile (from 'Makefile', line 35)
 CC = gcc
-# makefile (from 'Makefile', line 19)
-SRC_NAME = main.c ft_split.c ft_strnstr.c 
+# makefile (from 'Makefile', line 21)
+SRC_NAME = main.c ft_string.c ft_string_2.c ft_string_4.c ft_string_3.c create_terminal.c terminal_methods.c commands_1.c 
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -102,7 +104,7 @@ USER = rteles
 .DEFAULT_GOAL := minishell
 # makefile (from 'Makefile', line 13)
 NAME = minishell
-# makefile (from 'Makefile', line 16)
+# makefile (from 'Makefile', line 18)
 OBJ_PATH = ./objs/
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
@@ -110,6 +112,8 @@ OBJ_PATH = ./objs/
 VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/ruben/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
 # default
 MAKE_COMMAND := make
+# makefile (from 'Makefile', line 16)
+SRC_PATH_TERM = ./srcs/terminal/
 # default
 .VARIABLES := 
 # automatic
@@ -140,11 +144,11 @@ HOSTTYPE = x86_64
 SUFFIXES := 
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
-# makefile (from 'Makefile', line 23)
+# makefile (from 'Makefile', line 30)
 OBJ_NAME = $(SRC_NAME:.c=.o)
 # default
 .RECIPEPREFIX := 
-# makefile (from 'Makefile', line 17)
+# makefile (from 'Makefile', line 19)
 INC_PATH = ./includes/
 # environment
 LANG = C
@@ -153,7 +157,7 @@ TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=6/105=6%
+# Load=73/1024=7%, Rehash=0, Collisions=6/107=6%
 
 # Pattern-specific Variable Values
 
@@ -161,41 +165,41 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 14, inode 66146619527017522): 12 files, no impossibilities.
-# srcs (device 14, inode 14355223812337253): 5 files, no impossibilities so far.
+# . (device 14, inode 66146619527017522): 13 files, no impossibilities.
+# srcs (device 14, inode 14355223812337253): 10 files, no impossibilities so far.
 
-# 17 files, no impossibilities in 2 directories.
+# 23 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 objs/%.o: srcs/%.c
-#  recipe to execute (from 'Makefile', line 32):
+#  recipe to execute (from 'Makefile', line 39):
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $<
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
-objs/ft_strnstr.o: srcs/ft_strnstr.c
+objs/ft_string_2.o: srcs/ft_string_2.c
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'ft_strnstr'
-#  Last modified 2022-08-19 00:08:05.454699
+#  Implicit/static pattern stem: 'ft_string_2'
+#  Last modified 2022-08-22 23:28:48.6501196
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 32):
+#  recipe to execute (from 'Makefile', line 39):
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $<
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 objs/main.o: srcs/main.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-08-19 00:15:12.7370446
+#  Last modified 2022-08-23 00:12:34.3897613
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 32):
+#  recipe to execute (from 'Makefile', line 39):
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $<
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 all: minishell
 #  Phony target (prerequisite of .PHONY).
@@ -205,57 +209,115 @@ all: minishell
 #  File has been updated.
 #  Successfully updated.
 
+objs/ft_string_4.o: srcs/ft_string_4.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'ft_string_4'
+#  Last modified 2022-08-22 23:28:48.7871103
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 39):
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+
 .PHONY: all clean fclean re
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-srcs/ft_strnstr.c:
+srcs/ft_string_2.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-19 00:07:57.3154461
+#  Last modified 2022-08-22 23:21:32.8958005
 #  File has been updated.
 #  Successfully updated.
+
+objs/create_terminal.o: srcs/create_terminal.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'create_terminal'
+#  Last modified 2022-08-22 23:45:06.0526243
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 39):
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-19 00:00:28.3215779
+#  Last modified 2022-08-23 00:12:24.6058929
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 srcs/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-19 00:15:10.9652708
+#  Last modified 2022-08-23 00:11:54.9807891
 #  File has been updated.
 #  Successfully updated.
 
-objs/ft_split.o: srcs/ft_split.c
+# Not a target:
+srcs/ft_string_4.c:
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'ft_split'
-#  Last modified 2022-08-19 00:00:29.267593
+#  Last modified 2022-08-22 23:21:32.9068013
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 32):
-	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $<
 
-minishell: objs/main.o objs/ft_split.o objs/ft_strnstr.o
-#  Implicit rule search has not been done.
-#  Last modified 2022-08-19 00:15:12.8512547
+objs/terminal_methods.o: srcs/terminal_methods.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'terminal_methods'
+#  Last modified 2022-08-23 00:02:19.0498762
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 36):
-	$(CC) $(CFLAGS) $(OBJ) -o $@
+#  recipe to execute (from 'Makefile', line 39):
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+
+objs/ft_string_3.o: srcs/ft_string_3.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'ft_string_3'
+#  Last modified 2022-08-22 23:28:48.9400354
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 39):
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+
+minishell: objs/main.o objs/ft_string.o objs/ft_string_2.o objs/ft_string_4.o objs/ft_string_3.o objs/create_terminal.o objs/terminal_methods.o objs/commands_1.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-08-23 00:12:34.6628008
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 43):
+	$(CC) $(CFLAGS) $(OBJ) -o $@ -L/usr/local/lib -I/usr/local/include -lreadline
+
+# Not a target:
+srcs/create_terminal.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 23:42:51.2607586
+#  File has been updated.
+#  Successfully updated.
 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 44):
+#  recipe to execute (from 'Makefile', line 51):
 	rm -rf $(NAME)
+
+# Not a target:
+srcs/terminal_methods.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 23:53:07.6683223
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/ft_string_3.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 23:21:32.9798051
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -263,12 +325,25 @@ fclean: clean
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-srcs/ft_split.c:
+objs/commands_1.o: srcs/commands_1.c
 #  Implicit rule search has been done.
-#  Last modified 2022-08-18 23:59:21.0147868
+#  Implicit/static pattern stem: 'commands_1'
+#  Last modified 2022-08-23 00:12:34.531754
 #  File has been updated.
 #  Successfully updated.
+#  recipe to execute (from 'Makefile', line 39):
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+
+objs/ft_string.o: srcs/ft_string.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'ft_string'
+#  Last modified 2022-08-22 23:28:48.5228892
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 39):
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -281,23 +356,37 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 41):
+#  recipe to execute (from 'Makefile', line 48):
 	rm -rf $(OBJ_PATH)
 
+# Not a target:
+srcs/commands_1.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-23 00:11:35.3189651
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/ft_string.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 23:21:32.8898005
+#  File has been updated.
+#  Successfully updated.
+
 # files hash-table stats:
-# Load=15/1024=1%, Rehash=0, Collisions=0/46=0%
+# Load=25/1024=2%, Rehash=0, Collisions=0/76=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 35 / storage = 329 B / avg = 9 B
-# current buf: size = 8162 B / used = 329 B / count = 35 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 56 / storage = 704 B / avg = 12 B
+# current buf: size = 8162 B / used = 704 B / count = 56 / avg = 12 B
 
-# strcache performance: lookups = 61 / hit rate = 42%
+# strcache performance: lookups = 87 / hit rate = 35%
 # hash-table stats:
-# Load=35/8192=0%, Rehash=0, Collisions=2/61=3%
-# Finished Make data base on Mon Aug 22 23:18:37 2022
+# Load=56/8192=1%, Rehash=0, Collisions=2/87=2%
+# Finished Make data base on Tue Aug 23 00:12:35 2022
 
  

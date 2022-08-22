@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
@@ -28,4 +29,12 @@
     "**/.vscode",
     "**/.vscode/**"
   ]
+=======
+    "files.associations": {
+        "ft_string.h": "c",
+        "minishell.h": "c",
+        "stdlib.h": "c",
+        "unistd.h": "c"
+    }
+>>>>>>> 31da1419c73a91340de275601719067191ffd244
 }

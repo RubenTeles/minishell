@@ -6,11 +6,12 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 18:50:21 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/18 23:59:20 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/20 20:06:17 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
+#include <ft_string.h>
 
 char	*ft_creatword(char const *s, int lenword, int index)
 {
@@ -18,10 +19,11 @@ char	*ft_creatword(char const *s, int lenword, int index)
 	int		i;
 
 	i = 0;
-	substr = (char *)malloc((lenword + 1) * sizeof(char));
+	substr = (char *)malloc((lenword + 2) * sizeof(char));
 	if (substr == 0)
 		return (0);
-	substr[lenword] = '\0';
+	substr[lenword] = '/';
+	substr[lenword + 1] = '\0';
 	index -= lenword;
 	while (i < lenword)
 	{
@@ -103,5 +105,24 @@ char	**ft_split(char const *s, char c)
 		str[i] = ft_strx(s, c, i + 1);
 		i++;
 	}
+	return (str);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*str;
+	int		len;
+
+	len = ft_strlen(s);
+	str = malloc((len + 1) * sizeof(char));
+	if (str == 0)
+		return (0);
+	len = 0;
+	while (s[len])
+	{
+		str[len] = s[len];
+		len++;
+	}
+	str[len] = '\0';
 	return (str);
 }
