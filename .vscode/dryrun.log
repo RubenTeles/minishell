@@ -1,0 +1,11 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/mnt/c/Users/ruben/OneDrive/Área de Trabalho/42Lisboa/minishell'
+mkdir -p ./objs/
+gcc -g  -I ./includes/ -o objs/main.o -c srcs/main.c
+mkdir -p ./objs/
+gcc -g  -I ./includes/ -o objs/ft_split.o -c srcs/ft_split.c
+mkdir -p ./objs/
+gcc -g  -I ./includes/ -o objs/ft_strnstr.o -c srcs/ft_strnstr.c
+gcc -g  ./objs/main.o ./objs/ft_split.o ./objs/ft_strnstr.o -o minishell
+make: Leaving directory '/mnt/c/Users/ruben/OneDrive/Área de Trabalho/42Lisboa/minishell'
+ 
