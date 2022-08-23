@@ -6,7 +6,7 @@
 /*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/20 21:27:02 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:00:08 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ char	*ft_get_string(t_input *input, int *i)
 		len++;
 		if (input->line[*i + len - 1] == 39)
 			while (input->line[*i + len] && input->line[*i + len++] != 39)
+				;
+		if (input->line[*i + len - 1] == '"')
+			while (input->line[*i + len] && input->line[*i + len++] != '"')
 				;
 	}
 	out = malloc(sizeof(char) * len + 1);
