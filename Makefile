@@ -6,7 +6,7 @@
 #    By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 18:52:37 by ede-alme          #+#    #+#              #
-#    Updated: 2022/08/23 20:19:01 by ede-alme         ###   ########.fr        #
+#    Updated: 2022/08/23 21:37:26 by ede-alme         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC_PATH_TERM = ./srcs/terminal/
 SRC_PATH_STRING = ./srcs/string/
 OBJ_PATH = ./objs/
 INC_PATH = ./includes/
+
 
 SRC_NAME = 	main.c \
 			ft_string.c \
