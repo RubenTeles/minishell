@@ -6,7 +6,7 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/23 13:41:03 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:17:56 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_get_string(t_input *input, int *i)
 	return (out);
 }
 
-//Função de inicio, percorre um input recebido da função readline, ou seja vai percorrer a line até chegar ao fim...
+//Função de inicio, percorre um input recebido da função readline, ou seja vai percorrer a line até chegar ao fim e ierá armaznar todos os objetos num **array...
 void	ft_split_prompt(t_input *input)
 {
 	int		i;
@@ -71,6 +71,7 @@ void	ft_split_prompt(t_input *input)
 	}
 }
 
+//Teste de função ft_split_prompt, inicio da separação do input digitado no prompt
 int	main(int argc, char **argv, char **env)
 {
 	t_input	input;
