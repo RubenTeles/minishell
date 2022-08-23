@@ -6,7 +6,7 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/23 16:17:56 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/08/23 16:22:30 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_split_prompt(t_input *input)
 		i++;
 	}
 }
+
 
 //Teste de função ft_split_prompt, inicio da separação do input digitado no prompt
 int	main(int argc, char **argv, char **env)
