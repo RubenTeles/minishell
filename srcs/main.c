@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/22 18:00:08 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/08/23 13:41:03 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+//Função que quando chamada, adiciona a variavel $env na line... se o valor não existir, limpa a palavra $*** da line
+void	ft_put_env(char *line, int	index)
+{
+	printf("%c\n", line[index]);
+}
+
+//Função que separa todo o conteudo da line retornando *out que é o comando flag ou pipe
 char	*ft_get_string(t_input *input, int *i)
 {
 	char	*out;
@@ -21,13 +28,16 @@ char	*ft_get_string(t_input *input, int *i)
 	len = 0;
 	while (input->line[*i + len] && input->line[*i + len] != ' ')
 	{
+		if (input->line[*i + len] == '$')
+			ft_put_env(input->line, *i + len);
 		len++;
 		if (input->line[*i + len - 1] == 39)
-			while (input->line[*i + len] && input->line[*i + len++] != 39)
+			while (input->line[*i + len] && input->line[*i + len] != 39)
 				;
 		if (input->line[*i + len - 1] == '"')
 			while (input->line[*i + len] && input->line[*i + len++] != '"')
-				;
+				if (input->line[*i + len++] == '$')
+					ft_put_env(input->line, *i + (len - 1));
 	}
 	out = malloc(sizeof(char) * len + 1);
 	out[len] = '\0';
@@ -38,6 +48,7 @@ char	*ft_get_string(t_input *input, int *i)
 	return (out);
 }
 
+//Função de inicio, percorre um input recebido da função readline, ou seja vai percorrer a line até chegar ao fim...
 void	ft_split_prompt(t_input *input)
 {
 	int		i;
