@@ -1,3 +1,44 @@
 {
+<<<<<<< HEAD
     "makefile.extensionOutputFolder": "./.vscode"
+=======
+<<<<<<< HEAD
+  "C_Cpp_Runner.cCompilerPath": "gcc",
+  "C_Cpp_Runner.cppCompilerPath": "g++",
+  "C_Cpp_Runner.debuggerPath": "gdb",
+  "C_Cpp_Runner.cStandard": "",
+  "C_Cpp_Runner.cppStandard": "",
+  "C_Cpp_Runner.msvcBatchPath": "",
+  "C_Cpp_Runner.useMsvc": false,
+  "C_Cpp_Runner.warnings": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic"
+  ],
+  "C_Cpp_Runner.enableWarnings": true,
+  "C_Cpp_Runner.warningsAsError": false,
+  "C_Cpp_Runner.compilerArgs": [],
+  "C_Cpp_Runner.linkerArgs": [],
+  "C_Cpp_Runner.includePaths": [],
+  "C_Cpp_Runner.includeSearch": [
+    "*",
+    "**/*"
+  ],
+  "C_Cpp_Runner.excludeSearch": [
+    "**/build",
+    "**/build/**",
+    "**/.*",
+    "**/.*/**",
+    "**/.vscode",
+    "**/.vscode/**"
+  ]
+=======
+    "files.associations": {
+        "ft_string.h": "c",
+        "minishell.h": "c",
+        "stdlib.h": "c",
+        "unistd.h": "c"
+    }
+>>>>>>> 31da1419c73a91340de275601719067191ffd244
+>>>>>>> 0daae328bbc60ae6d9953a4ddb9a6e17860bc12b
 }

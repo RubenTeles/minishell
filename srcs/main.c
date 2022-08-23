@@ -6,26 +6,40 @@
 /*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/23 20:04:46 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/08/23 20:19:38 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-//Teste de função ft_split_prompt, inicio da separação do input digitado no prompt
 int	main(int argc, char **argv, char **env)
 {
-	t_input	input;
+	char	*line;
+	char	*var;
+	char	*var2;
+	int		i;
 
 	(void)argc;
 	(void)argv;
-	(void)env;
-	input.line = NULL;
+	new_terminal("The Best: ", env);
 	while (1)
 	{
-		input.line = readline("BASHINA$ ");
-		ft_split_prompt(&input);
+		line = readline(terminal()->title);
+		var = path_command(line);
+		terminal()->execute(var);
+		printf("%s \n", var);
+		free(var);
+		//printf("%s \n", terminal()->variable_env(line));
 	}
-	free (input.line);
+	
+	/*while(terminal()->path[++i])
+		printf("%s \n", terminal()->path[i]);*/
+
+
+	//create_path_comands(&rules, env, -1);
+	//execute(&rules, env);
+	/*while (rules.comands_path[++i])
+		printf("%s \n", rules.comands_path[i]);*/
+	terminal()->destroy();
 	return (0);
 }

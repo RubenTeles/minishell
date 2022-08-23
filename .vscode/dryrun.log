@@ -1,0 +1,9 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/ede-alme/42_Lisboa/Minishell'
+mkdir -p ./objs/
+gcc -g -lreadline  -I ./includes/ -o objs/main.o -c srcs/main.c -L/usr/local/lib -I/usr/local/include -lreadline
+mkdir -p ./objs/
+gcc -g -lreadline  -I ./includes/ -o objs/commands_1.o -c srcs/commands_1.c -L/usr/local/lib -I/usr/local/include -lreadline
+gcc -g -lreadline  ./objs/main.o ./objs/ft_string.o ./objs/ft_string_2.o ./objs/ft_string_4.o ./objs/ft_string_3.o ./objs/create_terminal.o ./objs/terminal_methods.o ./objs/commands_1.o -o minishell -L/usr/local/lib -I/usr/local/include -lreadline
+make: Leaving directory '/home/ede-alme/42_Lisboa/Minishell'
+ 
