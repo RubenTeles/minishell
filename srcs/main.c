@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/23 00:14:58 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/23 20:57:46 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **env)
 		line = readline(terminal()->title);
 		var = path_command(line);
 		terminal()->execute(var);
-
+		
 		
 		printf("%s \n", var);
 		free(var);
