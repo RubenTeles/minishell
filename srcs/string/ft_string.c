@@ -6,11 +6,12 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:39:43 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/20 21:57:13 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/24 22:26:57 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_string.h>
+#include <minishell.h>
 
 static int	ft_str_s_str(char *s1, char *s2)
 {

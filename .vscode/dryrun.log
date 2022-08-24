@@ -1,21 +1,6 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory '/mnt/c/Users/ruben/OneDrive/Área de Trabalho/42Lisboa/minishell'
-mkdir -p ./objs/
-gcc -g -lreadline  -I ./includes/ -o objs/main.o -c srcs/main.c -L/usr/local/lib -I/usr/local/include -lreadline
-mkdir -p ./objs/
-gcc -g -lreadline  -I ./includes/ -o objs/ft_string.o -c srcs/ft_string.c -L/usr/local/lib -I/usr/local/include -lreadline
-mkdir -p ./objs/
-gcc -g -lreadline  -I ./includes/ -o objs/ft_string_2.o -c srcs/ft_string_2.c -L/usr/local/lib -I/usr/local/include -lreadline
-mkdir -p ./objs/
-gcc -g -lreadline  -I ./includes/ -o objs/ft_string_4.o -c srcs/ft_string_4.c -L/usr/local/lib -I/usr/local/include -lreadline
-mkdir -p ./objs/
-gcc -g -lreadline  -I ./includes/ -o objs/ft_string_3.o -c srcs/ft_string_3.c -L/usr/local/lib -I/usr/local/include -lreadline
-mkdir -p ./objs/
-gcc -g -lreadline  -I ./includes/ -o objs/create_terminal.o -c srcs/create_terminal.c -L/usr/local/lib -I/usr/local/include -lreadline
-mkdir -p ./objs/
-gcc -g -lreadline  -I ./includes/ -o objs/terminal_methods.o -c srcs/terminal_methods.c -L/usr/local/lib -I/usr/local/include -lreadline
-mkdir -p ./objs/
-gcc -g -lreadline  -I ./includes/ -o objs/commands_1.o -c srcs/commands_1.c -L/usr/local/lib -I/usr/local/include -lreadline
-gcc -g -lreadline  ./objs/main.o ./objs/ft_string.o ./objs/ft_string_2.o ./objs/ft_string_4.o ./objs/ft_string_3.o ./objs/create_terminal.o ./objs/terminal_methods.o ./objs/commands_1.o -o minishell -L/usr/local/lib -I/usr/local/include -lreadline
 make: Leaving directory '/mnt/c/Users/ruben/OneDrive/Área de Trabalho/42Lisboa/minishell'
  
+make: *** No rule to make target 'objs/input_1.o', needed by 'minishell'.
+

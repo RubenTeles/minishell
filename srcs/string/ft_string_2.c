@@ -6,10 +6,11 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:18:02 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/20 20:18:22 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/24 22:28:19 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <minishell.h>
 #include <ft_string.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

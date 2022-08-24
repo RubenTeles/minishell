@@ -15,21 +15,31 @@ NAME = minishell
 SRC_PATH = ./srcs/
 SRC_PATH_TERM = ./srcs/terminal/
 SRC_PATH_STRING = ./srcs/string/
+SRC_PATH_INPUT = ./srcs/input/
 OBJ_PATH = ./objs/
 INC_PATH = ./includes/
 
 SRC_NAME = 	main.c \
-			ft_string.c \
-			ft_string_2.c \
-			ft_string_4.c \
-			ft_string_3.c \
-			create_terminal.c \
-			terminal_methods.c \
-			commands_1.c \
 
-OBJ_NAME = $(SRC_NAME:.c=.o)
+SRC_TERMINAL = 	create_terminal.c \
+				terminal_methods.c \
+				commands_1.c \
 
-SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
+SRC_STRING = 	ft_string.c \
+				ft_string_2.c \
+				ft_string_4.c \
+				ft_string_3.c 
+				
+SRC_INPUT = 	input_1.c \
+
+SRC = $(SRC_NAME) $(SRC_TERMINAL) $(SRC_STRING) $(SRC_INPUT)
+
+OBJ_NAME = $(SRC:.c=.o)
+
+SRC_MAIN = $(addprefix $(SRC_PATH), $(SRC_NAME)) \
+			$(addprefix $(SRC_PATH_TERM), $(SRC_TERMINAL)) \
+			$(addprefix $(SRC_PATH_STRING), $(SRC_STRING)) \
+			$(addprefix $(SRC_PATH_INPUT), $(SRC_INPUT))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 CC = gcc
@@ -38,6 +48,20 @@ CFLAGS = -g -lreadline #-fsanitize=address -Wall -Wextra -Werror
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+
+$(OBJ_PATH)%.o:$(SRC_PATH_TERM)%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+
+$(OBJ_PATH)%.o:$(SRC_PATH_STRING)%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+
+$(OBJ_PATH)%.o:$(SRC_PATH_INPUT)%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+
+
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ -L/usr/local/lib -I/usr/local/include -lreadline
