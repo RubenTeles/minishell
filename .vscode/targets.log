@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Aug 23 00:12:35 2022
+# Make data base, printed on Wed Aug 24 18:49:53 2022
 
 # Variables
 
@@ -15,7 +15,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = ELECTRON_RUN_AS_NODE/w:
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
 # default
 .SHELLFLAGS := -c
 # makefile (from 'Makefile', line 33)
@@ -35,7 +35,7 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /mnt/c/Users/ruben/AppData/Local/Programs/Microsoft VS Code/bin/code
+_ = /home/rteles/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/node
 # makefile (from 'Makefile', line 36)
 CFLAGS = -g -lreadline 
 # makefile (from 'Makefile', line 1)
@@ -51,13 +51,13 @@ VSCODE_CWD = /mnt/c/Users/ruben/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/rteles/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/bin/remote-cli:/home/rteles/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Python310/Scripts/:/mnt/c/Python310/:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files (x86)/Microsoft SQL Server/150/DTS/Binn/:/mnt/c/Program Files (x86)/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/150/DTS/Binn/:/mnt/c/Program Files/Azure Data Studio/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/PowerShell/7/:/mnt/c/MinGW/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/libunistd/unistd:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/laragon/bin/php/php-7.4.19-Win32-vc15-x64:/mnt/c/Program Files/nodejs/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/ProgramData/ComposerSetup/bin:/mnt/c/laragon/bin:/mnt/c/laragon/bin/apache/httpd-2.4.47-win64-VS16/bin:/mnt/c/laragon/bin/composer:/mnt/c/laragon/bin/git/bin:/mnt/c/laragon/bin/git/cmd:/mnt/c/laragon/bin/git/mingw64/bin:/mnt/c/laragon/bin/git/usr/bin:/mnt/c/laragon/bin/laragon/utils:/mnt/c/laragon/bin/mysql/mysql-5.7.33-winx64/bin:/mnt/c/laragon/bin/nginx/nginx-1.19.10:/mnt/c/laragon/bin/ngrok:/mnt/c/laragon/bin/nodejs/node-v14:/mnt/c/laragon/bin/notepad++:/mnt/c/laragon/bin/php/php-8.1.9:/mnt/c/laragon/bin/redis/redis-x64-3.2.100:/mnt/c/laragon/bin/telnet:/mnt/c/laragon/usr/bin:/mnt/c/Users/ruben/AppData/Local/Yarn/config/global/node_modules/.bin:/mnt/c/Users/ruben/AppData/Roaming/Composer/vendor/bin:/mnt/c/Users/ruben/AppData/Roaming/npm:/mnt/c/Users/ruben/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/ruben/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Program Files/JetBrains/PhpStorm 2022.1.3/bin:/mnt/c/ProgramData/ruben/GitHubDesktop/bin:/mnt/c/Users/ruben/AppData/Local/GitHubDesktop/bin:/snap/bin:/home/rteles/.foundry/bin
+PATH = /home/rteles/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/bin/remote-cli:/home/rteles/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Python310/Scripts/:/mnt/c/Python310/:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files (x86)/Microsoft SQL Server/150/DTS/Binn/:/mnt/c/Program Files (x86)/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/150/DTS/Binn/:/mnt/c/Program Files/Azure Data Studio/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/PowerShell/7/:/mnt/c/MinGW/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/libunistd/unistd:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/laragon/bin/php/php-7.4.19-Win32-vc15-x64:/mnt/c/Program Files/nodejs/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/ProgramData/ComposerSetup/bin:/mnt/c/laragon/bin:/mnt/c/laragon/bin/apache/httpd-2.4.47-win64-VS16/bin:/mnt/c/laragon/bin/composer:/mnt/c/laragon/bin/git/bin:/mnt/c/laragon/bin/git/cmd:/mnt/c/laragon/bin/git/mingw64/bin:/mnt/c/laragon/bin/git/usr/bin:/mnt/c/laragon/bin/laragon/utils:/mnt/c/laragon/bin/mysql/mysql-5.7.33-winx64/bin:/mnt/c/laragon/bin/nginx/nginx-1.19.10:/mnt/c/laragon/bin/ngrok:/mnt/c/laragon/bin/nodejs/node-v14:/mnt/c/laragon/bin/notepad++:/mnt/c/laragon/bin/php/php-8.1.9:/mnt/c/laragon/bin/redis/redis-x64-3.2.100:/mnt/c/laragon/bin/telnet:/mnt/c/laragon/usr/bin:/mnt/c/Users/ruben/AppData/Local/Yarn/config/global/node_modules/.bin:/mnt/c/Users/ruben/AppData/Roaming/Composer/vendor/bin:/mnt/c/Users/ruben/AppData/Roaming/npm:/mnt/c/Users/ruben/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/Azure Data Studio/bin:/mnt/c/Users/ruben/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/libunistd/unistd:/mnt/c/Program Files/JetBrains/PhpStorm 2022.1.3/bin:/mnt/c/ProgramData/ruben/GitHubDesktop/bin:/mnt/c/Users/ruben/AppData/Local/GitHubDesktop/bin:/snap/bin:/home/rteles/.foundry/bin
 # makefile (from 'Makefile', line 15)
 SRC_PATH = ./srcs/
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-4cc9417c-ca16-4209-b670-aeccdcbd210c.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-bd10f57f-2223-4158-b131-ef301622ec1c.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -91,7 +91,7 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 1
+SHLVL = 0
 # makefile (from 'Makefile', line 35)
 CC = gcc
 # makefile (from 'Makefile', line 21)
@@ -157,7 +157,7 @@ TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=73/1024=7%, Rehash=0, Collisions=6/107=6%
+# Load=73/1024=7%, Rehash=0, Collisions=6/114=5%
 
 # Pattern-specific Variable Values
 
@@ -166,9 +166,9 @@ WSL_DISTRO_NAME = Ubuntu
 # Directories
 
 # . (device 14, inode 66146619527017522): 13 files, no impossibilities.
-# srcs (device 14, inode 14355223812337253): 10 files, no impossibilities so far.
+# srcs (device 14, inode 14355223812337253): 9 files, no impossibilities so far.
 
-# 23 files, no impossibilities in 2 directories.
+# 22 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -194,7 +194,7 @@ objs/ft_string_2.o: srcs/ft_string_2.c
 objs/main.o: srcs/main.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-08-23 00:12:34.3897613
+#  Last modified 2022-08-23 00:15:50.2099914
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 39):
@@ -207,7 +207,9 @@ all: minishell
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
 
 objs/ft_string_4.o: srcs/ft_string_4.c
 #  Implicit rule search has been done.
@@ -234,9 +236,27 @@ srcs/ft_string_2.c:
 objs/create_terminal.o: srcs/create_terminal.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'create_terminal'
-#  Last modified 2022-08-22 23:45:06.0526243
+#  Last modified 2022-08-23 00:16:28.8051691
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := objs/create_terminal.o
+# automatic
+# % := 
+# automatic
+# * := create_terminal
+# automatic
+# + := srcs/create_terminal.c
+# automatic
+# | := 
+# automatic
+# < := srcs/create_terminal.c
+# automatic
+# ^ := srcs/create_terminal.c
+# automatic
+# ? := srcs/create_terminal.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/17=6%
 #  recipe to execute (from 'Makefile', line 39):
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
@@ -251,7 +271,7 @@ Makefile:
 # Not a target:
 srcs/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 00:11:54.9807891
+#  Last modified 2022-08-23 00:14:58.342761
 #  File has been updated.
 #  Successfully updated.
 
@@ -262,15 +282,11 @@ srcs/ft_string_4.c:
 #  File has been updated.
 #  Successfully updated.
 
-objs/terminal_methods.o: srcs/terminal_methods.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'terminal_methods'
-#  Last modified 2022-08-23 00:02:19.0498762
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 39):
-	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+# Not a target:
+objs/terminal_methods.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 objs/ft_string_3.o: srcs/ft_string_3.c
 #  Implicit rule search has been done.
@@ -284,16 +300,18 @@ objs/ft_string_3.o: srcs/ft_string_3.c
 
 minishell: objs/main.o objs/ft_string.o objs/ft_string_2.o objs/ft_string_4.o objs/ft_string_3.o objs/create_terminal.o objs/terminal_methods.o objs/commands_1.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-23 00:12:34.6628008
+#  Last modified 2022-08-23 00:16:29.0921344
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
 #  recipe to execute (from 'Makefile', line 43):
 	$(CC) $(CFLAGS) $(OBJ) -o $@ -L/usr/local/lib -I/usr/local/include -lreadline
 
 # Not a target:
 srcs/create_terminal.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 23:42:51.2607586
+#  Last modified 2022-08-23 00:17:19.7789336
 #  File has been updated.
 #  Successfully updated.
 
@@ -304,13 +322,6 @@ fclean: clean
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 51):
 	rm -rf $(NAME)
-
-# Not a target:
-srcs/terminal_methods.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-22 23:53:07.6683223
-#  File has been updated.
-#  Successfully updated.
 
 # Not a target:
 srcs/ft_string_3.c:
@@ -325,15 +336,11 @@ srcs/ft_string_3.c:
 #  Modification time never checked.
 #  File has not been updated.
 
-objs/commands_1.o: srcs/commands_1.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'commands_1'
-#  Last modified 2022-08-23 00:12:34.531754
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 39):
-	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+# Not a target:
+objs/commands_1.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 objs/ft_string.o: srcs/ft_string.c
 #  Implicit rule search has been done.
@@ -360,13 +367,6 @@ clean:
 	rm -rf $(OBJ_PATH)
 
 # Not a target:
-srcs/commands_1.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-23 00:11:35.3189651
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
 srcs/ft_string.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-08-22 23:21:32.8898005
@@ -374,19 +374,19 @@ srcs/ft_string.c:
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=25/1024=2%, Rehash=0, Collisions=0/76=0%
+# Load=23/1024=2%, Rehash=0, Collisions=0/68=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 56 / storage = 704 B / avg = 12 B
-# current buf: size = 8162 B / used = 704 B / count = 56 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 51 / storage = 615 B / avg = 12 B
+# current buf: size = 8162 B / used = 615 B / count = 51 / avg = 12 B
 
-# strcache performance: lookups = 87 / hit rate = 35%
+# strcache performance: lookups = 80 / hit rate = 36%
 # hash-table stats:
-# Load=56/8192=1%, Rehash=0, Collisions=2/87=2%
-# Finished Make data base on Tue Aug 23 00:12:35 2022
+# Load=51/8192=1%, Rehash=0, Collisions=2/80=2%
+# Finished Make data base on Wed Aug 24 18:49:53 2022
 
  
