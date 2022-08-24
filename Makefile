@@ -36,10 +36,6 @@ SRC = $(SRC_NAME) $(SRC_TERMINAL) $(SRC_STRING) $(SRC_INPUT)
 
 OBJ_NAME = $(SRC:.c=.o)
 
-SRC_MAIN = $(addprefix $(SRC_PATH), $(SRC_NAME)) \
-			$(addprefix $(SRC_PATH_TERM), $(SRC_TERMINAL)) \
-			$(addprefix $(SRC_PATH_STRING), $(SRC_STRING)) \
-			$(addprefix $(SRC_PATH_INPUT), $(SRC_INPUT))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 CC = gcc

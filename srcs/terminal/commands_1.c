@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /*Retorna o path com o comando certo*/
 char	*path_command(char *command)
@@ -20,7 +22,6 @@ char	*path_command(char *command)
 
 	i = -1;
 	aux_path = 0;
-	printf("comand: %s \n", command);
 	while (terminal()->path[++i])
 	{
 		aux_path = string()->join(terminal()->path[i], command);
@@ -41,9 +42,10 @@ void	ft_execute(char *path)
 	pid_t = fork();
 	if (pid_t == 0)
 	{
-		execve(path, comands, terminal()->env_m);
-		exit(127);
+		if (execve(path, comands, terminal()->env_m) < 0)
+			printf("%s: Command not found\n", comands[0]);
+		exit(0);
 	}
 	else
-		exit(1);
+		wait(&pid_t);
 }

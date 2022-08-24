@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		line = readline(terminal()->title);
 		add_history(line);
-		//printf("%s \n", line);
+		printf("%s \n", line);
 		var = path_command(line);
 		terminal()->execute(var);
 		//printf("%s \n", var);
