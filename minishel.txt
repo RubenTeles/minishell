@@ -11,6 +11,7 @@ return:
 ---------
 access - verifica se existe no path;
 
+
 fork() -> é como se fosse uma pthread é considerado 
 erro = -1
 child = 0
@@ -25,4 +26,3 @@ PID
 Divisao do Trabalho
 
 https://mywiki.wooledge.org/BashParser
->>>>>>> 31da1419c73a91340de275601719067191ffd244

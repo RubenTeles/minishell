@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 19:03:04 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/23 00:17:06 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/23 20:20:44 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ sudo apt-get install libreadline-dev
 
 https://vcpkg.io/en/getting-started.html
 */
+
+
+typedef struct s_input	t_input;
+
+struct s_input {
+	char	*line;
+	int		objects;
+	char	**values;
+};
 
 typedef struct s_terminal 			t_terminal;
 

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:51:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/08/23 00:14:58 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/23 20:19:38 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <ft_string.h>
 
 int	main(int argc, char **argv, char **env)
 {
@@ -28,8 +27,6 @@ int	main(int argc, char **argv, char **env)
 		line = readline(terminal()->title);
 		var = path_command(line);
 		terminal()->execute(var);
-
-		
 		printf("%s \n", var);
 		free(var);
 		//printf("%s \n", terminal()->variable_env(line));
