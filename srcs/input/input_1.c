@@ -71,7 +71,7 @@ void	ft_split_prompt(t_input *input)
 	}
 }
 
-t_input *inpt()
+t_input *inpt(void)
 {
 	static t_input	i;
 
