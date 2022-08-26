@@ -39,6 +39,7 @@ struct s_input {
 typedef struct s_terminal 			t_terminal;
 
 struct s_terminal {
+	int		fd[2];
 	char	*title;
 	int		env_count;
 	char	**env_m;
@@ -53,8 +54,9 @@ struct s_terminal {
 };
 
 //----Utils----//
-t_terminal	*terminal();
+t_terminal	*terminal(void);
 void		new_terminal(char *title, char **env);
+t_input 	*inpt(void);
 
 //----Terminal Methods----//
 int 	__count_env(void);

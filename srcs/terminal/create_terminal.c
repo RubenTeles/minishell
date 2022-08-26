@@ -69,9 +69,9 @@ void new_terminal(char *title, char **env)
 	create_env(env);
 }
 
-t_terminal *terminal()
+t_terminal *terminal(void)
 {
-	static t_terminal t;
+	static t_terminal	t;
 
 	return (&t);
 }
