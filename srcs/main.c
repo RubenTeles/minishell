@@ -13,6 +13,7 @@
 #include <minishell.h>
 #include <signal.h>
 
+/* Falta tirar o ^\   Para tirar é so meter uma flag no make*/ 
 static void	action(int sig)
 {
 	if (sig == SIGINT)
@@ -23,7 +24,7 @@ static void	action(int sig)
 		rl_redisplay();
 		return ;
 	}
-	if (sig == SIGQUIT) /* Falta tirar o ^\   Para tirar é so meter uma flag no make*/ 
+	if (sig == SIGQUIT) 
 		return ;
 }
 
@@ -38,15 +39,14 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 
 	signal(SIGINT, action);  //Ctrl + C
-	//Ctrl + 'D' - é quando a line for nula
 	signal(SIGHUP, action); //Ctrl + '\'
-	new_terminal("The Best: ", env);
+	//Ctrl + 'D' - é quando a line for nula
+	new_terminal("\033[0;36mThe Best: \033[0;37m", env);
 	while (1)
 	{
 		line = readline(terminal()->title);
-		printf("%s \n", inpt()->line);
-		/*var = path_command(line);
-		terminal()->execute(var);*/
+		var = path_command(line);
+		//terminal()->execute(var);
 		//printf("%s \n", var);
 		//free(var);
 		//printf("%s \n", terminal()->variable_env(line));

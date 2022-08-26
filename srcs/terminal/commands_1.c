@@ -29,6 +29,7 @@ char	*path_command(char *command)
 			break ;
 		free(aux_path);
 	}
+	printf("%s \n", aux_path);
 	return (aux_path);
 }
 
