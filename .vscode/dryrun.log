@@ -1,5 +1,0 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory '/mnt/c/Users/ruben/OneDrive/Área de Trabalho/42Lisboa/minishell'
-make: 'minishell' is up to date.
-make: Leaving directory '/mnt/c/Users/ruben/OneDrive/Área de Trabalho/42Lisboa/minishell'
- 
