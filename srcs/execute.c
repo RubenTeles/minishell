@@ -1,12 +1,12 @@
-#include  <fcntl.h>
-#include  <stdio.h>
-#include  <stdlib.h>
-#include  <string.h>
-#include  <sys/types.h>
-#include  <sys/wait.h>
-#include  <sys/stat.h>
-#include  <termios.h>
-#include  <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <termios.h>
+#include <unistd.h>
 
 #define READ 0
 #define WRITE 1
@@ -20,7 +20,7 @@ int main(int argc, char* argv[], char **env)
 	int fd_2[2];
 	char	***comands = malloc(sizeof(char **) * 3);
 	char	*comands_1[3] = {"ls", "-la", NULL};
-	char	*comands_2[3] = {"grep", "obj", NULL};
+	char	*comands_2[3] = {"grep", "a.out", NULL};
 	char	*comands_3[3] = {"wc", "-l", NULL};
 	comands[0] = comands_1;
 	comands[1] = comands_2;

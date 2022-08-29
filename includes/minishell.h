@@ -53,6 +53,17 @@ struct s_terminal {
 	void	(*destroy)();
 };
 
+typedef struct s_command 			t_command;
+
+struct s_command {
+	int		fd[2];
+	char	***commands;
+	char	**path;
+	char	**env_m;
+	int		c;
+	int		max_c;
+};
+
 //----Utils----//
 t_terminal	*terminal(void);
 void		new_terminal(char *title, char **env);
