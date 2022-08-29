@@ -22,6 +22,7 @@ int main(int argc, char* argv[], char **env)
 	char	*comands_1[3] = {"ls", "-la", NULL};
 	char	*comands_2[3] = {"grep", "a.out", NULL};
 	char	*comands_3[3] = {"wc", "-l", NULL};
+	char	*token[3] = {"|", "|", NULL};
 	comands[0] = comands_1;
 	comands[1] = comands_2;
 	comands[2] = comands_3;
@@ -37,6 +38,9 @@ int main(int argc, char* argv[], char **env)
 		close(fd[0]);
 		execve("/bin/ls", comands[0], env);
 	}
+	close(fd[1]);
+	close(fd[0]);
+	wait(&pid1);
 
 	pid2 = fork();
 	if(pid2 == 0)
@@ -49,7 +53,6 @@ int main(int argc, char* argv[], char **env)
 	}
 	close(fd[1]);
 	close(fd[0]);
-	wait(&pid1);
 	wait(&pid2);
 
 	pid3 = fork();

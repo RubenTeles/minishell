@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:37:10 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/23 00:17:18 by rteles           ###   ########.fr       */
+/*   Updated: 2022/08/29 23:02:39 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,17 @@ static void	create_env(char **env)
 	terminal()->env_m = malloc(sizeof(char *) * i + 1);
 	terminal()->export = malloc(sizeof(char *) * i + 1);
 	i = -1;
-	while (++i < terminal()->env_count)
+	while (env[++i])
 	{
 		aux = ft_strlen(env[i]);
 		terminal()->env_m[i] = malloc(sizeof(char) * aux + 1);
 		ft_strlcpy(terminal()->env_m[i], env[i], aux + 1);
 		terminal()->export[i] = string()->join("export ", env[i]);
 	}
+	terminal()->env_m[i] = malloc(sizeof(char) * 1);
+	terminal()->env_m[i] = NULL;
+	terminal()->export[i] = malloc(sizeof(char) * 1);
+	terminal()->export[i] = NULL;
 }
 
 static void	__destroy(void)
@@ -62,6 +66,7 @@ void new_terminal(char *title, char **env)
 	terminal()->env_m = 0;
 	terminal()->export = 0;
 	terminal()->path = 0;
+	terminal()->start = NULL;
 	terminal()->count_env = __count_env;
 	terminal()->variable_env = variable_env;
 	terminal()->execute = ft_execute;

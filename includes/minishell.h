@@ -18,6 +18,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <unistd.h>
 # include <ft_string.h>
 
@@ -37,31 +38,31 @@ struct s_input {
 };
 
 typedef struct s_terminal 			t_terminal;
-
-struct s_terminal {
-	int		fd[2];
-	char	*title;
-	int		env_count;
-	char	**env_m;
-	char	**path;
-	char	**export;
-	void	(*execute)(char *path_command);
-	int		(*count_env)();
-	char	*(*variable_env)(char *var);
-	void	(*unset)(char *input);
-	void	(*export_var)(char *var);
-	void	(*destroy)();
-};
-
 typedef struct s_command 			t_command;
 
+struct s_terminal {
+	int			fd[2];
+	t_command	*start;
+	char		*title;
+	int			env_count;
+	char		**env_m;
+	char		**path;
+	char		**export;
+	void		(*execute)(void);
+	int			(*count_env)();
+	char		*(*variable_env)(char *var);
+	void		(*unset)(char *input);
+	void		(*export_var)(char *var);
+	void		(*destroy)();
+};
+
 struct s_command {
-	int		fd[2];
-	char	***commands;
-	char	**path;
-	char	**env_m;
-	int		c;
-	int		max_c;
+	int			fd[2];
+	int			pid;
+	char		**command;
+	char		*path;
+	void		(*execute)(t_command *c, int in);
+	t_command	*next;
 };
 
 //----Utils----//
@@ -72,9 +73,13 @@ t_input 	*inpt(void);
 //----Terminal Methods----//
 int 	__count_env(void);
 char	*variable_env(char *var);
-void	ft_execute(char *path_command);
+void 	ft_execute(void);
 
 //----Commands----//
 char	*path_command(char *command);
+
+//----Para Apagar---//
+void    ft_echo(char **input);
+void    ft_env(char **input);
 
 #endif

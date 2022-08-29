@@ -32,21 +32,3 @@ char	*path_command(char *command)
 	printf("%s \n", aux_path);
 	return (aux_path);
 }
-
-void	ft_execute(char *path)
-{
-	int		pid_t;
-	char	*comands[3] = {	"ls", "-la", NULL };
-
-	if (!path)
-		return ;
-	pid_t = fork();
-	if (pid_t == 0)
-	{
-		if (execve(path, comands, terminal()->env_m) < 0)
-			printf("%s: Command not found\n", comands[0]);
-		exit(0);
-	}
-	else
-		wait(&pid_t);
-}
