@@ -45,7 +45,7 @@ int	main(int argc, char **argv, char **env)
 	/*while (1)
 	{
 		line = readline(terminal()->title);*/
-		ft_env(0);
+		ft_echo(0);
 		//var = path_command(line);
 		//terminal()->execute(var);
 		//printf("%s \n", var);

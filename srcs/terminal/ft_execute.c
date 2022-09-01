@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/29 22:06:36 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/01 22:47:42 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	execute(t_command *c, int in)
 	close(in);
 	close(c->fd[1]);
 	if (c->next != NULL)
-		execute(c->next, c->fd[0]);
+		c->next->execute(c->next, c->fd[0]);
 }
 
 t_command *new_command(char	**command)
