@@ -33,8 +33,9 @@ SRC_TERMINAL = 	create_terminal.c \
 
 SRC_STRING = 	ft_string.c \
 				ft_string_2.c \
+				ft_string_3.c \
 				ft_string_4.c \
-				ft_string_3.c 
+				ft_string_5.c \
 				
 SRC_INPUT = 	input_1.c \
 

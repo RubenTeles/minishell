@@ -6,23 +6,38 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/29 23:03:48 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/01 23:18:33 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	env_execute(t_command *c, int i)
+static void	env_execute(t_command *c, int in)
 {
+	char	**env_ter;
+	int		i;
+
+	env_ter = terminal()->env_m;
+	i = -1;
 	if (c->command[1] != NULL)
 	{
-        printf("env: '%s': No such file or directory\n", c->command[1]);
-        rl_on_new_line();
-        return ;
+		printf("env: '%s': No such file or directory\n", c->command[1]);
+		return ;
     }
-	while (terminal()->env_m[++i])
-		printf("%s\n", terminal()->env_m[i]);
-	rl_on_new_line();
+	dup2(in, STDIN_FILENO);
+	if (c->next != NULL)
+		dup2(c->fd[1], STDOUT_FILENO);
+	close(in);
+	close(c->fd[1]);
+	while (env_ter[++i])
+	{
+		write(STDOUT_FILENO, env_ter[i], string()->len(env_ter[i]));
+		write(STDOUT_FILENO, "\n", 1);
+	}
+	close(in);
+	close(c->fd[1]);
+	if (c->next != NULL)
+		c->next->execute(c->next, c->fd[0]);
 }
 
 static t_command *new_command(char	**command)
@@ -33,7 +48,7 @@ static t_command *new_command(char	**command)
 	if (!c)
 		return (NULL);
 	c->command = command;
-	c->path = 0;
+	c->path = NULL;
 	c->next = NULL;
 	c->execute = env_execute;
 	return (c);
@@ -46,5 +61,5 @@ void    ft_env(char **input)
 	t_command *command;
 
 	command = new_command(input_1);
-	command->execute(command, -1);
+	command->execute(command, 0);
 }

@@ -6,50 +6,28 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:18:57 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/01 22:49:39 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/01 23:12:29 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static char *echo_string(t_command *c, char *temp, char *str, int i)
-{
-	int		len;
-	
-	temp = malloc(sizeof(char) * 1);
-	temp[0] = '\0';
-	while (c->command[++i])
-	{
-		str = string()->join(temp, c->command[i]);
-		free(temp);
-		if (!c->command[i + 1])
-			break;
-		len = string()->len(str) + 1;
-		temp = malloc(sizeof(char) * len);
-		string()->copy_n(temp, str, len);
-		free(str);
-	}
-	return (str);
-}
-
 static void	echo_execute(t_command *c, int in)
 {
 	int		i;
-	char	*str;
 
 	i = 0;
 	if (c->command[1] == "-n")
 		i++;
-	str = echo_string(c, 0, 0, i);
 	dup2(in, STDIN_FILENO);
 	if (c->next != NULL)
 		dup2(c->fd[1], STDOUT_FILENO);
 	close(in);
 	close(c->fd[1]);
-	write(STDOUT_FILENO, str, string()->len(str));
+	while (c->command[++i])
+		write(STDOUT_FILENO, c->command[i], string()->len(c->command[i]) + 1);
 	if (c->command[1] != "-n")
 		write(STDOUT_FILENO, "\n", 1);
-	free(str);
 	close(in);
 	close(c->fd[1]);
 	if (c->next != NULL)
