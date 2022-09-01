@@ -25,6 +25,7 @@ SRC_NAME = 	main.c \
 SRC_COMMANDS = 	ft_echo.c \
 				ft_cd.c \
 				ft_env.c \
+				ft_pwd.c \
 
 SRC_TERMINAL = 	create_terminal.c \
 				terminal_methods.c \

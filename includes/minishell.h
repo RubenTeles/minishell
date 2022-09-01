@@ -81,5 +81,6 @@ char	*path_command(char *command);
 //----Para Apagar---//
 void    ft_echo(char **input);
 void    ft_env(char **input);
+void    ft_pwd(char **input);
 
 #endif
