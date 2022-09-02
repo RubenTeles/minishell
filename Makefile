@@ -38,7 +38,6 @@ SRC_STRING = 	ft_string.c \
 				ft_string_2.c \
 				ft_string_3.c \
 				ft_string_4.c \
-				ft_string_5.c \
 				
 SRC_INPUT = 	input_1.c \
 
@@ -53,35 +52,47 @@ CFLAGS = -g -lreadline #-fsanitize=address -Wall -Wextra -Werror
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 $(OBJ_PATH)%.o:$(SRC_PATH_TERM)%.c
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 $(OBJ_PATH)%.o:$(SRC_PATH_STRING)%.c
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 $(OBJ_PATH)%.o:$(SRC_PATH_INPUT)%.c
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 $(OBJ_PATH)%.o:$(SRC_PATH_COMMANDS)%.c
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@ -L/usr/local/lib -I/usr/local/include -lreadline
+	@$(CC) $(CFLAGS) $(OBJ) -o $@ -L/usr/local/lib -I/usr/local/include -lreadline
+	@echo "\
+	\033[0;32m**************************************************\n\
+	\033[0;32m** \033[0;33m                     __        ___           \033[0;32m**\n\
+	\033[0;32m** \033[0;33m|\  /| O |\   | O   |  \ |  | |    |    |    \033[0;32m**\n\
+	\033[0;32m** \033[0;33m| \/ | | | \  | |   \__  |__| |__  |    |    \033[0;32m**\n\
+	\033[0;32m** \033[0;33m|    | | |  \ | |      | |  | |    |    |    \033[0;32m**\n\
+	\033[0;32m** \033[0;33m|    | | |   \| |   \__/ |  | |___ |___ |___ \033[0;32m**\n\
+	\033[0;32m** \033[0;33m                                             \033[0;32m**\n\
+	\033[0;32m**************************************************\n\
+	\033[0;32m** \033[0;33m       rteles              ede-alme          \033[0;32m**\n\
+	\033[0;32m**************************************************"
 
 all: $(NAME)
 
 clean:
-	rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_PATH)
+	@echo "\033[0;31mClean!"
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 
