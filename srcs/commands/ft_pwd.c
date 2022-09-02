@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/01 23:32:53 by rteles           ###   ########.fr       */
+/*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
+/*   Updated: 2022/09/02 01:10:44 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+
 static void	pwd_execute(t_command *c, int in)
 {
 	char	*pwd;
-	int		i;
 
     pwd = terminal()->variable_env("PWD");
 	dup2(in, STDIN_FILENO);
@@ -27,8 +27,6 @@ static void	pwd_execute(t_command *c, int in)
 		write(STDOUT_FILENO, pwd, string()->len(pwd));
 		write(STDOUT_FILENO, "\n", 1);
 	}
-	close(in);
-	close(c->fd[1]);
     free(pwd);
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);

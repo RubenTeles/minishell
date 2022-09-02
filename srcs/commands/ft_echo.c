@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:18:57 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/01 23:12:29 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/02 01:10:37 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static void	echo_execute(t_command *c, int in)
 		write(STDOUT_FILENO, c->command[i], string()->len(c->command[i]) + 1);
 	if (c->command[1] != "-n")
 		write(STDOUT_FILENO, "\n", 1);
-	close(in);
-	close(c->fd[1]);
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
 }

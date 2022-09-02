@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:12:17 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/20 20:53:00 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/02 01:02:51 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n)
 		return (0);
 	while (str1[i] == str2[i] && i < n - 1 && str1[i] != '\0')
 		i++;
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+	if ((unsigned char)str1[i] - (unsigned char)str2[i] == 0)
+		return (1);
+	return (0);
 }
 
 char	*ft_string_in_two_char(char *str, char c1, char c2)

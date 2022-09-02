@@ -1,44 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 01:10:40 by rteles           ###   ########.fr       */
+/*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
+/*   Updated: 2022/09/02 01:09:51 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	env_execute(t_command *c, int in)
+static void	exit_execute(t_command *c, int in)
 {
-	char	**env_ter;
-	int		i;
-
-	env_ter = terminal()->env_m;
-	i = -1;
-	if (c->command[1] != NULL)
-	{
-		printf("env: '%s': No such file or directory\n", c->command[1]);
-		return ;
-    }
 	dup2(in, STDIN_FILENO);
 	if (c->next != NULL)
 		dup2(c->fd[1], STDOUT_FILENO);
 	close(in);
 	close(c->fd[1]);
-	while (env_ter[++i])
-	{
-		write(STDOUT_FILENO, env_ter[i], string()->len(env_ter[i]));
-		write(STDOUT_FILENO, "\n", 1);
-	}
+	write(STDOUT_FILENO, "exit\n", 5);
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
+    else
+		exit(0);
 }
 
-static t_command *new_command(char	**command)
+static  t_command *new_command(char	**command)
 {
 	t_command	*c;
 
@@ -48,14 +36,14 @@ static t_command *new_command(char	**command)
 	c->command = command;
 	c->path = NULL;
 	c->next = NULL;
-	c->execute = env_execute;
+	c->execute = exit_execute;
 	return (c);
 }
 
-void    ft_env(char **input)
+void    ft_exit(char **input)
 {
 	(void)input;
-	char	*input_1[2] = {"env", NULL};
+	char	*input_1[2] = {"exit", NULL};
 	t_command *command;
 
 	command = new_command(input_1);

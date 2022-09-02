@@ -42,16 +42,18 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGHUP, action); //Ctrl + '\'
 	//Ctrl + 'D' - é quando a line for nula
 	new_terminal("\033[0;36mThe Best: \033[0;37m", env);
-	/*while (1)
+	while (1)
 	{
-		line = readline(terminal()->title);*/
-		ft_pwd(0);
+		line = readline(terminal()->title);
+		if (!string()->compare_n(line, "", 1) && line != NULL)
+			add_history(line);
+		ft_choise(line);
 		//var = path_command(line);
 		//terminal()->execute(var);
 		//printf("%s \n", var);
 		//free(var);
 		//printf("%s \n", terminal()->variable_env(line));
-	//}
+	}
 	
 	/*while(terminal()->path[++i])
 		printf("%s \n", terminal()->path[i]);*/

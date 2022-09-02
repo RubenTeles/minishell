@@ -23,8 +23,10 @@ INC_PATH = ./includes/
 SRC_NAME = 	main.c \
 
 SRC_COMMANDS = 	ft_echo.c \
+				ft_choise.c \
 				ft_cd.c \
 				ft_env.c \
+				ft_exit.c \
 				ft_pwd.c \
 
 SRC_TERMINAL = 	create_terminal.c \
