@@ -45,8 +45,9 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		line = readline(terminal()->title);
-		if (!string()->compare_n(line, "", 1) && line != NULL)
+		if (line != NULL && !string()->compare_n(line, "", 1))
 			add_history(line);
+		//printf("%s\n", line);
 		ft_choise(line);
 		//var = path_command(line);
 		//terminal()->execute(var);

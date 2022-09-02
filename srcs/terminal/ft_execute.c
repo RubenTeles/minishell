@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/01 22:47:42 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/02 06:29:24 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,28 @@ t_command *new_command(char	**command)
 	return (c);
 }
 
-void ft_execute(void)
+void	ft_pipe(char ***comands)
 {
 	int 		fd[2];
 	int			i;
 	int			max_i;
 	t_command 	*command;
 	t_command 	*aux;
-	char	***comands = malloc(sizeof(char **) * 4);
-	char	*comands_1[3] = {"ls", "-la", NULL};
-	char	*comands_2[3] = {"grep", "5", NULL};
-	char	*comands_3[3] = {"grep", "a.out", NULL};
-	char	*comands_4[3] = {"wc", "-l", NULL};
+	char	***input = malloc(sizeof(char **) * 4);
+	char	*input_1[3] = {"ls", "-la", NULL};
+	char	*input_2[3] = {"grep", "5", NULL};
+	char	*input_3[3] = {"grep", "a.out", NULL};
+	char	*input_4[3] = {"wc", "-l", NULL};
 
-	comands[0] = comands_1;
-	comands[1] = comands_2;
-	comands[2] = comands_3;
-	comands[3] = comands_4;
+	input[0] = input_1;
+	input[1] = input_2;
+	input[2] = input_3;
+	input[3] = input_4;
 	max_i = 4;
 	i = -1;
 	while (++i < max_i)
 	{
-		aux = new_command(comands[i]);
+		aux = new_command(input[i]);
 		if (terminal()->start == NULL)
 			terminal()->start = aux;
 		else
