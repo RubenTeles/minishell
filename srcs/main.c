@@ -47,8 +47,13 @@ int	main(int argc, char **argv, char **env)
 		line = readline(terminal()->title);
 		if (line != NULL && !string()->compare_n(line, "", 1))
 			add_history(line);
-		//printf("%s\n", line);
-		ft_choise(line);
+		if (!line || string()->compare_n(line, "exit", 5))
+		{
+			printf("line passou aqui\n");
+			ft_exit(0);
+		}
+		////printf("%s\n", line);
+		ft_command_execute();
 		//var = path_command(line);
 		//terminal()->execute(var);
 		//printf("%s \n", var);

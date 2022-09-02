@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 06:29:24 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/02 07:05:18 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 static void	execute(t_command *c, int in)
 {
+	printf("pipe\n");
 	c->pid = fork();
 	if(c->pid == 0)
 	{
@@ -48,8 +49,14 @@ t_command *new_command(char	**command)
 	return (c);
 }
 
-void	ft_pipe(char ***comands)
+t_command	*ft_pipe(char **input)
 {
+	return (new_command(input));
+}
+
+void	ft_pipex(char ***comands)
+{
+	(void)comands;
 	int 		fd[2];
 	int			i;
 	int			max_i;
@@ -57,7 +64,7 @@ void	ft_pipe(char ***comands)
 	t_command 	*aux;
 	char	***input = malloc(sizeof(char **) * 4);
 	char	*input_1[3] = {"ls", "-la", NULL};
-	char	*input_2[3] = {"grep", "5", NULL};
+	char	*input_2[3] = {"grep", "1", NULL};
 	char	*input_3[3] = {"grep", "a.out", NULL};
 	char	*input_4[3] = {"wc", "-l", NULL};
 

@@ -73,16 +73,20 @@ t_input 	*inpt(void);
 //----Terminal Methods----//
 int 	__count_env(void);
 char	*variable_env(char *var);
-void 	ft_execute(void);
+void	ft_command_execute(void);
 
 //----Commands----//
 char	*path_command(char *command);
 
 //----Para Apagar---//
-void	ft_echo(char **input);
-void	ft_env(char **input);
-void	ft_pwd(char **input);
-void	ft_exit(char **input);
-void	ft_choise(char *command);
+t_command	*ft_echo(char **input);
+t_command	*ft_env(char **input);
+t_command	*ft_pwd(char **input);
+t_command	*ft_pipe(char **input);
+t_command	*ft_exit(char **input);
+t_command	*ft_choise(char **command);
+
+//----TESTE----//
+void	ft_pipex(char ***comands);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 01:10:44 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/02 07:16:56 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static void	pwd_execute(t_command *c, int in)
 {
+	printf("pwd\n");
 	char	*pwd;
 
     pwd = terminal()->variable_env("PWD");
@@ -46,12 +47,13 @@ static t_command *new_command(char	**command)
 	return (c);
 }
 
-void    ft_pwd(char **input)
+t_command	*ft_pwd(char **input)
 {
-	(void)input;
+	/*(void)input;
 	char	*input_1[2] = {"pwd", NULL};
 	t_command *command;
 
 	command = new_command(input_1);
-	command->execute(command, 0);
+	command->execute(command, 0);*/
+	return (new_command(input));
 }

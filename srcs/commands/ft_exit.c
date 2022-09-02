@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 01:09:51 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/02 07:17:09 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	exit_execute(t_command *c, int in)
 {
+	printf("exit\n");
 	dup2(in, STDIN_FILENO);
 	if (c->next != NULL)
 		dup2(c->fd[1], STDOUT_FILENO);
@@ -40,12 +41,18 @@ static  t_command *new_command(char	**command)
 	return (c);
 }
 
-void    ft_exit(char **input)
+t_command	*ft_exit(char **input)
 {
-	(void)input;
+	if (!input)
+	{
+		exit_execute(new_command(0), 0);
+		return (0);
+	}
+	/*(void)input;
 	char	*input_1[2] = {"exit", NULL};
 	t_command *command;
 
 	command = new_command(input_1);
-	command->execute(command, 0);
+	command->execute(command, 0);*/
+	return (new_command(input));
 }

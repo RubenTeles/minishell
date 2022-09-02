@@ -6,34 +6,34 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 06:28:31 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/02 07:23:32 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_choise(char *line)
+t_command	*ft_choise(char **command)
 {
-	if (string()->compare_n(line, "echo", string()->len(line)))
-		ft_echo(0);
-	else if (string()->compare_n(line, "pwd", string()->len(line)))
-		ft_pwd(0);
-	else if (string()->compare_n(line, "env", string()->len(line)))
-		ft_env(0);
-	else if (string()->compare_n(line, "exit", string()->len(line)) ||
-		!line)
-		ft_exit(0);
-	/*else if (command[0] == "export")
-		ft_export(command);
-	else if (command[0] == "unset")
-		ft_unset(command);
-	else if (command[0] == "cd")
-		ft_cd(command);
+	if (string()->compare_n(command[0], "echo", string()->len(command[0])))
+		return (ft_echo(command));
+	else if (string()->compare_n(command[0], "pwd", string()->len(command[0])))
+		return (ft_pwd(command));
+	else if (string()->compare_n(command[0], "env", string()->len(command[0])))
+		return (ft_env(command));
 	else
-		ft_pipe(command);*/
+		return (ft_pipe(command));
+	/*else if (string()->compare_n(*command[0], "exit", string()->len(*command[0])))
+		return (ft_exit(command));*/
+	/*else if (command[0] == "export")
+		return (ft_export(command));
+	else if (command[0] == "unset")
+		return (ft_unset(command));
+	else if (command[0] == "cd")
+		return (ft_cd(command));
+	*/
 }
 
-void ft_execute(void)
+void ft_command_execute(void)
 {
 	int			i;
 	int			max_i;
@@ -41,7 +41,7 @@ void ft_execute(void)
 	t_command 	*aux;
 	char	***comands = malloc(sizeof(char **) * 4);
 	char	*comands_1[3] = {"ls", "-la", NULL};
-	char	*comands_2[3] = {"grep", "5", NULL};
+	char	*comands_2[3] = {"grep", "1", NULL};
 	char	*comands_3[3] = {"grep", "a.out", NULL};
 	char	*comands_4[3] = {"wc", "-l", NULL};
 
@@ -53,7 +53,7 @@ void ft_execute(void)
 	i = -1;
 	while (++i < max_i)
 	{
-		aux = new_command(comands[i]);
+		aux = ft_choise(comands[i]);
 		if (terminal()->start == NULL)
 			terminal()->start = aux;
 		else
@@ -67,5 +67,9 @@ void ft_execute(void)
 		wait(&aux->pid);
 		aux = aux->next;
 	}
+	rl_on_new_line();
+	/*while (--i >= 0)
+		free(comands[i]);*/
+	free(comands);
 	//destroy commands
 }

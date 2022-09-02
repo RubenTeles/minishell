@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:18:57 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 06:27:53 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/02 07:17:03 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	echo_execute(t_command *c, int in)
 {
+	printf("echo\n");
 	int		i;
 
 	i = 0;
@@ -52,13 +53,14 @@ static t_command *new_command(char	**command)
 	return (c);
 }
 
-void    ft_echo(char **input)
+t_command	*ft_echo(char **input)
 {
-	(void)input;
+	/*(void)input;
 	char	*input_1[5] = {"echo", "-n", "ahahaha ", "hamburguer", NULL};
 	char	*input_2[4] = {"echo", "ahahaha ", "hamburguer", NULL};
 	t_command *command;
 
 	command = new_command(input_2);
-	command->execute(command, 0);
+	command->execute(command, 0);*/
+	return (new_command(input));
 }

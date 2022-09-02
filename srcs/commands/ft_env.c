@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 01:10:40 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/02 07:16:47 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	env_execute(t_command *c, int in)
 {
+	printf("env\n");
 	char	**env_ter;
 	int		i;
 
@@ -52,12 +53,13 @@ static t_command *new_command(char	**command)
 	return (c);
 }
 
-void    ft_env(char **input)
+t_command	*ft_env(char **input)
 {
-	(void)input;
+	/*(void)input;
 	char	*input_1[2] = {"env", NULL};
 	t_command *command;
 
 	command = new_command(input_1);
-	command->execute(command, 0);
+	command->execute(command, 0);*/
+	return (new_command(input));
 }
