@@ -156,15 +156,14 @@ t_token	*ft_split_line(const char *line, int i, t_token	*start, t_token	*end)
 	}
 	return (start);
 }
-
-void	get_comando(char *line, t_data *data,char *comando[20][20])
+//This function will make all parser functions and store them in the *comando[][] array
+void	get_comando(char *line, t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	comando = data->comando;
 	data->input = ft_split_line(line, 0, NULL, NULL);
 	data->start = ft_parameters(data->input, NULL, NULL);
 	while (data->start)
@@ -187,7 +186,6 @@ int	main(int argc, char *argv[], char **env)
 {
 	char	*line;
 	t_data	*data;
-	char	*comando[20][20];
 
 	(void) argv;
 	(void) argc;
@@ -195,8 +193,9 @@ int	main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		line = readline("MyShell$ ");
-		get_comando(line, data, comando);
-		//execve -> comando[X]	;
-		//free -> tokens... line...//
+		get_comando(line, data);
+		//execve -> data->comando[X]	;
+		//free -> tokens... line...Limpar o array comando[0][0]//
+		//printf("%s\n", data->comando[0][0]); // <- Neste exemplo será mostrado o primeiro comando digitado...
 	}
 }
