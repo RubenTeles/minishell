@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 07:23:32 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:23:16 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,27 @@ t_command	*ft_choise(char **command)
 	*/
 }
 
-void ft_command_execute(void)
+void ft_command_execute(char ***commandx)
 {
 	int			i;
 	int			max_i;
 	t_command 	*command;
 	t_command 	*aux;
-	char	***comands = malloc(sizeof(char **) * 4);
+	char	***commands = malloc(sizeof(char **) * 4);
 	char	*comands_1[3] = {"ls", "-la", NULL};
 	char	*comands_2[3] = {"grep", "1", NULL};
 	char	*comands_3[3] = {"grep", "a.out", NULL};
 	char	*comands_4[3] = {"wc", "-l", NULL};
 
-	comands[0] = comands_1;
-	comands[1] = comands_2;
-	comands[2] = comands_3;
-	comands[3] = comands_4;
+	commands[0] = comands_1;
+	commands[1] = comands_2;
+	commands[2] = comands_3;
+	commands[3] = comands_4;
 	max_i = 4;
 	i = -1;
 	while (++i < max_i)
 	{
-		aux = ft_choise(comands[i]);
+		aux = ft_choise(commands[i]);
 		if (terminal()->start == NULL)
 			terminal()->start = aux;
 		else
@@ -69,7 +69,7 @@ void ft_command_execute(void)
 	}
 	rl_on_new_line();
 	/*while (--i >= 0)
-		free(comands[i]);*/
-	free(comands);
+		free(commands[i]);*/
+	free(commands);
 	//destroy commands
 }

@@ -10,70 +10,195 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/ft_input.h"
 
-//Função que quando chamada, adiciona a variavel $env na line... se o valor não existir, limpa a palavra $*** da line
-void	ft_put_env(char *line, int index)
+/*
+echo
+teste*/
+
+/*echo
+tess*/
+
+/*<<
+ls
+-la*/
+
+void	ft_make_command(t_cms **aux, t_token **temp)
 {
-	printf("%c\n", line[index]);
+	int	i;
+
+	i = 0;
+	if (!strcmp("<", (*temp)->token) || !strcmp("<<", (*temp)->token)
+		|| !strcmp(">", (*temp)->token) || !strcmp(">>", (*temp)->token))
+	{
+		(*aux)->commands[i++] = (*temp)->token;
+		(*temp) = (*temp)->next;
+	}
+	while ((*temp))
+	{
+		if (!strcmp("<", (*temp)->token) || !strcmp("<<", (*temp)->token)
+			|| !strcmp(">", (*temp)->token) || !strcmp(">>", (*temp)->token))
+			break ;
+		if (!strcmp("|", (*temp)->token))
+		{
+			(*temp) = (*temp)->next;
+			break ;
+		}
+		(*aux)->commands[i++] = (*temp)->token;
+		(*temp) = (*temp)->next;
+	}
+}
+
+int	ft_count_param(t_token *temp)
+{
+	int	i;
+
+	i = 0;
+	while (temp)
+	{
+		if (!strcmp("|", temp->token) || !strcmp("<", temp->token)
+			|| !strcmp("<<", temp->token) || !strcmp(">", temp->token)
+			|| !strcmp(">>", temp->token))
+			break ;
+		i++;
+		temp = temp->next;
+	}
+	return (i);
+}
+
+t_cms	*ft_parameters(t_token *tokens, t_cms *start, t_cms *end)
+{
+	t_cms	*aux;
+	t_token	*temp;
+	int		i;
+
+	temp = tokens;
+	if (!tokens)
+		return (NULL);
+	i = ft_count_param(temp);
+	aux = malloc(sizeof(t_cms));
+	aux->next = NULL;
+	if (start == NULL)
+		start = aux;
+	else
+		end->next = aux;
+	end = aux;
+	aux->commands = malloc(sizeof(char *) * (i + 1));
+	aux->commands[i] = NULL;
+	temp = tokens;
+	ft_make_command(&aux, &temp);
+	if (temp)
+		start = ft_parameters(temp, start, end);
+	return (start);
 }
 
 //Função que separa todo o conteudo da line retornando *out que é o comando flag ou pipe
-char	*ft_get_string(t_input *input, int *i)
+char	*ft_get_command(const char *line, int *i)
 {
 	char	*out;
 	int		len;
 	int		new_i;
+	int		ignore;
 
+	ignore = 0;
 	len = 0;
-	while (input->line[*i + len] && input->line[*i + len] != ' ')
+	while ((line[*i + len]) && (line[*i + len] != ' ' || ignore))
 	{
-		if (input->line[*i + len] == '$')
-			ft_put_env(input->line, *i + len);
+		if (line[*i + len] == '\"' || line[*i + len] == '\'')
+			ignore = !ignore;
+		if (line[*i + len] == ignore && len++)
+			break ;
 		len++;
-		if (input->line[*i + len - 1] == 39)
-			while (input->line[*i + len] && input->line[*i + len] != 39)
-				;
-		if (input->line[*i + len - 1] == '"')
-			while (input->line[*i + len] && input->line[*i + len++] != '"')
-				if (input->line[*i + len++] == '$')
-					ft_put_env(input->line, *i + (len - 1));
 	}
 	out = malloc(sizeof(char) * len + 1);
 	out[len] = '\0';
 	new_i = len;
-	while (--len >= 0 && input->line[*i + len])
-		out[len] = input->line[*i + len];
+	while (--len >= 0 && line[*i + len])
+		out[len] = line[*i + len];
 	*i = new_i + *i;
 	return (out);
 }
 
 //Função de inicio, percorre um input recebido da função readline, ou seja vai percorrer a line até chegar ao fim e ierá armaznar todos os objetos num **array...
-void	ft_split_prompt(t_input *input)
+t_token	*ft_split_line(const char *line, int i, t_token	*start, t_token	*end)
 {
-	int		i;
-	char	*temp;
+	t_token	*aux;
 
-	temp = NULL;
-	input->objects = 0;
-	i = 0;
-	while (input->line[i] != '\0')
+	while (line[i] != '\0')
 	{
-		if (input->line[i] != '\t' && input->line[i] != ' ')
+		if (line[i] != '\t' && line[i] != ' ')
 		{
-			temp = ft_get_string(input, &i);
-			printf("%s\n", temp);
-			free (temp);
+			aux = malloc(sizeof(t_token));
+			aux->next = NULL;
+			aux->token = ft_get_command(line, &i);
+			if (start == NULL)
+				start = aux;
+			else
+				end->next = aux;
+			end = aux;
 		}
-		if (!input->line[i])
+		if (!line[i])
 			break ;
 		i++;
 	}
+	return (start);
+}
+//This function will make all parser functions and store them in the *comando[][] array
+void	get_comando(char *line, t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	data->input = ft_split_line(line, 0, NULL, NULL);
+	data->start = ft_parameters(data->input, NULL, NULL);
+	while (data->start)
+	{
+		//printf("=======		Commands	 ===========\n");
+		while (data->start->commands && data->start->commands[i])
+		{
+			data->comando[j][i] = data->start->commands[i];
+			//printf("%s\n", data->comando[j][i++]);
+			i++;
+		}
+		data->start = data->start->next;
+		i = 0;
+		j++;
+		//printf("\n\n");
+	}
+	
 }
 
-t_input *inpt(void)
-{
-	static t_input	i;
 
-	return (&i);
+void new_data(int max_comands)
+{
+	return ;
+}
+
+
+t_data *data(void)
+{
+	static t_data	d;
+
+	return (&d);
+}
+
+
+int	main(int argc, char *argv[], char **env)
+{
+	char	*line;
+	t_data	*data;
+
+	(void) argv;
+	(void) argc;
+	(void) env;
+	while (1)
+	{
+		line = readline("MyShell$ ");
+		get_comando(line, data);
+		//execve -> data->comando[X]	;
+		//free -> tokens... line...Limpar o array comando[0][0]//
+		//printf("%s\n", data->comando[0][0]); // <- Neste exemplo será mostrado o primeiro comando digitado...
+	}
 }

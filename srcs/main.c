@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <ft_input.h>
 #include <signal.h>
 
 /* Falta tirar o ^\   Para tirar é so meter uma flag no make*/ 
@@ -34,7 +35,7 @@ int	main(int argc, char **argv, char **env)
 	char	*var;
 	char	*var2;
 	int		i;
-
+	char	***command;
 	(void)argc;
 	(void)argv;
 
@@ -42,9 +43,11 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGHUP, action); //Ctrl + '\'
 	//Ctrl + 'D' - é quando a line for nula
 	new_terminal("\033[0;36mThe Best: \033[0;37m", env);
+	line = NULL;
 	while (1)
 	{
 		line = readline(terminal()->title);
+		get_comando(line, data);
 		if (line != NULL && !string()->compare_n(line, "", 1))
 			add_history(line);
 		if (!line || string()->compare_n(line, "exit", 5))
@@ -53,7 +56,7 @@ int	main(int argc, char **argv, char **env)
 			ft_exit(0);
 		}
 		////printf("%s\n", line);
-		ft_command_execute();
+		ft_command_execute(command);
 		//var = path_command(line);
 		//terminal()->execute(var);
 		//printf("%s \n", var);
