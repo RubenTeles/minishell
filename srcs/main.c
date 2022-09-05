@@ -36,6 +36,7 @@ int	main(int argc, char **argv, char **env)
 	char	*var2;
 	int		i;
 	char	***command;
+	//t_data	data;
 	(void)argc;
 	(void)argv;
 
@@ -47,7 +48,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		line = readline(terminal()->title);
-		get_comando(line, data);
+		//get_comando(line, &data);
 		if (line != NULL && !string()->compare_n(line, "", 1))
 			add_history(line);
 		if (!line || string()->compare_n(line, "exit", 5))
@@ -57,6 +58,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		////printf("%s\n", line);
 		ft_command_execute(command);
+		//ft_pipex(command);
 		//var = path_command(line);
 		//terminal()->execute(var);
 		//printf("%s \n", var);

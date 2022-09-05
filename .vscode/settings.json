@@ -1,9 +1,5 @@
 {
     "files.associations": {
-        "string.h": "c",
-        "ft_string.h": "c",
-        "minishell.h": "c",
-        "ft_input.h": "c",
-        "stdio.h": "c"
+        "ft_input.h": "c"
     }
 }

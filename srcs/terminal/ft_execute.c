@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 07:05:18 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/05 23:32:48 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static void	execute(t_command *c, int in)
 {
-	printf("pipe\n");
+	//printf("pipe\n");
 	c->pid = fork();
 	if(c->pid == 0)
 	{

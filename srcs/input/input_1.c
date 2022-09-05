@@ -184,11 +184,11 @@ t_data *data(void)
 	return (&d);
 }
 
-
+/*
 int	main(int argc, char *argv[], char **env)
 {
 	char	*line;
-	t_data	*data;
+	t_data	data;
 
 	(void) argv;
 	(void) argc;
@@ -196,9 +196,10 @@ int	main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		line = readline("MyShell$ ");
-		get_comando(line, data);
+		get_comando(line, &data);
 		//execve -> data->comando[X]	;
 		//free -> tokens... line...Limpar o array comando[0][0]//
 		//printf("%s\n", data->comando[0][0]); // <- Neste exemplo será mostrado o primeiro comando digitado...
 	}
 }
+*/
