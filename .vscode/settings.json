@@ -2,6 +2,8 @@
     "files.associations": {
         "string.h": "c",
         "ft_string.h": "c",
-        "minishell.h": "c"
+        "minishell.h": "c",
+        "termios.h": "c",
+        "readline.h": "c"
     }
 }

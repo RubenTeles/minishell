@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:18:02 by rteles            #+#    #+#             */
-/*   Updated: 2022/08/24 22:28:19 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:19:57 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (0);
 	ft_strlcpy(&str[0], s + start, len + 1);
 	return (str);
+}
+
+char	*replace_str(char *str1, char *str2)
+{
+	int	len;
+	
+	len = string()->len(str2) + 1;
+	free(str1);
+	str1 = malloc(sizeof(char) * len);
+	if (!str1)
+		return (0);
+	string()->copy_n(str1, str2, len);
+	return (str1);
 }

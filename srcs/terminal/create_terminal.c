@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:37:10 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 06:57:01 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:42:13 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void new_terminal(char *title, char **env)
 	terminal()->start = NULL;
 	terminal()->count_env = __count_env;
 	terminal()->variable_env = variable_env;
+	terminal()->index_var = index_var;
 	terminal()->execute = ft_command_execute;
 	terminal()->destroy = __destroy;
 	create_env(env);

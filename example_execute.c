@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -11,7 +13,7 @@
 #define READ 0
 #define WRITE 1
 
-int main(int argc, char* argv[], char **env)
+void ft_pipex(char **env, int in) 
 {
 	pid_t	pid1;
 	pid_t	pid2;
@@ -27,45 +29,78 @@ int main(int argc, char* argv[], char **env)
 	comands[1] = comands_2;
 	comands[2] = comands_3;
 
+	printf("aqui\n");
+
 	pipe(fd); // fd[0] = fd[1]
 	pipe(fd_2); //fd_2[0] = fd_2[1]
 	// READ | WRITE
 	pid1 = fork();
 	if(pid1 == 0)
 	{
+		dup2(in, STDIN_FILENO);
 		dup2(fd[WRITE], STDOUT_FILENO);
+		close(in);
 		close(fd[1]);
-		close(fd[0]);
 		execve("/bin/ls", comands[0], env);
 	}
+	close(in);
 	close(fd[1]);
-	close(fd[0]);
-	wait(&pid1);
 
 	pid2 = fork();
 	if(pid2 == 0)
 	{
 		dup2(fd[READ], STDIN_FILENO);
 		dup2(fd_2[WRITE], STDOUT_FILENO);
-		close(fd[0]);
-		close(fd[1]);
+		close(fd[READ]);
+		close(fd_2[WRITE]);
 		execve("/usr/bin/grep", comands[1], env);
 	}
-	close(fd[1]);
 	close(fd[0]);
-	wait(&pid2);
+	close(fd_2[1]);
 
 	pid3 = fork();
 	if(pid3 == 0)
 	{
 		dup2(fd_2[READ], STDIN_FILENO);
-		wait(&pid1);
 		close(fd_2[0]);
-		close(fd_2[1]);
 		execve("/bin/wc", comands[2], env);
 	}
-	
-	close(fd_2[1]);
 	close(fd_2[0]);
+	wait(&pid1);
+	wait(&pid2);
 	wait(&pid3);
+}
+
+int main(int argc, char* argv[], char **env)
+{
+	char	*line;
+	int		command;
+
+	command = 0;
+	while(1)
+	{
+		if (command)
+		{
+			command = 0;
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+		line = readline("ola: ");
+		printf("%s line\n", line);
+		if (line != NULL)
+			add_history(line);
+		if (!line && !command)
+		{
+			printf("line passou aqui\n");
+			exit(0);
+		}
+		////printf("%s\n", line);
+		if (line)
+		{
+			ft_pipex(env, 0);
+			command = 1;
+			free(line);
+		}
+	}
 }

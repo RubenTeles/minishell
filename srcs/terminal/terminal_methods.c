@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:02:33 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/01 23:32:43 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:40:54 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,23 @@ char	*variable_env(char *str)
 	if (!aux)
 		return ("");
 	return (string()->duplicate(aux));
+}
+
+int	index_var(char *str)
+{
+	int		i;
+	int		len;
+	char	*var;
+	char	*aux;
+
+	i = -1;
+	aux = 0;
+	var = string()->join(str, "=");
+	len = string()->len(var);
+	while (!aux && terminal()->env_m[++i])
+		aux = string()->n_str(terminal()->env_m[i], var, len);
+	free(var);
+	if (!aux)
+		return (-1);
+	return (i);
 }

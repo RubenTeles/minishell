@@ -33,23 +33,22 @@ int main(int argc, char* argv[], char **env)                 //
         dup2(fd[0], STDIN_FILENO);      // [STDIN -> pipe_output, STDOUT -> terminal_output, fd[1] -> pipe_output]    (of the WC process)
         close(fd[0]);      	         // [STDIN -> pipe_output, STDOUT -> terminal_output]                          (of the WC process)
         execve("/bin/wc", comands[1], env);      //
-    }                                            //
-    else                                         //
-    {                                            //
-        pid2=fork();                             //
+    }
                                                  //
-        if(pid2==0)                              //
-        {                                        // I am going to be the ls process (i.e. producing output to the pipe)
-            close(fd[0]);               // [STDIN -> terminal_input, STDOUT -> terminal_output, fd[0] -> pipe_input] (of the ls process)
-            dup2(fd[1], STDOUT_FILENO);  // [STDIN -> terminal_input, STDOUT -> pipe_input, fd[0] -> pipe_input]      (of the ls process)
-            close(fd[1]);                // [STDIN -> terminal_input, STDOUT -> pipe_input]                           (of the ls process)
-        	execve("/bin/ls", comands[0], env);  //
-        }                                        //
-                                                 //
-        close(fd[0]);                   // [STDIN -> terminal_input, STDOUT -> terminal_output, fd[0] -> pipe_input] (of the parent process)
-        close(fd[1]);                    // [STDIN -> terminal_input, STDOUT -> terminal_output]                      (of the parent process)
-        wait(&pid1);                    // As the parent process - we wait for a process to die (-1) means I don't care which one - it could be either ls or wc
-        wait(&pid2);                    // As the parent process - we wait for the another process to die.
+    pid2=fork();                             //
+                                             //
+    if(pid2==0)                              //
+    {                                        // I am going to be the ls process (i.e. producing output to the pipe)
+        close(fd[0]);               // [STDIN -> terminal_input, STDOUT -> terminal_output, fd[0] -> pipe_input] (of the ls process)
+        dup2(fd[1], STDOUT_FILENO);  // [STDIN -> terminal_input, STDOUT -> pipe_input, fd[0] -> pipe_input]      (of the ls process)
+        close(fd[1]);                // [STDIN -> terminal_input, STDOUT -> pipe_input]                           (of the ls process)
+    	execve("/bin/ls", comands[0], env);  //
+    }                                        //
+                                             //
+    close(fd[0]);                   // [STDIN -> terminal_input, STDOUT -> terminal_output, fd[0] -> pipe_input] (of the parent process)
+    close(fd[1]);                    // [STDIN -> terminal_input, STDOUT -> terminal_output]                      (of the parent process)
+    wait(&pid1);                    // As the parent process - we wait for a process to die (-1) means I don't care which one - it could be either ls or wc
+    wait(&pid2);                    // As the parent process - we wait for the another process to die.
                                                  // At this point we can safely assume both process are completed
-    }                                            //
+                                             //
 }

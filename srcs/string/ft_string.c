@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:39:43 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/01 23:15:33 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:01:19 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,15 @@ Substring, uma nova string que começa apartir de x casa com x len.
 
 sub_str_chars:
 Substring, um nova string que começa apartir de c1, ate c2.
+
+replace:
+Muda o valor da str1 para o str2.
 */
 t_string	*string(void)
 {
 	static t_string	s = {ft_strlen, ft_split, ft_strnstr, ft_strlcpy,
 		ft_strjoin, ft_str_s_str, ft_strchr, ft_strrchr, ft_strdup, ft_strncmp,
-		ft_substr, ft_string_in_two_char};
+		ft_substr, ft_string_in_two_char, replace_str};
 
 	return (&s);
 }

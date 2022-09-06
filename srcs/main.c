@@ -19,8 +19,9 @@ static void	action(int sig)
 	if (sig == SIGINT)
 	{
 		//Falta Tirar o ^C
-		printf("\n");
+		write(0, "\n", 1);
 		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 		return ;
 	}
@@ -45,22 +46,27 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		line = readline(terminal()->title);
-		if (line != NULL && !string()->compare_n(line, "", 1))
+		/*if (line != NULL && !string()->compare_n(line, "", 1))
 			add_history(line);
 		if (!line || string()->compare_n(line, "exit", 5))
 		{
 			printf("line passou aqui\n");
 			ft_exit(0);
-		}
+		}*/
 		////printf("%s\n", line);
-		ft_command_execute();
+		ft_cd(0);
+		free(line);
+		//rl_replace_line("", 0);
+		//free(line);
+		//free(line);
+		//rl_on_new_line();
+		//ft_command_execute();
 		//var = path_command(line);
 		//terminal()->execute(var);
 		//printf("%s \n", var);
 		//free(var);
 		//printf("%s \n", terminal()->variable_env(line));
 	}
-	
 	/*while(terminal()->path[++i])
 		printf("%s \n", terminal()->path[i]);*/
 

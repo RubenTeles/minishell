@@ -51,6 +51,7 @@ struct s_terminal {
 	void		(*execute)(void);
 	int			(*count_env)();
 	char		*(*variable_env)(char *var);
+	int			(*index_var)(char *str);
 	void		(*unset)(char *input);
 	void		(*export_var)(char *var);
 	void		(*destroy)();
@@ -60,6 +61,7 @@ struct s_command {
 	int			fd[2];
 	int			pid;
 	char		**command;
+	int			count_cmd;
 	char		*path;
 	void		(*execute)(t_command *c, int in);
 	t_command	*next;
@@ -73,6 +75,7 @@ t_input 	*inpt(void);
 //----Terminal Methods----//
 int 	__count_env(void);
 char	*variable_env(char *var);
+int		index_var(char *str);
 void	ft_command_execute(void);
 
 //----Commands----//
@@ -80,6 +83,7 @@ char	*path_command(char *command);
 
 //----Para Apagar---//
 t_command	*ft_echo(char **input);
+t_command	*ft_cd(char **input);
 t_command	*ft_env(char **input);
 t_command	*ft_pwd(char **input);
 t_command	*ft_pipe(char **input);
