@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 12:31:30 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/06 12:32:57 by ede-alme         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -171,7 +159,7 @@ t_token	*ft_split_line(const char *line, int i, t_token	*start, t_token	*end)
 
 void	ft_malloc_comando(t_data **data, t_data temp)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (temp.start)
@@ -185,7 +173,7 @@ void	ft_malloc_comando(t_data **data, t_data temp)
 
 int	ft_get_size_command(char **commands)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (commands && commands[i])
@@ -208,14 +196,15 @@ void	get_comando(char *line, t_data *data)
 	ft_malloc_comando(&data, *temp);
 	while (data->start)
 	{
-		if (data->start->commands && data->start->commands[i])
+		if (data->start->commands && data->start->commands[0])
 			data->comando[j] = malloc(sizeof(char *)
 					* (ft_get_size_command(data->start->commands) + 1));
-		while (++i && data->start->commands && data->start->commands[i])
-			data->comando[j][i] = data->start->commands[i];
+		while (data->comando && data->comando[j]
+			&& data->start->commands && data->start->commands[i])
+			data->comando[j][i++] = data->start->commands[i];//Aqui o array*** recebe os tokens consoante o numero do comando...
 		data->comando[j][i] = NULL;
 		data->start = data->start->next;
-		i = -1;
+		i = 0;
 		j++;
 	}
 	data->comando[j] = NULL;
