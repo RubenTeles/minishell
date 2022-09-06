@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/06 12:31:30 by ede-alme          #+#    #+#             */
+/*   Updated: 2022/09/06 12:32:57 by ede-alme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -20,7 +32,7 @@ struct s_cms {
 };
 
 struct s_data {
-	char	*comando[20][20];
+	char	***comando;
 	t_token	*input;
 	t_cms	*start;
 };
@@ -156,36 +168,63 @@ t_token	*ft_split_line(const char *line, int i, t_token	*start, t_token	*end)
 	}
 	return (start);
 }
+
+void	ft_malloc_comando(t_data **data, t_data temp)
+{
+	int	i;
+
+	i = 0;
+	while (temp.start)
+	{
+		temp.start = temp.start->next;
+		i++;
+	}
+	(*data)->comando = malloc(sizeof(char **) * (i + 1));
+	(*data)->comando[i] = NULL;
+}
+
+int	ft_get_size_command(char **commands)
+{
+	int	i;
+
+	i = 0;
+	while (commands && commands[i])
+		i++;
+	return (i);
+}
+
 //This function will make all parser functions and store them in the *comando[][] array
 void	get_comando(char *line, t_data *data)
 {
-	int	i;
-	int	j;
+	t_data	*temp;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
 	data->input = ft_split_line(line, 0, NULL, NULL);
 	data->start = ft_parameters(data->input, NULL, NULL);
+	temp = data;
+	ft_malloc_comando(&data, *temp);
 	while (data->start)
 	{
-		//printf("=======		Commands	 ===========\n");
-		while (data->start->commands && data->start->commands[i])
-		{
+		if (data->start->commands && data->start->commands[i])
+			data->comando[j] = malloc(sizeof(char *)
+					* (ft_get_size_command(data->start->commands) + 1));
+		while (++i && data->start->commands && data->start->commands[i])
 			data->comando[j][i] = data->start->commands[i];
-			//printf("%s\n", data->comando[j][i++]);
-			i++;
-		}
+		data->comando[j][i] = NULL;
 		data->start = data->start->next;
-		i = 0;
+		i = -1;
 		j++;
-		//printf("\n\n");
 	}
+	data->comando[j] = NULL;
 }
 
 int	main(int argc, char *argv[], char **env)
 {
 	char	*line;
-	t_data	*data;
+	t_data	data;
 
 	(void) argv;
 	(void) argc;
@@ -193,9 +232,9 @@ int	main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		line = readline("MyShell$ ");
-		get_comando(line, data);
+		get_comando(line, &data);
 		//execve -> data->comando[X]	;
 		//free -> tokens... line...Limpar o array comando[0][0]//
-		//printf("%s\n", data->comando[0][0]); // <- Neste exemplo será mostrado o primeiro comando digitado...
+		//printf("%s\n", data.comando[0][0]); // <- Neste exemplo será mostrado o primeiro comando digitado...
 	}
 }
