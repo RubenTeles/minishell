@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:38:50 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/06 15:00:16 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/06 23:11:45 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ struct s_string {
 	char	*(*sub_str)(char const *s, unsigned int start, size_t len);
 	char	*(*sub_str_chars)(char *str, char c1, char c2);
 	char	*(*replace)(char *str1, char *str2);
+	int		(*index_char)(char *str, char c);
 };
 
 size_t		ft_strlen(const char *string);
@@ -43,6 +44,7 @@ int			ft_strncmp(const char *str1, const char *str2, size_t n);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_string_in_two_char(char *str, char c1, char c2);
 char		*replace_str(char *str1, char *str2);
+int			index_char(char *str, char c);
 t_string 	*string(void);
 
 #endif

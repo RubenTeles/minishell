@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:18:02 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/06 15:19:57 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/06 23:12:16 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,21 @@ char	*replace_str(char *str1, char *str2)
 		return (0);
 	string()->copy_n(str1, str2, len);
 	return (str1);
+}
+
+int	index_char(char *str, char c)
+{
+	int	i;
+
+	i = -1;
+	if (!str || !c)
+		return (-1);
+	while (str[++i])
+	{
+		if (str[i] == c)
+			return (i);
+	}
+	if (str[i] == c)
+		return (i);
+	return (-1);
 }

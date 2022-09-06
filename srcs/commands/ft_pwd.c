@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 07:16:56 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/07 00:11:11 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ static t_command *new_command(char	**command)
 	if (!c)
 		return (NULL);
 	c->command = command;
+	c->count_cmd = 0;
+	while (command[c->count_cmd])
+		c->count_cmd++;
 	c->path = NULL;
 	c->next = NULL;
 	c->execute = pwd_execute;

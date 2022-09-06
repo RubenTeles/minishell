@@ -72,12 +72,14 @@ struct s_command {
 t_terminal	*terminal(void);
 void		new_terminal(char *title, char **env);
 t_input 	*inpt(void);
+void 	 	create_env(char **env);
 
 //----Terminal Methods----//
 int 	__count_env(void);
 char	*variable_env(char *var);
 void	replace_var(char *var, char *str);
-void	ft_command_execute(void);
+void	ft_command_execute(char ***comamands);
+
 
 //----Commands----//
 char	*path_command(char *command);
@@ -89,6 +91,7 @@ t_command	*ft_env(char **input);
 t_command	*ft_pwd(char **input);
 t_command	*ft_pipe(char **input);
 t_command	*ft_exit(char **input);
+t_command	*ft_export(char **input);
 t_command	*ft_choise(char **command);
 
 //----TESTE----//

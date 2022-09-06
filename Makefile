@@ -25,14 +25,16 @@ INC_PATH = ./includes/
 
 SRC_NAME = 	main.c \
 
-SRC_COMMANDS = 	ft_echo.c \
+SRC_COMMANDS = 	ft_cd.c \
 				ft_choise.c \
-				ft_cd.c \
+				ft_echo.c \
 				ft_env.c \
 				ft_exit.c \
+				ft_export.c \
 				ft_pwd.c \
 
 SRC_TERMINAL = 	create_terminal.c \
+				create_terminal_2.c \
 				terminal_methods.c \
 				commands_1.c \
 				ft_execute.c \

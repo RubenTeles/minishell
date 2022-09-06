@@ -6,17 +6,16 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:37:10 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/06 16:09:46 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/06 23:02:30 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 /* Dá valores ao env_m, export, e ao env_count usando o env do main*/
-static void	create_env(char **env)
+static void	create_path(char **env)
 {
 	int		i;
-	int		aux;
 	char	*path;
 	
 	path = 0;
@@ -31,18 +30,19 @@ static void	create_env(char **env)
 	terminal()->env_count = i;
 	terminal()->env_m = malloc(sizeof(char *) * i + 1);
 	terminal()->export = malloc(sizeof(char *) * i + 1);
-	i = -1;
+	create_env(env);
+	/*i = -1;
 	while (env[++i])
 	{
 		aux = ft_strlen(env[i]);
 		terminal()->env_m[i] = malloc(sizeof(char) * aux + 1);
 		ft_strlcpy(terminal()->env_m[i], env[i], aux + 1);
-		terminal()->export[i] = string()->join("export ", env[i]);
+		terminal()->export[i] = string()->join("declare -x ", env[i]);
 	}
 	terminal()->env_m[i] = malloc(sizeof(char) * 1);
 	terminal()->env_m[i] = NULL;
 	terminal()->export[i] = malloc(sizeof(char) * 1);
-	terminal()->export[i] = NULL;
+	terminal()->export[i] = NULL;*/
 }
 
 static void	__destroy(void)
@@ -72,7 +72,7 @@ void new_terminal(char *title, char **env)
 	terminal()->replace_var = replace_var;
 	terminal()->execute = ft_command_execute;
 	terminal()->destroy = __destroy;
-	create_env(env);
+	create_path(env);
 }
 
 t_terminal *terminal(void)

@@ -58,7 +58,7 @@ int	main(int argc, char **argv, char **env)
 			ft_exit(0);
 		}
 		////printf("%s\n", line);
-		ft_cd(0);
+		ft_export(0);
 		free(line);
 		//rl_replace_line("", 0);
 		//free(line);

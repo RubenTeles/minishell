@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/06 16:17:35 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/07 00:39:11 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 t_command	*ft_choise(char **command)
 {
+	if (string()->compare_n(command[0], "cd", string()->len(command[0])))
+		return (ft_cd(command));
 	if (string()->compare_n(command[0], "echo", string()->len(command[0])))
 		return (ft_echo(command));
-	else if (string()->compare_n(command[0], "pwd", string()->len(command[0])))
-		return (ft_pwd(command));
-	else if (string()->compare_n(command[0], "env", string()->len(command[0])))
+	if (string()->compare_n(command[0], "env", string()->len(command[0])))
 		return (ft_env(command));
-	else
-		return (ft_pipe(command));
-	/*else if (string()->compare_n(*command[0], "exit", string()->len(*command[0])))
-		return (ft_exit(command));*/
-	/*else if (command[0] == "export")
+	if (string()->compare_n(*command[0], "exit", string()->len(*command[0])))
+		return (ft_exit(command));
+	if (string()->compare_n(*command[0], "export", string()->len(*command[0])))
 		return (ft_export(command));
-	else if (command[0] == "unset")
+	if (string()->compare_n(command[0], "pwd", string()->len(command[0])))
+		return (ft_pwd(command));
+	/*
+	if (command[0] == "unset")
 		return (ft_unset(command));
-	else if (command[0] == "cd")
-		return (ft_cd(command));
 	*/
+	return (ft_pipe(command));
 }
 
-void ft_command_execute(char ***commandx)
+void ft_command_execute(char ***commands)
 {
 	int			i;
 	int			max_i;
 	t_command 	*command;
 	t_command 	*aux;
-	char	***commands = malloc(sizeof(char **) * 4);
+	commands = malloc(sizeof(char **) * 4);
 	char	*comands_1[3] = {"ls", "-la", NULL};
 	char	*comands_2[3] = {"grep", "1", NULL};
 	char	*comands_3[3] = {"grep", "a.out", NULL};
