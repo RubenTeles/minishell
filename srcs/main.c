@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <ft_input.h>
 #include <signal.h>
 
 /* Falta tirar o ^\   Para tirar é so meter uma flag no make*/ 
@@ -35,7 +36,8 @@ int	main(int argc, char **argv, char **env)
 	char	*var;
 	char	*var2;
 	int		i;
-
+	char	***command;
+	//t_data	data;
 	(void)argc;
 	(void)argv;
 
@@ -43,16 +45,18 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGHUP, action); //Ctrl + '\'
 	//Ctrl + 'D' - é quando a line for nula
 	new_terminal("\033[0;36mThe Best: \033[0;37m", env);
+	line = NULL;
 	while (1)
 	{
 		line = readline(terminal()->title);
-		/*if (line != NULL && !string()->compare_n(line, "", 1))
+		//get_comando(line, &data);
+		if (line != NULL && !string()->compare_n(line, "", 1))
 			add_history(line);
 		if (!line || string()->compare_n(line, "exit", 5))
 		{
 			printf("line passou aqui\n");
 			ft_exit(0);
-		}*/
+		}
 		////printf("%s\n", line);
 		ft_cd(0);
 		free(line);
@@ -60,12 +64,7 @@ int	main(int argc, char **argv, char **env)
 		//free(line);
 		//free(line);
 		//rl_on_new_line();
-		//ft_command_execute();
 		//var = path_command(line);
-		//terminal()->execute(var);
-		//printf("%s \n", var);
-		//free(var);
-		//printf("%s \n", terminal()->variable_env(line));
 	}
 	/*while(terminal()->path[++i])
 		printf("%s \n", terminal()->path[i]);*/

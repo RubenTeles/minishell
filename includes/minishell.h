@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <ft_string.h>
+# include <ft_input.h>
 
 /* Para incluir readline passos:
 sudo apt-get install libreadline-dev
@@ -48,7 +49,7 @@ struct s_terminal {
 	char		**env_m;
 	char		**path;
 	char		**export;
-	void		(*execute)(void);
+	void		(*execute)(char ***commands);
 	int			(*count_env)();
 	char		*(*variable_env)(char *var);
 	void		(*replace_var)(char *var, char *str);
