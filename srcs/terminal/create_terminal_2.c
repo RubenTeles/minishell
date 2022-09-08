@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:57:46 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 00:35:06 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/07 17:27:10 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	change_shlvl(void)
 		content[0] = (level / 10) + '0';
 		content[1] = (level % 10) + '0';
 	}
-	terminal()->replace_var("SHLVL", content);
+	terminal()->update_var("SHLVL", content);
 	free(content);
 }
 
@@ -87,9 +87,9 @@ static char	*create_export(char *var)
 	str = string()->join(name_var, variable);
 	free(name_var);
 	free(variable);
-	variable = string()->join("declare -x ", str);
-	free(str);
-	return (variable);
+	//variable = string()->join("declare -x ", str);
+	//free(str);
+	return (str);
 }
 
 void	create_env(char **env)

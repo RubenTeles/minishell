@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/06 16:11:39 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/07 18:32:04 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static void	cd_execute(t_command *c, int in)
 		printf("cd: %s: No such file or directory\n", c->command[1]);
 		return ;
 	}
-	terminal()->replace_var("OLDPWD", getcwd(buffer, 100));
+	terminal()->update_var("OLDPWD", getcwd(buffer, 100));
 	chdir(c->command[1]);
-	terminal()->replace_var("PWD", getcwd(buffer, 100));
+	terminal()->update_var("PWD", getcwd(buffer, 100));
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
 }

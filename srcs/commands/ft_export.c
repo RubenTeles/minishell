@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:41:55 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 00:10:05 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/07 20:59:20 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	export_execute(t_command *c, int in)
 	i = -1;
 	if (c->count_cmd < 2)
 		while (terminal()->export[++i])
-			printf("%s \n", terminal()->export[i]);
+			printf("declare -x  %s \n", terminal()->export[i]);
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
 }

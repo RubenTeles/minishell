@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:12:17 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/02 01:02:51 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/07 18:56:20 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ size_t	ft_strlen(const char *string)
 	size_t	i;
 
 	i = 0;
+	if (!string)
+		return (0);
 	while (string[i])
 		i++;
 	return (i);

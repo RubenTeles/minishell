@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 00:39:11 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/07 19:02:34 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_command	*ft_choise(char **command)
 		return (ft_echo(command));
 	if (string()->compare_n(command[0], "env", string()->len(command[0])))
 		return (ft_env(command));
-	if (string()->compare_n(*command[0], "exit", string()->len(*command[0])))
+	if (string()->compare_n(command[0], "exit", string()->len(command[0])))
 		return (ft_exit(command));
-	if (string()->compare_n(*command[0], "export", string()->len(*command[0])))
+	if (string()->compare_n(command[0], "export", string()->len(command[0])))
 		return (ft_export(command));
 	if (string()->compare_n(command[0], "pwd", string()->len(command[0])))
 		return (ft_pwd(command));
@@ -42,7 +42,7 @@ void ft_command_execute(char ***commands)
 	commands = malloc(sizeof(char **) * 4);
 	char	*comands_1[3] = {"ls", "-la", NULL};
 	char	*comands_2[3] = {"grep", "1", NULL};
-	char	*comands_3[3] = {"grep", "a.out", NULL};
+	char	*comands_3[3] = {"grep", "minishell", NULL};
 	char	*comands_4[3] = {"wc", "-l", NULL};
 
 	commands[0] = comands_1;

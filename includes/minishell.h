@@ -52,7 +52,7 @@ struct s_terminal {
 	void		(*execute)(char ***commands);
 	int			(*count_env)();
 	char		*(*variable_env)(char *var);
-	void		(*replace_var)(char *var, char *str);
+	void		(*update_var)(char *var, char *str);
 	void		(*unset)(char *input);
 	void		(*export_var)(char *var);
 	void		(*destroy)();
@@ -77,7 +77,7 @@ void 	 	create_env(char **env);
 //----Terminal Methods----//
 int 	__count_env(void);
 char	*variable_env(char *var);
-void	replace_var(char *var, char *str);
+void	update_var(char *var, char *str);
 void	ft_command_execute(char ***comamands);
 
 

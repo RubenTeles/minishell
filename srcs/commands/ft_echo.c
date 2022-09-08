@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:18:57 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 00:10:57 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/07 18:35:21 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ static void	echo_execute(t_command *c, int in)
 	int		i;
 
 	i = 0;
-	c->pid = fork();
-	if(c->pid == 0)
-	{
 		if (c->command[1] == "-n")
 			i++;
 		dup2(in, STDIN_FILENO);
@@ -32,7 +29,6 @@ static void	echo_execute(t_command *c, int in)
 			write(STDOUT_FILENO, c->command[i], string()->len(c->command[i]) + 1);
 		if (c->command[1] != "-n")
 			write(STDOUT_FILENO, "\n", 1);
-	}
 	close(in);
 	close(c->fd[1]);
 	if (c->next != NULL)

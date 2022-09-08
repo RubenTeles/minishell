@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/05 23:32:48 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/07 18:30:56 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void	execute(t_command *c, int in)
 		close(c->fd[1]);
 		execve(c->path, c->command, terminal()->env_m);
 	}
-	close(in);
+	if (in != STDIN_FILENO)
+		close(in);
 	close(c->fd[1]);
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
