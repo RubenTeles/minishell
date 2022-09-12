@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:57:46 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 17:27:10 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/12 18:28:28 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,45 +69,58 @@ static void	change_shlvl(void)
 	free(content);
 }
 
-static char	*create_export(char *var)
+t_env	*create_var_env(char *env)
 {
-	int	i;
-	char	*name_var;
-	char	*variable;
-	char	*str;
+	t_env	*var;
 
-	i = string()->index_char(var, '=');
-	name_var = malloc(sizeof(char) * i + 3);
-	string()->copy_n(name_var, var, i + 2);
-	str = string()->duplicate(string()->n_str(var, name_var, i + 2));
-	name_var[i + 1] = '\"';
-	name_var[i + 2] = '\0';
-	variable = string()->join(str, "\"\0");
-	free(str);
-	str = string()->join(name_var, variable);
-	free(name_var);
-	free(variable);
-	//variable = string()->join("declare -x ", str);
-	//free(str);
-	return (str);
+	var = malloc(sizeof(t_env));
+	var->var = string()->sub_split_option(env, '=', 0);
+	var->val = string()->sub_split_option(env, '=', 1);
+	var->next = 0;
+	return (var);
 }
 
-void	create_env(char **env)
+void	create_env_m(void)
 {
-	int	i;
-	int	aux;
+	int		i;
+	t_env	*aux;
+	char	*str;
+
+	terminal()->destroy->env_m();
+	aux = terminal()->env_l;
+	terminal()->count_env();
+	terminal()->env_m = malloc(sizeof(char *) * terminal()->env_count + 1);
+	i = 0;
+	while (aux)
+	{
+		str = string()->join(aux->var, "=");
+		terminal()->env_m[i] = string()->join(str, aux->val);
+		free(str);
+		aux = aux->next;
+		i++;
+	}
+	terminal()->env_m[i] = malloc(sizeof(char) * 1);
+	terminal()->env_m[i] = NULL;
+}
+
+void	create_env_l(char **env)
+{
+	int		i;
+	t_env	*aux_env;
+	t_env	*var_env;
 
 	i = -1;
 	while (env[++i])
 	{
-		aux = ft_strlen(env[i]);
-		terminal()->env_m[i] = malloc(sizeof(char) * aux + 1);
-		ft_strlcpy(terminal()->env_m[i], env[i], aux + 1);
-		terminal()->export[i] = create_export(env[i]);
+		aux_env = create_var_env(env[i]);
+		if (!terminal()->env_l)
+			terminal()->env_l = aux_env;
+		else
+			var_env->next = aux_env;
+		var_env = aux_env;
 	}
-	terminal()->env_m[i] = malloc(sizeof(char) * 1);
-	terminal()->env_m[i] = NULL;
-	terminal()->export[i] = malloc(sizeof(char) * 1);
-	terminal()->export[i] = NULL;
+	terminal()->env_count = i;
 	change_shlvl();
+	create_env_m();
+	//add_var_env("Comida");
 }

@@ -30,16 +30,24 @@ https://vcpkg.io/en/getting-started.html
 */
 
 
-typedef struct s_input	t_input;
-
-struct s_input {
-	char	*line;
-	int		objects;
-	char	**values;
-};
-
+typedef struct s_destroy 			t_destroy;
+typedef struct s_env 				t_env;
 typedef struct s_terminal 			t_terminal;
 typedef struct s_command 			t_command;
+
+struct s_destroy {
+	void		(*all)(void);
+	void		(*env_l)(void);
+	void		(*env_m)(void);
+	void		(*path)(void);
+	void		(*commands)(void);
+};
+
+struct s_env {
+	char	*var;
+	char	*val;
+	t_env	*next;
+};
 
 struct s_terminal {
 	int			fd[2];
@@ -47,15 +55,17 @@ struct s_terminal {
 	char		*title;
 	int			env_count;
 	char		**env_m;
+	t_env		*env_l;
 	char		**path;
-	char		**export;
+	t_destroy	*destroy;
 	void		(*execute)(char ***commands);
-	int			(*count_env)();
+	void		(*count_env)(void);
 	char		*(*variable_env)(char *var);
 	void		(*update_var)(char *var, char *str);
 	void		(*unset)(char *input);
 	void		(*export_var)(char *var);
-	void		(*destroy)();
+	void		(*create_path)(void);
+	int			(*index_var)(char *str);
 };
 
 struct s_command {
@@ -71,14 +81,16 @@ struct s_command {
 //----Utils----//
 t_terminal	*terminal(void);
 void		new_terminal(char *title, char **env);
-t_input 	*inpt(void);
-void 	 	create_env(char **env);
+void		create_env_l(char **env);
 
 //----Terminal Methods----//
-int 	__count_env(void);
+void	__count_env(void);
 char	*variable_env(char *var);
 void	update_var(char *var, char *str);
+int		index_var(char *str);
 void	ft_command_execute(char ***comamands);
+void	__destroy(void);
+void	__destroy_all(void);
 
 
 //----Commands----//

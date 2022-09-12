@@ -48,6 +48,7 @@ int	main(int argc, char **argv, char **env)
 	line = NULL;
 	while (1)
 	{
+		//ft_export(0);
 		line = readline(terminal()->title);
 		//get_comando(line, &data);
 		if (line != NULL && !string()->compare_n(line, "", 1))
@@ -75,7 +76,7 @@ int	main(int argc, char **argv, char **env)
 	//execute(&rules, env);
 	/*while (rules.comands_path[++i])
 		printf("%s \n", rules.comands_path[i]);*/
-	terminal()->destroy();
+	terminal()->destroy->all();
 	return (0);
 }
 

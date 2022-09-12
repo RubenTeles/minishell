@@ -32,6 +32,8 @@ static void	env_execute(t_command *c, int in)
 	close(c->fd[1]);
 	while (env_ter[++i])
 	{
+		if (string()->index_char(env_ter[i], '=') == -1)
+			continue;
 		write(STDOUT_FILENO, env_ter[i], string()->len(env_ter[i]));
 		write(STDOUT_FILENO, "\n", 1);
 	}

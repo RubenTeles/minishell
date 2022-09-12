@@ -12,6 +12,40 @@
 
 #include <minishell.h>
 
+static void	show_export(t_command *c, int in)
+{
+	char	**env_ter;
+	char	*aux;
+	int		i;
+
+	i = -1;
+	env_ter = terminal()->env_m;
+	while (env_ter[++i])
+	{
+		aux = string()->sub_split_option(env_ter[i], '=', 0);
+		write(STDOUT_FILENO, aux, string()->len(aux));
+		free(aux);
+		write(STDOUT_FILENO, "=\"", 2);
+		aux = string()->sub_split_option(env_ter[i], '=', 1);
+		write(STDOUT_FILENO, aux, string()->len(aux));
+		free(aux);
+		write(STDOUT_FILENO, "\"\n", 2);
+	}
+}
+/*
+static void add_export(t_command *c)
+{
+	char	*aux_var;
+	char	*aux_val;
+	int		i;
+
+	i = 0;
+	while (c->command[++i])
+	{
+
+	}
+}*/
+
 static void	export_execute(t_command *c, int in)
 {
 	printf("export\n");
@@ -19,8 +53,9 @@ static void	export_execute(t_command *c, int in)
 	
 	i = -1;
 	if (c->count_cmd < 2)
-		while (terminal()->export[++i])
-			printf("declare -x  %s \n", terminal()->export[i]);
+		show_export(c, in);
+	/*else
+		add_export(c);*/
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
 }
