@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:39:43 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/06 23:12:36 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/10 19:08:58 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,17 @@ duplicate:
 Duplica uma string (é preciso dar free);
 
 compare_n:
-Compara 2 strings, com n casas. Retorna 0 se for verdadeiro.
+Compara 2 strings, com n casas. Retorna 1 se for verdadeiro ou 0 se nao.
 
 sub_str:
 Substring, uma nova string que começa apartir de x casa com x len.
 
 sub_str_chars:
 Substring, um nova string que começa apartir de c1, ate c2.
+
+sub_split_option:
+Nova string, divida por um caracter. Se a opção for 0 é do index ate ao c, se for 1 é do index ate '\0'.
+Retorna Null se der erro.
 
 replace:
 Muda o valor da str1 para o str2.
@@ -136,7 +140,7 @@ t_string	*string(void)
 {
 	static t_string	s = {ft_strlen, ft_split, ft_strnstr, ft_strlcpy,
 		ft_strjoin, ft_str_s_str, ft_strchr, ft_strrchr, ft_strdup, ft_strncmp,
-		ft_substr, ft_string_in_two_char, replace_str, index_char};
+		ft_substr, ft_string_in_two_char, split_two_str, replace_str, index_char};
 
 	return (&s);
 }

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:18:02 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/06 23:12:16 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/10 19:24:09 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,20 @@ int	index_char(char *str, char c)
 	if (str[i] == c)
 		return (i);
 	return (-1);
+}
+
+char	*split_two_str(char *str, char c, int option)
+{
+	int	index;
+	int	len;
+
+	if (!str || !c)
+		return (0);
+	index = string()->index_char(str, c);
+	if (index == -1)
+		return (0);
+	len = string()->len(str);
+	if (option == 0)
+		return (string()->sub_str(str, 0, index));
+	return (string()->sub_str(str, index + 1, len - (index + 1)));
 }
