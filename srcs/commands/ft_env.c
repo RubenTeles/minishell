@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 00:10:45 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/12 21:29:39 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ static void	env_execute(t_command *c, int in)
 	dup2(in, STDIN_FILENO);
 	if (c->next != NULL)
 		dup2(c->fd[1], STDOUT_FILENO);
-	close(in);
+	if (in != STDIN_FILENO)
+		close(in);
 	close(c->fd[1]);
 	while (env_ter[++i])
 	{
 		if (string()->index_char(env_ter[i], '=') == -1)
 			continue;
-		write(STDOUT_FILENO, env_ter[i], string()->len(env_ter[i]));
+		write(STDOUT_FILENO, env_ter[i], string()->len(env_ter[i]) + 1);
 		write(STDOUT_FILENO, "\n", 1);
 	}
 	if (c->next != NULL)
@@ -50,8 +51,9 @@ static t_command *new_command(char	**command)
 		return (NULL);
 	c->command = command;
 	c->count_cmd = 0;
-	while (command[c->count_cmd])
-		c->count_cmd++;
+	if (command)
+		while (command[c->count_cmd])
+			c->count_cmd++;
 	c->path = NULL;
 	c->next = NULL;
 	c->execute = env_execute;
@@ -60,11 +62,11 @@ static t_command *new_command(char	**command)
 
 t_command	*ft_env(char **input)
 {
-	/*(void)input;
+	(void)input;
 	char	*input_1[2] = {"env", NULL};
 	t_command *command;
 
 	command = new_command(input_1);
-	command->execute(command, 0);*/
+	command->execute(command, STDIN_FILENO);
 	return (new_command(input));
 }

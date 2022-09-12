@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 18:30:56 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/12 19:33:36 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_command	*ft_pipe(char **input)
 void	ft_pipex(char ***comands)
 {
 	(void)comands;
-	int 		fd[2];
 	int			i;
 	int			max_i;
 	t_command 	*command;

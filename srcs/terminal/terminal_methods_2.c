@@ -6,36 +6,48 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 18:25:11 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/12 21:27:45 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	add_var_env(char *var)
+void	add_var(char *var)
 {
-	int		i;
+	t_env	*aux;
+	t_env	*var_env;
+
+	aux = terminal()->env_l;
+	while (aux)
+	{
+		var_env = aux;
+		aux = aux->next;
+	}
+	var_env->next = create_var_env(var);
+}
+
+void	add_var_if_exist(char *var)
+{
+	char	*exists;
 	char	*aux_var;
 	char	*aux_val;
 
-	aux_var = string()->sub_split_option(var, '=', 0);
-	aux_val = string()->sub_split_option(var, '=', 1);
 	if (!aux_var)
 		return ;
-	i = -1;
-	while (terminal()->env_m[++i])
+	aux_var = string()->sub_split_option(var, '=', 0);
+	aux_val = string()->sub_split_option(var, '=', 1);
+	exists = terminal()->variable_env(aux_var);
+	if (!string()->compare_n(exists, "", 2))
 	{
-		if (string()->compare_n(aux_var, terminal()->env_m[i],\
-			string()->len(aux_var)))
-		{
-            printf("por fazer");
-		}
+		if (aux_val != NULL)
+			terminal()->update_var(aux_var, aux_val);
 	}
-	i = terminal()->env_count;
-
-
-	printf("%s\n",aux_var);
+	else
+		add_var(var);
+	free(exists);
 	free(aux_var);
+	free(aux_val);
+	terminal()->update->all();
 }
 
 void	update_var(char *var, char *str)
@@ -58,6 +70,7 @@ void	update_var(char *var, char *str)
 			}
 		aux = aux->next;
 	}
+	terminal()->update->all();
 }
 
 char	*variable_env(char *str)
@@ -71,7 +84,11 @@ char	*variable_env(char *str)
 	while (aux)
 	{
 		if (string()->compare_n(str, aux->var, len))
-			return (string()->duplicate(aux->val));
+		{
+			if (aux->val)
+				return (string()->duplicate(aux->val));
+			return (0);
+		}
 		aux = aux->next;
 	}
 	return (string()->duplicate(""));

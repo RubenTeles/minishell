@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:41:55 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 20:59:20 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/12 21:02:46 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,15 @@ static void	export_execute(t_command *c, int in)
 	printf("export\n");
 	int	i;
 	
-	i = -1;
+	i = 0;
 	if (c->count_cmd < 2)
 		show_export(c, in);
-	/*else
-		add_export(c);*/
+	else
+	{
+		while (c->command[++i])
+			terminal()->add_var(c->command[i]);
+		terminal()->env_m;
+	}
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
 }

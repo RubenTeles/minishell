@@ -48,7 +48,8 @@ int	main(int argc, char **argv, char **env)
 	line = NULL;
 	while (1)
 	{
-		//ft_export(0);
+		ft_export(0);
+		terminal()->add_var("Ola=Chulos");
 		line = readline(terminal()->title);
 		//get_comando(line, &data);
 		if (line != NULL && !string()->compare_n(line, "", 1))
@@ -59,8 +60,8 @@ int	main(int argc, char **argv, char **env)
 			ft_exit(0);
 		}
 		////printf("%s\n", line);
-		//ft_export(0);
-		ft_command_execute(0);
+		ft_export(0);
+		//ft_command_execute(0);
 		free(line);
 		//rl_replace_line("", 0);
 		//free(line);

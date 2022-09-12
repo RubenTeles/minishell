@@ -29,11 +29,17 @@ sudo apt-get install libreadline-dev
 https://vcpkg.io/en/getting-started.html
 */
 
-
+typedef struct s_update 			t_update;
 typedef struct s_destroy 			t_destroy;
 typedef struct s_env 				t_env;
 typedef struct s_terminal 			t_terminal;
 typedef struct s_command 			t_command;
+
+struct s_update {
+	void		(*all)(void);
+	void		(*env_m)(void);
+	void		(*path)(void);
+};
 
 struct s_destroy {
 	void		(*all)(void);
@@ -51,20 +57,20 @@ struct s_env {
 
 struct s_terminal {
 	int			fd[2];
-	t_command	*start;
 	char		*title;
 	int			env_count;
 	char		**env_m;
 	t_env		*env_l;
 	char		**path;
+	t_command	*start;
+	t_update	*update;
 	t_destroy	*destroy;
+	void		(*add_var)(char *var);
+	void		(*update_var)(char *var, char *str);
+	void		(*destroy_var)(char *input);
 	void		(*execute)(char ***commands);
 	void		(*count_env)(void);
 	char		*(*variable_env)(char *var);
-	void		(*update_var)(char *var, char *str);
-	void		(*unset)(char *input);
-	void		(*export_var)(char *var);
-	void		(*create_path)(void);
 	int			(*index_var)(char *str);
 };
 
@@ -82,6 +88,9 @@ struct s_command {
 t_terminal	*terminal(void);
 void		new_terminal(char *title, char **env);
 void		create_env_l(char **env);
+void		__update(void);
+void		__destroy(void);
+void		__destroy_all(void);
 
 //----Terminal Methods----//
 void	__count_env(void);
@@ -89,8 +98,8 @@ char	*variable_env(char *var);
 void	update_var(char *var, char *str);
 int		index_var(char *str);
 void	ft_command_execute(char ***comamands);
-void	__destroy(void);
-void	__destroy_all(void);
+t_env	*create_var_env(char *env);
+void	add_var_if_exist(char *var);
 
 
 //----Commands----//

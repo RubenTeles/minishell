@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal_methods_3.c                               :+:      :+:    :+:   */
+/*   _destroy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:53:23 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 18:23:20 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/12 21:13:19 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static void	__destroy_env_l(void)
 	while (aux)
 	{
 		aux_2 = aux;
-		if (aux->next)
-			aux = aux->next;
+		aux = aux->next;
 		free(aux_2);
 	}
 }
@@ -55,14 +54,18 @@ static void	__destroy_path(void)
 
 static void	__destroy_commands(void)
 {
-	/*int i;
+	t_command	*aux;
+	t_command	*aux_2;
 
-    i = -1;
-    if (!terminal()->path)
-        return ;
-    while (terminal()->path[++i])
-		free(terminal()->path[i]);
-	free(terminal()->path);*/
+	if (!terminal()->start)
+		return ;
+	aux = terminal()->start;
+	while (aux)
+	{
+		aux_2 = aux;
+		aux = aux->next;
+		free(aux_2);
+	}
 }
 
 void	__destroy(void)

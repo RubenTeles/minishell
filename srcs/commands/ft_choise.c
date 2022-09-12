@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 19:02:34 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/12 19:41:00 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ void ft_command_execute(char ***commands)
 	while (aux)
 	{
 		wait(&aux->pid);
+		command = aux;
 		aux = aux->next;
+		free(command);
 	}
 	//rl_on_new_line();
 	/*while (--i >= 0)

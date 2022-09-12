@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:57:46 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 18:28:28 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/12 21:23:28 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,29 +80,6 @@ t_env	*create_var_env(char *env)
 	return (var);
 }
 
-void	create_env_m(void)
-{
-	int		i;
-	t_env	*aux;
-	char	*str;
-
-	terminal()->destroy->env_m();
-	aux = terminal()->env_l;
-	terminal()->count_env();
-	terminal()->env_m = malloc(sizeof(char *) * terminal()->env_count + 1);
-	i = 0;
-	while (aux)
-	{
-		str = string()->join(aux->var, "=");
-		terminal()->env_m[i] = string()->join(str, aux->val);
-		free(str);
-		aux = aux->next;
-		i++;
-	}
-	terminal()->env_m[i] = malloc(sizeof(char) * 1);
-	terminal()->env_m[i] = NULL;
-}
-
 void	create_env_l(char **env)
 {
 	int		i;
@@ -121,6 +98,4 @@ void	create_env_l(char **env)
 	}
 	terminal()->env_count = i;
 	change_shlvl();
-	create_env_m();
-	//add_var_env("Comida");
 }
