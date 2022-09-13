@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 00:11:11 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/14 00:18:14 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 static void	pwd_execute(t_command *c, int in)
 {
-	printf("pwd\n");
 	char	*pwd;
 
     pwd = terminal()->variable_env("PWD");
 	dup2(in, STDIN_FILENO);
 	if (c->next != NULL)
 		dup2(c->fd[1], STDOUT_FILENO);
-	close(in);
+	if (in != STDIN_FILENO)
+		close(in);
 	close(c->fd[1]);
     {
 		write(STDOUT_FILENO, pwd, string()->len(pwd));
@@ -42,8 +42,9 @@ static t_command *new_command(char	**command)
 		return (NULL);
 	c->command = command;
 	c->count_cmd = 0;
-	while (command[c->count_cmd])
-		c->count_cmd++;
+	if (command)
+		while (command[c->count_cmd])
+			c->count_cmd++;
 	c->path = NULL;
 	c->next = NULL;
 	c->execute = pwd_execute;
@@ -53,10 +54,10 @@ static t_command *new_command(char	**command)
 t_command	*ft_pwd(char **input)
 {
 	/*(void)input;
-	char	*input_1[2] = {"pwd", NULL};
-	t_command *command;
+	char		*input_1[2] = {"pwd", NULL};
+	t_command	*command;
 
 	command = new_command(input_1);
-	command->execute(command, 0);*/
+	command->execute(command, STDIN_FILENO);*/
 	return (new_command(input));
 }

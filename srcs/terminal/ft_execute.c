@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 19:33:36 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/14 00:08:39 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,4 @@ void	ft_pipex(char ***comands)
 		wait(&aux->pid);
 		aux = aux->next;
 	}
-	//destroy commands
 }

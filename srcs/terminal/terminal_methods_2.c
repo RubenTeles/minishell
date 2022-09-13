@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/13 03:54:32 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/13 23:55:04 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,34 @@ void	delete_var(char	*var)
 {
 	t_env	*aux;
 	t_env	*previus;
-	char	*aux_var;
-	char	*aux_val;
+	char	*var_env;
 
-	if (!aux_var)
+	if (!var_env)
 		return ;
-	aux_var = string()->sub_split_option(var, '=', 0);
-	aux_val = string()->sub_split_option(var, '=', 1);
-	if (terminal()->var_exist(aux_var) == 0)
+	var_env = string()->sub_split_option(var, '=', 0);
+	if (terminal()->var_exist(var_env) == 0)
+	{
+		free(var_env);
 		return ;
+	}
 	aux = terminal()->env_l;
 	previus = NULL;
 	while (aux)
 	{
-		if (string()->compare_n(aux_var, aux->var, string()->len(aux->var)));
-			break;
+		if (string()->len(aux->var) == string()->len(var_env))
+			if (string()->compare_n(aux->var, var_env, string()->len(aux->var)))
+				break;
 		previus = aux;
 		aux = aux->next;
 	}
-	if (string()->compare_n(aux_var, aux->var, string()->len(aux->var)) && previus)
+	if (string()->compare_n(aux->var, var_env, string()->len(aux->var)))
 		previus->next = aux->next;
 	else
 		terminal()->env_l->next = aux->next;
-	free(aux->val);
 	free(aux->var);
+	free(aux->val);
 	free(aux);
-	free(aux_var);
-	free(aux_val);
+	free(var_env);
 	terminal()->update->all();
 }
 

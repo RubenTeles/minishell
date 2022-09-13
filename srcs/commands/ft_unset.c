@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:41:55 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/13 03:56:15 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/14 00:03:24 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static void	unset_execute(t_command *c, int in)
 	int	i;
 	
 	i = 0;
-	if (c->count_cmd < 2)
-		printf("somithing\n");
-	else
+	if (c->count_cmd > 1)
 	{
 		while (c->command[++i])
 			terminal()->delete_var(c->command[i]);
@@ -52,6 +50,7 @@ t_command	*ft_unset(char **input)
 	(void)input;
 	char	*input_1[3] = {"unset", NULL};
 	char	*input_2[3] = {"unset", "Ola", NULL};
+	char	*input_3[4] = {"unset", "Ola", "Adeus", NULL};
 	t_command *command;
 
 	command = new_command(input_2);

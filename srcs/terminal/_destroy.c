@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:53:23 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/13 03:54:09 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/14 00:10:12 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static void	__destroy_commands(void)
 			free(aux_2->path);
 		free(aux_2);
 	}
+	terminal()->start = NULL;
 }
 
 void	__destroy(void)
