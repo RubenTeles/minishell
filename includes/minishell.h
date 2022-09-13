@@ -67,11 +67,11 @@ struct s_terminal {
 	t_destroy	*destroy;
 	void		(*add_var)(char *var);
 	void		(*update_var)(char *var, char *str);
-	void		(*destroy_var)(char *input);
+	void		(*delete_var)(char *var);
 	void		(*execute)(char ***commands);
 	void		(*count_env)(void);
 	char		*(*variable_env)(char *var);
-	int			(*index_var)(char *str);
+	int			(*var_exist)(char *str);
 };
 
 struct s_command {
@@ -96,11 +96,11 @@ void		__destroy_all(void);
 void	__count_env(void);
 char	*variable_env(char *var);
 void	update_var(char *var, char *str);
-int		index_var(char *str);
+int		var_exist(char *str);
 void	ft_command_execute(char ***comamands);
 t_env	*create_var_env(char *env);
 void	add_var_if_exist(char *var);
-
+void	delete_var(char	*var);
 
 //----Commands----//
 char	*path_command(char *command);
@@ -113,6 +113,7 @@ t_command	*ft_pwd(char **input);
 t_command	*ft_pipe(char **input);
 t_command	*ft_exit(char **input);
 t_command	*ft_export(char **input);
+t_command	*ft_unset(char **input);
 t_command	*ft_choise(char **command);
 
 //----TESTE----//

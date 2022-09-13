@@ -32,6 +32,7 @@ SRC_COMMANDS = 	ft_cd.c \
 				ft_exit.c \
 				ft_export.c \
 				ft_pwd.c \
+				ft_unset.c \
 
 SRC_TERMINAL = 	create_terminal.c \
 				create_terminal_2.c \

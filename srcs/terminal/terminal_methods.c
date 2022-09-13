@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:02:33 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 18:15:48 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/13 03:02:58 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,24 @@ void __count_env(void)
 	terminal()->env_count = i;
 }
 
-/* DAR FREE*/
-int	index_var(char *str)
+int	var_exist(char *str)
 {
-	int		i;
 	int		len;
+	t_env	*aux;
 	char	*var;
-	char	*aux;
 
-	i = -1;
-	aux = 0;
-	var = string()->join(str, "=");
-	len = string()->len(var);
-	while (!aux && terminal()->env_m[++i])
-		aux = string()->n_str(terminal()->env_m[i], var, len);
-	free(var);
-	if (!aux)
-		return (-1);
-	return (i);
+	aux = terminal()->env_l;
+	len = string()->len(str);
+	while (aux)
+	{
+		if (string()->compare_n(str, aux->var, len))
+		{
+			if (aux->val)
+				return (1);
+			return (2);
+		}
+		aux = aux->next;
+	}
+	return (0);
 }
 

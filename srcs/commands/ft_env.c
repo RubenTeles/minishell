@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 21:29:39 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/13 03:18:06 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,31 @@
 
 static void	env_execute(t_command *c, int in)
 {
-	printf("env\n");
+	t_env	*aux;
 	char	**env_ter;
-	int		i;
 
-	env_ter = terminal()->env_m;
-	i = -1;
 	if (c->command[1] != NULL)
 	{
 		printf("env: '%s': No such file or directory\n", c->command[1]);
 		return ;
-    }
+	}
 	dup2(in, STDIN_FILENO);
 	if (c->next != NULL)
 		dup2(c->fd[1], STDOUT_FILENO);
 	if (in != STDIN_FILENO)
 		close(in);
 	close(c->fd[1]);
-	while (env_ter[++i])
+	aux = terminal()->env_l;
+	while (aux)
 	{
-		if (string()->index_char(env_ter[i], '=') == -1)
-			continue;
-		write(STDOUT_FILENO, env_ter[i], string()->len(env_ter[i]) + 1);
-		write(STDOUT_FILENO, "\n", 1);
+		if (aux->val)
+		{
+			write(STDOUT_FILENO, aux->var, string()->len(aux->var));
+			write(STDOUT_FILENO, "=", 1);
+			write(STDOUT_FILENO, aux->val, string()->len(aux->val));
+			write(STDOUT_FILENO, "\n", 1);
+		}
+		aux = aux->next;
 	}
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
@@ -67,6 +69,6 @@ t_command	*ft_env(char **input)
 	t_command *command;
 
 	command = new_command(input_1);
-	command->execute(command, STDIN_FILENO);
+	command->execute(command, 0);
 	return (new_command(input));
 }

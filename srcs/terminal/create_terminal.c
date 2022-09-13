@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:37:10 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 21:26:21 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/13 03:55:36 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ void new_terminal(char *title, char **env)
 	terminal()->variable_env = variable_env;
 	terminal()->add_var = add_var_if_exist;
 	terminal()->update_var = update_var;
+	terminal()->delete_var = delete_var;
 	terminal()->execute = ft_command_execute;
-	terminal()->index_var = index_var;
+	terminal()->var_exist = var_exist;
 	__update();
 	__destroy();
 	create_env_l(env);

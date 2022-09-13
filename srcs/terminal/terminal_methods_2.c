@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 21:27:45 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/13 03:54:32 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	add_var(char *var)
 
 void	add_var_if_exist(char *var)
 {
-	char	*exists;
 	char	*aux_var;
 	char	*aux_val;
 
@@ -36,15 +35,13 @@ void	add_var_if_exist(char *var)
 		return ;
 	aux_var = string()->sub_split_option(var, '=', 0);
 	aux_val = string()->sub_split_option(var, '=', 1);
-	exists = terminal()->variable_env(aux_var);
-	if (!string()->compare_n(exists, "", 2))
+	if (terminal()->var_exist(aux_var) > 0)
 	{
 		if (aux_val != NULL)
 			terminal()->update_var(aux_var, aux_val);
 	}
 	else
 		add_var(var);
-	free(exists);
 	free(aux_var);
 	free(aux_val);
 	terminal()->update->all();
@@ -70,6 +67,40 @@ void	update_var(char *var, char *str)
 			}
 		aux = aux->next;
 	}
+	terminal()->update->all();
+}
+
+void	delete_var(char	*var)
+{
+	t_env	*aux;
+	t_env	*previus;
+	char	*aux_var;
+	char	*aux_val;
+
+	if (!aux_var)
+		return ;
+	aux_var = string()->sub_split_option(var, '=', 0);
+	aux_val = string()->sub_split_option(var, '=', 1);
+	if (terminal()->var_exist(aux_var) == 0)
+		return ;
+	aux = terminal()->env_l;
+	previus = NULL;
+	while (aux)
+	{
+		if (string()->compare_n(aux_var, aux->var, string()->len(aux->var)));
+			break;
+		previus = aux;
+		aux = aux->next;
+	}
+	if (string()->compare_n(aux_var, aux->var, string()->len(aux->var)) && previus)
+		previus->next = aux->next;
+	else
+		terminal()->env_l->next = aux->next;
+	free(aux->val);
+	free(aux->var);
+	free(aux);
+	free(aux_var);
+	free(aux_val);
 	terminal()->update->all();
 }
 

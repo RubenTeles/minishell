@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:53:23 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 21:13:19 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/13 03:54:09 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	__destroy_env_l(void)
 	{
 		aux_2 = aux;
 		aux = aux->next;
+		free(aux_2->var);
+		free(aux_2->val);
 		free(aux_2);
 	}
 }
@@ -64,6 +66,8 @@ static void	__destroy_commands(void)
 	{
 		aux_2 = aux;
 		aux = aux->next;
+		if (aux_2->path)
+			free(aux_2->path);
 		free(aux_2);
 	}
 }
