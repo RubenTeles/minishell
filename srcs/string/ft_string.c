@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:39:43 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/10 19:08:58 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/15 22:54:35 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ Copia a string SRC para a string DEST num determinado numero de caracteres
 join:
 
 search_chars:
-Procura se a string tem apenas estes caracteres, Retorna 1 se tiver alem destes.
+Procura se a string tem apenas estes caracteres,
+Retorna 1 se tiver alem destes.
 
 pos_char:
 Retorna a primeira posição do char procurado.
@@ -126,7 +127,8 @@ sub_str_chars:
 Substring, um nova string que começa apartir de c1, ate c2.
 
 sub_split_option:
-Nova string, divida por um caracter. Se a opção for 0 é do index ate ao c, se for 1 é do index ate '\0'.
+Nova string, divida por um caracter. Se a opção for 0 é do index ate ao c,
+se for 1 é do index ate '\0'.
 Retorna Null se der erro.
 
 replace:
@@ -140,7 +142,8 @@ t_string	*string(void)
 {
 	static t_string	s = {ft_strlen, ft_split, ft_strnstr, ft_strlcpy,
 		ft_strjoin, ft_str_s_str, ft_strchr, ft_strrchr, ft_strdup, ft_strncmp,
-		ft_substr, ft_string_in_two_char, split_two_str, replace_str, index_char};
+		ft_substr, ft_string_in_two_char, split_two_str, replace_str,
+		index_char};
 
 	return (&s);
 }

@@ -43,41 +43,25 @@ int	main(int argc, char **argv, char **env)
 
 	signal(SIGINT, action);  //Ctrl + C
 	signal(SIGHUP, action); //Ctrl + '\'
-	//Ctrl + 'D' - é quando a line for nula
 	new_terminal("\033[0;36mThe Best: \033[0;37m", env);
-	line = NULL;
 	while (1)
 	{
-		line = readline(terminal()->title);
+		line = readline((terminal())->title);
 		//get_comando(line, &data);
-		if (line != NULL && !string()->compare_n(line, "", 1))
+		if (line != NULL && !(string())->compare_n(line, "", 1))
 			add_history(line);
-		if (!line || string()->compare_n(line, "exit", 5))
+		if (!line || (string())->compare_n(line, "exit", 5))
 		{
-			printf("line passou aqui\n");
+			free(line);
 			ft_exit(0);
 		}
 		ft_command_execute(0);
-		//ft_env(0);
-		////printf("%s\n", line);
-		//ft_command_execute(0);
 		free(line);
-		//rl_replace_line("", 0);
-		//free(line);
-		//free(line);
-		//rl_on_new_line();
-		//var = path_command(line);
 	}
-	/*while(terminal()->path[++i])
-		printf("%s \n", terminal()->path[i]);*/
-
-
-	//create_path_comands(&rules, env, -1);
-	//execute(&rules, env);
-	/*while (rules.comands_path[++i])
-		printf("%s \n", rules.comands_path[i]);*/
-	terminal()->destroy->all();
 	return (0);
 }
 
-/* ‘|’, ‘&’, ‘;’, ‘(’, ‘)’, ‘<’, or ‘>’. space, tab, newline */
+/* ‘|’, ‘&’, ‘;’, ‘(’, ‘)’, ‘<’, or ‘>’. space, tab, newline 
+//Ctrl + 'D' - é quando a line for nula
+
+*/

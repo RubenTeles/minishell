@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/07 18:32:04 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/15 22:50:42 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	cd_execute(t_command *c, int in)
 {
-	printf("cd\n");
 	char	buffer[100];
 	char	*str;
 	int		i;
@@ -31,41 +30,25 @@ static void	cd_execute(t_command *c, int in)
 		printf("cd: %s: No such file or directory\n", c->command[1]);
 		return ;
 	}
-	terminal()->update_var("OLDPWD", getcwd(buffer, 100));
+	(terminal())->update_var("OLDPWD", getcwd(buffer, 100));
 	chdir(c->command[1]);
-	terminal()->update_var("PWD", getcwd(buffer, 100));
+	(terminal())->update_var("PWD", getcwd(buffer, 100));
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
 }
 
-static t_command *new_command(char	**command)
+void	*ft_cd(t_command *c)
 {
-	t_command	*c;
-
-	c = malloc(sizeof(t_command));
-	if (!c)
-		return (NULL);
-	c->command = command;
-	c->count_cmd = 0;
-	while (command[c->count_cmd])
-		c->count_cmd++;
-	c->path = 0;
-	c->next = NULL;
-	c->execute = cd_execute;
-	return (c);
-}
-
-t_command	*ft_cd(char **input)
-{
-	(void)input;
-	char	*input_1[3] = {"cd", "..", NULL};
+	/*char	*input_1[3] = {"cd", "..", NULL};
 	char	*input_2[3] = {"cd", "includes", NULL};
 	char	*input_3[2] = {"cd", NULL};
 	char	*input_4[3] = {"cd", "asdasdasdasdas/", NULL};
-	t_command *command;
 
-	command = new_command(input_3);
-	command->execute(command, 0);
-    
-	return (command);
+	c->command = input_1;*/
+	
+	if (!c->command)
+		return (c);
+	while (c->command[c->count_cmd])
+		c->count_cmd++;
+	c->execute = cd_execute;
 }

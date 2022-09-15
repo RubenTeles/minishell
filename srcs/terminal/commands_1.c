@@ -22,13 +22,12 @@ char	*path_command(char *command)
 
 	i = -1;
 	aux_path = 0;
-	while (terminal()->path[++i])
+	while ((terminal())->path[++i])
 	{
-		aux_path = string()->join(terminal()->path[i], command);
+		aux_path = string()->join((terminal())->path[i], command);
 		if (!access(aux_path, F_OK))
 			break ;
 		free(aux_path);
 	}
-	//printf("%s \n", aux_path);
 	return (aux_path);
 }

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:53:23 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/14 00:10:12 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/15 22:54:55 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	__destroy_env_m(void)
 	int	i;
 
 	i = -1;
-	if (!terminal()->env_m)
+	if (!(terminal())->env_m)
 		return ;
-	while (terminal()->env_m[++i])
-		free(terminal()->env_m[i]);
-	free(terminal()->env_m);
+	while ((terminal())->env_m[++i])
+		free((terminal())->env_m[i]);
+	free((terminal())->env_m);
 }
 
 static void	__destroy_env_l(void)
@@ -29,9 +29,9 @@ static void	__destroy_env_l(void)
 	t_env	*aux;
 	t_env	*aux_2;
 
-	if (!terminal()->env_l)
+	if (!(terminal())->env_l)
 		return ;
-	aux = terminal()->env_l;
+	aux = (terminal())->env_l;
 	while (aux)
 	{
 		aux_2 = aux;
@@ -47,11 +47,11 @@ static void	__destroy_path(void)
 	int	i;
 
 	i = -1;
-	if (!terminal()->path)
+	if (!(terminal())->path)
 		return ;
-	while (terminal()->path[++i])
-		free(terminal()->path[i]);
-	free(terminal()->path);
+	while ((terminal())->path[++i])
+		free((terminal())->path[i]);
+	free((terminal())->path);
 }
 
 static void	__destroy_commands(void)
@@ -59,9 +59,9 @@ static void	__destroy_commands(void)
 	t_command	*aux;
 	t_command	*aux_2;
 
-	if (!terminal()->start)
+	if (!(terminal())->start)
 		return ;
-	aux = terminal()->start;
+	aux = (terminal())->start;
 	while (aux)
 	{
 		aux_2 = aux;
@@ -70,15 +70,15 @@ static void	__destroy_commands(void)
 			free(aux_2->path);
 		free(aux_2);
 	}
-	terminal()->start = NULL;
+	(terminal())->start = NULL;
 }
 
 void	__destroy(void)
 {
-	terminal()->destroy = malloc(sizeof(t_destroy));
-	terminal()->destroy->env_l = __destroy_env_l;
-	terminal()->destroy->env_m = __destroy_env_m;
-	terminal()->destroy->path = __destroy_path;
-	terminal()->destroy->commands = __destroy_commands;
-	terminal()->destroy->all = __destroy_all;
+	(terminal())->destroy = malloc(sizeof(t_destroy));
+	(terminal())->destroy->env_l = __destroy_env_l;
+	(terminal())->destroy->env_m = __destroy_env_m;
+	(terminal())->destroy->path = __destroy_path;
+	(terminal())->destroy->commands = __destroy_commands;
+	(terminal())->destroy->all = __destroy_all;
 }

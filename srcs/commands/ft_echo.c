@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:18:57 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/14 00:21:08 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/15 22:51:57 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	echo_execute(t_command *c, int in)
 {
-	printf("echo\n");
 	int		i;
 
 	i = 0;
@@ -36,31 +35,16 @@ static void	echo_execute(t_command *c, int in)
 		c->next->execute(c->next, c->fd[0]);
 }
 
-static t_command *new_command(char	**command)
+void	*ft_echo(t_command *c)
 {
-	t_command	*c;
-
-	c = malloc(sizeof(t_command));
-	if (!c)
-		return (NULL);
-	c->command = command;
-	c->count_cmd = 0;
-	while (command[c->count_cmd])
-		c->count_cmd++;
-	c->path = 0;
-	c->next = NULL;
-	c->execute = echo_execute;
-	return (c);
-}
-
-t_command	*ft_echo(char **input)
-{
-	/*(void)input;
-	char	*input_1[5] = {"echo", "-n", "ahahaha ", "hamburguer", NULL};
+	/*char	*input_1[5] = {"echo", "-n", "\"ahahaha $USER \"", "hamburguer", NULL};
 	char	*input_2[4] = {"echo", "ahahaha ", "hamburguer", NULL};
-	t_command *command;
 
-	command = new_command(input_2);
-	command->execute(command, 0);*/
-	return (new_command(input));
+	c->command = input_1;*/
+	
+	if (!c->command)
+		return (c);
+	while (c->command[c->count_cmd])
+		c->count_cmd++;
+	c->execute = echo_execute;
 }

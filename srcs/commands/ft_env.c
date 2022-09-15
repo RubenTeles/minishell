@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/13 03:18:06 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/15 21:14:26 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,16 @@ static void	env_execute(t_command *c, int in)
 		c->next->execute(c->next, c->fd[0]);
 }
 
-static t_command *new_command(char	**command)
+void	*ft_env(t_command *c)
 {
-	t_command	*c;
+	/*char	*input_1[2] = {"env", NULL};
+	char	*input_2[3] = {"env", "asdas", NULL};
 
-	c = malloc(sizeof(t_command));
-	if (!c)
-		return (NULL);
-	c->command = command;
-	c->count_cmd = 0;
-	if (command)
-		while (command[c->count_cmd])
-			c->count_cmd++;
-	c->path = NULL;
-	c->next = NULL;
+	c->command = input_1;*/
+	
+	if (!c->command)
+		return (c);
+	while (c->command[c->count_cmd])
+		c->count_cmd++;
 	c->execute = env_execute;
-	return (c);
-}
-
-t_command	*ft_env(char **input)
-{
-	(void)input;
-	char	*input_1[2] = {"env", NULL};
-	t_command *command;
-
-	command = new_command(input_1);
-	command->execute(command, 0);
-	return (new_command(input));
 }

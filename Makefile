@@ -31,6 +31,7 @@ SRC_COMMANDS = 	ft_cd.c \
 				ft_env.c \
 				ft_exit.c \
 				ft_export.c \
+				ft_pipe.c \
 				ft_pwd.c \
 				ft_unset.c \
 
@@ -39,7 +40,6 @@ SRC_TERMINAL = 	create_terminal.c \
 				terminal_methods.c \
 				terminal_methods_2.c \
 				commands_1.c \
-				ft_execute.c \
 				_update.c \
 				_destroy.c \
 

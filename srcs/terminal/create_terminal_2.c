@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:57:46 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 21:23:28 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/15 22:57:27 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	change_shlvl(void)
 	int		level;
 	int		i;
 
-	content = terminal()->variable_env("SHLVL");
+	content = (terminal())->variable_env("SHLVL");
 	level = ft_atoi(content);
 	free(content);
 	level += 1;
@@ -57,7 +57,7 @@ static void	change_shlvl(void)
 	content = malloc(sizeof(char) * i);
 	if (!content)
 		return ;
-	content[i - 1] = '\0'; 
+	content[i - 1] = '\0';
 	if (level < 10)
 		content[0] = level + '0';
 	else
@@ -65,7 +65,7 @@ static void	change_shlvl(void)
 		content[0] = (level / 10) + '0';
 		content[1] = (level % 10) + '0';
 	}
-	terminal()->update_var("SHLVL", content);
+	(terminal())->update_var("SHLVL", content);
 	free(content);
 }
 
@@ -74,8 +74,10 @@ t_env	*create_var_env(char *env)
 	t_env	*var;
 
 	var = malloc(sizeof(t_env));
-	var->var = string()->sub_split_option(env, '=', 0);
-	var->val = string()->sub_split_option(env, '=', 1);
+	if (!var)
+		ft_exit(0);
+	var->var = (string())->sub_split_option(env, '=', 0);
+	var->val = (string())->sub_split_option(env, '=', 1);
 	var->next = 0;
 	return (var);
 }
@@ -90,12 +92,12 @@ void	create_env_l(char **env)
 	while (env[++i])
 	{
 		aux_env = create_var_env(env[i]);
-		if (!terminal()->env_l)
-			terminal()->env_l = aux_env;
+		if (!(terminal())->env_l)
+			(terminal())->env_l = aux_env;
 		else
 			var_env->next = aux_env;
 		var_env = aux_env;
 	}
-	terminal()->env_count = i;
+	(terminal())->env_count = i;
 	change_shlvl();
 }

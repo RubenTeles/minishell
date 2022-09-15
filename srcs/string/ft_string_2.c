@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:18:02 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 21:24:32 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/15 22:53:45 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 char	*replace_str(char *str1, char *str2)
 {
 	int	len;
-	
-	len = string()->len(str2) + 1;
+
+	len = (string())->len(str2) + 1;
 	free(str1);
 	str1 = malloc(sizeof(char) * len);
 	if (!str1)
 		return (0);
-	string()->copy_n(str1, str2, len);
+	(string())->copy_n(str1, str2, len);
 	return (str1);
 }
 
@@ -67,13 +67,13 @@ char	*split_two_str(char *str, char c, int option)
 
 	if (!str || !c)
 		return (0);
-	index = string()->index_char(str, c);
+	index = (string())->index_char(str, c);
 	if (index == -1 && option == 0)
-		return (string()->duplicate(str));
+		return ((string())->duplicate(str));
 	else if (index == -1 && option == 1)
 		return (0);
-	len = string()->len(str);
+	len = (string())->len(str);
 	if (option == 0)
-		return (string()->sub_str(str, 0, index));
-	return (string()->sub_str(str, index + 1, len - (index + 1)));
+		return ((string())->sub_str(str, 0, index));
+	return ((string())->sub_str(str, index + 1, len - (index + 1)));
 }

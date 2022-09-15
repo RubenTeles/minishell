@@ -106,17 +106,13 @@ void	delete_var(char	*var);
 char	*path_command(char *command);
 
 //----Para Apagar---//
-t_command	*ft_echo(char **input);
-t_command	*ft_cd(char **input);
-t_command	*ft_env(char **input);
-t_command	*ft_pwd(char **input);
-t_command	*ft_pipe(char **input);
-t_command	*ft_exit(char **input);
-t_command	*ft_export(char **input);
-t_command	*ft_unset(char **input);
-t_command	*ft_choise(char **command);
-
-//----TESTE----//
-void	ft_pipex(char ***comands);
+void	*ft_cd(t_command *c);
+void	*ft_echo(t_command *c);
+void	*ft_env(t_command *c);
+void	*ft_exit(t_command *c);
+void	*ft_export(t_command *c);
+void	*ft_pipe(t_command *c);
+void	*ft_pwd(t_command *c);
+void	*ft_unset(t_command *c);
 
 #endif
