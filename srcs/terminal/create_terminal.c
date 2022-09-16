@@ -6,25 +6,32 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:37:10 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 22:58:05 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 15:41:49 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+void	__destroy_title(void)
+{
+	if (!(terminal())->title)
+		return ;
+	free((terminal())->title);
+}
+
 void	__destroy_all(void)
 {
-	(terminal())->destroy->env_l();
-	(terminal())->destroy->env_m();
+	(terminal())->destroy->title();
 	(terminal())->destroy->path();
 	(terminal())->destroy->commands();
+	(terminal())->destroy->env_m();
+	(terminal())->destroy->env_l();
 	free((terminal())->update);
 	free((terminal())->destroy);
 }
 
-void	new_terminal(char *title, char **env)
+void	new_terminal(char **env)
 {
-	(terminal())->title = title;
 	(terminal())->env_l = NULL;
 	(terminal())->env_m = NULL;
 	(terminal())->env_count = 0;

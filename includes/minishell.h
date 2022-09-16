@@ -39,6 +39,7 @@ struct s_update {
 	void		(*all)(void);
 	void		(*env_m)(void);
 	void		(*path)(void);
+	void		(*title)(void);
 };
 
 struct s_destroy {
@@ -46,6 +47,7 @@ struct s_destroy {
 	void		(*env_l)(void);
 	void		(*env_m)(void);
 	void		(*path)(void);
+	void		(*title)(void);
 	void		(*commands)(void);
 };
 
@@ -86,11 +88,9 @@ struct s_command {
 
 //----Utils----//
 t_terminal	*terminal(void);
-void		new_terminal(char *title, char **env);
+void		new_terminal(char **env);
 void		create_env_l(char **env);
-void		__update(void);
-void		__destroy(void);
-void		__destroy_all(void);
+void		execute(t_command *c, int in);
 
 //----Terminal Methods----//
 void	__count_env(void);
@@ -101,6 +101,13 @@ void	ft_command_execute(char ***comamands);
 t_env	*create_var_env(char *env);
 void	add_var_if_exist(char *var);
 void	delete_var(char	*var);
+
+//----Update and Destroy----//
+void		__update(void);
+void 		__update_title(void);
+void		__destroy(void);
+void		__destroy_title(void);
+void		__destroy_all(void);
 
 //----Commands----//
 char	*path_command(char *command);

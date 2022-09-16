@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 22:52:22 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 14:17:31 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,8 @@ static void	pwd_execute(t_command *c, int in)
 {
 	char	*pwd;
 
+	execute(c, in);
     pwd = (terminal())->variable_env("PWD");
-	dup2(in, STDIN_FILENO);
-	if (c->next != NULL)
-		dup2(c->fd[1], STDOUT_FILENO);
-	if (in != STDIN_FILENO)
-		close(in);
-	close(c->fd[1]);
 	write(STDOUT_FILENO, pwd, string()->len(pwd));
 	write(STDOUT_FILENO, "\n", 1);
     free(pwd);
@@ -32,10 +27,6 @@ static void	pwd_execute(t_command *c, int in)
 
 void	*ft_pwd(t_command *c)
 {
-	/*	char		*input_1[2] = {"pwd", NULL};
-
-	c->command = input_1;*/
-	
 	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])

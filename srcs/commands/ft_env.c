@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 21:14:26 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 14:02:59 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ static void	env_execute(t_command *c, int in)
 
 void	*ft_env(t_command *c)
 {
-	/*char	*input_1[2] = {"env", NULL};
-	char	*input_2[3] = {"env", "asdas", NULL};
-
-	c->command = input_1;*/
-	
 	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])

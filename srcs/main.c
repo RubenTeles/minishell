@@ -43,7 +43,7 @@ int	main(int argc, char **argv, char **env)
 
 	signal(SIGINT, action);  //Ctrl + C
 	signal(SIGHUP, action); //Ctrl + '\'
-	new_terminal("\033[0;36mThe Best: \033[0;37m", env);
+	new_terminal(env);
 	while (1)
 	{
 		line = readline((terminal())->title);

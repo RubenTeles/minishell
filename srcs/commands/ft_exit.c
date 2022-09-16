@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 22:25:27 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 14:03:34 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ void	*ft_exit(t_command *c)
 {
 	if (!c)
 		exit_execute(c, STDIN_FILENO);
-	/*char	*input_1[2] = {"exit", NULL};
-
-	c->command = input_1;*/
-	
 	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])

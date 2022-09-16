@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 22:52:10 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 14:19:49 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,7 @@ static void	pipe_execute(t_command *c, int in)
 	c->pid = fork();
 	if(c->pid == 0)
 	{
-		dup2(in, STDIN_FILENO);
-		if (c->next != NULL)
-			dup2(c->fd[1], STDOUT_FILENO);
-		close(in);
-		close(c->fd[1]);
+		execute(c, in);
 		execve(c->path, c->command, (terminal())->env_m);
 	}
 	if (in != STDIN_FILENO)

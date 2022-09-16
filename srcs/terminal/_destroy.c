@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:53:23 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 22:54:55 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 14:55:58 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	__destroy(void)
 	(terminal())->destroy->env_l = __destroy_env_l;
 	(terminal())->destroy->env_m = __destroy_env_m;
 	(terminal())->destroy->path = __destroy_path;
+	(terminal())->destroy->title = __destroy_title;
 	(terminal())->destroy->commands = __destroy_commands;
 	(terminal())->destroy->all = __destroy_all;
 }

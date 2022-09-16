@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:57:01 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 22:55:39 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 15:17:47 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	__update_all(void)
 {
 	(terminal())->update->env_m();
 	(terminal())->update->path();
+	(terminal())->update->title();
 }
 
 void	__update(void)
@@ -59,5 +60,6 @@ void	__update(void)
 	(terminal())->update = malloc(sizeof(t_update));
 	(terminal())->update->env_m = __update_env_m;
 	(terminal())->update->path = __update_path;
+	(terminal())->update->title = __update_title;
 	(terminal())->update->all = __update_all;
 }

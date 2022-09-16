@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 22:51:16 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 15:34:58 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	execute(t_command *c, int in)
 	if (in != STDIN_FILENO)
 		close(in);
 	close(c->fd[1]);
-	c->execute(c, STDIN_FILENO);
-	if (c->next != NULL)
-		execute(c->next, c->fd[0]);
+	//c->execute(c, STDIN_FILENO);
+	//if (c->next != NULL)
+	//	execute(c->next, c->fd[0]);
 }
 
 static t_command *new_command(char **command)
@@ -68,18 +68,45 @@ void ft_command_execute(char ***commands)
 	int			max_i;
 	t_command 	*command;
 	t_command 	*aux;
-	commands = malloc(sizeof(char **) * 4);
-	//char	*comands_1[3] = {"pwd", NULL};char	*comands_1[3] = {"ls", "-la", NULL};
-	//char	*comands_2[3] = {"grep", "1", NULL};
-	//char	*comands_3[3] = {"grep", "minishell", NULL};
-	//char	*comands_4[3] = {"wc", "-l", NULL};
-	char	*comands_1[3] = {"pwd", NULL};
+	commands = malloc(sizeof(char **) * 1);
+	char	*comands_1[3] = {"cd", "..", NULL};
+	char	*comands_2[3] = {"cd", "includes", NULL};
+	char	*comands_3[2] = {"cd", NULL};
+	//char	*comands_4[3] = {"cd", "asdasdasdasdas/", "asdasd", NULL};
+	/*******/
+	char	*comands_5[5] = {"echo", "-n", "\"ahahaha $USER \"", " hamburguer", NULL};
+	char	*comands_6[4] = {"echo", "ahahaha ", "hamburguer", NULL};
+	/*******/
+	//char	*comands_7[2] = {"env", NULL};
+	//char	*comands_8[3] = {"env", "asdas", NULL};
+	/*******/
+	//char	*comands_9[2] = {"exit", NULL};
+	/*******/
+	//char	*comands_10[3] = {"export", NULL};
+	//char	*comands_11[3] = {"export", "Ola=", NULL};
+	//char	*comands_12[3] = {"export", "Ola", NULL};
+	//char	*comands_13[3] = {"export", "Ola=hehe", NULL};
+	/*******/
+	char	*comands_14[3] = {"pwd", NULL};
+	//******/
+	//char	*comands_15[3] = {"ls", "-la", NULL};
+	//char	*comands_16[3] = {"grep", "1", NULL};
+	//char	*comands_17[3] = {"grep", "minishell", NULL};
+	//char	*comands_18[3] = {"wc", "-l", NULL};
+	/*******/
+	//char	*comands_19[2] = {"pwd", NULL};
+	/*******/
+	//char	*comands_20[3] = {"unset", NULL};
+	//char	*comands_21[3] = {"unset", "Ola", NULL};
+	//char	*comands_22[4] = {"unset", "Ola", "Adeus", NULL};
+	/*******/
 
 
-	commands[0] = comands_1;
-	//commands[1] = comands_2;
-	//commands[2] = comands_3;
-	//commands[3] = comands_4;
+
+	commands[0] = comands_3;
+	//commands[1] = comands_16;
+	//commands[2] = comands_17;
+	//commands[3] = comands_18;
 	//max_i = 4;
 	max_i = 1;
 	i = -1;
@@ -92,8 +119,7 @@ void ft_command_execute(char ***commands)
 			command->next = aux;
 		command = aux;
 	}
-	execute((terminal())->start, STDIN_FILENO);
-	//(terminal())->start->execute((terminal())->start, STDIN_FILENO);
+	(terminal())->start->execute((terminal())->start, STDIN_FILENO);
 	aux = (terminal())->start;
 	while (aux)
 	{
@@ -101,10 +127,7 @@ void ft_command_execute(char ***commands)
 		command = aux;
 		aux = aux->next;
 	}
-	//rl_on_new_line();
-	/*while (--i >= 0)
-		free(commands[i]);*/
 	free(commands);
 	(terminal())->destroy->commands();
-	//destroy commands
+	(terminal())->update->title();
 }

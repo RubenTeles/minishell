@@ -41,6 +41,7 @@ SRC_TERMINAL = 	create_terminal.c \
 				terminal_methods_2.c \
 				commands_1.c \
 				_update.c \
+				_update_2.c \
 				_destroy.c \
 
 SRC_STRING = 	ft_string.c \
