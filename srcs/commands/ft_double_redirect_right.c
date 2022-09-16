@@ -1,46 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   ft_double_redirect_right.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 22:06:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 18:12:17 by rteles           ###   ########.fr       */
+/*   Created: 2022/09/16 16:33:46 by rteles            #+#    #+#             */
+/*   Updated: 2022/09/16 18:40:47 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	cd_execute(t_command *c, int in)
+static void	double_redirect_right_execute(t_command *c, int in)
 {
-	char	buffer[100];
-	int		i;
+	char	buffer[__INT_MAX__];
+	char	*str;
 
 	execute(c, in, 0);
-	if (c->count_cmd > 2)
+	if (!c->command[1])
 	{
-		printf("cd: too many arguments\n");
+		printf("syntax error near unexpected token `newline'\n");
 		return ;
 	}
-	if (c->command[1] == NULL && (terminal())->var_exist("HOME"))
-		c->command[1] = (terminal())->variable_env("HOME");
-	if (access(c->command[1], F_OK))
-	{
-		printf("cd: %s: No such file or directory\n", c->command[1]);
-		return ;
-	}
-	(terminal())->update_var("OLDPWD", getcwd(buffer, 100));
-	chdir(c->command[1]);
-	(terminal())->update_var("PWD", getcwd(buffer, 100));
+	str = str_file(in);
+	c->fd[1] = open(c->command[1], O_WRONLY | O_APPEND | O_CREAT );
+	write(c->fd[1], str, (string())->len(str));
 	execute(c, in, 1);
 }
 
-void	*ft_cd(t_command *c)
+void	*ft_double_redirect_right(t_command *c)
 {
 	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
-	c->execute = cd_execute;
+	c->execute = double_redirect_right_execute;
 }

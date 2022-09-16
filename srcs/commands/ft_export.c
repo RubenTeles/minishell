@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:41:55 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 14:04:05 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 15:51:15 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ static void	show_export(t_command *c, int in)
 	t_env	*aux;
 	char	**env_ter;
 
-	dup2(in, STDIN_FILENO);
-	if (c->next != NULL)
-		dup2(c->fd[1], STDOUT_FILENO);
-	if (in != STDIN_FILENO)
-		close(in);
-	close(c->fd[1]);
 	aux = terminal()->env_l;
 	while (aux)
 	{
@@ -44,15 +38,13 @@ static void	export_execute(t_command *c, int in)
 	int	i;
 	
 	i = 0;
+	execute(c, in, 0);
 	if (c->count_cmd < 2)
 		show_export(c, in);
 	else
-	{
 		while (c->command[++i])
 			terminal()->add_var(c->command[i]);
-	}
-	if (c->next != NULL)
-		c->next->execute(c->next, c->fd[0]);
+	execute(c, in, 1);
 }
 
 void	*ft_export(t_command *c)

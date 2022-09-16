@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:17:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 15:40:49 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 19:36:48 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static char	*path_title(void)
 	char	*aux;
 	int		c;
 
+	aux = NULL;
 	home = (terminal())->variable_env("HOME");
 	pwd = (terminal())->variable_env("PWD");
 	c = (string())->len(pwd) - (string())->len(home);
@@ -30,7 +31,8 @@ static char	*path_title(void)
 		pwd = (string())->join("~", aux);
 	}
 	free(home);
-	free(aux);
+	if (aux != NULL)
+		free(aux);
 	return (pwd);
 }
 
@@ -43,9 +45,9 @@ void	__update_title(void)
 
 	(terminal())->destroy->title();
 	user = (terminal())->variable_env("USER");
-	aux = (string())->join("\033[0;36m", user);
+	aux = (string())->join("\033[1;36m", user);
 	free(user);
-	user = (string())->join(aux, "\033[0;37m:\033[0;35m");
+	user = (string())->join(aux, "\033[0;37m:\033[1;35m");
 	free(aux);
 	pwd = path_title();
 	aux = (string())->join(user, pwd);

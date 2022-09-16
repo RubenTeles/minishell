@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:18:57 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 14:15:17 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/16 15:48:23 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,16 @@ static void	echo_execute(t_command *c, int in)
 	int		i;
 
 	i = 0;
+	execute(c, in, 0);
 	if ((string())->compare_n(c->command[1], "-n",
 			(string())->len(c->command[1])))
 		i++;
-	dup2(in, STDIN_FILENO);
-	if (c->next != NULL)
-		dup2(c->fd[1], STDOUT_FILENO);
-	if (in != STDIN_FILENO)
-		close(in);
-	close(c->fd[1]);
 	while (c->command[++i])
 		write(STDOUT_FILENO, c->command[i], string()->len(c->command[i]) + 1);
 	if (!(string())->compare_n(c->command[1], "-n",
 			(string())->len(c->command[1])))
 		write(STDOUT_FILENO, "\n", 1);
-	if (in != STDIN_FILENO)
-		close(in);
-	close(c->fd[1]);
-	if (c->next != NULL)
-		c->next->execute(c->next, c->fd[0]);
+	execute(c, in, 1);
 }
 
 void	*ft_echo(t_command *c)

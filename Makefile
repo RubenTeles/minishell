@@ -34,12 +34,15 @@ SRC_COMMANDS = 	ft_cd.c \
 				ft_pipe.c \
 				ft_pwd.c \
 				ft_unset.c \
+				ft_redirect_right.c \
+				ft_redirect_left.c \
+				ft_double_redirect_right.c \
+				ft_double_redirect_left.c \
 
 SRC_TERMINAL = 	create_terminal.c \
 				create_terminal_2.c \
 				terminal_methods.c \
 				terminal_methods_2.c \
-				commands_1.c \
 				_update.c \
 				_update_2.c \
 				_destroy.c \

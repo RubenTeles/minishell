@@ -22,6 +22,8 @@
 # include <unistd.h>
 # include <ft_string.h>
 # include <ft_input.h>
+# include <fcntl.h> 
+# include <errno.h> 
 
 /* Para incluir readline passos:
 sudo apt-get install libreadline-dev
@@ -90,7 +92,7 @@ struct s_command {
 t_terminal	*terminal(void);
 void		new_terminal(char **env);
 void		create_env_l(char **env);
-void		execute(t_command *c, int in);
+void		execute(t_command *c, int in, int option);
 
 //----Terminal Methods----//
 void	__count_env(void);
@@ -121,5 +123,9 @@ void	*ft_export(t_command *c);
 void	*ft_pipe(t_command *c);
 void	*ft_pwd(t_command *c);
 void	*ft_unset(t_command *c);
+void	*ft_redirect_right(t_command *c);
+void	*ft_redirect_left(t_command *c);
+void	*ft_double_redirect_right(t_command *c);
+void	*ft_double_redirect_left(t_command *c);
 
 #endif
