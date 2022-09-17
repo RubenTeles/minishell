@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/17 21:59:56 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/17 23:27:37 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,9 @@ void ft_command_execute(char ***commands)
 	/*******/
 	char	*comands_24[3] = {">>", "BYE", NULL};
 	//char	*comands_25[4] = {">>", "texto", "Adeus", NULL};
+	/*******/
+	//char	*comands_26[2] = {"wc", NULL};
+	//char	*comands_27[3] = {"<", "texto", NULL};
 	
 
 	commands[0] = comands_14;
