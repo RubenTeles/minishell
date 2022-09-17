@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 23:01:33 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/17 16:13:30 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,25 +105,4 @@ void	delete_var(char	*var)
 	free(aux);
 	free(var_env);
 	(terminal())->update->all();
-}
-
-char	*variable_env(char *str)
-{
-	int		len;
-	t_env	*aux;
-	char	*var;
-
-	aux = (terminal())->env_l;
-	len = (string())->len(str);
-	while (aux)
-	{
-		if ((string())->compare_n(str, aux->var, len))
-		{
-			if (aux->val)
-				return ((string())->duplicate(aux->val));
-			return (0);
-		}
-		aux = aux->next;
-	}
-	return ((string())->duplicate(""));
 }

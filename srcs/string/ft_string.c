@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:39:43 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 22:54:35 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/17 16:17:36 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ sub_str_chars:
 Substring, um nova string que começa apartir de c1, ate c2.
 
 sub_split_option:
-Nova string, divida por um caracter. Se a opção for 0 é do index ate ao c,
-se for 1 é do index ate '\0'.
+Nova string, divida por um caracter. Se a opção for 0 é do inicio ate ao c,
+se for 1 é do c ate '\0'.
 Retorna Null se der erro.
 
 replace:

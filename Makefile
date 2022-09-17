@@ -46,6 +46,7 @@ SRC_TERMINAL = 	create_terminal.c \
 				_update.c \
 				_update_2.c \
 				_destroy.c \
+				ft_redict_utils.c \
 
 SRC_STRING = 	ft_string.c \
 				ft_string_2.c \

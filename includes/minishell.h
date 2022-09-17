@@ -85,6 +85,7 @@ struct s_command {
 	int			count_cmd;
 	char		*path;
 	void		(*execute)(t_command *c, int in);
+	t_command	*prev;
 	t_command	*next;
 };
 
@@ -94,15 +95,21 @@ void		new_terminal(char **env);
 void		create_env_l(char **env);
 void		execute(t_command *c, int in, int option);
 
+//----Redirect----//
+char		*ft_str_file(int in);
+int			is_redirect(char *command);
+
+
 //----Terminal Methods----//
-void	__count_env(void);
-char	*variable_env(char *var);
-void	update_var(char *var, char *str);
-int		var_exist(char *str);
-void	ft_command_execute(char ***comamands);
-t_env	*create_var_env(char *env);
-void	add_var_if_exist(char *var);
-void	delete_var(char	*var);
+void		__count_env(void);
+char		*variable_env(char *var);
+void		update_var(char *var, char *str);
+int			var_exist(char *str);
+void		ft_command_execute(char ***comamands);
+t_env		*create_var_env(char *env);
+void		add_var_if_exist(char *var);
+void		delete_var(char	*var);
+char		*path_command(char *command);
 
 //----Update and Destroy----//
 void		__update(void);
@@ -111,10 +118,7 @@ void		__destroy(void);
 void		__destroy_title(void);
 void		__destroy_all(void);
 
-//----Commands----//
-char	*path_command(char *command);
-
-//----Para Apagar---//
+//----Commands---//
 void	*ft_cd(t_command *c);
 void	*ft_echo(t_command *c);
 void	*ft_env(t_command *c);

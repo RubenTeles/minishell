@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:02:33 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 16:12:55 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/17 16:14:58 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,27 @@ int	var_exist(char *str)
 		aux = aux->next;
 	}
 	return (0);
+}
+
+char	*variable_env(char *str)
+{
+	int		len;
+	t_env	*aux;
+	char	*var;
+
+	aux = (terminal())->env_l;
+	len = (string())->len(str);
+	while (aux)
+	{
+		if ((string())->compare_n(str, aux->var, len))
+		{
+			if (aux->val)
+				return ((string())->duplicate(aux->val));
+			return (0);
+		}
+		aux = aux->next;
+	}
+	return ((string())->duplicate(""));
 }
 
 /*Retorna o path com o comando certo*/

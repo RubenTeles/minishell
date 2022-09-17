@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:17:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 19:36:48 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/17 16:23:54 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	__update_title(void)
 	free(aux);
 	pwd = path_title();
 	aux = (string())->join(user, pwd);
-	title = (string())->join(aux, "\033[0;37m$ ");
-	free(aux);
 	free(user);
 	free(pwd);
+	title = (string())->join(aux, "\033[0;37m$ ");
+	free(aux);
 	(terminal())->title = title;
 }

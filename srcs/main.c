@@ -33,10 +33,7 @@ static void	action(int sig)
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
-	char	*var;
-	char	*var2;
 	int		i;
-	char	***command;
 	//t_data	data;
 	(void)argc;
 	(void)argv;
