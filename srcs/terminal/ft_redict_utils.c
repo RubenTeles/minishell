@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 21:12:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/17 23:12:06 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/19 23:14:41 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,35 @@ char	*ft_str_file(int in)
 	return (str);
 }
 
-int	is_redirect(char *command)
+int	is_redirect_right(char *command)
 {
-	if (string()->compare_n(command, ">", string()->len(command)))
-		return (1);
 	if (string()->compare_n(command, ">>", string()->len(command)))
 		return (2);
+	if (string()->compare_n(command, ">", string()->len(command)))
+		return (1);
 	return (0);
+}
+
+int	is_redirect_left(char *command)
+{
+	if (string()->compare_n(command, "<<", string()->len(command)))
+		return (2);
+	if (string()->compare_n(command, "<", string()->len(command)))
+		return (1);
+	return (0);
+}
+
+t_command *last_command_left_redirect(t_command *c)
+{
+	t_command	*last;
+
+	last = c;
+	while (last)
+	{
+		if (last->next && is_redirect_left(last->next->command[0]))
+			last = last->next;
+		else
+			break ;
+	}
+	return (last);
 }

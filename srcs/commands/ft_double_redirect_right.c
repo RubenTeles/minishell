@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:46 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/19 19:33:05 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/19 23:21:40 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	double_redirect_right_execute(t_command *c, int in)
 		printf("syntax error near unexpected token `newline'\n");
 		return ;
 	}
-	if (c->next && is_redirect(c->next->command[0]) > 0)
+	if (c->next && is_redirect_right(c->next->command[0]) > 0)
 	{
 		c->fd[1] = open(c->command[1], O_RDWR|O_CREAT, 0777);
 		close(c->fd[1]);

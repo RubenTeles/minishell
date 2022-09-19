@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 15:49:37 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/19 23:27:00 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 
 static void	pipe_execute(t_command *c, int in)
 {
+	int		i;
+	char	*str;
+	int		a;
+
+	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
+		in = left_redirect(c->next);
+	if (in < 0)
+		return ;
 	c->pid = fork();
 	if(c->pid == 0)
 	{

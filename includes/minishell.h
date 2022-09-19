@@ -97,8 +97,9 @@ void		execute(t_command *c, int in, int option);
 
 //----Redirect----//
 char		*ft_str_file(int in);
-int			is_redirect(char *command);
-
+int			is_redirect_right(char *command);
+int			is_redirect_left(char *command);
+t_command 	*last_command_left_redirect(t_command *c);
 
 //----Terminal Methods----//
 void		__count_env(void);
@@ -110,6 +111,7 @@ t_env		*create_var_env(char *env);
 void		add_var_if_exist(char *var);
 void		delete_var(char	*var);
 char		*path_command(char *command);
+int			left_redirect(t_command *c);
 
 //----Update and Destroy----//
 void		__update(void);
