@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/17 23:27:37 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/19 19:28:01 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ t_command	*ft_choise(char **command)
 		return (ft_double_redirect_right(c));
 	if (string()->compare_n(command[0], ">", string()->len(command[0])))
 		return (ft_redirect_right(c));
-	/*if (string()->compare_n(command[0], "<", string()->len(command[0])))
+	if (string()->compare_n(command[0], "<", string()->len(command[0])))
 		return (ft_redirect_left(c));
-	if (string()->compare_n(command[0], "<<", string()->len(command[0])))
+	/*if (string()->compare_n(command[0], "<<", string()->len(command[0])))
 		return (ft_double_redirect_left(c));*/
 	return (ft_pipe(c));
 }
@@ -85,7 +85,7 @@ void ft_command_execute(char ***commands)
 	int			max_i;
 	t_command 	*command;
 	t_command 	*aux;
-	commands = malloc(sizeof(char **) * 4);
+	commands = malloc(sizeof(char **) * 2);
 	char	*comands_1[3] = {"cd", "..", NULL};
 	char	*comands_2[3] = {"cd", "includes", NULL};
 	//char	*comands_3[2] = {"cd", NULL};
@@ -124,16 +124,15 @@ void ft_command_execute(char ***commands)
 	char	*comands_24[3] = {">>", "BYE", NULL};
 	//char	*comands_25[4] = {">>", "texto", "Adeus", NULL};
 	/*******/
-	//char	*comands_26[2] = {"wc", NULL};
-	//char	*comands_27[3] = {"<", "texto", NULL};
-	
+	char	*comands_26[2] = {"wc", NULL};
+	char	*comands_27[3] = {"<", "texto", NULL};
 
-	commands[0] = comands_14;
-	commands[1] = comands_22;
-	commands[2] = comands_23;
-	commands[3] = comands_24;
+	commands[0] = comands_26;
+	commands[1] = comands_27;
+	//commands[2] = comands_23;
+	//commands[3] = comands_24;
 	//max_i = 4;
-	max_i = 4;
+	max_i = 2;
 	i = -1;
 	while (++i < max_i)
 	{

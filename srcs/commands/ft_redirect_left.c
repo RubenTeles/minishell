@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/17 23:27:09 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/19 19:31:56 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	redirect_left_execute(t_command *c, int in)
 		close(c->fd[1]);
 		return ;
 	}
-	close(c->fd[1]);
 	dup2(in, c->fd[1]);
+	close(c->fd[1]);
 	if (c->next != NULL)
 		c->next->execute(c->next, c->fd[0]);
 }
