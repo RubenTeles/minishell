@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <ft_input.h>
 #include <signal.h>
 
 /* Falta tirar o ^\   Para tirar é so meter uma flag no make*/ 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/06 13:23:43 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:29:14 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,10 @@ void	get_comando(char *line, t_data *data);
 void	ft_malloc_comando(t_data **data, t_data temp);
 int		ft_get_size_command(char **commands);
 
+//			---			            -> -> free_inputs.c
+//This functions will grant all input paramters are free after the execve functs
+t_cms	*ft_free_start(t_cms *start);
+void	ft_free_data(t_data *data, char *line);
+void	ft_free_input(t_token *input);
 
 #endif

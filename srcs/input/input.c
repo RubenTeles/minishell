@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <string.h>
+#include <ctype.h>
+#include "../../includes/minishell.h"
+#include "../../includes/ft_string.h"
 
 typedef struct s_token	t_token;
 typedef struct s_cms	t_cms;
@@ -47,13 +51,14 @@ void	ft_make_command(t_cms **aux, t_token **temp)
 		(*aux)->commands[i++] = (*temp)->token;
 		(*temp) = (*temp)->next;
 	}
-	while ((*temp))
+	while ((*temp) && (*temp)->token)
 	{
 		if (!strcmp("<", (*temp)->token) || !strcmp("<<", (*temp)->token)
 			|| !strcmp(">", (*temp)->token) || !strcmp(">>", (*temp)->token))
 			break ;
 		if (!strcmp("|", (*temp)->token))
 		{
+			free ((*temp)->token);
 			(*temp) = (*temp)->next;
 			break ;
 		}
@@ -69,9 +74,9 @@ int	ft_count_param(t_token *temp)
 	i = 0;
 	while (temp)
 	{
-		if (!strcmp("|", temp->token) || !strcmp("<", temp->token)
-			|| !strcmp("<<", temp->token) || !strcmp(">", temp->token)
-			|| !strcmp(">>", temp->token))
+		if ((i) && (!strcmp("|", temp->token) || !strcmp("<", temp->token)
+				|| !strcmp("<<", temp->token) || !strcmp(">", temp->token)
+				|| !strcmp(">>", temp->token)))
 			break ;
 		i++;
 		temp = temp->next;
@@ -96,7 +101,7 @@ t_cms	*ft_parameters(t_token *tokens, t_cms *start, t_cms *end)
 	else
 		end->next = aux;
 	end = aux;
-	aux->commands = malloc(sizeof(char *) * (i + 1));
+	aux->commands = malloc((sizeof(char *) * (i + 1)));
 	aux->commands[i] = NULL;
 	temp = tokens;
 	ft_make_command(&aux, &temp);
@@ -117,11 +122,16 @@ char	*ft_get_command(const char *line, int *i)
 	len = 0;
 	while ((line[*i + len]) && (line[*i + len] != ' ' || ignore))
 	{
-		if (line[*i + len] == '\"' || line[*i + len] == '\'')
-			ignore = !ignore;
-		if (line[*i + len] == ignore && len++)
+		if (!line[*i + len])
 			break ;
+		if (ignore == '"' && line[*i + len] == '\\' && ++len && line[*i + len]
+			&& line[*i + len] == '"')
+			len++;
+		if (!ignore && (line[*i + len] == '\"' || line[*i + len] == '\''))
+			ignore = line[*i + len];
 		len++;
+		if (ignore && line[*i + len] == ignore && len++)
+			ignore = 0;
 	}
 	out = malloc(sizeof(char) * len + 1);
 	out[len] = '\0';
@@ -173,12 +183,22 @@ void	ft_malloc_comando(t_data **data, t_data temp)
 
 int	ft_get_size_command(char **commands)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (commands && commands[i])
 		i++;
 	return (i);
+}
+
+t_cms	*ft_free_start(t_cms	*start)
+{
+	t_cms	*temp;
+
+	temp = start->next;
+	free(start->commands);
+	free(start);
+	return (temp);
 }
 
 //This function will make all parser functions and store them in the *comando[][] array
@@ -203,27 +223,150 @@ void	get_comando(char *line, t_data *data)
 			&& data->start->commands && data->start->commands[i])
 			data->comando[j][i++] = data->start->commands[i];//Aqui o array*** recebe os tokens consoante o numero do comando...
 		data->comando[j][i] = NULL;
-		data->start = data->start->next;
+		data->start = ft_free_start(data->start);
 		i = 0;
 		j++;
 	}
 	data->comando[j] = NULL;
 }
 
+void	ft_free_input(t_token *input)
+{
+	if (input)
+	{
+		ft_free_input(input->next);
+		free(input);
+	}
+}
+
+void	ft_free_data(t_data *data, char *line)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (data->comando[j])
+	{
+		while (data->comando[j][i])
+			free(data->comando[j][i++]);
+		free(data->comando[j]);
+		i = 0;
+		j++;
+	}
+	if (data->input)
+		ft_free_input(data->input);
+	if (data->comando)
+		free(data->comando);
+	if (data->start)
+		printf("Falta limpar o start...\n");
+	if (line)
+		free(line);
+}
+
+char	*ft_new_aux(char *aux, char index)
+{
+	char	*temp;
+	int		i;
+
+	i = 0;
+	temp = aux;
+	while (aux && aux[i])
+		i++;
+	aux = malloc(sizeof(char) * i + 1 + 1);
+	i = 0;
+	if (!aux)
+		return (temp);
+	while (temp && temp[i])
+	{
+		aux[i] = temp[i];
+		i++;
+	}
+	if (temp)
+		free (temp);
+	if (aux)
+		aux[i] = index;
+	aux[i + 1] = '\0';
+	return (aux);
+}
+
+char	*ft_formattoken(char *token)
+{
+	char	*aux;
+	int		i;
+	int		j;
+	int		cote;
+
+	i = 0;
+	j = 0;
+	cote = 0;
+	aux = NULL;
+	while (token && token[i])
+	{
+		if (!cote && (token[i] == '\'' || token[i] == '"'))
+			cote = token[i++];
+		if (cote == '"' && token[i] == '\\' && token[i + 1] && token[i + 1] == '"' && ++i && ++j)
+			aux = ft_new_aux(aux, token[i++]);
+		if (!token[i])
+			break ;
+		if (cote != '\'' && token[i] == '$' && ++i)
+		{
+			while (isalnum(token[i]))
+				i++;
+			aux = ft_putvar(token, i, aux);
+			//qualquervar = (terminal())->variable_env(user);
+			//(string())->join(algo, qualquervar);
+			//free(qualquervar);
+		}
+		if (!cote && token[i] && (token[i] != '\'' || token[i] != '"') && ++j)
+		{
+			aux = ft_new_aux(aux, token[i++]);
+			continue ;
+		}
+		if (cote && token[i] && token[i] == cote && i++)
+			cote = 0;
+		else if (token[i] && ++j)
+			aux = ft_new_aux(aux, token[i++]);
+	}
+	if (aux)
+		aux[j] = 0;
+	free (token);
+	return (aux);
+}
+
 int	main(int argc, char *argv[], char **env)
 {
 	char	*line;
 	t_data	data;
+	int		i;
+	int		j;
 
 	(void) argv;
 	(void) argc;
 	(void) env;
 	while (1)
 	{
+		i = 0;
+		j = 0;
 		line = readline("MyShell$ ");
 		get_comando(line, &data);
+		//teste de comandos//........
+		while (data.comando[i])
+		{
+			printf("Command		->>>>>>>>>	");
+			while (data.comando[i][j])
+			{
+				data.comando[i][j] = ft_formattoken(data.comando[i][j]);
+				printf("-%s-\n",data.comando[i][j++]);
+			}
+			i++;
+			j = 0;
+			printf("\n\n");
+		}
 		//execve -> data->comando[X]	;
 		//free -> tokens... line...Limpar o array comando[0][0]//
 		//printf("%s\n", data.comando[0][0]); // <- Neste exemplo será mostrado o primeiro comando digitado...
+		ft_free_data(&data, line);
+		break ;
 	}
 }

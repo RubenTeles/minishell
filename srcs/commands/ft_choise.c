@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/19 23:30:49 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/21 22:10:39 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	execute(t_command *c, int in, int option)
 	if (option == 0)
 	{
 		dup2(in, STDIN_FILENO);
-		if (c->next && !string()->compare_n(c->next->command[0], "<", string()->len(c->next->command[0])))
+		if (c->next && is_redirect_left(c->next->command[0]) > 0)
+			c = last_command_left_redirect(c->next);
+		if (c->next)
 			dup2(c->fd[1], STDOUT_FILENO);
 		if (in != STDIN_FILENO)
 			close(in);
@@ -31,8 +33,6 @@ void	execute(t_command *c, int in, int option)
 			close(in);
 		close(c->fd[1]);
 		fd = c->fd[0];
-		if (c->next && is_redirect_left(c->next->command[0]) > 0)
-			c = last_command_left_redirect(c->next);
 		if (c->next)
 			c->next->execute(c->next, fd);
 	}

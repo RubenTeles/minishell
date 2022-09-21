@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:17:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/17 16:23:54 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/21 22:29:43 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ static char	*path_title(void)
 	{
 		aux = (string())->sub_str(pwd, (string())->len(home),
 				(string())->len(pwd));
-		free(pwd);
-		pwd = (string())->join("~", aux);
+		if ((string())->len(home) > 0)
+		{
+			free(pwd);
+			pwd = (string())->join("~", aux);
+		}
 	}
 	free(home);
 	if (aux != NULL)

@@ -21,7 +21,6 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <ft_string.h>
-# include <ft_input.h>
 # include <fcntl.h> 
 # include <errno.h> 
 
