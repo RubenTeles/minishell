@@ -4,6 +4,7 @@
         "ft_string.h": "c",
         "minishell.h": "c",
         "termios.h": "c",
-        "readline.h": "c"
+        "readline.h": "c",
+        "get_next_line.h": "c"
     }
 }

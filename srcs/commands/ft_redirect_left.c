@@ -12,6 +12,14 @@
 
 #include <minishell.h>
 
+int	management_left_redirect(t_command *c)
+{
+	if (is_redirect_left(c->command[0]) == 1)
+		return (left_redirect(c));
+	else
+		return (double_left_redirect(c, 0, 0, 0));
+}
+
 int left_redirect(t_command *c)
 {
 	c->fd[1] = open(c->command[1], O_RDWR, 0777);
@@ -23,42 +31,24 @@ int left_redirect(t_command *c)
 	}
 	c->fd[0] = c->fd[1];
 	if (c->next && is_redirect_left(c->next->command[0]))
-		c->fd[0] = left_redirect(c->next);
+		c->fd[0] = management_left_redirect(c->next);
 	return (c->fd[0]);
 }
 
 static void	redirect_left_execute(t_command *c, int in)
 {
-//	char	*str;
-//	int		i;
-//
-//	
-//	//dup2(in, c->fd[1]);
-//	dup2(c->fd[1], in);
-//	c->fd[1] = open(c->command[1], O_RDWR, 0777);
-//	if (c->fd[1] < 0)
-//	{
-//	    printf("%s: No such file or directory\n", c->command[1]);
-//		close(c->fd[1]);
-//		return ;
-//	}
-//	str = ft_str_file(c->fd[1]);
-//	i = -1;
-//	
-//	/*while (str[++i])
-//		write(in, &str[i], 1);*/
-//	
-//	/*dup2(in, c->fd[1]);*/
-//	close(c->fd[1]);
-//	/*if (c->next != NULL)
-//		c->next->execute(c->prev, c->fd[0]);*/
+	(void)c;
+	(void)in;
+
+	return ;
 }
 
-void	*ft_redirect_left(t_command *c)
+t_command	*ft_redirect_left(t_command *c)
 {
 	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = redirect_left_execute;
+	return (c);
 }

@@ -12,46 +12,54 @@
 
 #include <minishell.h>
 
-int double_left_redirect(t_command *c)
+static void	ft_write_in_file(t_command *c, char *str)
 {
-	c->fd[1] = dup(STDIN_FILENO);
-	if (c->fd[1] < 0)
+	write(c->fd[1], str, (string())->len(str));
+	close(c->fd[1]);
+}
+
+int double_left_redirect(t_command *c, char *str, char *line, char *aux)
+{
+	while (1)
 	{
-		printf("%s: No such file or directory\n", c->command[1]);
-		close(c->fd[1]);
-		return (-1);
+		line = readline("\033[1;36m> \033[0;37m");
+		if ((string())->compare_n(c->command[1], line,
+			(string())->len(c->command[1])))
+			break ;
+		if (!str)
+			str = (string())->join("\n", line);
+		else
+		{
+			aux = (string())->join(str, "\n");
+			free(str);
+			str = (string())->join(aux, line);
+			free(aux);
+		}
+		free(line);
 	}
-	c->fd[0] = c->fd[1];
+	ft_write_in_file(c, str);
+	free(line);
+	if (str)
+		free(str);
 	if (c->next && is_redirect_left(c->next->command[0]))
-		c->fd[0] = left_redirect(c->next);
+		c->fd[0] = management_left_redirect(c->next);
 	return (c->fd[0]);
 }
 
 static void	double_redirect_left_execute(t_command *c, int in)
 {
-	/*char	*str;
+	(void)c;
+	(void)in;
 
-	if (!c->command[1])
-	{
-		printf("syntax error near unexpected token `newline'\n");
-		return ;
-	}
-	str = ft_str_file(in);
-	if (in != STDIN_FILENO)
-		close(in);
-	c->fd[1] = open(c->command[1], O_RDWR|O_CREAT|O_APPEND, 0777);
-	write(c->fd[1], str, (string())->len(str));
-	close(c->fd[1]);
-	free(str);
-	if (c->next != NULL)
-		c->next->execute(c->next, c->fd[0]);*/
+	return ;
 }
 
-void	*ft_double_redirect_left(t_command *c)
+t_command	*ft_double_redirect_left(t_command *c)
 {
-	/*if (!c->command)
+	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
-	c->execute = double_redirect_left_execute;*/
+	c->execute = double_redirect_left_execute;
+	return (c);
 }

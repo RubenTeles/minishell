@@ -24,11 +24,12 @@ static void	unset_execute(t_command *c, int in)
 	execute(c, in, 1);
 }
 
-void	*ft_unset(t_command *c)
+t_command	*ft_unset(t_command *c)
 {
 	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = unset_execute;
+	return (c);
 }

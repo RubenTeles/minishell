@@ -26,7 +26,7 @@ static void	exit_execute(t_command *c, int in)
 	}
 }
 
-void	*ft_exit(t_command *c)
+t_command	*ft_exit(t_command *c)
 {
 	if (!c)
 		exit_execute(c, STDIN_FILENO);
@@ -35,4 +35,5 @@ void	*ft_exit(t_command *c)
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = exit_execute;
+	return (c);
 }

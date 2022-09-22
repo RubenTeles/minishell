@@ -61,7 +61,7 @@ OBJ_NAME = $(SRC:.c=.o)
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
-CC = gcc
+CC = clang ##gcc
 
 CFLAGS = -g -lreadline #-fsanitize=address -Wall -Wextra -Werror
 

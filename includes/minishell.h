@@ -99,6 +99,9 @@ char		*ft_str_file(int in);
 int			is_redirect_right(char *command);
 int			is_redirect_left(char *command);
 t_command 	*last_command_left_redirect(t_command *c);
+int			management_left_redirect(t_command *c);
+int			left_redirect(t_command *c);
+int			double_left_redirect(t_command *c, char *str, char *line, char *aux);
 
 //----Terminal Methods----//
 void		__count_env(void);
@@ -110,7 +113,6 @@ t_env		*create_var_env(char *env);
 void		add_var_if_exist(char *var);
 void		delete_var(char	*var);
 char		*path_command(char *command);
-int			left_redirect(t_command *c);
 
 //----Update and Destroy----//
 void		__update(void);
@@ -120,17 +122,17 @@ void		__destroy_title(void);
 void		__destroy_all(void);
 
 //----Commands---//
-void	*ft_cd(t_command *c);
-void	*ft_echo(t_command *c);
-void	*ft_env(t_command *c);
-void	*ft_exit(t_command *c);
-void	*ft_export(t_command *c);
-void	*ft_pipe(t_command *c);
-void	*ft_pwd(t_command *c);
-void	*ft_unset(t_command *c);
-void	*ft_redirect_right(t_command *c);
-void	*ft_redirect_left(t_command *c);
-void	*ft_double_redirect_right(t_command *c);
-void	*ft_double_redirect_left(t_command *c);
+t_command	*ft_cd(t_command *c);
+t_command	*ft_echo(t_command *c);
+t_command	*ft_env(t_command *c);
+t_command	*ft_exit(t_command *c);
+t_command	*ft_export(t_command *c);
+t_command	*ft_pipe(t_command *c);
+t_command	*ft_pwd(t_command *c);
+t_command	*ft_unset(t_command *c);
+t_command	*ft_redirect_right(t_command *c);
+t_command	*ft_redirect_left(t_command *c);
+t_command	*ft_double_redirect_right(t_command *c);
+t_command	*ft_double_redirect_left(t_command *c);
 
 #endif

@@ -39,11 +39,12 @@ static void	double_redirect_right_execute(t_command *c, int in)
 		c->next->execute(c->next, c->fd[0]);
 }
 
-void	*ft_double_redirect_right(t_command *c)
+t_command	*ft_double_redirect_right(t_command *c)
 {
 	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = double_redirect_right_execute;
+	return (c);
 }

@@ -36,11 +36,12 @@ static void	cd_execute(t_command *c, int in)
 	execute(c, in, 1);
 }
 
-void	*ft_cd(t_command *c)
+t_command	*ft_cd(t_command *c)
 {
 	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = cd_execute;
+	return (c);
 }

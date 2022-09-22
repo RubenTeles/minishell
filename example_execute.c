@@ -9,6 +9,9 @@
 #include <sys/stat.h>
 #include <termios.h>
 #include <unistd.h>
+#include "includes/ft_string.h"
+#include "includes/minishell.h"
+
 
 #define READ 0
 #define WRITE 1
@@ -70,7 +73,7 @@ void ft_pipex(char **env, int in)
 	wait(&pid2);
 	wait(&pid3);
 }
-
+/*
 int main(int argc, char* argv[], char **env)
 {
 	char	*line;
@@ -79,26 +82,7 @@ int main(int argc, char* argv[], char **env)
 	char	*line2;
 
 	command = 0;
-	line2 = read(0,buf, 100);
-	write(1, line2, 100);
-	/*	char	buf[100];
-	int 	size;
-	int     i;
-	
-	while (buf[0] != 'O')
-	{
-	    write(1, "> ", 2);
-    	size = read(0,buf, 100);
-    	write(1, &buf, size);
-    	if (buf[0] != 'O')
-    	    break ;
-    	i = -1;
-    	while(size > ++i)
-    	    buf[i] = '\0';
-	}
-    while(size > ++i)
-	    buf[i] = '\0';*/
-	/*while(1)
+	while(1)
 	{
 		if (command)
 		{
@@ -123,5 +107,47 @@ int main(int argc, char* argv[], char **env)
 			command = 1;
 			free(line);
 		}
-	}*/
+	}
+}*/
+
+int	main(void)
+{
+	char	buf[1024];
+	int 	size;
+	int		i;
+	int		fd;
+	char	*str;
+	char	*aux_1;
+	char	*aux_2;
+	char	input[9] = "olamigos";
+	
+	fd = dup(STDIN_FILENO);
+	close(fd);
+	printf("%i\n", fd);
+	str = NULL;
+	aux_1 = NULL;
+	aux_2 = NULL;
+	while (1)
+	{
+		write(1, "> ", 2);
+    	aux_1 = readline((terminal())->title);
+		//aux_1 = get_next_line(0);
+		if (!aux_2)
+			str = (string())->duplicate(aux_1);
+		else
+			str = (string())->join(aux_1, aux_2);
+		if ((string())->compare_n(aux_1, input, (string())->len(input)))
+			break ;
+		if (!aux_2)
+			free(aux_2);
+		aux_2 = (string())->duplicate(str);
+		printf("%s\n", aux_2);
+		free(str);
+	}
+	free(aux_1);
+	free(aux_2);
+	write(fd, str, (string())->len(str));
+	//size = read(fd, buf, 100);
+	printf("%s\n", str);
+	free(str);
 }

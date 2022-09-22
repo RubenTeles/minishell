@@ -47,11 +47,12 @@ static void	export_execute(t_command *c, int in)
 	execute(c, in, 1);
 }
 
-void	*ft_export(t_command *c)
+t_command	*ft_export(t_command *c)
 {
 	if (!c->command)
 		return (c);
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = export_execute;
+	return (c);
 }

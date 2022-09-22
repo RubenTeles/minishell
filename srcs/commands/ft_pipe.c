@@ -17,12 +17,8 @@
 
 static void	pipe_execute(t_command *c, int in)
 {
-	int		i;
-	char	*str;
-	int		a;
-
-	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
-		in = left_redirect(c->next);
+	if (c->next && is_redirect_left(c->next->command[0]) > 0)
+		in = management_left_redirect(c->next);
 	if (in < 0)
 		return ;
 	c->pid = fork();
@@ -34,7 +30,7 @@ static void	pipe_execute(t_command *c, int in)
 	execute(c, in, 1);
 }
 
-void	*ft_pipe(t_command *c)
+t_command	*ft_pipe(t_command *c)
 {	
 	if (!c->command)
 		return (c);
@@ -42,4 +38,5 @@ void	*ft_pipe(t_command *c)
 		c->count_cmd++;
 	c->path = path_command(c->command[0]);
 	c->execute = pipe_execute;
+	return (c);
 }

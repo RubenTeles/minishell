@@ -77,10 +77,10 @@ t_command	*ft_choise(char **command)
 		return (ft_double_redirect_right(c));
 	if (string()->compare_n(command[0], ">", string()->len(command[0])))
 		return (ft_redirect_right(c));
+	if (string()->compare_n(command[0], "<<", string()->len(command[0])))
+		return (ft_double_redirect_left(c));
 	if (string()->compare_n(command[0], "<", string()->len(command[0])))
 		return (ft_redirect_left(c));
-	/*if (string()->compare_n(command[0], "<<", string()->len(command[0])))
-		return (ft_double_redirect_left(c));*/
 	return (ft_pipe(c));
 }
 
@@ -109,9 +109,9 @@ void ft_command_execute(char ***commands)
 	//char	*comands_12[3] = {"export", "Ola", NULL};
 	//char	*comands_13[3] = {"export", "Ola=hehe", NULL};
 	/*******/
-	char	*comands_14[3] = {"ls", "-la", NULL};
+	char	*comands_14[2] = {"ls", NULL};
 	//char	*comands_14[2] = {"ls", NULL};
-	//char	*comands_15[3] = {"grep", "1", NULL};
+	char	*comands_15[3] = {"grep", "1", NULL};
 	char	*comands_16[3] = {"grep", "minishell", NULL};
 	//char	*comands_17[3] = {"wc", "-l", NULL};
 	/*******/
@@ -132,6 +132,9 @@ void ft_command_execute(char ***commands)
 	char	*comands_26[3] = {"wc", "-l", NULL};
 	char	*comands_27[3] = {"<", "Adeus", NULL};
 	char	*comands_28[3] = {"<", "BYE", NULL};
+	/*******/
+	char	*comands_29[3] = {"<<", "Adeus", NULL};
+	char	*comands_30[3] = {"<", "minishel.txt", NULL};
 
 	//commands[0] = comands_14;
 	//commands[1] = comands_22;
@@ -139,8 +142,8 @@ void ft_command_execute(char ***commands)
 	//commands[3] = comands_24;
 
 	commands[0] = comands_26;
-	commands[1] = comands_27;
-	commands[2] = comands_28;
+	commands[1] = comands_15;
+	commands[2] = comands_29;
 	//commands[3] = comands_24;
 	//max_i = 4;
 	max_i = 3;
