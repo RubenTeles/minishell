@@ -142,8 +142,8 @@ void ft_command_execute(char ***commands)
 	//commands[3] = comands_24;
 
 	commands[0] = comands_26;
-	commands[1] = comands_15;
-	commands[2] = comands_29;
+	commands[1] = comands_29;
+	commands[2] = comands_30;
 	//commands[3] = comands_24;
 	//max_i = 4;
 	max_i = 3;

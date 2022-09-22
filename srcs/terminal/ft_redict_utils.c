@@ -48,18 +48,24 @@ char	*ft_str_file(int in)
 
 int	is_redirect_right(char *command)
 {
-	if (string()->compare_n(command, ">>", string()->len(command)))
+	int	i;
+
+	i = (string())->len(command);
+	if (i == 2 && (string())->compare_n(command, ">>", (string())->len(command)))
 		return (2);
-	if (string()->compare_n(command, ">", string()->len(command)))
+	if (i == 1 && (string())->compare_n(command, ">", (string())->len(command)))
 		return (1);
 	return (0);
 }
 
 int	is_redirect_left(char *command)
 {
-	if (string()->compare_n(command, "<<", string()->len(command)))
+	int	i;
+
+	i = (string())->len(command);
+	if (i == 2 && (string())->compare_n(command, "<<", (string())->len(command)))
 		return (2);
-	if (string()->compare_n(command, "<", string()->len(command)))
+	if (i == 1 && (string())->compare_n(command, "<", (string())->len(command)))
 		return (1);
 	return (0);
 }

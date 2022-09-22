@@ -12,10 +12,9 @@
 
 #include <minishell.h>
 
-static void	ft_write_in_file(t_command *c, char *str)
+static void	ft_while_d_l_redirect(t_command *c, char *str)
 {
-	write(c->fd[1], str, (string())->len(str));
-	close(c->fd[1]);
+	//Reduzir Codigo;
 }
 
 int double_left_redirect(t_command *c, char *str, char *line, char *aux)
@@ -23,6 +22,12 @@ int double_left_redirect(t_command *c, char *str, char *line, char *aux)
 	while (1)
 	{
 		line = readline("\033[1;36m> \033[0;37m");
+		if (!line)
+		{
+			printf("\033[1;33mwarning\033[0;37m: here-document at line ");
+			printf("%zu delimited by end-of-file\n", (string())->len(str));
+			break ;
+		}
 		if ((string())->compare_n(c->command[1], line,
 			(string())->len(c->command[1])))
 			break ;
@@ -37,11 +42,14 @@ int double_left_redirect(t_command *c, char *str, char *line, char *aux)
 		}
 		free(line);
 	}
-	ft_write_in_file(c, str);
 	free(line);
+	if (str != NULL && !(string())->compare_n(str, "", 1))
+		add_history(str);
+	write(c->fd[1], str, (string())->len(str));
+	close(c->fd[1]);
 	if (str)
 		free(str);
-	if (c->next && is_redirect_left(c->next->command[0]))
+	if (c->next && is_redirect_left(c->next->command[0]) > 0)
 		c->fd[0] = management_left_redirect(c->next);
 	return (c->fd[0]);
 }
