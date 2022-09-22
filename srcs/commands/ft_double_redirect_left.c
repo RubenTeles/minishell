@@ -6,11 +6,26 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:34:08 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/19 19:34:15 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/22 17:47:31 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int double_left_redirect(t_command *c)
+{
+	c->fd[1] = dup(STDIN_FILENO);
+	if (c->fd[1] < 0)
+	{
+		printf("%s: No such file or directory\n", c->command[1]);
+		close(c->fd[1]);
+		return (-1);
+	}
+	c->fd[0] = c->fd[1];
+	if (c->next && is_redirect_left(c->next->command[0]))
+		c->fd[0] = left_redirect(c->next);
+	return (c->fd[0]);
+}
 
 static void	double_redirect_left_execute(t_command *c, int in)
 {

@@ -75,9 +75,30 @@ int main(int argc, char* argv[], char **env)
 {
 	char	*line;
 	int		command;
+	char	buf[100];
+	char	*line2;
 
 	command = 0;
-	while(1)
+	line2 = read(0,buf, 100);
+	write(1, line2, 100);
+	/*	char	buf[100];
+	int 	size;
+	int     i;
+	
+	while (buf[0] != 'O')
+	{
+	    write(1, "> ", 2);
+    	size = read(0,buf, 100);
+    	write(1, &buf, size);
+    	if (buf[0] != 'O')
+    	    break ;
+    	i = -1;
+    	while(size > ++i)
+    	    buf[i] = '\0';
+	}
+    while(size > ++i)
+	    buf[i] = '\0';*/
+	/*while(1)
 	{
 		if (command)
 		{
@@ -102,5 +123,5 @@ int main(int argc, char* argv[], char **env)
 			command = 1;
 			free(line);
 		}
-	}
+	}*/
 }
