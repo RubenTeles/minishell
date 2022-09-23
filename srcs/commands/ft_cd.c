@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 18:12:17 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/23 21:26:22 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static void	cd_execute(t_command *c, int in)
 	char	buffer[100];
 	int		i;
 
+	in = management_input_execute(c->next);
+	if (in == -1)
+		return ;
 	execute(c, in, 0);
 	if (c->count_cmd > 2)
 	{

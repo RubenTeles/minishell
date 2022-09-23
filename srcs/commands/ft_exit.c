@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 15:52:28 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/23 18:06:16 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 static void	exit_execute(t_command *c, int in)
 {
 	if (c)
+	{
+		in = management_input_execute(c->next);
+		if (in == -1)
+			return ;
 		execute(c, in, 0);
+	}
 	write(STDOUT_FILENO, "exit\n", 5);
 	if (c && c->next != NULL)
 		execute(c, in, 1);

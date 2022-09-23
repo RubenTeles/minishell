@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/19 23:30:03 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/23 21:38:18 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int	management_left_redirect(t_command *c)
 		return (double_left_redirect(c, 0, 0, 0));
 }
 
-int left_redirect(t_command *c)
+int	left_redirect(t_command *c)
 {
 	c->fd[1] = open(c->command[1], O_RDWR, 0777);
 	if (c->fd[1] < 0)
 	{
-		printf("%s: No such file or directory\n", c->command[1]);
+		printf("%s: No such file or directory or ", c->command[1]);
+		printf("Permission denied\n");
 		close(c->fd[1]);
 		return (-1);
 	}
@@ -37,10 +38,16 @@ int left_redirect(t_command *c)
 
 static void	redirect_left_execute(t_command *c, int in)
 {
-	(void)c;
-	(void)in;
-
-	return ;
+	if (!c->command[1])
+	{
+		printf("syntax error near unexpected token\n");
+		return ;
+	}
+	in = management_input_execute(c);
+	if (in == -1)
+		return ;
+	if (c->next != NULL)
+		c->next->execute(c->next, in);
 }
 
 t_command	*ft_redirect_left(t_command *c)

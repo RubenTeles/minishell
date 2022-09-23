@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:18:57 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 15:48:23 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/23 17:54:18 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static void	echo_execute(t_command *c, int in)
 	int		i;
 
 	i = 0;
+	in = management_input_execute(c->next);
+	if (in == -1)
+		return ;
 	execute(c, in, 0);
 	if ((string())->compare_n(c->command[1], "-n",
 			(string())->len(c->command[1])))

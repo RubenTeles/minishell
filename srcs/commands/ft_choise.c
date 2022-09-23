@@ -6,37 +6,11 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/21 22:10:39 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/23 21:30:12 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	execute(t_command *c, int in, int option)
-{
-	int	fd;
-
-	if (option == 0)
-	{
-		dup2(in, STDIN_FILENO);
-		if (c->next && is_redirect_left(c->next->command[0]) > 0)
-			c = last_command_left_redirect(c->next);
-		if (c->next)
-			dup2(c->fd[1], STDOUT_FILENO);
-		if (in != STDIN_FILENO)
-			close(in);
-		close(c->fd[1]);
-	}
-	else if (option == 1)
-	{
-		if (in != STDIN_FILENO)
-			close(in);
-		close(c->fd[1]);
-		fd = c->fd[0];
-		if (c->next)
-			c->next->execute(c->next, fd);
-	}
-}
 
 static t_command *new_command(char **command)
 {
@@ -54,34 +28,41 @@ static t_command *new_command(char **command)
 	return (c);
 }
 
+t_command	*ft_choise_2(t_command *c, char **command, int i)
+{
+	if (i == 2 && (string())->compare_n(command[0], ">>", i))
+		return (ft_double_redirect_right(c));
+	if (i == 1 && (string())->compare_n(command[0], ">", i))
+		return (ft_redirect_right(c));
+	if (i == 2 && (string())->compare_n(command[0], "<<", i))
+		return (ft_double_redirect_left(c));
+	if (i == 1 && (string())->compare_n(command[0], "<", i))
+		return (ft_redirect_left(c));
+	return (ft_pipe(c));
+}
+
 t_command	*ft_choise(char **command)
 {
 	t_command	*c;
+	int			i;
 
 	c = new_command(command);
-	if (string()->compare_n(command[0], "cd", string()->len(command[0])))
+	i = (string())->len(command[0]);
+	if (i == 2 && (string())->compare_n(command[0], "cd", i))
 		return (ft_cd(c));
-	if (string()->compare_n(command[0], "echo", string()->len(command[0])))
+	if (i == 4 && (string())->compare_n(command[0], "echo", i))
 		return (ft_echo(c));
-	if (string()->compare_n(command[0], "env", string()->len(command[0])))
+	if (i == 3 && (string())->compare_n(command[0], "env", i))
 		return (ft_env(c));
-	if (string()->compare_n(command[0], "exit", string()->len(command[0])))
+	if (i == 4 && (string())->compare_n(command[0], "exit", i))
 		return (ft_exit(c));
-	if (string()->compare_n(command[0], "export", string()->len(command[0])))
+	if (i == 6 && (string())->compare_n(command[0], "export", i))
 		return (ft_export(c));
-	if (string()->compare_n(command[0], "pwd", string()->len(command[0])))
+	if (i == 3 && (string())->compare_n(command[0], "pwd", i))
 		return (ft_pwd(c));
-	if (string()->compare_n(command[0], "unset", string()->len(command[0])))
+	if (i == 5 && (string())->compare_n(command[0], "unset", i))
 		return (ft_unset(c));
-	if (string()->compare_n(command[0], ">>", string()->len(command[0])))
-		return (ft_double_redirect_right(c));
-	if (string()->compare_n(command[0], ">", string()->len(command[0])))
-		return (ft_redirect_right(c));
-	if (string()->compare_n(command[0], "<<", string()->len(command[0])))
-		return (ft_double_redirect_left(c));
-	if (string()->compare_n(command[0], "<", string()->len(command[0])))
-		return (ft_redirect_left(c));
-	return (ft_pipe(c));
+	return (ft_choise_2(c, command, i));
 }
 
 void ft_command_execute(char ***commands)
@@ -90,14 +71,15 @@ void ft_command_execute(char ***commands)
 	int			max_i;
 	t_command 	*command;
 	t_command 	*aux;
+
 	commands = malloc(sizeof(char **) * 4);
-	char	*comands_1[3] = {"cd", "..", NULL};
-	char	*comands_2[3] = {"cd", "includes", NULL};
+	//char	*comands_1[3] = {"cd", "..", NULL};
+	//char	*comands_2[3] = {"cd", "includes", NULL};
 	//char	*comands_3[2] = {"cd", NULL};
 	//char	*comands_4[3] = {"cd", "asdasdasdasdas/", "asdasd", NULL};
 	/*******/
 	//char	*comands_5[5] = {"echo", "-n", "\"ahahaha $USER \"", "hamburguer", NULL};
-	//char	*comands_6[4] = {"echo", "ahahaha ", "hamburguer", NULL};
+	//char	*comands_6[4] = {"echo", "ahahaha", "hamburguer", NULL};
 	/*******/
 	//char	*comands_7[2] = {"env", NULL};
 	//char	*comands_8[3] = {"env", "asdas", NULL};
@@ -109,10 +91,10 @@ void ft_command_execute(char ***commands)
 	//char	*comands_12[3] = {"export", "Ola", NULL};
 	//char	*comands_13[3] = {"export", "Ola=hehe", NULL};
 	/*******/
-	char	*comands_14[2] = {"ls", NULL};
+	char	*comands_14[3] = {"ls", "-l", NULL};
 	//char	*comands_14[2] = {"ls", NULL};
-	char	*comands_15[3] = {"grep", "1", NULL};
-	char	*comands_16[3] = {"grep", "minishell", NULL};
+	char	*comands_15[3] = {"grep", "srcs", NULL};
+	//char	*comands_16[3] = {"grep", "minishell", NULL};
 	//char	*comands_17[3] = {"wc", "-l", NULL};
 	/*******/
 	//char	*comands_18[2] = {"pwd", NULL};
@@ -121,32 +103,35 @@ void ft_command_execute(char ***commands)
 	//char	*comands_20[3] = {"unset", "Ola", NULL};
 	//char	*comands_21[4] = {"unset", "Ola", "Adeus", NULL};
 	/*******/
-	char	*comands_22[3] = {">", "texto", NULL};
-	char	*comands_23[3] = {">", "Adeus", NULL};
+	//char	*comands_22[3] = {">", "texto", NULL};
+	//char	*comands_23[3] = {">", "Adeus", NULL};
 	//char	*comands_24[3] = {">", "BYE", NULL};
 	//char	*comands_23[4] = {">", "texto", "Adeus", NULL};
 	/*******/
-	char	*comands_24[3] = {">>", "BYE", NULL};
+	//char	*comands_24[3] = {">>", "BYE", NULL};
 	//char	*comands_25[4] = {">>", "texto", "Adeus", NULL};
 	/*******/
 	char	*comands_26[3] = {"wc", "-l", NULL};
-	char	*comands_27[3] = {"<", "Adeus", NULL};
-	char	*comands_28[3] = {"<", "BYE", NULL};
+	//char	*comands_27[3] = {"<", "Adeus", NULL};
+	//char	*comands_28[3] = {"<", "BYE", NULL};
 	/*******/
 	char	*comands_29[3] = {"<<", "Adeus", NULL};
-	char	*comands_30[3] = {"<", "minishel.txt", NULL};
-
-	//commands[0] = comands_14;
-	//commands[1] = comands_22;
-	//commands[2] = comands_23;
-	//commands[3] = comands_24;
+	//char	*comands_30[3] = {"<", "minishel.txt", NULL};
+	/****ERROS****/
+	//char	*comands_31[2] = {">", NULL};
+	//char	*comands_32[2] = {"<", NULL};
+	//char	*comands_33[2] = {".", NULL};
+	//char	*comands_34[3] = {">", "asd", NULL};
+	char	*comands_35[3] = {"<", "ola", NULL};
+	char	*comands_36[3] = {">", "ola", NULL};
+	char	*comands_37[3] = {">>", "ola", NULL};
 
 	commands[0] = comands_26;
 	commands[1] = comands_29;
-	commands[2] = comands_30;
+	//commands[2] = comands_6;
 	//commands[3] = comands_24;
 	//max_i = 4;
-	max_i = 3;
+	max_i = 2;
 	i = -1;
 	while (++i < max_i)
 	{

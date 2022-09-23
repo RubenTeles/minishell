@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 15:49:21 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/23 21:35:53 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ static void	env_execute(t_command *c, int in)
 	t_env	*aux;
 	char	**env_ter;
 
+	in = management_input_execute(c->next);
+	if (in == -1)
+		return ;
 	if (c->command[1] != NULL)
 	{
 		printf("env: '%s': No such file or directory\n", c->command[1]);
 		return ;
 	}
-	execute(c, in,  0);
+	execute(c, in, 0);
 	aux = terminal()->env_l;
 	while (aux)
 	{

@@ -38,6 +38,7 @@ SRC_COMMANDS = 	ft_cd.c \
 				ft_redirect_left.c \
 				ft_double_redirect_right.c \
 				ft_double_redirect_left.c \
+				ft_management_execute.c \
 
 SRC_TERMINAL = 	create_terminal.c \
 				create_terminal_2.c \
@@ -61,7 +62,7 @@ OBJ_NAME = $(SRC:.c=.o)
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
-CC = clang ##gcc
+CC = gcc
 
 CFLAGS = -g -lreadline #-fsanitize=address -Wall -Wextra -Werror
 

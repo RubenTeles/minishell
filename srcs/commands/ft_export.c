@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:41:55 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 15:51:15 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/23 21:33:25 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ static void	show_export(t_command *c, int in)
 static void	export_execute(t_command *c, int in)
 {
 	int	i;
-	
+
 	i = 0;
+	in = management_input_execute(c->next);
+	if (in == -1)
+		return ;
 	execute(c, in, 0);
 	if (c->count_cmd < 2)
 		show_export(c, in);

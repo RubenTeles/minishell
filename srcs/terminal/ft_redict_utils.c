@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 21:12:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/19 23:14:41 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/23 21:40:11 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ char	*ft_str_file(int in)
 	total = 0;
 	str = malloc(sizeof(char) * 1);
 	str[0] = '\0';
-	while (size > 0)
+	while (size > 0 && in != STDIN_FILENO)
 	{
-		size = read(in, buffer, 1000);// -1 ERRO
+		size = read(in, buffer, 1000);
 		total += size;
 		if (size > 0)
 			str = copy_file(buffer, str, size);
@@ -51,9 +51,11 @@ int	is_redirect_right(char *command)
 	int	i;
 
 	i = (string())->len(command);
-	if (i == 2 && (string())->compare_n(command, ">>", (string())->len(command)))
+	if (i == 2 && (string())->compare_n(command, ">>",
+			(string())->len(command)))
 		return (2);
-	if (i == 1 && (string())->compare_n(command, ">", (string())->len(command)))
+	if (i == 1 && (string())->compare_n(command, ">",
+			(string())->len(command)))
 		return (1);
 	return (0);
 }
@@ -63,14 +65,16 @@ int	is_redirect_left(char *command)
 	int	i;
 
 	i = (string())->len(command);
-	if (i == 2 && (string())->compare_n(command, "<<", (string())->len(command)))
+	if (i == 2 && (string())->compare_n(command, "<<",
+			(string())->len(command)))
 		return (2);
-	if (i == 1 && (string())->compare_n(command, "<", (string())->len(command)))
+	if (i == 1 && (string())->compare_n(command, "<",
+			(string())->len(command)))
 		return (1);
 	return (0);
 }
 
-t_command *last_command_left_redirect(t_command *c)
+t_command	*last_command_left_redirect(t_command *c)
 {
 	t_command	*last;
 
