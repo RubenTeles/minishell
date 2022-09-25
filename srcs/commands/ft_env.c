@@ -17,7 +17,8 @@ static void	env_execute(t_command *c, int in)
 	t_env	*aux;
 	char	**env_ter;
 
-	in = management_input_execute(c->next);
+	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
+		in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
 	if (c->command[1] != NULL)

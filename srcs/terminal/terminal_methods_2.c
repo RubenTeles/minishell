@@ -71,22 +71,13 @@ void	update_var(char *var, char *str)
 	(terminal())->update->all();
 }
 
-void	delete_var(char	*var)
+void	delete_var_2(char *var_env)
 {
 	t_env	*aux;
 	t_env	*previus;
-	char	*var_env;
 
-	if (!var_env)
-		return ;
-	var_env = (string())->sub_split_option(var, '=', 0);
-	if ((terminal())->var_exist(var_env) == 0)
-	{
-		free(var_env);
-		return ;
-	}
-	aux = (terminal())->env_l;
 	previus = NULL;
+	aux = (terminal())->env_l;
 	while (aux)
 	{
 		if ((string())->len(aux->var) == (string())->len(var_env))
@@ -103,6 +94,21 @@ void	delete_var(char	*var)
 	free(aux->var);
 	free(aux->val);
 	free(aux);
+}
+
+void	delete_var(char	*var)
+{
+	char	*var_env;
+
+	if (!var_env)
+		return ;
+	var_env = (string())->sub_split_option(var, '=', 0);
+	if ((terminal())->var_exist(var_env) == 0)
+	{
+		free(var_env);
+		return ;
+	}
+	delete_var_2(var_env);
 	free(var_env);
 	(terminal())->update->all();
 }

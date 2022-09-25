@@ -42,7 +42,8 @@ static void	double_redirect_right_execute(t_command *c, int in)
 		printf("syntax error near unexpected token\n");
 		return ;
 	}
-	in = management_input_execute(c->next);
+	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
+		in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
 	if (c->next && is_redirect_right(c->next->command[0]) > 0)

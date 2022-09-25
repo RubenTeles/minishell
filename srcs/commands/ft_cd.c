@@ -15,26 +15,32 @@
 static void	cd_execute(t_command *c, int in)
 {
 	char	buffer[100];
-	int		i;
+	char	*home;
 
-	in = management_input_execute(c->next);
+	if (c->next && is_redirect_left(c->next->command[0]) > 0)
+		in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
-	execute(c, in, 0);
 	if (c->count_cmd > 2)
 	{
 		printf("cd: too many arguments\n");
 		return ;
 	}
-	if (c->command[1] == NULL && (terminal())->var_exist("HOME"))
-		c->command[1] = (terminal())->variable_env("HOME");
-	if (access(c->command[1], F_OK))
+	if (!c->command[1] && (terminal())->var_exist("HOME"))
+		home = (terminal())->variable_env("HOME");
+	if (access(c->command[1], F_OK) || access(home, F_OK))
 	{
 		printf("cd: %s: No such file or directory\n", c->command[1]);
+		if (home)
+			free(home);
 		return ;
 	}
+	execute(c, in, 0);
 	(terminal())->update_var("OLDPWD", getcwd(buffer, 100));
-	chdir(c->command[1]);
+	if (!c->command[1])
+		chdir(home);
+	else
+		chdir(c->command[1]);
 	(terminal())->update_var("PWD", getcwd(buffer, 100));
 	execute(c, in, 1);
 }

@@ -81,8 +81,9 @@ char	*path_command(char *command)
 	{
 		aux_path = string()->join((terminal())->path[i], command);
 		if (!access(aux_path, F_OK))
-			break ;
+			return (aux_path);
 		free(aux_path);
 	}
+	aux_path = 0;
 	return (aux_path);
 }

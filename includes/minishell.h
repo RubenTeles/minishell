@@ -23,6 +23,7 @@
 # include <ft_string.h>
 # include <fcntl.h> 
 # include <errno.h> 
+# include <parse.h> 
 
 /* Para incluir readline passos:
 sudo apt-get install libreadline-dev
@@ -30,11 +31,11 @@ sudo apt-get install libreadline-dev
 https://vcpkg.io/en/getting-started.html
 */
 
-typedef struct s_update 			t_update;
-typedef struct s_destroy 			t_destroy;
-typedef struct s_env 				t_env;
-typedef struct s_terminal 			t_terminal;
-typedef struct s_command 			t_command;
+typedef struct s_update				t_update;
+typedef struct s_destroy			t_destroy;
+typedef struct s_env				t_env;
+typedef struct s_terminal			t_terminal;
+typedef struct s_command			t_command;
 
 struct s_update {
 	void		(*all)(void);
@@ -100,17 +101,18 @@ int			management_input_execute(t_command *c);
 char		*ft_str_file(int in);
 int			is_redirect_right(char *command);
 int			is_redirect_left(char *command);
-t_command 	*last_command_left_redirect(t_command *c);
+t_command	*last_command_left_redirect(t_command *c);
 int			management_left_redirect(t_command *c);
 int			left_redirect(t_command *c);
-int			double_left_redirect(t_command *c, char *str, char *line, char *aux);
+int			\
+double_left_redirect(t_command *c, char *str, char *line, char *aux);
 
 //----Terminal Methods----//
 void		__count_env(void);
 char		*variable_env(char *var);
 void		update_var(char *var, char *str);
 int			var_exist(char *str);
-void		ft_command_execute(char ***comamands);
+void		ft_command_execute(char ***commands);
 t_env		*create_var_env(char *env);
 void		add_var_if_exist(char *var);
 void		delete_var(char	*var);
@@ -118,7 +120,7 @@ char		*path_command(char *command);
 
 //----Update and Destroy----//
 void		__update(void);
-void 		__update_title(void);
+void		__update_title(void);
 void		__destroy(void);
 void		__destroy_title(void);
 void		__destroy_all(void);
@@ -136,5 +138,9 @@ t_command	*ft_redirect_right(t_command *c);
 t_command	*ft_redirect_left(t_command *c);
 t_command	*ft_double_redirect_right(t_command *c);
 t_command	*ft_double_redirect_left(t_command *c);
+
+// APAGAR
+void ft_command_execute_2(char ***commands);
+void ft_command_execute_3(char ***commands);
 
 #endif

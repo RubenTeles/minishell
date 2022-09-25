@@ -54,7 +54,14 @@ SRC_STRING = 	ft_string.c \
 				ft_string_3.c \
 				ft_string_4.c \
 				
-SRC_INPUT = 	#input_1.c \
+SRC_INPUT = 	1cotes.c \
+				2create_token.c \
+				3pipe.c \
+				4create_data.c \
+				5format_token.c \
+				6free_input.c \
+				utils.c \
+
 
 SRC = $(SRC_NAME) $(SRC_TERMINAL) $(SRC_STRING) $(SRC_INPUT) $(SRC_COMMANDS)
 

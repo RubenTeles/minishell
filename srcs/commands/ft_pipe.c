@@ -26,8 +26,11 @@ static void	pipe_execute(t_command *c, int in)
 		in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
-	c->pid = fork();
-	if (c->pid == 0)
+	if (!c->path)
+		printf("Command '%s' not found\n", c->command[0]);
+	if (c->path)
+		c->pid = fork();
+	if (c->path && c->pid == 0)
 	{
 		execute(c, in, 0);
 		execve(c->path, c->command, (terminal())->env_m);

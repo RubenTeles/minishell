@@ -49,9 +49,9 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+int	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (size == 0)

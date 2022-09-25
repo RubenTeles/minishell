@@ -25,6 +25,8 @@ int	management_input_execute(t_command *c)
 
 void	execute_in(t_command *c, int in)
 {
+	int	fd;
+
 	if (in != STDIN_FILENO)
 		close(in);
 	close(c->fd[1]);
@@ -38,7 +40,6 @@ void	execute_in(t_command *c, int in)
 void	execute(t_command *c, int in, int option)
 {
 	t_command	*nextx;
-	int			fd;
 
 	nextx = NULL;
 	if (option == 0)
