@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:38:50 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/10 18:20:52 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:13:35 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct s_string {
 	size_t	(*len)(const char *string);
 	char	**(*split)(char const *s, char c);
 	char	*(*n_str)(const char *s1, const char *s2, size_t n);
-	int		(*copy_n)(char *dest, const char *src, size_t size);
+	int		(*copy_n)(char *dest, const char *src, int size);
 	char	*(*join)(char const *s1, char const *s2);
 	int		(*only_this_chars)(char *s1, char *s2);
 	char	*(*pos_char)(const char *string, int c);
@@ -39,7 +39,7 @@ struct s_string {
 size_t		ft_strlen(const char *string);
 char		**ft_split(char const *s, char c);
 char		*ft_strnstr(const char *s1, const char *s2, size_t n);
-int			ft_strlcpy(char *dest, const char *src, size_t size);
+int			ft_strlcpy(char *dest, const char *src, int size);
 char		*ft_strdup(const char *s);
 int			ft_strncmp(const char *str1, const char *str2, size_t n);
 char		*ft_substr(char const *s, unsigned int start, size_t len);

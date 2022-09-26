@@ -71,7 +71,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 CC = gcc
 
-CFLAGS = -g -lreadline #-fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -g -lreadline -Wall -Wextra -Werror #-fsanitize=address 
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/23 21:35:53 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:14:11 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	env_execute(t_command *c, int in)
 {
 	t_env	*aux;
-	char	**env_ter;
 
 	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
 		in = management_input_execute(c->next);

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:57:01 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 15:17:47 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:11:56 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	__update_env_m(void)
 /* Dá valores ao env_m, export, e ao env_count usando o env do main*/
 static void	__update_path(void)
 {
-	int		i;
 	char	*path;
 
 	(terminal())->destroy->path();

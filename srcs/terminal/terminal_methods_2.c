@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/17 16:13:30 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:11:43 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	add_var_if_exist(char *var)
 	char	*aux_var;
 	char	*aux_val;
 
-	if (!aux_var)
+	if (!var)
 		return ;
 	aux_var = (string())->sub_split_option(var, '=', 0);
 	aux_val = (string())->sub_split_option(var, '=', 1);
@@ -100,7 +100,7 @@ void	delete_var(char	*var)
 {
 	char	*var_env;
 
-	if (!var_env)
+	if (!var)
 		return ;
 	var_env = (string())->sub_split_option(var, '=', 0);
 	if ((terminal())->var_exist(var_env) == 0)

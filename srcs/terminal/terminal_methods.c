@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:02:33 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/17 16:14:58 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:10:58 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	var_exist(char *str)
 {
 	int		len;
 	t_env	*aux;
-	char	*var;
 
 	aux = (terminal())->env_l;
 	len = (string())->len(str);
@@ -52,7 +51,6 @@ char	*variable_env(char *str)
 {
 	int		len;
 	t_env	*aux;
-	char	*var;
 
 	aux = (terminal())->env_l;
 	len = (string())->len(str);

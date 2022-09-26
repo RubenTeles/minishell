@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/26 04:22:05 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:13:58 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ static int	cd_execute_2(t_command *c, int in)
 
 static void	cd_execute(t_command *c, int in)
 {
-	char	buffer[1001];
-	char	*home;
-
 	if (c->next && is_redirect_left(c->next->command[0]) > 0)
 		in = management_input_execute(c->next);
 	if (in == -1)

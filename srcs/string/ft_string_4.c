@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:12:17 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/12 17:53:30 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:12:33 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int	ft_strlcpy(char *dest, const char *src, size_t size)
+int	ft_strlcpy(char *dest, const char *src, int size)
 {
 	int	i;
 

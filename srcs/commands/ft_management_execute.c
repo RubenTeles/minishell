@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 17:41:40 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/23 21:37:24 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:15:41 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	execute_in(t_command *c, int in)
 	if (c->next && is_redirect_left(c->next->command[0]) > 0)
 		c = last_command_left_redirect(c->next);
 	if (c->next)
-		c->next->execute(c->next, c->fd[0]);
+		c->next->execute(c->next, fd);
 }
 
 void	execute(t_command *c, int in, int option)

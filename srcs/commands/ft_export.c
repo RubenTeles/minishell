@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:41:55 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/23 21:33:25 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:14:48 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 static void	show_export(t_command *c, int in)
 {
 	t_env	*aux;
-	char	**env_ter;
 
+	(void)c;
+	(void)in;
 	aux = terminal()->env_l;
 	while (aux)
 	{
