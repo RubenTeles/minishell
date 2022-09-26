@@ -28,7 +28,7 @@ static void	action(int sig)
 		return ;
 }
 
-/*static void	formate_tokens(t_data *data)
+static void	formate_tokens(t_data *data)
 {
 	int	i;
 	int	j;
@@ -40,7 +40,7 @@ static void	action(int sig)
 		while (data->comando[j][++i])
 			data->comando[j][i] = ft_formattoken(data->comando[j][i]);
 	}
-}*/
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -67,8 +67,8 @@ int	main(int argc, char **argv, char **env)
 		}
 		line = ft_check_cotes(line);
 		get_comando(line, &data);
-		//formate_tokens(&data);
-		ft_command_execute(data.comando);
+		formate_tokens(&data);
+		(terminal())->execute(data.comando);
 		if (line != NULL && !(string())->compare_n(line, "", 1))
 			add_history(line);
 		ft_free_data(&data, line);

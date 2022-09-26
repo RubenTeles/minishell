@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:15:52 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/26 05:00:59 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 10:50:42 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ char	*ft_putvar(char *token, int *i, char *aux, int *j)
 		var[index] = token[(*i) + index];
 	(*i) = temp;
 	value = (terminal())->variable_env(var);
-	/*if (!value)
-		return (aux);*/
-	/*	??
-	return (value);*/
 	free (var);
-	auxvar = (string())->join(aux, "");
-	(*j) = (*j) + (string())->len("");
+	auxvar = (string())->join(aux, value);
+	if (!auxvar)
+		auxvar = (string())->duplicate(value);
+	(*j) = (*j) + (string())->len(value);
 	free(value);
 	free (aux);
 	return (auxvar);
