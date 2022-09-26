@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/26 04:52:45 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:44:05 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void ft_command_execute(char ***commands)
 	int			max_i;
 	t_command 	*command;
 	t_command 	*aux;
+	int			i_erro;
 
+	i_erro = STDERR_FILENO;
+	(void)i_erro;
 	max_i = 0;
 	while (commands[max_i])
 		max_i++;
