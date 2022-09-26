@@ -6,13 +6,13 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/23 21:34:35 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 13:02:28 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	pwd_execute(t_command *c, int in)
+static void	pwd_execute(t_command *c, int in) //getcwd(buffer, 100)
 {
 	char	*pwd;
 
