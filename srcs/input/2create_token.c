@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_token.c                                     :+:      :+:    :+:   */
+/*   2create_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:07:51 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/25 23:08:57 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:48:46 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+int	ft_check_pipe(char c)
+{
+	if (c == ' ' || c == '|' || c == '<' || c == '>' || c == '&')
+		return (0);
+	return (1);
+}
 
 char	*ft_get_command(const char *line, int *idx)
 {
@@ -19,7 +26,7 @@ char	*ft_get_command(const char *line, int *idx)
 
 	h.cote = 0;
 	h.j = 0;
-	while ((line[*idx + h.j]) && (line[*idx + h.j] != ' ' || h.cote))
+	while ((line[*idx + h.j]) && (ft_check_pipe(line[*idx + h.j]) || h.cote))
 	{
 		if (line[*idx + h.j] == '\\' && (!h.cote || h.cote == '"')
 			&& line[*idx + h.j + 1] && ++h.j)
@@ -40,7 +47,8 @@ char	*ft_get_command(const char *line, int *idx)
 	return (out);
 }
 
-//Função de inicio, percorre um input recebido da função readline, ou seja vai percorrer a line até chegar ao fim e ierá armaznar todos os objetos num **array...
+/*Função de inicio, percorre um input recebido da função readline, ou seja vai
+percorrer a line até chegar ao fim e ierá armazenar todos os objetos **array*/
 t_token	*ft_split_line(const char *line, int i, t_token	*start, t_token	*end)
 {
 	t_token	*aux;

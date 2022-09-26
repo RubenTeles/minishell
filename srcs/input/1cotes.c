@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cotes.c                                            :+:      :+:    :+:   */
+/*   1cotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:01:38 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/25 23:02:57 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:26:18 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parse.h>
 
-char	*ft_new_input(char *line, char *nl) /** ERRO Falta \n no inicio **/
+char	*ft_new_input(char *line, char *nl)
 {
 	char	*new;
 	char	*temp;
@@ -49,7 +49,7 @@ char	*ft_read_double_cote(char *line, int *i, int *cote)
 		if (line[*i] == '"' && ++(*i))
 			(*cote) = 0;
 		else if (line[*i] == '\\' && ++(*i) && !line[*i])
-			line = ft_new_input(line, "\n");
+			line = ft_new_input(line, NULL);
 		else
 			(*i)++;
 	}
@@ -89,7 +89,7 @@ char	*ft_check_cotes(char *line)
 	}
 	if (cote)
 	{
-		line = ft_new_input(line, NULL);
+		line = ft_new_input(line, "\n");
 		line = ft_check_cotes(line);
 	}
 	return (line);
