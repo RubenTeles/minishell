@@ -42,16 +42,11 @@ static void	formate_tokens(t_data *data)
 	}
 }
 
-int	main(int argc, char **argv, char **env)
-{
+static void	ft_readline_while(void)
+{	
 	char	*line;
 	t_data	data;
 
-	(void)argc;
-	(void)argv;
-	signal(SIGINT, action);
-	signal(SIGHUP, action);
-	new_terminal(env);
 	while (1)
 	{
 		line = readline((terminal())->title);
@@ -73,11 +68,21 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 		ft_free_data(&data, line);
 	}
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	(void)argc;
+	(void)argv;
+	signal(SIGINT, action);
+	signal(SIGHUP, action);
+	new_terminal(env);
+	ft_readline_while();
 	return (0);
 }
 
 /* ‘|’, ‘&’, ‘;’, ‘(’, ‘)’, ‘<’, or ‘>’. space, tab, newline 
 Ctrl + 'D' - é quando a line for nula
-Ctrl + 'D' - é quando a line for nula
-Ctrl + 'D' - é quando a line for nula
+Ctrl + '\' - não faz nada
+Ctrl + 'C' - nova quebra de linha
 */
