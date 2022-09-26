@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 17:41:40 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/26 05:15:41 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:29:34 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,4 @@ void	execute(t_command *c, int in, int option)
 	}
 	else if (option == 1)
 		execute_in(c, in);
-	/*{
-		if (in != STDIN_FILENO)
-			close(in);
-		close(c->fd[1]);
-		fd = c->fd[0];
-		if (c->next && is_redirect_left(c->next->command[0]) > 0)
-			c = last_command_left_redirect(c->next);
-		if (c->next)
-			c->next->execute(c->next, c->fd[0]);
-	}*/
 }

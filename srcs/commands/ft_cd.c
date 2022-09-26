@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/26 05:13:58 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:01:58 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static int	cd_execute_2(t_command *c, int in)
 		return (-1);
 	}
 	execute(c, in, 0);
-	(terminal())->update_var("OLDPWD", getcwd(buffer, 100));
+	(terminal())->update_var("OLDPWD", getcwd(buffer, 1001));
 	chdir(home);
-	(terminal())->update_var("PWD", getcwd(buffer, 100));
+	(terminal())->update_var("PWD", getcwd(buffer, 1001));
 	if (!c->command[1])
 		free(home);
 	execute(c, in, 1);

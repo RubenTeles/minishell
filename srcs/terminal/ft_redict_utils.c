@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 21:12:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/23 21:40:11 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:23:41 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ char	*ft_str_file(int in)
 	char	*str;
 	int		total;
 
-	size = 1;
+	size = 1000;
 	total = 0;
 	str = malloc(sizeof(char) * 1);
 	str[0] = '\0';
-	while (size > 0 && in != STDIN_FILENO)
+	while (size == 1000 && in != STDIN_FILENO)
 	{
 		size = read(in, buffer, 1000);
 		total += size;

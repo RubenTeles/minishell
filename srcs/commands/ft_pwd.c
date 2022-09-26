@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/26 13:02:28 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:17:33 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static void	pwd_execute(t_command *c, int in) //getcwd(buffer, 100)
 {
 	char	*pwd;
+	char	buffer[1001];
 
 	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
 		in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
 	execute(c, in, 0);
-	pwd = (terminal())->variable_env("PWD");
+	pwd = getcwd(buffer, 1001);
 	write(STDOUT_FILENO, pwd, string()->len(pwd));
 	write(STDOUT_FILENO, "\n", 1);
-	free(pwd);
 	execute(c, in, 1);
 }
 
