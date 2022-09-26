@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:46 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/23 21:35:31 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/26 04:44:14 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static void	double_redirect_right_execute_2(t_command *c, int in)
 		close(in);
 	c->fd[1] = open(c->command[1], O_RDWR | O_CREAT | O_APPEND, 0777);
 	if (c->fd[1] == -1)
+	{
 		printf("%s: Permission denied\n", c->command[1]);
+		return ;
+	}
 	else
 	{
 		write(c->fd[1], str, (string())->len(str));
@@ -30,9 +33,7 @@ static void	double_redirect_right_execute_2(t_command *c, int in)
 	}
 	if (str)
 		free(str);
-	if (c->fd[1] == -1)
-		if (c->next != NULL)
-			c->next->execute(c->next, c->fd[0]);
+	execute(c, in, 1);
 }
 
 static void	double_redirect_right_execute(t_command *c, int in)

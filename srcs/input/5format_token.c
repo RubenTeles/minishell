@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_token.c                                     :+:      :+:    :+:   */
+/*   5format_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:15:52 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/25 23:45:05 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/09/26 05:00:59 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ char	*ft_putvar(char *token, int *i, char *aux, int *j)
 		var[index] = token[(*i) + index];
 	(*i) = temp;
 	value = (terminal())->variable_env(var);
-	if (!value)
-		return (aux);
+	/*if (!value)
+		return (aux);*/
+	/*	??
+	return (value);*/
 	free (var);
 	auxvar = (string())->join(aux, "");
 	(*j) = (*j) + (string())->len("");
