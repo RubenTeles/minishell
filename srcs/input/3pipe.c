@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   3pipe.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:11:37 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/25 23:46:05 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:51:23 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_make_command(t_cms **aux, t_token **temp)
 		if (!fstrcmp("<", (*temp)->token) || !fstrcmp("<<", (*temp)->token)
 			|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token))
 			break ;
-		if (!fstrcmp("|", (*temp)->token))
+		if (!fstrcmp("|", (*temp)->token) || !fstrcmp("||", (*temp)->token))
 		{
 			free ((*temp)->token);
 			(*temp) = (*temp)->next;

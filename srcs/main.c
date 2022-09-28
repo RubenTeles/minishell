@@ -55,10 +55,10 @@ static void	ft_readline_while(void)
 			free(line);
 			ft_exit(0);
 		}
-		if ((string())->compare_n(line, "", 1))
+		if ((string())->compare_n(line, "", 1) || ft_str_is(line, ' '))
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		line = ft_check_cotes(line);
 		get_comando(line, &data);
