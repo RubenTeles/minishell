@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 01:05:16 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 01:08:30 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void ft_command_execute(char ***commands)
 	while (aux)
 	{
 		wait(&aux->pid);//preciso do status do filho.
+		/*https://www.geeksforgeeks.org/exit-status-child-process-linux/?ref=lbp
+		https://www.geeksforgeeks.org/exit-status-variable-in-linux/?ref=gcse*/
 		aux = aux->next;
 	}
 	(terminal())->destroy->commands();
