@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:37:10 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/16 15:41:49 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/28 21:22:12 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	new_terminal(char **env)
 	(terminal())->env_l = NULL;
 	(terminal())->env_m = NULL;
 	(terminal())->env_count = 0;
+	(terminal())->last_exit = 0;
 	(terminal())->path = NULL;
 	(terminal())->start = NULL;
 	(terminal())->count_env = __count_env;

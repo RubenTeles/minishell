@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 17:41:40 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/26 22:29:34 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/28 22:30:00 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ int	management_input_execute(t_command *c)
 	return (in);
 }
 
-void	execute_in(t_command *c, int in)
+void	execute_out(t_command *c)
 {
 	int	fd;
 
-	if (in != STDIN_FILENO)
-		close(in);
-	close(c->fd[1]);
+	if (c->fd[1] != STDOUT_FILENO)
+		close(c->fd[1]);
 	fd = c->fd[0];
 	if (c->next && is_redirect_left(c->next->command[0]) > 0)
 		c = last_command_left_redirect(c->next);
@@ -41,20 +40,27 @@ void	execute(t_command *c, int in, int option)
 {
 	t_command	*nextx;
 
+	(void)in;
 	nextx = NULL;
 	if (option == 0)
 	{
-		dup2(in, STDIN_FILENO);
 		if (c->next && is_redirect_left(c->next->command[0]) > 0)
 			nextx = last_command_left_redirect(c->next);
 		else
 			nextx = c;
 		if (nextx->next)
 			dup2(c->fd[1], STDOUT_FILENO);
-		if (in != STDIN_FILENO)
-			close(in);
 		close(c->fd[1]);
 	}
 	else if (option == 1)
-		execute_in(c, in);
+		execute_out(c);
+	else if (option == 2)
+	{
+		if (c->next && is_redirect_left(c->next->command[0]) > 0)
+			nextx = last_command_left_redirect(c->next);
+		else
+			nextx = c;
+		if (!nextx->next)
+			c->fd[1] = STDOUT_FILENO;
+	}
 }

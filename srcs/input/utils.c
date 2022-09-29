@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:35:27 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/28 12:58:39 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/09/29 01:01:38 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_exit_status(char *aux, int *j)
 	char	*value;
 	char	*auxvar;
 
-	value = (string())->duplicate("Value");
+	value = (string())->duplicate("Value");//(terminal())->last_exit precisa de ser convertida para string;
 	(*j) += (string())->len(value);
 	if (aux && aux[0])
 		auxvar = (string())->join(aux, value);

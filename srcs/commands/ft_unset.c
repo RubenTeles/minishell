@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:41:55 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/23 21:38:53 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/28 22:26:10 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	unset_execute(t_command *c, int in)
 		in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
-	execute(c, in, 0);
+	execute(c, in, 2);
 	if (c->count_cmd > 1)
 		while (c->command[++i])
 			(terminal())->delete_var(c->command[i]);

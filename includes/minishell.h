@@ -60,8 +60,8 @@ struct s_env {
 };
 
 struct s_terminal {
-	int			fd[2];
 	char		*title;
+	int			last_exit;
 	int			env_count;
 	char		**env_m;
 	t_env		*env_l;

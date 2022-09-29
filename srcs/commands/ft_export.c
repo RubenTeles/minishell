@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:41:55 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/26 05:14:48 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/28 22:27:14 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static void	show_export(t_command *c, int in)
 	aux = terminal()->env_l;
 	while (aux)
 	{
-		write(STDOUT_FILENO, "declare -x ", 11);
-		write(STDOUT_FILENO, aux->var, string()->len(aux->var));
+		write(c->fd[1], "declare -x ", 11);
+		write(c->fd[1], aux->var, string()->len(aux->var));
 		if (aux->val)
 		{
-			write(STDOUT_FILENO, "=\"", 2);
-			write(STDOUT_FILENO, aux->val, string()->len(aux->val));
-			write(STDOUT_FILENO, "\"", 1);
+			write(c->fd[1], "=\"", 2);
+			write(c->fd[1], aux->val, string()->len(aux->val));
+			write(c->fd[1], "\"", 1);
 		}
-		write(STDOUT_FILENO, "\n", 1);
+		write(c->fd[1], "\n", 1);
 		aux = aux->next;
 	}
 }
@@ -42,7 +42,7 @@ static void	export_execute(t_command *c, int in)
 	in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
-	execute(c, in, 0);
+	execute(c, in, 2);
 	if (c->count_cmd < 2)
 		show_export(c, in);
 	else
