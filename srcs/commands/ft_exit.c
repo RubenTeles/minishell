@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:58:50 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 00:06:37 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ static void	exit_execute(t_command *c, int in)
 		{
 			printf("cd: too many arguments\n");
 			c->exit_status = 1;
-			return ;
 		}
 		if (c->count_cmd == 2)
 		{
 			if ((string())->only_this_chars(c->command[1], "0123456789"))
 			{
-				printf("precisa de ser convertido %s\n", c->command[1]);
 				x = (string())->str_in_int(c->command[1]);
 				c->exit_status = x;
 			}
@@ -42,7 +40,6 @@ static void	exit_execute(t_command *c, int in)
 			{
 				printf("exit: %s: numeric argument required", c->command[1]);
 				c->exit_status = 2;
-				return ;
 			}
 		}
 	}

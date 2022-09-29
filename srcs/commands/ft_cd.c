@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:57:30 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 00:04:06 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	cd_execute_2(t_command *c, int in)
 		c->exit_status = 1;
 		if (!c->command[1])
 			free(home);
-		return (-1);
 	}
 	execute(c, in, 2);
 	(terminal())->update_var("OLDPWD", getcwd(buffer, 1001));
@@ -49,7 +48,6 @@ static void	cd_execute(t_command *c, int in)
 	{
 		printf("cd: too many arguments\n");
 		c->exit_status = 1;
-		return ;
 	}
 	if (cd_execute_2(c, in) == -1)
 		return ;

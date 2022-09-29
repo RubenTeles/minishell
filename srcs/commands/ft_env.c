@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:58:48 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 00:03:35 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	env_execute(t_command *c, int in)
 	{
 		printf("env: '%s': No such file or directory\n", c->command[1]);
 		c->exit_status = 1;
-		return ;
 	}
 	execute(c, in, 2);
 	aux = terminal()->env_l;

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 00:00:51 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 00:09:38 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void ft_command_execute_2(t_command *aux, int status)
 	while (aux)
 	{
 		waitpid(aux->pid, &status, 0);
-		if (WIFEXITED(status) && aux->choice == 12)
+		if (WIFEXITED(status) && aux->choice == 12 && aux->exit_status == 0)
         	aux->exit_status = WEXITSTATUS(status);
 		(terminal())->last_exit = aux->exit_status;
 		aux = aux->next;
