@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:17 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 00:47:10 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:59:29 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	redirect_right_execute(t_command *c, int in)
 	if (!c->command[1])
 	{
 		printf("syntax error near unexpected token\n");
-		(terminal())->last_exit = 2;
+		c->exit_status = 2;
 		return ;
 	}
 	if (c->next && is_redirect_left(c->next->command[0]) > 0)
@@ -56,7 +56,7 @@ static void	redirect_right_execute(t_command *c, int in)
 		if (c->fd[1] == -1)
 		{
 			printf("%s: Permission denied\n", c->command[1]);
-			(terminal())->last_exit = 126;
+			c->exit_status = 126;
 			return ;
 		}
 		c->next->execute(c->next, in);
@@ -72,5 +72,6 @@ t_command	*ft_redirect_right(t_command *c)
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = redirect_right_execute;
+	c->choice = 9;
 	return (c);
 }

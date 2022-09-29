@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 00:48:17 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:57:30 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	cd_execute_2(t_command *c, int in)
 	if (access(home, F_OK))
 	{
 		printf("cd: %s: No such file or directory\n", home);
-		(terminal())->last_exit = 1;
+		c->exit_status = 1;
 		if (!c->command[1])
 			free(home);
 		return (-1);
@@ -48,7 +48,7 @@ static void	cd_execute(t_command *c, int in)
 	if (c->count_cmd > 2)
 	{
 		printf("cd: too many arguments\n");
-		(terminal())->last_exit = 1;
+		c->exit_status = 1;
 		return ;
 	}
 	if (cd_execute_2(c, in) == -1)
@@ -62,5 +62,6 @@ t_command	*ft_cd(t_command *c)
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = cd_execute;
+	c->choice = 1;
 	return (c);
 }

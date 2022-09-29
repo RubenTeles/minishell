@@ -26,7 +26,7 @@ INC_PATH = ./includes/
 SRC_NAME = 	main.c \
 
 SRC_COMMANDS = 	ft_cd.c \
-				ft_choise.c \
+				ft_choice.c \
 				ft_echo.c \
 				ft_env.c \
 				ft_exit.c \
@@ -53,6 +53,7 @@ SRC_STRING = 	ft_string.c \
 				ft_string_2.c \
 				ft_string_3.c \
 				ft_string_4.c \
+				ft_string_5.c \
 				
 SRC_INPUT = 	1cotes.c \
 				2create_token.c \

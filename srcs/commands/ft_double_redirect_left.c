@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:34:08 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 00:59:38 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:58:26 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,56 @@ static int	error_line(char	*str)
 	return (1);
 }
 
-static char	*ft_hereadoc(t_command *c, char *str, char *line, char *aux)
+static char	*ft_hereadoc(t_command *c, char *str, char **line, char *aux)
 {
 	while (1)
 	{
-		line = readline("\033[1;36m> \033[0;37m");
-		if (!line && error_line(str))
-			break ;
-		if ((string())->compare_n(c->command[1], line,
+		*line = readline("\033[1;36m> \033[0;37m");
+		if (!*line && error_line(str))
+			return(str);
+		if ((string())->compare_n(c->command[1], *line,
 				(string())->len(c->command[1])))
-			break ;
+			return(str);
 		if (!str)
-			str = (string())->join("\n", line);
+			str = (string())->join("\n", *line);
 		else
 		{
 			aux = (string())->join(str, "\n");
 			free(str);
-			str = (string())->join(aux, line);
+			str = (string())->join(aux, *line);
 			free(aux);
 		}
-		free(line);
+		free(*line);
 	}
-	free(line);
+	free(*line);
 	return (str);
 }
 
 int	double_left_redirect(t_command *c, char *str, char *line, char *aux)
 {
-	str = ft_hereadoc(c, str, line, aux);
-	if (str != NULL && !(string())->compare_n(str, "", 1))
-		add_history(str);
+	char	*history;
+
+	str = ft_hereadoc(c, str, &line, aux);
+	if (str && !(string())->compare_n(str, "", 1))
+	{
+		history = (string())->join((terminal())->line, str);
+		free((terminal())->line);
+		aux = (string())->join(history, "\n");
+		free(history);
+		if (line)
+			history = (string())->join(aux, line);
+		else
+			history = (string())->duplicate(aux);
+		(terminal())->line = (string())->join(history, "\n");
+		free(aux);
+		free(history);
+	}
 	write(c->fd[1], str, (string())->len(str));
 	close(c->fd[1]);
 	if (str)
 		free(str);
+	if (line)
+		free(line);
 	if (c->next && is_redirect_left(c->next->command[0]) > 0)
 		c->fd[0] = management_left_redirect(c->next);
 	return (c->fd[0]);
@@ -63,7 +79,7 @@ static void	double_redirect_left_execute(t_command *c, int in)
 	if (!c->command[1])
 	{
 		printf("syntax error near unexpected token\n");
-		(terminal())->last_exit = 2;
+		c->exit_status = 2;
 		return ;
 	}
 	in = management_input_execute(c);
@@ -80,5 +96,6 @@ t_command	*ft_double_redirect_left(t_command *c)
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = double_redirect_left_execute;
+	c->choice = 10;
 	return (c);
 }

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/28 22:18:21 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:59:37 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ static void	pipe_execute(t_command *c, int in)
 	if (in == -1)
 		return ;
 	if (!c->path)
+	{
 		printf("Command '%s' not found\n", c->command[0]);
+		c->exit_status = 127;
+	}
 	if (c->path)
 		c->pid = fork();
 	if (c->path && c->pid == 0)
@@ -40,7 +43,6 @@ static void	pipe_execute(t_command *c, int in)
 	}
 	if (in != STDIN_FILENO)
 		close(in);
-	//execute(c, in, 1);
 	close(c->fd[1]);
 	if (c->next && is_redirect_left(c->next->command[0]) > 0)
 		c = last_command_left_redirect(c->next);
@@ -56,5 +58,6 @@ t_command	*ft_pipe(t_command *c)
 		c->count_cmd++;
 	c->path = path_command(c->command[0]);
 	c->execute = pipe_execute;
+	c->choice = 12;
 	return (c);
 }

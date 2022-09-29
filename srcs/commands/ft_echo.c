@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:18:57 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/28 22:24:37 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:58:44 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ t_command	*ft_echo(t_command *c)
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = echo_execute;
+	c->choice = 2;
 	return (c);
 }

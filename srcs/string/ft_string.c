@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:39:43 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/17 16:17:36 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:43:22 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,19 @@ Retorna -1 se nao conseguir
 
 index_char:
 retorna o index do char na string, ou -1 se nao tiver.
+
+str_in_int:
+converte str de numeros em int.
+
+int_in_str:
+converte int em str.
 */
 t_string	*string(void)
 {
 	static t_string	s = {ft_strlen, ft_split, ft_strnstr, ft_strlcpy,
 		ft_strjoin, ft_str_s_str, ft_strchr, ft_strrchr, ft_strdup, ft_strncmp,
 		ft_substr, ft_string_in_two_char, split_two_str, replace_str,
-		index_char};
+		index_char, ft_atoi, ft_itoa};
 
 	return (&s);
 }

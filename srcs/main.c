@@ -43,30 +43,32 @@ static void	formate_tokens(t_data *data)
 }
 
 static void	ft_readline_while(void)
-{	
-	char	*line;
+{
 	t_data	data;
 
 	while (1)
 	{
-		line = readline((terminal())->title);
-		if (!line || (string())->compare_n(line, "exit", 5))
+		(terminal())->line = readline((terminal())->title);
+		if (!(terminal())->line ||
+				(string())->compare_n((terminal())->line, "exit", 5))
 		{
-			free(line);
+			free((terminal())->line);
 			ft_exit(0);
 		}
-		if ((string())->compare_n(line, "", 1) || ft_str_is(line, ' '))
+		if ((string())->compare_n((terminal())->line, "", 1) ||
+				ft_str_is((terminal())->line, ' '))
 		{
-			free(line);
+			free((terminal())->line);
 			continue ;
 		}
-		line = ft_check_cotes(line);
-		get_comando(line, &data);
+		(terminal())->line = ft_check_cotes((terminal())->line);
+		get_comando((terminal())->line, &data);
 		formate_tokens(&data);
 		(terminal())->execute(data.comando);
-		if (line != NULL && !(string())->compare_n(line, "", 1))
-			add_history(line);
-		ft_free_data(&data, line);
+		if ((terminal())->line &&
+				!(string())->compare_n((terminal())->line, "", 1))
+			add_history((terminal())->line);
+		ft_free_data(&data, (terminal())->line);
 	}
 }
 

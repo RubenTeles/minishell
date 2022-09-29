@@ -66,6 +66,7 @@ struct s_terminal {
 	char		**env_m;
 	t_env		*env_l;
 	char		**path;
+	char		*line;
 	t_command	*start;
 	t_update	*update;
 	t_destroy	*destroy;
@@ -84,6 +85,8 @@ struct s_command {
 	char		**command;
 	int			count_cmd;
 	char		*path;
+	int			choice;
+	int			exit_status;
 	void		(*execute)(t_command *c, int in);
 	t_command	*prev;
 	t_command	*next;
@@ -138,9 +141,5 @@ t_command	*ft_redirect_right(t_command *c);
 t_command	*ft_redirect_left(t_command *c);
 t_command	*ft_double_redirect_right(t_command *c);
 t_command	*ft_double_redirect_left(t_command *c);
-
-// APAGAR
-void ft_command_execute_2(char ***commands);
-void ft_command_execute_3(char ***commands);
 
 #endif

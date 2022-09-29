@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:18:02 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/15 22:53:45 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:38:05 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,33 @@ char	*split_two_str(char *str, char c, int option)
 	if (option == 0)
 		return ((string())->sub_str(str, 0, index));
 	return ((string())->sub_str(str, index + 1, len - (index + 1)));
+}
+
+int	ft_atoi(char *str)
+{
+	int			i;
+	int			s;
+	long long	n;
+
+	i = 0;
+	s = 1;
+	n = 0;
+	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			s *= -1;
+		i++;
+	}
+	while ('0' <= str[i] && str[i] <= '9')
+	{
+		n = n * 10 + (str[i] - '0');
+		if (n * s > 2147483647)
+			return (-1);
+		else if (n * s < -2147483648)
+			return (0);
+		i++;
+	}
+	return (n * s);
 }

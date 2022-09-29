@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_choise.c                                        :+:      :+:    :+:   */
+/*   ft_choice.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 01:08:30 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 00:00:51 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_command	*new_command(char **command)
 	c->command = command;
 	c->count_cmd = 0;
 	c->path = NULL;
+	c->exit_status = 0;
 	c->prev = NULL;
 	c->next = NULL;
 	pipe(c->fd);
@@ -66,16 +67,28 @@ t_command	*ft_choise(char **command)
 	return (ft_choise_2(c, command, i));
 }
 
+static void ft_command_execute_2(t_command *aux, int status)
+{
+	aux = (terminal())->start;
+	while (aux)
+	{
+		waitpid(aux->pid, &status, 0);
+		if (WIFEXITED(status) && aux->choice == 12)
+        	aux->exit_status = WEXITSTATUS(status);
+		(terminal())->last_exit = aux->exit_status;
+		aux = aux->next;
+	}
+	(terminal())->destroy->commands();
+	(terminal())->update->title();
+}
+
 void ft_command_execute(char ***commands)
 {
 	int			i;
 	int			max_i;
-	t_command 	*command;
-	t_command 	*aux;
-	int			i_erro;
+	t_command	*command;
+	t_command	*aux;
 
-	i_erro = STDERR_FILENO;
-	(void)i_erro;
 	max_i = 0;
 	while (commands[max_i])
 		max_i++;
@@ -93,14 +106,5 @@ void ft_command_execute(char ***commands)
 		command = aux;
 	}
 	(terminal())->start->execute((terminal())->start, STDIN_FILENO);
-	aux = (terminal())->start;
-	while (aux)
-	{
-		wait(&aux->pid);//preciso do status do filho.
-		/*https://www.geeksforgeeks.org/exit-status-child-process-linux/?ref=lbp
-		https://www.geeksforgeeks.org/exit-status-variable-in-linux/?ref=gcse*/
-		aux = aux->next;
-	}
-	(terminal())->destroy->commands();
-	(terminal())->update->title();
+	ft_command_execute_2(aux, 0);
 }

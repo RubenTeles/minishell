@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 22:41:55 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/28 22:26:10 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:59:17 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ t_command	*ft_unset(t_command *c)
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = unset_execute;
+	c->choice = 7;
 	return (c);
 }

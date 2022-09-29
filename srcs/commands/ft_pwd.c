@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 00:58:57 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:59:13 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ t_command	*ft_pwd(t_command *c)
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->execute = pwd_execute;
+	c->choice = 6;
 	return (c);
 }
