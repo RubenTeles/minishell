@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:53:23 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 17:12:02 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 22:19:40 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	__destroy_path(void)
 	while ((terminal())->path[++i])
 		free((terminal())->path[i]);
 	free((terminal())->path);
+	(terminal())->path = NULL;
 }
 
 static void	__destroy_commands(void)

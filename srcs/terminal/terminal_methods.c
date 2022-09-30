@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:02:33 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 16:21:44 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 22:24:15 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ char	*path_command(char *command)
 
 	i = -1;
 	aux_path = 0;
+	if (!(terminal())->var_exist("PATH") || !(terminal())->path)
+		return (0);
 	while ((terminal())->path[++i])
 	{
 		aux_path = string()->join((terminal())->path[i], command);

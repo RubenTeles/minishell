@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:57:01 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 20:51:35 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 22:18:52 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ static void	__update_path(void)
 	char	*path;
 
 	(terminal())->destroy->path();
-	path = (terminal())->variable_env("PATH");
-	if ((string())->index_char(path, ':') > -1)
-		(terminal())->path = (string())->split(path, ':');
-	free(path);
+	if ((terminal())->var_exist("PATH"))
+	{
+		path = (terminal())->variable_env("PATH");
+		if ((string())->index_char(path, ':') > -1)
+			(terminal())->path = (string())->split(path, ':');
+		free(path);
+	}
 }
 
 static void	__update_all(void)
