@@ -6,31 +6,21 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 19:30:10 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 20:48:53 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	pipe_execute(t_command *c, int in)
+static void	pipe_execute_2(t_command *c, int in)
 {
-	/*if ((string())->compare_n(c->command[0], ".",
-			(string())->len(c->command[0])))
-	{
-		printf(".: filename argument required\n");
-		printf(".: usage: . filename [arguments]\n");
-		execute(c, in, 1);
-		return ;
-	}*/
-	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
-		in = management_input_execute(c->next);
-	if (in == -1)
-		return ;
-	if (!c->path)
+	if (!c->path && access(c->command[0], F_OK))
 	{
 		printf("Command '%s' not found\n", c->command[0]);
 		c->exit_status = 127;
 	}
+	if (!c->path && !access(c->command[0], F_OK))
+		c->path = c->command[0];
 	if (c->path)
 		c->pid = fork();
 	if (c->path && c->pid == 0)
@@ -41,6 +31,25 @@ static void	pipe_execute(t_command *c, int in)
 		execute(c, in, 0);
 		execve(c->path, c->command, (terminal())->env_m);
 	}
+	if (!access(c->command[0], F_OK))
+		c->path = NULL;
+}
+
+static void	pipe_execute(t_command *c, int in)
+{
+	if ((string())->compare_n(c->command[0], ".",
+			(string())->len(c->command[0])))
+	{
+		printf(".: filename argument required\n");
+		printf(".: usage: . filename [arguments]\n");
+		execute(c, in, 1);
+		return ;
+	}
+	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
+		in = management_input_execute(c->next);
+	if (in == -1)
+		return ;
+	pipe_execute_2(c, in);
 	if (in != STDIN_FILENO)
 		close(in);
 	close(c->fd[1]);

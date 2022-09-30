@@ -6,11 +6,18 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 17:41:40 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/28 22:30:00 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 20:26:59 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	error_line(char	*str)
+{
+	printf("\033[1;33mwarning\033[0;37m: here-document at line ");
+	printf("%zu delimited by end-of-file\n", (string())->len(str));
+	return (1);
+}
 
 int	management_input_execute(t_command *c)
 {

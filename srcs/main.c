@@ -42,6 +42,18 @@ static void	formate_tokens(t_data *data)
 	}
 }
 
+static void	ft_readline_while_2(t_data *data)
+{
+	(terminal())->line = ft_check_cotes((terminal())->line);
+	get_comando((terminal())->line, data);
+	formate_tokens(data);
+	(terminal())->execute(data->comando);
+	if ((terminal())->line
+		&& !(string())->compare_n((terminal())->line, "", 1))
+		add_history((terminal())->line);
+	ft_free_data(data, (terminal())->line);
+}
+
 static void	ft_readline_while(void)
 {
 	t_data	data;
@@ -49,26 +61,19 @@ static void	ft_readline_while(void)
 	while (1)
 	{
 		(terminal())->line = readline((terminal())->title);
-		if (!(terminal())->line ||
-				(string())->compare_n((terminal())->line, "exit", 5))
+		if (!(terminal())->line
+			|| (string())->compare_n((terminal())->line, "exit", 5))
 		{
 			free((terminal())->line);
 			ft_exit(0);
 		}
-		if ((string())->compare_n((terminal())->line, "", 1) ||
-				ft_str_is((terminal())->line, ' ', '|'))
+		if ((string())->compare_n((terminal())->line, "", 1)
+			|| ft_str_is((terminal())->line, ' ', '|'))
 		{
 			free((terminal())->line);
 			continue ;
 		}
-		(terminal())->line = ft_check_cotes((terminal())->line);
-		get_comando((terminal())->line, &data);
-		formate_tokens(&data);
-		(terminal())->execute(data.comando);
-		if ((terminal())->line &&
-				!(string())->compare_n((terminal())->line, "", 1))
-			add_history((terminal())->line);
-		ft_free_data(&data, (terminal())->line);
+		ft_readline_while_2(&data);
 	}
 }
 
@@ -77,7 +82,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	signal(SIGINT, action);
-	signal(SIGHUP, action);
+	signal(SIGQUIT, action);
 	new_terminal(env);
 	ft_readline_while();
 	return (0);

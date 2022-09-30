@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 18:21:07 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 19:45:11 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ t_command	*ft_choise(char **command)
 	return (ft_choise_2(c, command, i));
 }
 
-static void ft_command_execute_2(t_command *aux, int status)
+static void	ft_command_execute_2(t_command *aux, int status)
 {
 	aux = (terminal())->start;
 	while (aux)
 	{
 		waitpid(aux->pid, &status, 0);
 		if (WIFEXITED(status) && aux->choice == 12 && aux->exit_status == 0)
-        	aux->exit_status = WEXITSTATUS(status);
+			aux->exit_status = WEXITSTATUS(status);
 		(terminal())->last_exit = aux->exit_status;
 		aux = aux->next;
 	}
@@ -82,7 +82,7 @@ static void ft_command_execute_2(t_command *aux, int status)
 	(terminal())->update->title();
 }
 
-void ft_command_execute(char ***commands)
+void	ft_command_execute(char ***commands)
 {
 	int			i;
 	int			max_i;

@@ -99,6 +99,7 @@ void		create_env_l(char **env);
 void		execute(t_command *c, int in, int option);
 void		execute_in(t_command *c, int in);
 int			management_input_execute(t_command *c);
+int			error_line(char	*str);
 
 //----Redirect----//
 char		*ft_str_file(int in);

@@ -6,18 +6,11 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:34:08 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:58:26 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 20:26:38 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static int	error_line(char	*str)
-{
-	printf("\033[1;33mwarning\033[0;37m: here-document at line ");
-	printf("%zu delimited by end-of-file\n", (string())->len(str));
-	return (1);
-}
 
 static char	*ft_hereadoc(t_command *c, char *str, char **line, char *aux)
 {
@@ -25,10 +18,10 @@ static char	*ft_hereadoc(t_command *c, char *str, char **line, char *aux)
 	{
 		*line = readline("\033[1;36m> \033[0;37m");
 		if (!*line && error_line(str))
-			return(str);
+			return (str);
 		if ((string())->compare_n(c->command[1], *line,
 				(string())->len(c->command[1])))
-			return(str);
+			return (str);
 		if (!str)
 			str = (string())->join("\n", *line);
 		else
@@ -44,25 +37,28 @@ static char	*ft_hereadoc(t_command *c, char *str, char **line, char *aux)
 	return (str);
 }
 
-int	double_left_redirect(t_command *c, char *str, char *line, char *aux)
+static void	double_2(char *str, char *line, char *aux)
 {
 	char	*history;
 
+	history = (string())->join((terminal())->line, str);
+	free((terminal())->line);
+	aux = (string())->join(history, "\n");
+	free(history);
+	if (line)
+		history = (string())->join(aux, line);
+	else
+		history = (string())->duplicate(aux);
+	(terminal())->line = (string())->join(history, "\n");
+	free(aux);
+	free(history);
+}
+
+int	double_left_redirect(t_command *c, char *str, char *line, char *aux)
+{
 	str = ft_hereadoc(c, str, &line, aux);
 	if (str && !(string())->compare_n(str, "", 1))
-	{
-		history = (string())->join((terminal())->line, str);
-		free((terminal())->line);
-		aux = (string())->join(history, "\n");
-		free(history);
-		if (line)
-			history = (string())->join(aux, line);
-		else
-			history = (string())->duplicate(aux);
-		(terminal())->line = (string())->join(history, "\n");
-		free(aux);
-		free(history);
-	}
+		double_2(str, line, aux);
 	write(c->fd[1], str, (string())->len(str));
 	close(c->fd[1]);
 	if (str)

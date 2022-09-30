@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   6free_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:18:49 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/28 12:52:07 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/09/30 20:50:26 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_cms	*ft_free_start(t_cms *start)
 	free(start);
 	return (temp);
 }
-
 
 void	ft_free_input(t_token *input)
 {

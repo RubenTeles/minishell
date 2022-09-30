@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:17 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:59:29 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 20:42:38 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	redirect_right_execute_2(t_command *c, int in)
 	str = ft_str_file(in);
 	if (in != STDIN_FILENO)
 		close(in);
-	c->fd[1] = open(c->command[1], O_RDWR | O_CREAT | O_TRUNC , 0777);
+	c->fd[1] = open(c->command[1], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (c->fd[1] == -1)
 	{
 		printf("%s: Permission denied\n", c->command[1]);

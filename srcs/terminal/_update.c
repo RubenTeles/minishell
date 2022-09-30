@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:57:01 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 17:11:58 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 20:51:35 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	__update_env_m(void)
 	(terminal())->destroy->env_m();
 	aux = (terminal())->env_l;
 	(terminal())->count_env();
-	(terminal())->env_m = malloc(sizeof(char *) * ((terminal())->env_count + 1));
+	(terminal())->env_m = malloc(sizeof(char *)
+			* ((terminal())->env_count + 1));
 	i = 0;
 	while (aux)
 	{
