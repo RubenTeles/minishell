@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 00:06:37 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 19:17:57 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ static void	exit_execute(t_command *c, int in)
 			}
 			else
 			{
-				printf("exit: %s: numeric argument required", c->command[1]);
+				printf("exit: %s: numeric argument required\n", c->command[1]);
 				c->exit_status = 2;
 			}
 		}
 	}
-	write(STDOUT_FILENO, "exit\n", 5);
-	if (c && c->next != NULL)
+	if (c && c->next)
 		execute(c, in, 1);
-	else
+	else if (!c || !c->prev)
 	{
+		write(STDOUT_FILENO, "exit\n", 5);
 		terminal()->destroy->all();
 		exit(x);
 	}
@@ -61,6 +61,7 @@ t_command	*ft_exit(t_command *c)
 		return (c);
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
+	c->execute = exit_execute;
 	c->choice = 4;
 	return (c);
 }

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:35:27 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/29 23:47:44 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:39:26 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ char	*ft_exit_status(char *aux, int *j)
 	return (auxvar);
 }
 
-int	ft_str_is(char *line, char c)
+int	ft_str_is(char *line, char c, char d)
 {
 	int	i;
 
 	i = 0;
-	while (line && line[i] && line[i] == c)
+	while (line && line[i] && (line[i] == c || line[i] == d))
 		i++;
 	if (line && line[i])
 		return (0);

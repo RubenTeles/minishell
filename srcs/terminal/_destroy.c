@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:53:23 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/21 22:26:31 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 17:12:02 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	__destroy_env_m(void)
 		return ;
 	while ((terminal())->env_m[++i])
 		free((terminal())->env_m[i]);
+	free((terminal())->env_m[i]);
 	free((terminal())->env_m);
 }
 

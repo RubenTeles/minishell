@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:59:37 by rteles           ###   ########.fr       */
+/*   Updated: 2022/09/30 19:30:10 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	pipe_execute(t_command *c, int in)
 {
-	if ((string())->compare_n(c->command[0], ".",
+	/*if ((string())->compare_n(c->command[0], ".",
 			(string())->len(c->command[0])))
 	{
 		printf(".: filename argument required\n");
 		printf(".: usage: . filename [arguments]\n");
 		execute(c, in, 1);
 		return ;
-	}
+	}*/
 	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
 		in = management_input_execute(c->next);
 	if (in == -1)

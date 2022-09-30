@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/28 13:01:03 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:39:53 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,6 @@ t_cms	*ft_free_start(t_cms *start);
 //This functions will help process of parser
 int		fstrcmp(const char *s1, const char *s2);
 char	*ft_exit_status(char *aux, int *j);
-int		ft_str_is(char *line, char c);
+int		ft_str_is(char *line, char c, char d);
 
 #endif

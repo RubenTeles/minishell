@@ -56,7 +56,7 @@ static void	ft_readline_while(void)
 			ft_exit(0);
 		}
 		if ((string())->compare_n((terminal())->line, "", 1) ||
-				ft_str_is((terminal())->line, ' '))
+				ft_str_is((terminal())->line, ' ', '|'))
 		{
 			free((terminal())->line);
 			continue ;
