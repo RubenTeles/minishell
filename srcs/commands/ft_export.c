@@ -12,12 +12,10 @@
 
 #include <minishell.h>
 
-static void	show_export(t_command *c, int in)
+static void	show_export(t_command *c)
 {
 	t_env	*aux;
 
-	(void)c;
-	(void)in;
 	aux = terminal()->env_l;
 	while (aux)
 	{
@@ -42,13 +40,13 @@ static void	export_execute(t_command *c, int in)
 	in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
-	execute(c, in, 2);
+	execute(c, 2);
 	if (c->count_cmd < 2)
-		show_export(c, in);
+		show_export(c);
 	else
 		while (c->command[++i])
 			terminal()->add_var(c->command[i]);
-	execute(c, in, 1);
+	execute(c, 1);
 }
 
 t_command	*ft_export(t_command *c)

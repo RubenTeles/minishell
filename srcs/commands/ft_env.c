@@ -25,7 +25,7 @@ static void	env_execute(t_command *c, int in)
 		printf("env: '%s': No such file or directory\n", c->command[1]);
 		c->exit_status = 1;
 	}
-	execute(c, in, 2);
+	execute(c, 2);
 	aux = terminal()->env_l;
 	while (aux)
 	{
@@ -38,7 +38,7 @@ static void	env_execute(t_command *c, int in)
 		}
 		aux = aux->next;
 	}
-	execute(c, in, 1);
+	execute(c, 1);
 }
 
 t_command	*ft_env(t_command *c)

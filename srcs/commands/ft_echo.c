@@ -21,7 +21,7 @@ static void	echo_execute(t_command *c, int in)
 		in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
-	execute(c, in, 2);
+	execute(c, 2);
 	if ((string())->compare_n(c->command[1], "-n",
 			(string())->len(c->command[1])))
 		i++;
@@ -35,7 +35,7 @@ static void	echo_execute(t_command *c, int in)
 			(string())->len(c->command[1])))
 		write(c->fd[1], "\n", 1);
 	write(c->fd[1], "", 1);
-	execute(c, in, 1);
+	execute(c, 1);
 }
 
 t_command	*ft_echo(t_command *c)

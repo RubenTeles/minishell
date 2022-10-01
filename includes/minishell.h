@@ -96,7 +96,7 @@ struct s_command {
 t_terminal	*terminal(void);
 void		new_terminal(char **env);
 void		create_env_l(char **env);
-void		execute(t_command *c, int in, int option);
+void		execute(t_command *c, int option);
 void		execute_in(t_command *c, int in);
 int			management_input_execute(t_command *c);
 int			error_line(char	*str);

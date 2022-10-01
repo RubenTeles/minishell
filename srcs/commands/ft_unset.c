@@ -21,7 +21,7 @@ static void	unset_execute(t_command *c, int in)
 		in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
-	execute(c, in, 2);
+	execute(c, 2);
 	if (c->count_cmd > 1)
 	{
 		while (c->command[++i])
@@ -35,7 +35,7 @@ static void	unset_execute(t_command *c, int in)
 				(terminal())->delete_var(c->command[i]);
 		}
 	}
-	execute(c, in, 1);
+	execute(c, 1);
 }
 
 t_command	*ft_unset(t_command *c)

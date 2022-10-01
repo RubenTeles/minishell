@@ -21,11 +21,11 @@ static void	pwd_execute(t_command *c, int in)
 		in = management_input_execute(c->next);
 	if (in == -1)
 		return ;
-	execute(c, in, 2);
+	execute(c, 2);
 	pwd = getcwd(buffer, 1001);
 	write(c->fd[1], pwd, string()->len(pwd));
 	write(c->fd[1], "\n", 2);
-	execute(c, in, 1);
+	execute(c, 1);
 }
 
 t_command	*ft_pwd(t_command *c)

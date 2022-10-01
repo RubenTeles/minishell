@@ -31,7 +31,7 @@ static int	cd_execute_3(t_command *c, int in, char	*home)
 	if (c->prev || (!(is_redirect_left(aux->command[0]) > 0)
 			&& !(is_redirect_right(aux->command[0]) > 0)))
 	{
-		execute(c, in, 1);
+		execute(c, 1);
 		if (!c->command[1])
 			free(home);
 		return (1);
@@ -58,13 +58,13 @@ static void	cd_execute_2(t_command *c, int in)
 	if (c->next || c->prev)
 		if (cd_execute_3(c, in, home) == 1)
 			return ;
-	execute(c, in, 2);
+	execute(c, 2);
 	(terminal())->update_var("OLDPWD", getcwd(buffer, 1001));
 	chdir(home);
 	(terminal())->update_var("PWD", getcwd(buffer, 1001));
 	if (!c->command[1])
 		free(home);
-	execute(c, in, 1);
+	execute(c, 1);
 }
 
 static void	cd_execute(t_command *c, int in)

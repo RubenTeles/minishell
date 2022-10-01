@@ -34,7 +34,7 @@ static void	double_redirect_right_execute_2(t_command *c, int in)
 	}
 	if (str)
 		free(str);
-	execute(c, in, 1);
+	execute(c, 1);
 }
 
 static void	double_redirect_right_execute(t_command *c, int in)

@@ -26,19 +26,21 @@ static void	pipe_execute_2(t_command *c, int in)
 		dup2(in, STDIN_FILENO);
 		if (in != STDIN_FILENO)
 			close(in);
-		execute(c, in, 0);
+		execute(c, 0);
 		execve(c->path, c->command, (terminal())->env_m);
 	}
 }
 
 static void	pipe_execute(t_command *c, int in)
 {
+	int	fd;
+
 	if ((string())->compare_n(c->command[0], ".",
 			(string())->len(c->command[0])))
 	{
 		printf(".: filename argument required\n");
 		printf(".: usage: . filename [arguments]\n");
-		execute(c, in, 1);
+		execute(c, 1);
 		return ;
 	}
 	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
@@ -49,10 +51,11 @@ static void	pipe_execute(t_command *c, int in)
 	if (in != STDIN_FILENO)
 		close(in);
 	close(c->fd[1]);
+	fd = c->fd[0];
 	if (c->next && is_redirect_left(c->next->command[0]) > 0)
 		c = last_command_left_redirect(c->next);
 	if (c->next)
-		c->next->execute(c->next, c->fd[0]);
+		c->next->execute(c->next, fd);
 }
 
 t_command	*ft_pipe(t_command *c)

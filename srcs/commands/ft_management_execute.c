@@ -43,11 +43,10 @@ void	execute_out(t_command *c)
 		c->next->execute(c->next, fd);
 }
 
-void	execute(t_command *c, int in, int option)
+void	execute(t_command *c, int option)
 {
 	t_command	*nextx;
 
-	(void)in;
 	nextx = NULL;
 	if (option == 0)
 	{

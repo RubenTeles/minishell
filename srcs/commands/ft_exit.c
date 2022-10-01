@@ -14,7 +14,7 @@
 
 static void	exit_execute_2(t_command *c, int in, int *x)
 {
-	execute(c, in, 2);
+	execute(c, 2);
 	if (c->count_cmd > 2)
 	{
 		printf("exit: too many arguments\n");
@@ -49,7 +49,7 @@ static void	exit_execute(t_command *c, int in)
 		exit_execute_2(c, in, &x);
 	}
 	if (c && c->next)
-		execute(c, in, 1);
+		execute(c, 1);
 	else if (!c || !c->prev)
 	{
 		write(STDOUT_FILENO, "exit\n", 6);
