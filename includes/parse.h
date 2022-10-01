@@ -3,25 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/30 18:39:53 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/01 20:18:26 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdlib.h>
-# include <sys/types.h>
-# include <unistd.h>
-# include <string.h>
-# include <ctype.h>
-# include <ft_string.h>
 # include <minishell.h>
 
 typedef struct s_token	t_token;
@@ -95,5 +86,6 @@ t_cms	*ft_free_start(t_cms *start);
 int		fstrcmp(const char *s1, const char *s2);
 char	*ft_exit_status(char *aux, int *j);
 int		ft_str_is(char *line, char c, char d);
+int		fisalnum(int c);
 
 #endif

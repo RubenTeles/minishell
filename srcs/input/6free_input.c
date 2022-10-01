@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   6free_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:18:49 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/30 20:50:26 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/01 20:16:07 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	ft_free_data(t_data *data, char *line)
 		ft_free_input(data->input);
 	if (data->comando)
 		free(data->comando);
-	if (data->start)
-		printf("Falta limpar o start...\n");
 	if (line)
 		free(line);
 }

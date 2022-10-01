@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   5format_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:15:52 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/28 12:51:54 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/01 20:20:05 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_putvar(char *token, int *i, char *aux, int *j)
 	h.i = 0;
 	if (token[(*i) + h.i] == '?' && ++(*i))
 		return (ft_exit_status(aux, j));
-	while (token[(*i) + h.i] && isalnum(token[(*i) + h.i]))
+	while (token[(*i) + h.i] && fisalnum(token[(*i) + h.i]))
 		h.i++;
 	var = malloc(sizeof(char) * h.i + 1);
 	h.j = (*i) + h.i;
@@ -90,7 +90,8 @@ char	*ft_formatdouble(char *aux, char *token, int *i, int *j)
 			&& ++(*j))
 			aux = ft_new_aux(aux, token[(*i)++]);
 		else if (token[(*i)] == '$' && token[(*i) + 1]
-			&& (isalnum(token[(*i) + 1]) || token[(*i) + 1] == '?') && ++(*i))
+			&& (fisalnum(token[(*i) + 1])
+				|| token[(*i) + 1] == '?') && ++(*i))
 			aux = ft_putvar(token, i, aux, j);
 		else if (++(*j))
 			aux = ft_new_aux(aux, token[(*i)++]);
