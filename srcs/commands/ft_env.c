@@ -12,19 +12,10 @@
 
 #include <minishell.h>
 
-static void	env_execute(t_command *c, int in)
+static void	env_execute_2(t_command *c)
 {
 	t_env	*aux;
 
-	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
-		in = management_input_execute(c->next);
-	if (in == -1)
-		return ;
-	if (c->command[1] != NULL)
-	{
-		printf("env: '%s': No such file or directory\n", c->command[1]);
-		c->exit_status = 1;
-	}
 	execute(c, 2);
 	aux = terminal()->env_l;
 	while (aux)
@@ -39,6 +30,22 @@ static void	env_execute(t_command *c, int in)
 		aux = aux->next;
 	}
 	execute(c, 1);
+}
+
+static void	env_execute(t_command *c, int in)
+{
+	if (c->next != NULL && is_redirect_left(c->next->command[0]) > 0)
+		in = management_input_execute(c->next);
+	if (in == -1)
+		return ;
+	if (c->command[1] != NULL)
+	{
+		printf("env: '%s': No such file or directory\n", c->command[1]);
+		c->exit_status = 1;
+		execute(c, 2);
+		return ;
+	}
+	env_execute_2(c);
 }
 
 t_command	*ft_env(t_command *c)
