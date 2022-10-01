@@ -23,8 +23,18 @@ static void	unset_execute(t_command *c, int in)
 		return ;
 	execute(c, in, 2);
 	if (c->count_cmd > 1)
+	{
 		while (c->command[++i])
-			(terminal())->delete_var(c->command[i]);
+		{
+			if (string()->is_alfanumeric(c->command[i]) == 0)
+			{
+				printf("unset: '%s': not a valid identifier\n", c->command[i]);
+				c->exit_status = 1;
+			}
+			else
+				(terminal())->delete_var(c->command[i]);
+		}
+	}
 	execute(c, in, 1);
 }
 

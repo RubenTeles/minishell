@@ -144,13 +144,18 @@ converte str de numeros em int.
 
 int_in_str:
 converte int em str.
+
+int	ft_isalnum:
+verifica se a string contem apenas caracteres alfa numericos 
+retorna 1 se sim, ou 0 se nao.
+
 */
 t_string	*string(void)
 {
 	static t_string	s = {ft_strlen, ft_split, ft_strnstr, ft_strlcpy,
 		ft_strjoin, ft_str_s_str, ft_strchr, ft_strrchr, ft_strdup, ft_strncmp,
 		ft_substr, ft_string_in_two_char, split_two_str, replace_str,
-		index_char, ft_atoi, ft_itoa};
+		index_char, ft_atoi, ft_itoa, ft_isalnum};
 
 	return (&s);
 }

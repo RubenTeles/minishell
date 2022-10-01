@@ -66,3 +66,22 @@ char	*ft_itoa(int n)
 	else
 		return (ft_mkitoax(n, ft_power(n), 0));
 }
+
+int	ft_isalnum(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = -1;
+	while (str[++i])
+	{
+		if ((str[i] >= 'a' && str[i] <= 'z')
+			|| (str[i] >= 'A' && str[i] <= 'Z')
+			|| (str[i] >= '0' && str[i] <= '9'))
+			continue ;
+		else
+			return (0);
+	}
+	return (1);
+}

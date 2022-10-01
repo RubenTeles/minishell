@@ -36,6 +36,7 @@ struct s_string {
 	int		(*index_char)(char *str, char c);
 	int		(*str_in_int)(char *str);
 	char	*(*int_in_str)(int n);
+	int		(*is_alfanumeric)(char *str);
 };
 
 size_t		ft_strlen(const char *string);
@@ -51,6 +52,7 @@ int			index_char(char *str, char c);
 char		*split_two_str(char *str, char c, int option);
 int			ft_atoi(char *str);
 char		*ft_itoa(int n);
+int			ft_isalnum(char *str);
 t_string	*string(void);
 
 #endif
