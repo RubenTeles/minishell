@@ -27,13 +27,14 @@ static void	echo_execute(t_command *c, int in)
 		i++;
 	while (c->command[++i])
 	{
-		write(c->fd[1], c->command[i], string()->len(c->command[i]) + 1);
+		write(c->fd[1], c->command[i], string()->len(c->command[i]));
 		if (i < c->count_cmd - 1)
 			write(c->fd[1], " ", 1);
 	}
 	if (!(string())->compare_n(c->command[1], "-n",
 			(string())->len(c->command[1])))
 		write(c->fd[1], "\n", 1);
+	write(c->fd[1], "", 1);
 	execute(c, in, 1);
 }
 

@@ -19,8 +19,6 @@ static void	pipe_execute_2(t_command *c, int in)
 		printf("Command '%s' not found\n", c->command[0]);
 		c->exit_status = 127;
 	}
-	if (!c->path && !access(c->command[0], F_OK))
-		c->path = c->command[0];
 	if (c->path)
 		c->pid = fork();
 	if (c->path && c->pid == 0)
@@ -31,8 +29,6 @@ static void	pipe_execute_2(t_command *c, int in)
 		execute(c, in, 0);
 		execve(c->path, c->command, (terminal())->env_m);
 	}
-	if (!access(c->command[0], F_OK))
-		c->path = NULL;
 }
 
 static void	pipe_execute(t_command *c, int in)
@@ -66,6 +62,8 @@ t_command	*ft_pipe(t_command *c)
 	while (c->command[c->count_cmd])
 		c->count_cmd++;
 	c->path = path_command(c->command[0]);
+	if (!c->path && !access(c->command[0], F_OK))
+		c->path = (string())->duplicate(c->command[0]);
 	c->execute = pipe_execute;
 	c->choice = 12;
 	return (c);

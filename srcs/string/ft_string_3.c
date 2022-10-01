@@ -94,7 +94,7 @@ char	**ft_split(char const *s, char c)
 	int		len;
 	char	**str;
 
-	if (s == 0)
+	if (!s)
 		return (0);
 	len = ft_lenchar(s, c);
 	str = (char **)malloc((len + 1) * sizeof(char *));

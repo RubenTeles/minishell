@@ -29,7 +29,7 @@ static void	show_export(t_command *c, int in)
 			write(c->fd[1], aux->val, string()->len(aux->val));
 			write(c->fd[1], "\"", 1);
 		}
-		write(c->fd[1], "\n", 1);
+		write(c->fd[1], "\n", 2);
 		aux = aux->next;
 	}
 }

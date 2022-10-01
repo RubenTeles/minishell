@@ -24,7 +24,7 @@ static void	pwd_execute(t_command *c, int in)
 	execute(c, in, 2);
 	pwd = getcwd(buffer, 1001);
 	write(c->fd[1], pwd, string()->len(pwd));
-	write(c->fd[1], "\n", 1);
+	write(c->fd[1], "\n", 2);
 	execute(c, in, 1);
 }
 

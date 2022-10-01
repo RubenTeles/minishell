@@ -52,7 +52,7 @@ static void	exit_execute(t_command *c, int in)
 		execute(c, in, 1);
 	else if (!c || !c->prev)
 	{
-		write(STDOUT_FILENO, "exit\n", 5);
+		write(STDOUT_FILENO, "exit\n", 6);
 		terminal()->destroy->all();
 		exit(x);
 	}
