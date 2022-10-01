@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static void cd_erro(t_command *c, char *home, int v)
+static void	cd_erro(t_command *c, char *home, int v)
 {
 	if (access(home, ENOTDIR) && v == -1)
 	{
