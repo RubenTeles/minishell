@@ -12,6 +12,15 @@
 
 #include <minishell.h>
 
+static void cd_erro(t_command *c, char *home, int v)
+{
+	if (access(home, ENOTDIR) && v == -1)
+	{
+		printf("cd: %s: No such directory\n", home);
+		c->exit_status = 1;
+	}
+}
+
 static int	cd_execute_3(t_command *c, char	*home)
 {
 	t_command	*aux;
@@ -60,7 +69,7 @@ static void	cd_execute_2(t_command *c)
 			return ;
 	execute(c, 2);
 	(terminal())->update_var("OLDPWD", getcwd(buffer, 1001));
-	chdir(home);
+	cd_erro(c, home, chdir(home));
 	(terminal())->update_var("PWD", getcwd(buffer, 1001));
 	if (!c->command[1])
 		free(home);
