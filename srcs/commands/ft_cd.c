@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static int	cd_execute_3(t_command *c, int in, char	*home)
+static int	cd_execute_3(t_command *c, char	*home)
 {
 	t_command	*aux;
 
@@ -39,7 +39,7 @@ static int	cd_execute_3(t_command *c, int in, char	*home)
 	return (0);
 }
 
-static void	cd_execute_2(t_command *c, int in)
+static void	cd_execute_2(t_command *c)
 {
 	char		buffer[1001];
 	char		*home;
@@ -56,7 +56,7 @@ static void	cd_execute_2(t_command *c, int in)
 			free(home);
 	}
 	if (c->next || c->prev)
-		if (cd_execute_3(c, in, home) == 1)
+		if (cd_execute_3(c, home) == 1)
 			return ;
 	execute(c, 2);
 	(terminal())->update_var("OLDPWD", getcwd(buffer, 1001));
@@ -78,7 +78,7 @@ static void	cd_execute(t_command *c, int in)
 		printf("cd: too many arguments\n");
 		c->exit_status = 1;
 	}
-	cd_execute_2(c, in);
+	cd_execute_2(c);
 }
 
 t_command	*ft_cd(t_command *c)

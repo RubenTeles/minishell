@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static void	exit_execute_2(t_command *c, int in, int *x)
+static void	exit_execute_2(t_command *c, int *x)
 {
 	execute(c, 2);
 	if (c->count_cmd > 2)
@@ -46,7 +46,7 @@ static void	exit_execute(t_command *c, int in)
 			in = management_input_execute(c->next);
 		if (in == -1)
 			return ;
-		exit_execute_2(c, in, &x);
+		exit_execute_2(c, &x);
 	}
 	if (c && c->next)
 		execute(c, 1);
