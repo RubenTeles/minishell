@@ -16,26 +16,12 @@ static void	change_shlvl(void)
 {
 	char	*content;
 	int		level;
-	int		i;
 
 	content = (terminal())->variable_env("SHLVL");
 	level = (string())->str_in_int(content);
 	free(content);
 	level += 1;
-	i = 2;
-	if (level < 10)
-		i = 3;
-	content = malloc(sizeof(char) * i);
-	if (!content)
-		return ;
-	content[i - 1] = '\0';
-	if (level < 10)
-		content[0] = level + '0';
-	else
-	{
-		content[0] = (level / 10) + '0';
-		content[1] = (level % 10) + '0';
-	}
+	content = (string()->int_in_str(level));
 	(terminal())->update_var("SHLVL", content);
 	free(content);
 }
