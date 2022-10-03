@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   2create_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:07:51 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/30 20:50:34 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/03 18:44:36 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ char	*ft_get_command(const char *line, int *idx)
 	h.j = 0;
 	while ((line[*idx + h.j]) && (ft_check_pipe(line, idx, &h.j) || h.cote))
 	{
+		if ((line[*idx + h.j] == '(' ||  line[*idx + h.j] == ')') && !h.cote && h.j > 0)
+			break;
+		if ((line[*idx + h.j] == '(' ||  line[*idx + h.j] == ')') && !h.cote && h.j == 0)
+		{
+			h.j++;
+			break ;
+		}
 		if (line[*idx + h.j] == '\\' && (!h.cote || h.cote == '"')
 			&& line[*idx + h.j + 1] && ++h.j)
 			h.j++;

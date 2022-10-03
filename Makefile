@@ -43,6 +43,7 @@ SRC_COMMANDS = 	ft_cd.c \
 				ft_double_and.c \
 				ft_double_pipe.c \
 				ft_d_and_pipe_utils.c \
+				ft_parentheses.c \
 
 SRC_TERMINAL = 	create_terminal.c \
 				create_terminal_2.c \

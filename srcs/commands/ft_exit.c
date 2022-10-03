@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 20:45:18 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/03 21:50:25 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static void	exit_execute(t_command *c, int in)
 			return ;
 		exit_execute_2(c, &x);
 	}
-	if (c && c->next)
+	if (c && c->next && !is_ppa(c->next))
 		execute(c, 1);
-	else if (!c || !c->prev)
+	else if (!c || !c->prev || (c->prev && is_ppa(c->prev)))
 	{
 		write(STDOUT_FILENO, "exit\n", 6);
 		terminal()->destroy->all();

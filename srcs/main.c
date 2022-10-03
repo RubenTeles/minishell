@@ -42,16 +42,22 @@ static void	formate_tokens(t_data *data)
 	}
 }
 
-static void	ft_readline_while_2(t_data *data)
+int	ft_readline_while_2(t_data *data)
 {
 	(terminal())->line = ft_check_cotes((terminal())->line);
-	get_comando((terminal())->line, data);
-	formate_tokens(data);
-	(terminal())->execute(data->comando);
-	if ((terminal())->line
-		&& !(string())->compare_n((terminal())->line, "", 1))
-		add_history((terminal())->line);
-	ft_free_data(data, (terminal())->line);
+	if (get_comando((terminal())->line, data))
+	{
+		formate_tokens(data);
+		(terminal())->execute(data->comando);
+		if ((terminal())->line
+			&& !(string())->compare_n((terminal())->line, "", 1))
+			add_history((terminal())->line);
+		ft_free_data(data, (terminal())->line);
+		return (0);
+	}
+	add_history((terminal())->line);
+	free((terminal())->line);
+	return (1);
 }
 
 static void	ft_readline_while(void)
@@ -70,10 +76,12 @@ static void	ft_readline_while(void)
 		if ((string())->compare_n((terminal())->line, "", 1)
 			|| ft_str_is((terminal())->line, ' ', '|'))
 		{
+			add_history((terminal())->line);
 			free((terminal())->line);
 			continue ;
 		}
-		ft_readline_while_2(&data);
+		if (ft_readline_while_2(&data))
+			continue ;
 	}
 }
 

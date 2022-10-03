@@ -6,7 +6,7 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:11:37 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/09/28 12:51:23 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/03 18:48:23 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,23 @@ void	ft_make_command(t_cms **aux, t_token **temp)
 
 	i = 0;
 	if (!fstrcmp("<", (*temp)->token) || !fstrcmp("<<", (*temp)->token)
-		|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token))
+		|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token) || !fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token) || !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
 	{
+		if (!fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)  || !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
+		{
+			(*aux)->commands[i++] = (*temp)->token;
+			(*temp) = (*temp)->next;
+			return ;
+		}
 		(*aux)->commands[i++] = (*temp)->token;
 		(*temp) = (*temp)->next;
 	}
 	while ((*temp) && (*temp)->token)
 	{
 		if (!fstrcmp("<", (*temp)->token) || !fstrcmp("<<", (*temp)->token)
-			|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token))
+			|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token) || !fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)  || !fstrcmp("(", (*temp)->token)  || !fstrcmp(")", (*temp)->token))
 			break ;
-		if (!fstrcmp("|", (*temp)->token) || !fstrcmp("||", (*temp)->token))
+		if (!fstrcmp("|", (*temp)->token))
 		{
 			free ((*temp)->token);
 			(*temp) = (*temp)->next;
@@ -46,9 +52,16 @@ int	ft_count_param(t_token *temp)
 	i = 0;
 	while (temp)
 	{
+		if (i == 0 && (!fstrcmp("||", temp->token) || !fstrcmp("&&", temp->token) || !fstrcmp("(", temp->token) || !fstrcmp(")", temp->token)))
+		{
+			i++;
+			temp = temp->next;
+			break;
+		}
+		
 		if ((i) && (!fstrcmp("|", temp->token) || !fstrcmp("<", temp->token)
 				|| !fstrcmp("<<", temp->token) || !fstrcmp(">", temp->token)
-				|| !fstrcmp(">>", temp->token)))
+				|| !fstrcmp(">>", temp->token) || !fstrcmp("||", temp->token) || !fstrcmp("&&", temp->token) || !fstrcmp("(", temp->token) || !fstrcmp(")", temp->token)))
 			break ;
 		i++;
 		temp = temp->next;

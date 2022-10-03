@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   6free_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:18:49 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/01 20:16:07 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/02 03:32:28 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ t_cms	*ft_free_start(t_cms *start)
 	return (temp);
 }
 
-void	ft_free_input(t_token *input)
+void	ft_free_input(t_token *input, int token)
 {
 	if (input)
 	{
-		ft_free_input(input->next);
+		if (token)
+			free(input->token);
+		ft_free_input(input->next, token);
 		free(input);
 	}
 }
@@ -47,7 +49,7 @@ void	ft_free_data(t_data *data, char *line)
 		j++;
 	}
 	if (data->input)
-		ft_free_input(data->input);
+		ft_free_input(data->input, 0);
 	if (data->comando)
 		free(data->comando);
 	if (line)

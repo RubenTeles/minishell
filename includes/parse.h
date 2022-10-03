@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/01 20:18:26 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/02 03:42:15 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*ft_new_input(char *line, char *nl);
 //Create a list of tokens read from line
 t_token	*ft_split_line(const char *line, int i, t_token	*start, t_token	*end);
 char	*ft_get_command(const char *line, int *idx);
+int		ft_returnpipe(char *token, t_token *temp);
 
 //			---			            -> 2create_token.c
 //join all tokens into a command array***
@@ -65,7 +66,8 @@ void	ft_make_command(t_cms **aux, t_token **temp);
 
 //			---			            -> 4create_data.c
 //This functions will be called to start data
-void	get_comando(char *line, t_data *data);
+int		get_comando(char *line, t_data *data);
+int		ft_multipipe(t_token *input);
 
 //			---			            -> 5format_token.c
 //This functions will change the input format of token
@@ -78,7 +80,7 @@ char	*ft_putvar(char *token, int *i, char *aux, int *j);
 //			---			            -> 6free_input.c
 //This functions will grant all input paramters are free after the execve functs
 void	ft_free_data(t_data *data, char *line);
-void	ft_free_input(t_token *input);
+void	ft_free_input(t_token *input, int token);
 t_cms	*ft_free_start(t_cms *start);
 
 //			---			            -> utils.c

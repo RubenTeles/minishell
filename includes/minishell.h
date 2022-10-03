@@ -111,6 +111,8 @@ int			left_redirect(t_command *c);
 int			\
 double_left_redirect(t_command *c, char *str, char *line, char *aux);
 int			is_d_pipe_or_and(t_command *c);
+int			is_parethenses(t_command *c);
+int			is_ppa(t_command *c);
 
 //----Terminal Methods----//
 void		__count_env(void);
@@ -145,5 +147,6 @@ t_command	*ft_double_redirect_right(t_command *c);
 t_command	*ft_double_redirect_left(t_command *c);
 t_command	*ft_double_and(t_command *c);
 t_command	*ft_double_pipe(t_command *c);
+t_command	*ft_parentheses(t_command *c);
 
 #endif
