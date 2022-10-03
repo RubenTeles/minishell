@@ -38,7 +38,11 @@ SRC_COMMANDS = 	ft_cd.c \
 				ft_redirect_left.c \
 				ft_double_redirect_right.c \
 				ft_double_redirect_left.c \
+				ft_redict_utils.c \
 				ft_management_execute.c \
+				ft_double_and.c \
+				ft_double_pipe.c \
+				ft_d_and_pipe_utils.c \
 
 SRC_TERMINAL = 	create_terminal.c \
 				create_terminal_2.c \
@@ -47,7 +51,6 @@ SRC_TERMINAL = 	create_terminal.c \
 				_update.c \
 				_update_2.c \
 				_destroy.c \
-				ft_redict_utils.c \
 
 SRC_STRING = 	ft_string.c \
 				ft_string_2.c \

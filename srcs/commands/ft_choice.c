@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 19:45:11 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/03 00:30:50 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ t_command	*ft_choise_2(t_command *c, char **command, int i)
 		return (ft_double_redirect_left(c));
 	if (i == 1 && (string())->compare_n(command[0], "<", i))
 		return (ft_redirect_left(c));
+	if (i == 2 && (string())->compare_n(command[0], "&&", i))
+		return (ft_double_and(c));
+	if (i == 2 && (string())->compare_n(command[0], "**", i)) //need fix
+		return (ft_double_pipe(c));
 	return (ft_pipe(c));
 }
 
