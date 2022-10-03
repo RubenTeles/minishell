@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:53:36 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/03 22:05:23 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/03 23:39:53 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_d_pipe_or_and(t_command *c)
 	return (0);
 }
 
-int is_parethenses(t_command *c)
+int	is_parethenses(t_command *c)
 {
 	int	len;
 

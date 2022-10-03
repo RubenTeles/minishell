@@ -6,11 +6,26 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:10:53 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/03 23:37:16 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/03 23:42:12 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static void	double_pipe_execute_2(t_command *c)
+{
+	if ((terminal())->last_exit == 0)
+	{
+		c->exit_status = (terminal())->last_exit;
+		if (c->next && (is_parethenses(c->next) > 0))
+			c->next->execute(c->next, STDIN_FILENO);
+		else if (c->next->next)
+			c->next->next->execute(c->next->next, STDIN_FILENO);
+		return ;
+	}
+	if (c->next)
+		c->next->execute(c->next, STDIN_FILENO);
+}
 
 static void	double_pipe_execute(t_command *c, int in)
 {
@@ -30,17 +45,7 @@ static void	double_pipe_execute(t_command *c, int in)
 			break ;
 		aux = aux->next;
 	}
-	if ((terminal())->last_exit == 0)
-	{
-		c->exit_status = (terminal())->last_exit;
-		if (c->next && (is_parethenses(c->next) > 0))
-			c->next->execute(c->next, STDIN_FILENO);
-		else if (c->next->next)
-			c->next->next->execute(c->next->next, STDIN_FILENO);
-		return ;
-	}
-	if (c->next)
-		c->next->execute(c->next, STDIN_FILENO);
+	double_pipe_execute_2(c);
 }
 
 t_command	*ft_double_pipe(t_command *c)

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/03 21:50:38 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/03 23:38:18 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	cd_execute_2(t_command *c)
 			free(home);
 	}
 	if ((c->next && !is_ppa(c->next))
-			|| (c->prev && !is_ppa(c->prev)))
+		|| (c->prev && !is_ppa(c->prev)))
 		if (cd_execute_3(c, home) == 1)
 			return ;
 	execute(c, 2);
