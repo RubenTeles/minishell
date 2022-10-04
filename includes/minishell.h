@@ -100,6 +100,8 @@ void		execute(t_command *c, int option);
 void		execute_in(t_command *c, int in);
 int			management_input_execute(t_command *c);
 int			error_line(char	*str);
+t_command	*next_d_pipe_or_and(t_command *c);
+void		ft_command_execute_2(void);
 
 //----Redirect----//
 char		*ft_str_file(int in);
@@ -113,6 +115,7 @@ double_left_redirect(t_command *c, char *str, char *line, char *aux);
 int			is_d_pipe_or_and(t_command *c);
 int			is_parethenses(t_command *c);
 int			is_ppa(t_command *c);
+int			is_token(t_command *c);
 
 //----Terminal Methods----//
 void		__count_env(void);

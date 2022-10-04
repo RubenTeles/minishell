@@ -6,6 +6,8 @@
         "termios.h": "c",
         "readline.h": "c",
         "get_next_line.h": "c",
-        "parse.h": "c"
+        "parse.h": "c",
+        "stdio.h": "c",
+        "signal.h": "c"
     }
 }

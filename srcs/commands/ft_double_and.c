@@ -6,34 +6,73 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:10:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/03 00:28:10 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/04 23:35:46 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	double_and_execute(t_command *c, int in)
+/*int	ft_count_command(t_command *c, char *command)
 {
+	int			len;
+	int			count;
 	t_command	*aux;
-	int			status;
 
-	status = 0;
-	(void)in;
+	if (!command)
+		return (0);
+	count = 0;
+	len = (string())->len(command);
 	aux = (terminal())->start;
-	while (aux != c)
+	while (aux && (aux != c))
 	{
-		waitpid(aux->pid, &status, 0);
-		if (WIFEXITED(status) && aux->choice == 12 && aux->exit_status == 0)
-			aux->exit_status = WEXITSTATUS(status);
-		(terminal())->last_exit = aux->exit_status;
-		if (aux->next == c)
-			break ;
+		if (len == 2 && (string())->compare_n(c->command[0], command, 2))
+			count++;
 		aux = aux->next;
 	}
-	if (c->next)
-		c->next->execute(c->next, STDIN_FILENO);
-	else
-		printf("ERRO\n");
+	return (count);
+}*/
+
+static void	double_and_execute(t_command *c, int in)
+{
+	char		*line;
+	char		*aux_line;
+	char		*aux_line_2;
+	//int			count;
+	t_data		data;
+
+	(void)in;
+	(void)c;
+	line = NULL;
+	//count = ft_count_command(c, c->command[0]);
+	aux_line_2 = (string())->duplicate((terminal())->line);
+	//while ((string())->index_char(aux_line_2, '&') != -1 && count >= 0)
+	while ((string())->index_char(aux_line_2, '&') != -1)
+	{
+		aux_line = (string())->sub_split_option(aux_line_2, '&', 1);
+		if (aux_line[0] == '&')
+		{
+			/*count--;
+			if (count == 0)
+			{*/
+				line = (string())->sub_split_option(aux_line, '&', 1);
+				free(aux_line_2);
+				free(aux_line); 
+				break ;
+			//}
+		}
+		free(aux_line_2);
+		aux_line_2 = (string())->duplicate(aux_line);
+		free(aux_line); 
+	}
+	aux_line = (string())->duplicate((terminal())->line);
+	ft_command_execute_2();
+	free((terminal())->line);
+	(terminal())->line = line;
+	get_comando((terminal())->line, &data);
+	formate_tokens_main(&data);
+	(terminal())->execute((&data)->comando);
+	ft_free_data(&data, (terminal())->line);
+	(terminal())->line = aux_line;
 }
 
 t_command	*ft_double_and(t_command *c)

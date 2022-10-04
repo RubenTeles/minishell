@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/04 21:40:16 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/04 23:15:13 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ int		fstrcmp(const char *s1, const char *s2);
 char	*ft_exit_status(char *aux, int *j);
 int		ft_str_is(char *line, char c, char d);
 int		fisalnum(int c);
+
+void	formate_tokens_main(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:50:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/04 16:18:41 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/04 23:06:10 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,48 @@ static t_command	*open_paretheses(t_command *c, t_command *aux)
 static void	parentheses_open_execute(t_command *c, int in)
 {
 	t_command	*last;
+	t_command	*next_p_a;
 
 	last = open_paretheses(c, c);
 	if (!last)
 		return ;
-	if ((c->prev && (!(is_d_pipe_or_and(c->prev) > 0)
+	if ((c->prev && (!(is_token(c->prev))
 				&& !(is_parethenses(c->prev) == 1)))
-		|| (!c->next || (is_d_pipe_or_and(c->next) > 0)
-		|| (is_parethenses(c->next) == 2)) || ((is_parethenses(c->prev) == 1)
-		&& (is_parethenses(last->next) == 2)))
+		|| (!c->next || (is_token(c->next))
+			|| (is_parethenses(c->next) == 2))
+		|| ((is_parethenses(c->prev) == 1)
+			&& (is_parethenses(last->next) == 2)))
 	{
 		printf("syntax error near unexpected token `('\n");
 		c->exit_status = 2;
 		return ;
 	}
-	if (!c->prev || ((c->prev && (is_d_pipe_or_and(c->prev) == 1)))
+	if ((c->prev && c->prev && (is_d_pipe_or_and(c->prev) == 2)
+			&& c->prev->exit_status == 0))
+	{
+		next_p_a = next_d_pipe_or_and(last);
+		if (next_p_a)
+		{
+			next_p_a->execute(next_p_a, in);
+			return;
+		}
+		return ;
+	}
+	if (!c->prev)
+		c->next->execute(c->next, in);
+	/*if (!c->prev || ((c->prev && (is_d_pipe_or_and(c->prev) == 1)))
 		|| (c->prev && (is_d_pipe_or_and(c->prev) == 2)
 			&& c->prev->exit_status != 0) || is_parethenses(c->prev) == 1)
 		c->next->execute(c->next, in);
 	else if ((c->prev && (is_d_pipe_or_and(c->prev) == 2)
 			&& c->prev->exit_status == 0) && last->next)
-		last->next->execute(last->next, in);
+		last->next->execute(last->next, in);*/
 }
 
 static void	parentheses_close_execute(t_command *c, int in)
 {
-	if ((c->next && (!(is_d_pipe_or_and(c->next) > 0)
-				&& !(is_parethenses(c->next) == 2)))
-		|| (!c->prev || ((is_d_pipe_or_and(c->prev) > 0)
+	if ((c->next && (!(is_token(c->next)) && !(is_parethenses(c->next) == 2)))
+		|| (!c->prev || ((is_token(c->prev))
 				|| (is_parethenses(c->prev) == 1))))
 	{
 		printf("syntax error near unexpected token `)'\n");

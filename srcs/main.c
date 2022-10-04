@@ -28,7 +28,7 @@ static void	action(int sig)
 		return ;
 }
 
-static void	formate_tokens(t_data *data)
+void	formate_tokens_main(t_data *data)
 {
 	int	i;
 	int	j;
@@ -47,7 +47,7 @@ int	ft_readline_while_2(t_data *data)
 	(terminal())->line = ft_check_cotes((terminal())->line);
 	if (get_comando((terminal())->line, data))
 	{
-		formate_tokens(data);
+		formate_tokens_main(data);
 		(terminal())->execute(data->comando);
 		if ((terminal())->line
 			&& !(string())->compare_n((terminal())->line, "", 1))

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:53:36 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/03 23:39:53 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/04 23:22:13 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,35 @@ int	is_ppa(t_command *c)
 	if ((is_parethenses(c) > 0) || (is_d_pipe_or_and(c) > 0))
 		return (1);
 	return (0);
+}
+
+int	is_token(t_command *c)
+{
+	int	len;
+
+	if (!c)
+		return (0);
+	len = (string())->len(c->command[0]);
+	if ((len == 1 && ((string())->compare_n(c->command[0], ">", len)
+			|| (string())->compare_n(c->command[0], "<", len)
+			|| (string())->compare_n(c->command[0], "|", len)))
+			|| (len == 2 
+			&& ((string())->compare_n(c->command[0], ">>", len)
+			|| (string())->compare_n(c->command[0], "<<", len)))
+			|| (is_d_pipe_or_and(c) > 0))
+		return (1);
+	return (0);
+}
+
+t_command	*next_d_pipe_or_and(t_command *c)
+{
+	t_command	*next;
+
+	next = NULL;
+	if (!c->next)
+		return (next);
+	next = c->next;
+	while (next && !(is_d_pipe_or_and(next) > 0))
+		next = next->next;
+	return next;
 }

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/03 20:53:25 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/04 22:28:26 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,11 @@ t_command	*ft_choise(char **command)
 	return (ft_choise_2(c, command, i));
 }
 
-static void	ft_command_execute_2(t_command *aux, int status)
+void	ft_command_execute_2(void)
 {
+	t_command 	*aux;
+	int			status;
+
 	aux = (terminal())->start;
 	while (aux)
 	{
@@ -113,5 +116,5 @@ void	ft_command_execute(char ***commands)
 		command = aux;
 	}
 	(terminal())->start->execute((terminal())->start, STDIN_FILENO);
-	ft_command_execute_2(aux, 0);
+	ft_command_execute_2();
 }
