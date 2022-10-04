@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   5format_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:15:52 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/01 20:20:05 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/04 21:32:03 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	*ft_formattoken(char *tk)
 	while (tk && tk[h.i])
 	{
 		if (tk[h.i] == '$' && tk[h.i + 1]
-			&& (isalnum(tk[h.i + 1]) || tk[h.i + 1] == '?') && ++h.i)
+			&& (fisalnum(tk[h.i + 1]) || tk[h.i + 1] == '?') && ++h.i)
 			h.aux = ft_putvar(tk, &(h.i), h.aux, &(h.j));
 		else if (tk[h.i] == '\'' && ++(h.i))
 			h.aux = ft_formatsimple(h.aux, tk, &(h.i), &(h.j));

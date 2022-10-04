@@ -6,33 +6,20 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:11:37 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/03 18:48:23 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/04 21:38:51 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void	ft_make_command(t_cms **aux, t_token **temp)
+void	ft_make_command2(t_cms **aux, t_token **temp, int i)
 {
-	int	i;
-
-	i = 0;
-	if (!fstrcmp("<", (*temp)->token) || !fstrcmp("<<", (*temp)->token)
-		|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token) || !fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token) || !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
-	{
-		if (!fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)  || !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
-		{
-			(*aux)->commands[i++] = (*temp)->token;
-			(*temp) = (*temp)->next;
-			return ;
-		}
-		(*aux)->commands[i++] = (*temp)->token;
-		(*temp) = (*temp)->next;
-	}
 	while ((*temp) && (*temp)->token)
 	{
 		if (!fstrcmp("<", (*temp)->token) || !fstrcmp("<<", (*temp)->token)
-			|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token) || !fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)  || !fstrcmp("(", (*temp)->token)  || !fstrcmp(")", (*temp)->token))
+			|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token)
+			|| !fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)
+			|| !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
 			break ;
 		if (!fstrcmp("|", (*temp)->token))
 		{
@@ -45,6 +32,29 @@ void	ft_make_command(t_cms **aux, t_token **temp)
 	}
 }
 
+void	ft_make_command(t_cms **aux, t_token **temp)
+{
+	int	i;
+
+	i = 0;
+	if (!fstrcmp("<", (*temp)->token) || !fstrcmp("<<", (*temp)->token)
+		|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token)
+		|| !fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)
+		|| !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
+	{
+		if (!fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)
+			|| !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
+		{
+			(*aux)->commands[i++] = (*temp)->token;
+			(*temp) = (*temp)->next;
+			return ;
+		}
+		(*aux)->commands[i++] = (*temp)->token;
+		(*temp) = (*temp)->next;
+	}
+	ft_make_command2(aux, temp, i);
+}
+
 int	ft_count_param(t_token *temp)
 {
 	int	i;
@@ -52,16 +62,18 @@ int	ft_count_param(t_token *temp)
 	i = 0;
 	while (temp)
 	{
-		if (i == 0 && (!fstrcmp("||", temp->token) || !fstrcmp("&&", temp->token) || !fstrcmp("(", temp->token) || !fstrcmp(")", temp->token)))
+		if (!i && (!fstrcmp("||", temp->token) || !fstrcmp("&&", temp->token)
+				|| !fstrcmp("(", temp->token) || !fstrcmp(")", temp->token)))
 		{
 			i++;
 			temp = temp->next;
-			break;
+			break ;
 		}
-		
 		if ((i) && (!fstrcmp("|", temp->token) || !fstrcmp("<", temp->token)
 				|| !fstrcmp("<<", temp->token) || !fstrcmp(">", temp->token)
-				|| !fstrcmp(">>", temp->token) || !fstrcmp("||", temp->token) || !fstrcmp("&&", temp->token) || !fstrcmp("(", temp->token) || !fstrcmp(")", temp->token)))
+				|| !fstrcmp(">>", temp->token) || !fstrcmp("||", temp->token)
+				|| !fstrcmp("&&", temp->token) || !fstrcmp("(", temp->token)
+				|| !fstrcmp(")", temp->token)))
 			break ;
 		i++;
 		temp = temp->next;
@@ -107,14 +119,4 @@ void	ft_malloc_comando(t_data **data, t_data temp)
 	}
 	(*data)->comando = malloc(sizeof(char **) * (i + 1));
 	(*data)->comando[i] = NULL;
-}
-
-int	ft_get_size_command(char **commands)
-{
-	int	i;
-
-	i = 0;
-	while (commands && commands[i])
-		i++;
-	return (i);
 }

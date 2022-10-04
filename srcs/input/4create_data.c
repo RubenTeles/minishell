@@ -6,7 +6,7 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/02 03:48:59 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/04 21:38:59 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,14 @@ int	get_comando(char *line, t_data *data)
 	}
 	data->comando[h.j] = NULL;
 	return (1);
+}
+
+int	ft_get_size_command(char **commands)
+{
+	int	i;
+
+	i = 0;
+	while (commands && commands[i])
+		i++;
+	return (i);
 }

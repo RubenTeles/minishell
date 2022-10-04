@@ -6,7 +6,7 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/02 03:42:15 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/04 21:40:16 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,23 @@ char	*ft_new_input(char *line, char *nl);
 //Create a list of tokens read from line
 t_token	*ft_split_line(const char *line, int i, t_token	*start, t_token	*end);
 char	*ft_get_command(const char *line, int *idx);
-int		ft_returnpipe(char *token, t_token *temp);
+char	*ft_return_token(const char *line, int *idx, t_help *h);
+int		ft_check_pipe(const char *line, int *idx, int *j);
 
-//			---			            -> 2create_token.c
+//			---			            -> 3pipe.c
 //join all tokens into a command array***
-int		ft_get_size_command(char **commands);
 void	ft_malloc_comando(t_data **data, t_data temp);
 t_cms	*ft_parameters(t_token *tokens, t_cms *start, t_cms *end);
 int		ft_count_param(t_token *temp);
 void	ft_make_command(t_cms **aux, t_token **temp);
+void	ft_make_command2(t_cms **aux, t_token **temp, int i);
 
 //			---			            -> 4create_data.c
 //This functions will be called to start data
 int		get_comando(char *line, t_data *data);
 int		ft_multipipe(t_token *input);
+int		ft_returnpipe(char *token, t_token *temp);
+int		ft_get_size_command(char **commands);
 
 //			---			            -> 5format_token.c
 //This functions will change the input format of token

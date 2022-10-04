@@ -6,11 +6,25 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:07:51 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/03 18:44:36 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/04 21:29:27 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+char	*ft_return_token(const char *line, int *idx, t_help *h)
+{
+	h->aux = NULL;
+	h->aux = malloc(sizeof(char) * h->j + 1);
+	if (!h->aux)
+		return (NULL);
+	h->aux[h->j] = '\0';
+	h->i = h->j;
+	while (--(h->j) >= 0 && line[*idx + h->j])
+		h->aux[h->j] = line[*idx + h->j];
+	*idx = h->i + *idx;
+	return (h->aux);
+}
 
 int	ft_check_pipe(const char *line, int *idx, int *j)
 {
@@ -31,20 +45,15 @@ int	ft_check_pipe(const char *line, int *idx, int *j)
 
 char	*ft_get_command(const char *line, int *idx)
 {
-	char	*out;
 	t_help	h;
 
 	h.cote = 0;
 	h.j = 0;
 	while ((line[*idx + h.j]) && (ft_check_pipe(line, idx, &h.j) || h.cote))
 	{
-		if ((line[*idx + h.j] == '(' ||  line[*idx + h.j] == ')') && !h.cote && h.j > 0)
-			break;
-		if ((line[*idx + h.j] == '(' ||  line[*idx + h.j] == ')') && !h.cote && h.j == 0)
-		{
-			h.j++;
+		if ((line[*idx + h.j] == '(' || line[*idx + h.j] == ')') && !h.cote
+			&& (h.j > 0 || (h.j == 0 && ++h.j)))
 			break ;
-		}
 		if (line[*idx + h.j] == '\\' && (!h.cote || h.cote == '"')
 			&& line[*idx + h.j + 1] && ++h.j)
 			h.j++;
@@ -55,13 +64,7 @@ char	*ft_get_command(const char *line, int *idx)
 		else
 			h.j++;
 	}
-	out = malloc(sizeof(char) * h.j + 1);
-	out[h.j] = '\0';
-	h.i = h.j;
-	while (--h.j >= 0 && line[*idx + h.j])
-		out[h.j] = line[*idx + h.j];
-	*idx = h.i + *idx;
-	return (out);
+	return (ft_return_token(line, idx, &h));
 }
 
 /*Função de inicio, percorre um input recebido da função readline, ou seja vai
