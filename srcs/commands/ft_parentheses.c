@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:50:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/03 23:39:38 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:18:41 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static t_command	*open_paretheses(t_command *c, t_command *aux)
 	}
 	if (!aux)
 	{
-		printf("ERRO NAO HA FIM\n");
+		printf("syntax error near expected token `)'\n");
+		c->exit_status = 2;
 		return (NULL);
 	}
 	aux->count_cmd = c->count_cmd;
@@ -43,16 +44,19 @@ static void	parentheses_open_execute(t_command *c, int in)
 {
 	t_command	*last;
 
+	last = open_paretheses(c, c);
+	if (!last)
+		return ;
 	if ((c->prev && (!(is_d_pipe_or_and(c->prev) > 0)
 				&& !(is_parethenses(c->prev) == 1)))
 		|| (!c->next || (is_d_pipe_or_and(c->next) > 0)
-			|| (is_parethenses(c->next) == 2)))
+		|| (is_parethenses(c->next) == 2)) || ((is_parethenses(c->prev) == 1)
+		&& (is_parethenses(last->next) == 2)))
 	{
-		printf("syntax error near unexpected token `%s'\n", c->command[0]);
+		printf("syntax error near unexpected token `('\n");
 		c->exit_status = 2;
 		return ;
 	}
-	last = open_paretheses(c, c);
 	if (!c->prev || ((c->prev && (is_d_pipe_or_and(c->prev) == 1)))
 		|| (c->prev && (is_d_pipe_or_and(c->prev) == 2)
 			&& c->prev->exit_status != 0) || is_parethenses(c->prev) == 1)
@@ -69,7 +73,7 @@ static void	parentheses_close_execute(t_command *c, int in)
 		|| (!c->prev || ((is_d_pipe_or_and(c->prev) > 0)
 				|| (is_parethenses(c->prev) == 1))))
 	{
-		printf("syntax error near unexpected token `%s'\n", c->command[0]);
+		printf("syntax error near unexpected token `)'\n");
 		c->exit_status = 2;
 		return ;
 	}
