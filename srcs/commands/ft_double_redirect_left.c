@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:34:08 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 20:26:38 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:53:48 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*ft_hereadoc(t_command *c, char *str, char **line, char *aux)
 	return (str);
 }
 
-static void	double_2(char *str, char *line, char *aux)
+/*static void	double_2(char *str, char *line, char *aux)
 {
 	char	*history;
 
@@ -52,13 +52,12 @@ static void	double_2(char *str, char *line, char *aux)
 	(terminal())->line = (string())->join(history, "\n");
 	free(aux);
 	free(history);
-}
-
+	//if (str && !(string())->compare_n(str, "", 1))
+	//	double_2(str, line, aux);
+}*/
 int	double_left_redirect(t_command *c, char *str, char *line, char *aux)
 {
 	str = ft_hereadoc(c, str, &line, aux);
-	if (str && !(string())->compare_n(str, "", 1))
-		double_2(str, line, aux);
 	write(c->fd[1], str, (string())->len(str));
 	close(c->fd[1]);
 	if (str)
