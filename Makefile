@@ -44,6 +44,7 @@ SRC_COMMANDS = 	ft_cd.c \
 				ft_double_pipe.c \
 				ft_d_and_pipe_utils.c \
 				ft_parentheses.c \
+				ft_wildcard.c \
 
 SRC_TERMINAL = 	create_terminal.c \
 				create_terminal_2.c \
@@ -76,7 +77,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 CC = gcc
 
-CFLAGS = -g -lreadline -Wall -Wextra -Werror -fsanitize=address 
+CFLAGS = -g #-lreadline -Wall -Wextra -Werror -fsanitize=address 
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
