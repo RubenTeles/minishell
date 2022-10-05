@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:59:13 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:13:17 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	pwd_execute(t_command *c, int in)
 	execute(c, 2);
 	pwd = getcwd(buffer, 1001);
 	write(c->fd[1], pwd, string()->len(pwd));
-	write(c->fd[1], "\n", 2);
+	write(c->fd[1], "\n", 1);
 	execute(c, 1);
 }
 

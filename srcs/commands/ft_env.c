@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 00:03:35 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:03:02 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	env_execute_2(t_command *c)
 			write(c->fd[1], aux->var, string()->len(aux->var));
 			write(c->fd[1], "=", 1);
 			write(c->fd[1], aux->val, string()->len(aux->val));
-			write(c->fd[1], "\n", 2);
+			write(c->fd[1], "\n", 1);
 		}
 		aux = aux->next;
 	}
