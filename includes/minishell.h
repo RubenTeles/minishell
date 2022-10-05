@@ -116,6 +116,7 @@ int			is_d_pipe_or_and(t_command *c);
 int			is_parethenses(t_command *c);
 int			is_ppa(t_command *c);
 int			is_token(t_command *c);
+int			ft_count_command(t_command *c);
 
 //----Terminal Methods----//
 void		__count_env(void);

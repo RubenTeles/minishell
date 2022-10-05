@@ -6,59 +6,56 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:10:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/04 23:35:46 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/05 02:24:25 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/*int	ft_count_command(t_command *c, char *command)
+int	ft_count_command(t_command *c)
 {
 	int			len;
 	int			count;
 	t_command	*aux;
 
-	if (!command)
-		return (0);
 	count = 0;
-	len = (string())->len(command);
+	len = (string())->len(c->command[0]);
 	aux = (terminal())->start;
 	while (aux && (aux != c))
 	{
-		if (len == 2 && (string())->compare_n(c->command[0], command, 2))
+		if (len == 2 && (string())->compare_n(aux->command[0], c->command[0], 2))
 			count++;
 		aux = aux->next;
 	}
 	return (count);
-}*/
+}
 
 static void	double_and_execute(t_command *c, int in)
 {
 	char		*line;
 	char		*aux_line;
 	char		*aux_line_2;
-	//int			count;
+	int			count;
 	t_data		data;
 
 	(void)in;
 	(void)c;
 	line = NULL;
-	//count = ft_count_command(c, c->command[0]);
+	count = ft_count_command(c);
 	aux_line_2 = (string())->duplicate((terminal())->line);
-	//while ((string())->index_char(aux_line_2, '&') != -1 && count >= 0)
-	while ((string())->index_char(aux_line_2, '&') != -1)
+	while ((string())->index_char(aux_line_2, '&') != -1 && count >= 0)
 	{
 		aux_line = (string())->sub_split_option(aux_line_2, '&', 1);
 		if (aux_line[0] == '&')
 		{
-			/*count--;
 			if (count == 0)
-			{*/
+			{
 				line = (string())->sub_split_option(aux_line, '&', 1);
 				free(aux_line_2);
 				free(aux_line); 
 				break ;
-			//}
+			}
+			count--;
 		}
 		free(aux_line_2);
 		aux_line_2 = (string())->duplicate(aux_line);

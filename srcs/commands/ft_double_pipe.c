@@ -6,30 +6,36 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:10:53 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/04 23:10:12 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/05 02:27:22 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	double_pipe_execute_3(void)
+static void	double_pipe_execute_3(t_command *c)
 {
 	char		*line;
 	char		*aux_line;
 	char		*aux_line_2;
+	int			count;
 	t_data		data;
 
 	line = NULL;
+	count = ft_count_command(c);
 	aux_line_2 = (string())->duplicate((terminal())->line);
-	while ((string())->index_char(aux_line_2, '&') != -1)
+	while ((string())->index_char(aux_line_2, '|') != -1 && count >= 0)
 	{
-		aux_line = (string())->sub_split_option(aux_line_2, '&', 1);
-		if (aux_line[0] == '&')
+		aux_line = (string())->sub_split_option(aux_line_2, '|', 1);
+		if (aux_line[0] == '|')
 		{
-			line = (string())->sub_split_option(aux_line, '&', 1);
-			free(aux_line_2);
-			free(aux_line); 
-			break ;
+			if (count == 0)
+			{
+				line = (string())->sub_split_option(aux_line, '|', 1);
+				free(aux_line_2);
+				free(aux_line); 
+				break ;
+			}
+			count--;
 		}
 		free(aux_line_2);
 		aux_line_2 = (string())->duplicate(aux_line);
@@ -60,7 +66,7 @@ static void	double_pipe_execute_2(t_command *c)
 			pipe_or_and->execute(pipe_or_and, STDIN_FILENO);
 		return ;
 	}
-	double_pipe_execute_3();
+	double_pipe_execute_3(c);
 }
 
 static void	double_pipe_execute(t_command *c, int in)
