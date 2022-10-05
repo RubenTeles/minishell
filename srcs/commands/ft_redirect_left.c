@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:58:23 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:44:23 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	management_left_redirect(t_command *c)
 
 int	left_redirect(t_command *c)
 {
+	t_command	*pipe_or_and;
+
 	c->fd[1] = open(c->command[1], O_RDWR, 0777);
 	if (c->fd[1] < 0)
 	{
@@ -29,6 +31,9 @@ int	left_redirect(t_command *c)
 		printf("Permission denied\n");
 		c->exit_status = 1;
 		close(c->fd[1]);
+		pipe_or_and = next_d_pipe_or_and(c);
+		if (pipe_or_and)
+			pipe_or_and->execute(pipe_or_and, STDIN_FILENO);
 		return (-1);
 	}
 	c->fd[0] = c->fd[1];
