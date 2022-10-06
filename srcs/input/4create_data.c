@@ -3,21 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   4create_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/05 19:08:14 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:54:28 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
+int	ft_last_token(t_token *temp)
+{
+	t_token	*start;
+
+	start = temp;
+	while (start)
+	{
+		if ((!fstrcmp("&&", start->token) || !fstrcmp("||", start->token)
+				|| !fstrcmp("|", start->token)) && !start->next)
+			return (1);
+		start = start->next;
+	}
+	return (0);
+}
+
 int	ft_returnpipe(char *token, t_token *temp)
 {
-	if (temp)
-		printf("syntax error near unexpected token '%s'\n", token);
-	else
-		printf("syntax error near unexpected token '%s'\n", token);
+	printf("syntax error near unexpected token %s\n", token);
 	ft_free_input(temp, 1);
 	return (1);
 }
@@ -29,7 +41,8 @@ int	ft_multipipe(t_token *input)
 
 	is_pipe = 0;
 	temp = input;
-	if (!fstrcmp("|", input->token) || !fstrcmp("||", input->token))
+	if (!fstrcmp("|", input->token) || !fstrcmp("||", input->token)
+		|| !fstrcmp("&&", input->token))
 		return (ft_returnpipe(input->token, temp));
 	else
 	{
@@ -40,9 +53,9 @@ int	ft_multipipe(t_token *input)
 				is_pipe++;
 			else
 				is_pipe = 0;
-			if (is_pipe > 1)
-				return (ft_returnpipe(input->token, temp));
-			if (input->next == NULL && !fstrcmp("|", input->token))
+			if (is_pipe > 1 || ((!fstrcmp("&&", input->token) || !fstrcmp("||",
+							input->token) || !fstrcmp("|", input->token))
+					&& !input->next))
 				return (ft_returnpipe(input->token, temp));
 			input = input->next;
 		}

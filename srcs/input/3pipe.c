@@ -6,7 +6,7 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:11:37 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/04 21:38:51 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:33:34 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void	ft_make_command(t_cms **aux, t_token **temp)
 		{
 			(*aux)->commands[i++] = (*temp)->token;
 			(*temp) = (*temp)->next;
+			while (!fstrcmp("|", (*temp)->token))
+			{
+				free((*temp)->token);
+				(*temp) = (*temp)->next;
+			}
 			return ;
 		}
 		(*aux)->commands[i++] = (*temp)->token;

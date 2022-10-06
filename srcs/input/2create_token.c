@@ -6,7 +6,7 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:07:51 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/04 21:29:27 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:32:26 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@ char	*ft_return_token(const char *line, int *idx, t_help *h)
 int	ft_check_pipe(const char *line, int *idx, int *j)
 {
 	if ((*j) == 0 && (line[(*idx) + (*j)] == '>' || line[(*idx) + (*j)] == '<'
-			|| line[(*idx) + (*j)] == '|' || line[(*idx) + (*j)] == '&')
-		&& ++(*j))
+			|| line[(*idx) + (*j)] == '|' || line[(*idx) + (*j)] == '&' || line
+			[(*idx) + (*j)] == '(' || line[(*idx) + (*j)] == ')') && ++(*j))
 	{
+		if (line[(*idx) + (*j)] == '(' || line[(*idx) + (*j)] == ')')
+			return (0);
 		if (line[(*idx) + 0] == line[(*idx) + (*j)] && (*j)++)
 			return (0);
 	}
-	else if ((line[(*idx) + (*j)] == '>' || line[(*idx) + (*j)] == '<'
-			|| line[(*idx) + (*j)] == '|' || line[(*idx) + (*j)] == '&'))
+	else if ((line[(*idx) + (*j)] == '>' || line[(*idx) + (*j)] == '<' || line
+			[(*idx) + (*j)] == '|' || line[(*idx) + (*j)] == '&' || line[(*idx)
+				+ (*j)] == '(' || line[(*idx) + (*j)] == ')'))
 		return (0);
 	else if (line[*idx + *j] != ' ' )
 		return (1);
@@ -51,9 +54,6 @@ char	*ft_get_command(const char *line, int *idx)
 	h.j = 0;
 	while ((line[*idx + h.j]) && (ft_check_pipe(line, idx, &h.j) || h.cote))
 	{
-		if ((line[*idx + h.j] == '(' || line[*idx + h.j] == ')') && !h.cote
-			&& (h.j > 0 || (h.j == 0 && ++h.j)))
-			break ;
 		if (line[*idx + h.j] == '\\' && (!h.cote || h.cote == '"')
 			&& line[*idx + h.j + 1] && ++h.j)
 			h.j++;
