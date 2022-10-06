@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:46 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 20:41:38 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:48:30 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	double_redirect_right_execute_2(t_command *c, int in)
 {
-	char	*str;
+	char		*str;
+	t_command	*pipe_or_and;
 
 	str = NULL;
 	str = ft_str_file(in);
@@ -24,7 +25,10 @@ static void	double_redirect_right_execute_2(t_command *c, int in)
 	if (c->fd[1] == -1)
 	{
 		printf("%s: Permission denied\n", c->command[1]);
-		c->exit_status = 126;
+		c->exit_status = 1;
+		pipe_or_and = next_d_pipe_or_and(c);
+		if (pipe_or_and)
+			pipe_or_and->execute(pipe_or_and, STDIN_FILENO);
 		return ;
 	}
 	else
@@ -39,6 +43,8 @@ static void	double_redirect_right_execute_2(t_command *c, int in)
 
 static void	double_redirect_right_execute(t_command *c, int in)
 {
+	t_command	*pipe_or_and;
+
 	if (!c->command[1])
 	{
 		printf("syntax error near unexpected token\n");
@@ -56,7 +62,10 @@ static void	double_redirect_right_execute(t_command *c, int in)
 		if (c->fd[1] == -1)
 		{
 			printf("%s: Permission denied\n", c->command[1]);
-			c->exit_status = 126;
+			c->exit_status = 1;
+			pipe_or_and = next_d_pipe_or_and(c);
+			if (pipe_or_and)
+				pipe_or_and->execute(pipe_or_and, STDIN_FILENO);
 			return ;
 		}
 		c->next->execute(c->next, in);

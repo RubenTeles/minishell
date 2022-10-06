@@ -117,6 +117,7 @@ int			is_parethenses(t_command *c);
 int			is_ppa(t_command *c);
 int			is_token(t_command *c);
 int			ft_count_command(t_command *c);
+void		ft_call(void);
 
 //----Terminal Methods----//
 void		__count_env(void);

@@ -76,6 +76,7 @@ static void	ft_readline_while(void)
 		if ((string())->compare_n((terminal())->line, "", 1)
 			|| ft_str_is((terminal())->line, ' ', '|'))
 		{
+			if (ft_str_is((terminal())->line, ' ', '|'))
 			add_history((terminal())->line);
 			free((terminal())->line);
 			continue ;
@@ -91,8 +92,9 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	signal(SIGINT, action);
 	signal(SIGQUIT, action);
-	new_terminal(env);
-	ft_readline_while();
+	ft_call();
+	/*new_terminal(env);
+	ft_readline_while();*/
 	return (0);
 }
 

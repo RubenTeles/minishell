@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:49:00 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/03 21:50:25 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/05 19:25:09 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ static void	exit_execute_2(t_command *c, int *x)
 	}
 	if (c->count_cmd == 2)
 	{
-		if ((string())->only_this_chars(c->command[1], "0123456789"))
+		if ((string())->only_this_chars(c->command[1], "-+0123456789"))
 		{
 			*x = (string())->str_in_int(c->command[1]);
+			if (*x >= 256 || *x < 0)
+				*x %= 256;
 			c->exit_status = *x;
 		}
 		else
