@@ -65,6 +65,7 @@ SRC_INPUT = 	1cotes.c \
 				4create_data.c \
 				5format_token.c \
 				6free_input.c \
+				7checker.c \
 				utils.c \
 
 

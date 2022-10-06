@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4create_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/04 21:38:59 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/05 19:08:14 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	ft_returnpipe(char *token, t_token *temp)
 {
-	printf("syntax error near unexpected token %s\n", token);
+	if (temp)
+		printf("syntax error near unexpected token '%s'\n", token);
+	else
+		printf("syntax error near unexpected token '%s'\n", token);
 	ft_free_input(temp, 1);
 	return (1);
 }
@@ -54,7 +57,7 @@ int	get_comando(char *line, t_data *data)
 
 	h.j = 0;
 	data->input = ft_split_line(line, 0, NULL, NULL);
-	if (ft_multipipe(data->input))
+	if (ft_multipipe(data->input) || ft_check_parents(data->input))
 		return (0);
 	data->start = ft_parameters(data->input, NULL, NULL);
 	temp = data;
