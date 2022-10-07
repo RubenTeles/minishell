@@ -6,11 +6,26 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/04 21:38:59 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:54:28 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+int	ft_last_token(t_token *temp)
+{
+	t_token	*start;
+
+	start = temp;
+	while (start)
+	{
+		if ((!fstrcmp("&&", start->token) || !fstrcmp("||", start->token)
+				|| !fstrcmp("|", start->token)) && !start->next)
+			return (1);
+		start = start->next;
+	}
+	return (0);
+}
 
 int	ft_returnpipe(char *token, t_token *temp)
 {
@@ -26,7 +41,8 @@ int	ft_multipipe(t_token *input)
 
 	is_pipe = 0;
 	temp = input;
-	if (!fstrcmp("|", input->token) || !fstrcmp("||", input->token))
+	if (!fstrcmp("|", input->token) || !fstrcmp("||", input->token)
+		|| !fstrcmp("&&", input->token))
 		return (ft_returnpipe(input->token, temp));
 	else
 	{
@@ -37,9 +53,9 @@ int	ft_multipipe(t_token *input)
 				is_pipe++;
 			else
 				is_pipe = 0;
-			if (is_pipe > 1)
-				return (ft_returnpipe(input->token, temp));
-			if (input->next == NULL && !fstrcmp("|", input->token))
+			if (is_pipe > 1 || ((!fstrcmp("&&", input->token) || !fstrcmp("||",
+							input->token) || !fstrcmp("|", input->token))
+					&& !input->next))
 				return (ft_returnpipe(input->token, temp));
 			input = input->next;
 		}
@@ -54,7 +70,7 @@ int	get_comando(char *line, t_data *data)
 
 	h.j = 0;
 	data->input = ft_split_line(line, 0, NULL, NULL);
-	if (ft_multipipe(data->input))
+	if (ft_multipipe(data->input) || ft_check_parents(data->input))
 		return (0);
 	data->start = ft_parameters(data->input, NULL, NULL);
 	temp = data;

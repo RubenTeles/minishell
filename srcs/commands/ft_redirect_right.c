@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:17 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/05 18:08:55 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/07 23:41:49 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	redirect_right_execute(t_command *c, int in)
 
 	if (!c->command[1])
 	{
-		printf("syntax error near unexpected token\n");
+		printf("syntax error near unexpected token >\n");
 		c->exit_status = 2;
 		return ;
 	}

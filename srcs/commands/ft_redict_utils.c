@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 21:12:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/05 18:18:01 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/07 23:37:19 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*copy_file(char *buffer, char *str, int size)
 
 char	*ft_str_file(int in)
 {
-	char	buffer[1000];
+	char	buffer[1001];
 	int		size;
 	char	*str;
 	int		total;
