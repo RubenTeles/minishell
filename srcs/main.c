@@ -39,6 +39,15 @@ void	formate_tokens_main(t_data *data)
 		i = -1;
 		while (data->comando[j][++i])
 			data->comando[j][i] = ft_formattoken(data->comando[j][i]);
+		/*i = -1;
+		while (data->comando[j][++i])
+		{
+			if ((string())->index_char(data->comando[j][i], '*') > 0)
+			{
+				data->comando[j] = 
+				break ;
+			}
+		}*/
 	}
 }
 
