@@ -1,0 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_wildcard_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/08 02:48:32 by rteles            #+#    #+#             */
+/*   Updated: 2022/10/08 02:49:37 by rteles           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <ft_wildcard.h>
+
+t_list	*create_list(char *str)
+{
+	t_list	*l;
+
+	l = malloc(sizeof(t_list));
+	if (!l)
+		return (NULL);
+	l->command = str;
+	l->next = NULL;
+	return (l);
+}
+
+char	**copy_double_string_and_free(char **src, char **dest, int extra)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	if (!src)
+	{
+		dest = malloc(sizeof(char *) * (i + extra + 1));
+		dest[i + extra] = NULL;
+		return (dest);
+	}
+	while (src[i])
+		i++;
+	dest = malloc(sizeof(char *) * (i + extra + 1));
+	if (!dest)
+		return (0);
+	dest[i + extra] = NULL;
+	i = -1;
+	while (src[++i])
+	{
+		len =  (string())->len(src[i]);
+		dest[i] = malloc(sizeof(char) * (len + 1));
+		(string())->copy_n(dest[i], src[i], len + 1);
+		free(src[i]);
+	}
+	free(src);
+	src = NULL;
+	return (dest);
+}

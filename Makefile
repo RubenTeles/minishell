@@ -20,6 +20,7 @@ SRC_PATH_COMMANDS = ./srcs/commands/
 SRC_PATH_TERM = ./srcs/terminal/
 SRC_PATH_STRING = ./srcs/string/
 SRC_PATH_INPUT = ./srcs/input/
+SRC_PATH_WILDCARD = ./srcs/wildcard/
 OBJ_PATH = ./objs/
 INC_PATH = ./includes/
 
@@ -44,7 +45,6 @@ SRC_COMMANDS = 	ft_cd.c \
 				ft_double_pipe.c \
 				ft_d_and_pipe_utils.c \
 				ft_parentheses.c \
-				#ft_wildcard.c \
 
 SRC_TERMINAL = 	create_terminal.c \
 				create_terminal_2.c \
@@ -69,8 +69,14 @@ SRC_INPUT = 	1cotes.c \
 				7checker.c \
 				utils.c \
 
+SRC_WILDCARD = 	ft_wildcard_create.c \
+				ft_wildcard_create_2.c \
+				ft_wildcard_validation.c \
+				ft_wildcard_utils.c \
+				ft_wildcard.c \
 
-SRC = $(SRC_NAME) $(SRC_TERMINAL) $(SRC_STRING) $(SRC_INPUT) $(SRC_COMMANDS)
+
+SRC = $(SRC_NAME) $(SRC_TERMINAL) $(SRC_STRING) $(SRC_INPUT) $(SRC_COMMANDS) $(SRC_WILDCARD)
 
 OBJ_NAME = $(SRC:.c=.o)
 
@@ -78,7 +84,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 CC = gcc
 
-CFLAGS = -g -lreadline -Wall -Wextra -Werror -fsanitize=address 
+CFLAGS = -g #-lreadline -Wall -Wextra -Werror -fsanitize=address 
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
@@ -100,6 +106,9 @@ $(OBJ_PATH)%.o:$(SRC_PATH_COMMANDS)%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
+$(OBJ_PATH)%.o:$(SRC_PATH_WILDCARD)%.c
+	@mkdir -p $(OBJ_PATH)
+	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $@ -L/usr/local/lib -I/usr/local/include -lreadline

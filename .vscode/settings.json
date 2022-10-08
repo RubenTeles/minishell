@@ -8,6 +8,7 @@
         "get_next_line.h": "c",
         "parse.h": "c",
         "stdio.h": "c",
-        "signal.h": "c"
+        "signal.h": "c",
+        "dirent.h": "c"
     }
 }
