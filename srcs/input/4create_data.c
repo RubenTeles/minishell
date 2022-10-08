@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4create_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/08 15:56:04 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 19:01:56 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@ int	ft_returnpipe(char *token, t_token *temp)
 int	ft_multipipe(t_token *input)
 {
 	int		is_pipe;
+	int		is_token;
+	int		or_and;
 	t_token	*temp;
 
 	is_pipe = 0;
+	is_token = 0;
+	or_and = 0;
 	temp = input;
 	if (!fstrcmp("|", input->token) || !fstrcmp("||", input->token)
 		|| !fstrcmp("&&", input->token))
@@ -68,9 +72,15 @@ int	ft_multipipe(t_token *input)
 				is_pipe++;
 			else
 				is_pipe = 0;
-			if (is_pipe > 1 || ((!fstrcmp("&&", input->token) || !fstrcmp("||",
-							input->token) || !fstrcmp("|", input->token))
-					&& !input->next))
+			if (!fstrcmp(">>", input->token) || !fstrcmp(">", input->token) || !fstrcmp("<", input->token) || !fstrcmp("<<", input->token))
+				is_token++;
+			else
+				is_token = 0;
+			if (!fstrcmp("&&", input->token) || !fstrcmp("||", input->token))
+				or_and++;
+			else
+				or_and = 0;
+			if (is_token > 1 || or_and > 1 || is_pipe > 1 || ((!fstrcmp("&&", input->token) || !fstrcmp("||", input->token) || !fstrcmp("|", input->token)) && !input->next))
 				return (ft_returnpipe(input->token, temp));
 			input = input->next;
 		}
@@ -86,8 +96,6 @@ int	get_comando(char *line, t_data *data)
 	h.j = 0;
 	if (data->input == NULL)
 		data->input = ft_split_line(line, 0, NULL, NULL);
-	/*if (ft_multipipe(data->input) || ft_check_parents(data->input))
-		return (0);*/
 	data->start = ft_parameters(data->input, NULL, NULL);
 	temp = data;
 	ft_malloc_comando(&data, *temp);

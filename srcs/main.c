@@ -36,18 +36,13 @@ void	formate_tokens_main(t_data *data)
 	j = -1;
 	while (data->comando[++j])
 	{
-		/*i = -1;
+		i = -1;
+		//printf("O comando   ->  ");
 		while (data->comando[j][++i])
 		{
-			if ((string())->index_char(data->comando[j][i], '*') != -1)
-			{
-				data->comando[j] = 
-				break ;
-			}
-		}*/
-		i = -1;
-		while (data->comando[j][++i])
+			//printf("%s\n", data->comando[j][i]);
 			data->comando[j][i] = ft_formattoken(data->comando[j][i]);
+		}
 	}
 }
 
@@ -81,11 +76,12 @@ static void	ft_readline_while(void)
 		if (!(terminal())->line
 			|| (string())->compare_n((terminal())->line, "exit", 5))
 		{
-			free((terminal())->line);
+			if ((terminal())->line)
+				free((terminal())->line);
 			ft_exit(0);
 		}
 		if ((string())->compare_n((terminal())->line, "", 1)
-			||  ft_str_is((terminal())->line, ' ', ' '))
+			|| ft_str_is((terminal())->line, ' ', ' '))
 		{
 			free((terminal())->line);
 			continue ;
