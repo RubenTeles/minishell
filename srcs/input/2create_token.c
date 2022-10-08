@@ -6,7 +6,7 @@
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:07:51 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/06 12:32:26 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:59:25 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ char	*ft_return_token(const char *line, int *idx, t_help *h)
 
 int	ft_check_pipe(const char *line, int *idx, int *j)
 {
-	if ((*j) == 0 && (line[(*idx) + (*j)] == '>' || line[(*idx) + (*j)] == '<'
-			|| line[(*idx) + (*j)] == '|' || line[(*idx) + (*j)] == '&' || line
-			[(*idx) + (*j)] == '(' || line[(*idx) + (*j)] == ')') && ++(*j))
+	if ((*j) == 0 && (line[(*idx)] == '>' || line[(*idx)] == '<' || line[(*idx)]
+			== '|' || line[(*idx)] == '&' || line[(*idx) + (*j)] == '(' || line
+			[(*idx) + (*j)] == ')') && ++(*j))
 	{
-		if (line[(*idx) + (*j)] == '(' || line[(*idx) + (*j)] == ')')
+		if (line[(*idx)] == '(' || line[(*idx)] == ')')
 			return (0);
-		if (line[(*idx) + 0] == line[(*idx) + (*j)] && (*j)++)
+		if (line[(*idx)] == line[(*idx) + (*j)] && (*j)++)
 			return (0);
 	}
 	else if ((line[(*idx) + (*j)] == '>' || line[(*idx) + (*j)] == '<' || line

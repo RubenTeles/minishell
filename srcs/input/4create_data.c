@@ -3,33 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   4create_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/06 12:54:28 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/08 13:19:38 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int	ft_last_token(t_token *temp)
+int	ft_check_parents(t_token *input)
 {
-	t_token	*start;
+	int		is_par;
+	char	*last_token;
+	t_token	*temp;
 
-	start = temp;
-	while (start)
+	is_par = 0;
+	temp = input;
+	last_token = NULL;
+	while (input)
 	{
-		if ((!fstrcmp("&&", start->token) || !fstrcmp("||", start->token)
-				|| !fstrcmp("|", start->token)) && !start->next)
-			return (1);
-		start = start->next;
+		if (is_par < 0 || (!fstrcmp(")", input->token) && (!fstrcmp("(",
+						last_token))) || (!fstrcmp("(", last_token)
+				&& ((!fstrcmp("&&", input->token) || !fstrcmp("||", input->token
+						) || !fstrcmp("|", input->token) || !fstrcmp("<",
+							input->token) || !fstrcmp("<<", input->token)))))
+			return (ft_returnpipe(input->token, temp));
+		if (!fstrcmp("(", input->token))
+				is_par++;
+		if (!fstrcmp(")", input->token))
+				is_par--;
+		last_token = input->token;
+		input = input->next;
 	}
+	if (is_par != 0)
+		return (ft_returnpipe(last_token, temp));
 	return (0);
 }
 
 int	ft_returnpipe(char *token, t_token *temp)
 {
-	printf("syntax error near unexpected token %s\n", token);
+	if (token)
+		printf("syntax error near unexpected token `%s´\n", token);
 	ft_free_input(temp, 1);
 	return (1);
 }
@@ -70,8 +85,8 @@ int	get_comando(char *line, t_data *data)
 
 	h.j = 0;
 	data->input = ft_split_line(line, 0, NULL, NULL);
-	if (ft_multipipe(data->input) || ft_check_parents(data->input))
-		return (0);
+	/*if (ft_multipipe(data->input) || ft_check_parents(data->input))
+		return (0);*/
 	data->start = ft_parameters(data->input, NULL, NULL);
 	temp = data;
 	ft_malloc_comando(&data, *temp);

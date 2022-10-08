@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/05 19:02:55 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/08 13:10:22 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,6 @@ int		fstrcmp(const char *s1, const char *s2);
 char	*ft_exit_status(char *aux, int *j);
 int		ft_str_is(char *line, char c, char d);
 int		fisalnum(int c);
-
-//This function is for all checks	-> 7checker.c
-int		ft_check_parents(t_token *input);
 
 void	formate_tokens_main(t_data *data);
 
