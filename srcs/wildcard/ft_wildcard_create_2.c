@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:47:31 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 02:48:57 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 21:53:00 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,12 @@ void	wildcard_med(t_wildcard *w, char *sub)
 void	create_wildcard_2(t_wildcard *w, char *wildcard)
 {
 	char		*aux;
-	char		*aux_2;
 	int			i;
 
-	printf("Dir:\t%i\n", w->in_dir);
 	if ((string())->index_char(wildcard, '*') > 0)
 		w->begin = (string())->sub_split_option(wildcard, '*', 0);
-	printf("Start:\t%s\n", w->begin);
+	else if (w->next_dir && (string())->index_char(wildcard, '*') == -1)
+		w->begin = (string())->duplicate(wildcard);
 	aux = (string())->sub_split_option(wildcard, '*', 1);
 	i = 0;
 	while ((string())->index_char(&aux[i], '*') == 0)
@@ -55,50 +54,45 @@ void	create_wildcard_2(t_wildcard *w, char *wildcard)
 		if (&aux[i] && (string())->len(&aux[i]) > 0)
 			w->final = (string())->duplicate(&aux[i]);
 		free(aux);
+		if ((string())->index_char(wildcard, '*') == 0 && !w->final
+			&& !w->begin && !w->med)
+			w->all = 1;
 	}
-	printf("Final:\t%s\n", w->final);
+}
+
+static void	new_wildcard(t_wildcard	*w, int dir)
+{
+	w->begin = NULL;
+	w->med = NULL;
+	w->final = NULL;
+	w->in_dir = dir;
+	w->next_dir = NULL;
+	w->all = 0;
 }
 
 t_wildcard	*create_wildcard(char *wildcard, int dir)
 {
 	t_wildcard	*w;
 	char		*aux;
-	char		*aux_2;
 	int			i;
 
 	w = malloc(sizeof(t_wildcard));
 	if (!w)
 		return (NULL);
-	w->begin = NULL;
-	w->med = NULL;
-	w->final = NULL;
-	w->in_dir = dir;
-	w->next_dir = NULL;
+	new_wildcard(w, dir);
 	i = 0;
 	while ((string())->index_char(&wildcard[i], '/') == 0)
 		i++;
 	if ((string())->index_char(wildcard, '/') > 0)
 	{
-		w->next_dir = create_wildcard((string())->sub_split_option(wildcard, '/', 1), dir + 1);
-		create_wildcard_2(w, (string())->sub_split_option(wildcard, '/', 0));
+		aux = (string())->sub_split_option(wildcard, '/', 1);
+		w->next_dir = create_wildcard(aux, dir + 1);
+		free(aux);
+		aux = (string())->sub_split_option(wildcard, '/', 0);
+		create_wildcard_2(w, aux);
+		free(aux);
 	}
 	else
 		create_wildcard_2(w, wildcard);
-	/*if ((string())->index_char(wildcard, '*') > 0)
-		w->begin = (string())->sub_split_option(wildcard, '*', 0);
-	printf("Start:\t%s\n", w->begin);
-	aux = (string())->sub_split_option(wildcard, '*', 1);
-	i = 0;
-	while ((string())->index_char(&aux[i], '*') == 0)
-		i++;
-	wildcard_med(w, &aux[i]);
-	if (aux && (string())->index_char(&aux[i], '*') == -1)
-	{
-		if (&aux[i] && (string())->len(&aux[i]) > 0)
-			w->final = (string())->duplicate(&aux[i]);
-		free(aux);
-		printf("Final:\t%s\n", w->final);
-		return (w);;
-	}*/
 	return (w);
 }

@@ -32,16 +32,23 @@ void	formate_tokens_main(t_data *data)
 {
 	int	i;
 	int	j;
+	//int	is_wild;
 
 	j = -1;
 	while (data->comando[++j])
 	{
+		//is_wild = 0;
 		i = -1;
 		//printf("O comando   ->  ");
 		while (data->comando[j][++i])
 		{
 			//printf("%s\n", data->comando[j][i]);
+			/*if (ft_iswildcard(data->comando[j][i]))
+				is_wild = 1;*/
 			data->comando[j][i] = ft_formattoken(data->comando[j][i]);
+			/*if (is_wild == 1)
+				ft_wildcard(data->comando[j][i]);
+			is_wild = 0;*/
 		}
 	}
 }

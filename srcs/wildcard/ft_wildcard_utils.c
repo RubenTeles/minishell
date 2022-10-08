@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:48:32 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 02:49:37 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 21:49:43 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ t_list	*create_list(char *str)
 	return (l);
 }
 
+char	**copy_double_string_and_free_2(char **dest, int extra)
+{
+	dest = malloc(sizeof(char *) * (extra + 1));
+	dest[extra] = NULL;
+	return (dest);
+}
+
 char	**copy_double_string_and_free(char **src, char **dest, int extra)
 {
 	int	i;
@@ -31,11 +38,7 @@ char	**copy_double_string_and_free(char **src, char **dest, int extra)
 
 	i = 0;
 	if (!src)
-	{
-		dest = malloc(sizeof(char *) * (i + extra + 1));
-		dest[i + extra] = NULL;
-		return (dest);
-	}
+		return (copy_double_string_and_free_2(dest, extra));
 	while (src[i])
 		i++;
 	dest = malloc(sizeof(char *) * (i + extra + 1));
@@ -45,7 +48,7 @@ char	**copy_double_string_and_free(char **src, char **dest, int extra)
 	i = -1;
 	while (src[++i])
 	{
-		len =  (string())->len(src[i]);
+		len = (string())->len(src[i]);
 		dest[i] = malloc(sizeof(char) * (len + 1));
 		(string())->copy_n(dest[i], src[i], len + 1);
 		free(src[i]);
@@ -53,4 +56,13 @@ char	**copy_double_string_and_free(char **src, char **dest, int extra)
 	free(src);
 	src = NULL;
 	return (dest);
+}
+
+int	is_dir_type(int type)
+{
+	if (type == DT_UNKNOWN || type == DT_FIFO || type == DT_CHR
+		|| type == DT_DIR || type == DT_BLK || type == DT_LNK
+		|| type == DT_SOCK || type == DT_WHT)
+		return (1);
+	return (0);
 }

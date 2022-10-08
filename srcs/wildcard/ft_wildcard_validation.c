@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:45:03 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 02:45:50 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 21:56:27 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,16 @@ int	ft_valid_med(char *str, char *med, int i)
 	if (!str || !med)
 		return (0);
 	while (med[a] && str[i] && (med[a] != str[i]))
+	{
 		i++;
-	while (med[a] && str[i + a] && (med[a] == str[i + a]))
-		a++;
+		a = 0;
+		while (med[a] && str[i + a] && (med[a] == str[i + a]))
+			a++;
+	}
 	if (!str[i + a])
 		return (start);
 	if (a == len)
-		return (i + a);
+		return (i + a - 1);
 	return (start);
 }
 
@@ -62,15 +65,10 @@ int	ft_valid_final(char *str, char *final)
 	return (0);
 }
 
-
-int	ft_valid(t_wildcard *w, char *str)
+int	ft_valid(t_wildcard *w, char *str, int i, int aux)
 {
-	int	i;
-	int	aux;
 	int	a;
 
-	i = 0;
-	aux = 0;
 	if (w->begin)
 	{
 		aux = ft_valid_start(str, w->begin);
@@ -83,7 +81,6 @@ int	ft_valid(t_wildcard *w, char *str)
 		a = -1;
 		while (w->med[++a])
 		{
-			//printf("str: %s Med: %s\n",str, w->med[a]);
 			aux = ft_valid_med(str, w->med[a], i);
 			if ((aux - i) == 0)
 				return (0);
@@ -91,6 +88,6 @@ int	ft_valid(t_wildcard *w, char *str)
 		}
 	}
 	if (w->final && !ft_valid_final(str, w->final))
-			return (0);
+		return (0);
 	return (1);
 }

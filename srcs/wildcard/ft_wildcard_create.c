@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:40:53 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 16:15:07 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 22:24:25 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,76 +33,71 @@ void	__destroy_wildcard(t_wildcard *w)
 	free(w);
 }
 
-t_list	*begin(t_list *list, char *wildcard, char *path)
+t_list	*begin(t_list *list, char *wildcard, char *path, char *parent)
 {
-	struct dirent	*rdir;
 	t_wildcard		*w;
 	int				i;
 	char			*aux;
-	char			*parent;
 
 	i = 0;
-	parent = NULL;
 	if (wildcard[i] == '/')
 	{
 		while (wildcard[i] == '/')
 			i++;
- 		aux = (string())->sub_str(wildcard, i, (string())->len(wildcard) - i);
+		aux = (string())->sub_str(wildcard, i, (string())->len(wildcard) - i);
 		w = create_wildcard(aux, 0);
 		free(aux);
 		parent = (string())->sub_str(wildcard, 0, i);
 	}
 	else
 		w = create_wildcard(wildcard, 0);
-	list = ft_wildcard_validation(w, list, path, parent);
+	list = ft_wildcard_valid(w, list, path, parent);
 	__destroy_wildcard(w);
 	return (list);
 }
 
-char	**ft_wildcard(char	**command)
+char	**ft_wildcard(char	*command)
 {
 	char			buffer[1001];
-	char			*path;
+	char			**flag;
 	int				i;
-	int				aux;
-	t_list			*start;
 	t_list			*list;
+	t_list			*start;
 
 	i = 0;
-	start = create_list(command[0]);
-	list = start;
-	while (command[++i])
+	list = create_list(command);
+	start = list;
+	if ((string())->index_char(command, '*') >= 0)
 	{
-		if ((string())->index_char(command[i], '*') >= 0)
-		{
-			aux = 0;
-			if (command[i][aux] == '/')
-				path = "/";
-			else
-				path = getcwd(buffer, 1001);
-			while (command[i][aux] == '/')
-				aux++;
-			list = begin(list, command[i], path);
-		}
+		if (command[i] == '/')
+			list = begin(list, command, "/", 0);
 		else
-			list->next = create_list(command[i]);
+			list = begin(list, command, getcwd(buffer, 1001), 0);
 	}
-	//conversao lista para **comandos
-	return (command);
-}
-
-void	ft_call(void)
-{
-	char	*commands[3] = {"ls", "///*", NULL};
-	char	**result;
-	int		i;
-
-	result = ft_wildcard(commands);
-	i = -1;
-	while (commands[++i])
+	if (!start->next)
 	{
-		//printf("%s\n", commands[i]);
-		//free(commands[i]);
+		free(start);
+		return (NULL);
 	}
-	//free(commands);
+	flag = ft_new_flags(start->next, 1);
+	free(start);
+	return (flag);
 }
+
+//teste
+//void	ft_call(void)
+//{
+//	char	**result;
+//	int		i;
+//
+//	result = ft_wildcard("***");
+//	i = -1;
+//	while (result[++i])
+//	{
+//		printf("%s ", result[i]);
+//		free(result[i]);
+//	}
+//	free(result);
+//	printf("\n%i\n", i);
+//}
+//
