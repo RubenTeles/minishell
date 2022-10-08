@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 17:41:40 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 18:11:10 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 18:27:05 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	execute(t_command *c, int option)//, int in)
 			nextx = last_command_left_redirect(c->next);
 		else
 			nextx = c;
-		if (nextx->next && !is_ppa(nextx->next) && !is_in_p_pipe(c->next))
+		if (nextx->next && (!is_ppa(nextx->next) || is_in_p_pipe(c->next)))
 			dup2(c->fd[1], STDOUT_FILENO);
 		close(c->fd[1]);
 	}
