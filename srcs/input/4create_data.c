@@ -6,7 +6,7 @@
 /*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/08 19:01:56 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/08 20:30:54 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_multipipe(t_token *input)
 				is_pipe++;
 			else
 				is_pipe = 0;
-			if (!fstrcmp(">>", input->token) || !fstrcmp(">", input->token) || !fstrcmp("<", input->token) || !fstrcmp("<<", input->token))
+			if (!fstrcmp(">>", input->token) || !fstrcmp(">", input->token) || !fstrcmp("<", input->token) || !fstrcmp("<<", input->token) || !fstrcmp("|", input->token) || !fstrcmp("||", input->token) || !fstrcmp("&&", input->token))
 				is_token++;
 			else
 				is_token = 0;
