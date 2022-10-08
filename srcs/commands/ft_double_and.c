@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:10:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 15:57:21 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 18:01:55 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_count_command(t_command *c)
 	return (count);
 }
 
-static void	double_and_execute(t_command *c, int in)
+static void	double_and_execute_2(t_command *c, int in)
 {
 	char		*line;
 	char		*aux_line;
@@ -61,6 +61,8 @@ static void	double_and_execute(t_command *c, int in)
 		aux_line_2 = (string())->duplicate(aux_line);
 		free(aux_line); 
 	}
+	if (!is_in_p_pipe(c))
+		in = STDIN_FILENO;
 	aux_line = (string())->duplicate((terminal())->line);
 	ft_command_execute_2();
 	free((terminal())->line);
@@ -68,9 +70,32 @@ static void	double_and_execute(t_command *c, int in)
 	data.input = NULL;
 	get_comando((terminal())->line, &data);
 	formate_tokens_main(&data);
-	(terminal())->execute((&data)->comando);
+	(terminal())->execute((&data)->comando, in);
 	ft_free_data(&data, (terminal())->line);
 	(terminal())->line = aux_line;
+}
+
+static void	double_and_execute(t_command *c, int in)
+{
+	t_command	*aux;
+	int			status;
+
+	status = 0;
+	(void)in;
+	aux = (terminal())->start;
+	while (aux != c)
+	{
+		waitpid(aux->pid, &status, 0);
+		if (WIFEXITED(status) && aux->choice == 12 && aux->exit_status == 0)
+			aux->exit_status = WEXITSTATUS(status);
+		(terminal())->last_exit = aux->exit_status;
+		if (aux->next == c)
+			break ;
+		aux = aux->next;
+	}
+	if ((terminal())->last_exit != 0)
+		return ;
+	double_and_execute_2(c, in);
 }
 
 t_command	*ft_double_and(t_command *c)

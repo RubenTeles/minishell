@@ -9,6 +9,7 @@
         "parse.h": "c",
         "stdio.h": "c",
         "signal.h": "c",
-        "dirent.h": "c"
+        "dirent.h": "c",
+        "minishell": "c"
     }
 }

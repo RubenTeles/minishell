@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 17:41:40 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/05 18:00:40 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 18:11:10 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,23 @@ void	execute_out(t_command *c)
 		c->next->execute(c->next, fd);
 }
 
-void	execute(t_command *c, int option)
+void	execute(t_command *c, int option)//, int in)
 {
 	t_command	*nextx;
 
 	nextx = NULL;
+	/*if (c && is_in_p_pipe(c) && c->prev)
+	{
+		c->fd[0] = c->prev->fd[0];
+		c->fd[1] = c->prev->fd[1];
+	}*/
 	if (option == 0)
 	{
 		if (c->next && is_redirect_left(c->next->command[0]) > 0)
 			nextx = last_command_left_redirect(c->next);
 		else
 			nextx = c;
-		if (nextx->next && !is_ppa(nextx->next))
+		if (nextx->next && !is_ppa(nextx->next) && !is_in_p_pipe(c->next))
 			dup2(c->fd[1], STDOUT_FILENO);
 		close(c->fd[1]);
 	}
@@ -66,7 +71,8 @@ void	execute(t_command *c, int option)
 			nextx = last_command_left_redirect(c->next);
 		else
 			nextx = c;
-		if (!nextx->next || (nextx->next && (is_ppa(nextx->next))))
+		if (!nextx->next || (nextx->next && (is_ppa(nextx->next))
+				&& !is_in_p_pipe(c->next)))
 			c->fd[1] = STDOUT_FILENO;
 	}
 }

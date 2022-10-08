@@ -6,13 +6,13 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:10:53 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 15:57:27 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 18:02:22 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	double_pipe_execute_3(t_command *c)
+static void	double_pipe_execute_3(t_command *c, int in)
 {
 	char		*line;
 	char		*aux_line;
@@ -41,6 +41,8 @@ static void	double_pipe_execute_3(t_command *c)
 		aux_line_2 = (string())->duplicate(aux_line);
 		free(aux_line); 
 	}
+	if (!is_in_p_pipe(c))
+		in = STDIN_FILENO;
 	aux_line = (string())->duplicate((terminal())->line);
 	ft_command_execute_2();
 	free((terminal())->line);
@@ -48,12 +50,12 @@ static void	double_pipe_execute_3(t_command *c)
 	data.input = NULL;
 	get_comando((terminal())->line, &data);
 	formate_tokens_main(&data);
-	(terminal())->execute((&data)->comando);
+	(terminal())->execute((&data)->comando, in);
 	ft_free_data(&data, (terminal())->line);
 	(terminal())->line = aux_line;
 }
 
-static void	double_pipe_execute_2(t_command *c)
+static void	double_pipe_execute_2(t_command *c, int in)
 {
 	t_command	*pipe_or_and;
 
@@ -67,7 +69,7 @@ static void	double_pipe_execute_2(t_command *c)
 			pipe_or_and->execute(pipe_or_and, STDIN_FILENO);
 		return ;
 	}
-	double_pipe_execute_3(c);
+	double_pipe_execute_3(c, in);
 }
 
 static void	double_pipe_execute(t_command *c, int in)
@@ -88,7 +90,7 @@ static void	double_pipe_execute(t_command *c, int in)
 			break ;
 		aux = aux->next;
 	}
-	double_pipe_execute_2(c);
+	double_pipe_execute_2(c, in);
 }
 
 t_command	*ft_double_pipe(t_command *c)

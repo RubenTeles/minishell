@@ -59,7 +59,7 @@ int	ft_readline_while_2(t_data *data)
 		&& get_comando((terminal())->line, data))
 	{
 		formate_tokens_main(data);
-		(terminal())->execute(data->comando);
+		(terminal())->execute(data->comando, STDIN_FILENO);
 		if ((terminal())->line
 			&& !(string())->compare_n((terminal())->line, "", 1))
 			add_history((terminal())->line);

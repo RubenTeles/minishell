@@ -73,7 +73,7 @@ struct s_terminal {
 	void		(*add_var)(char *var);
 	void		(*update_var)(char *var, char *str);
 	void		(*delete_var)(char *var);
-	void		(*execute)(char ***commands);
+	void		(*execute)(char ***commands, int in);
 	void		(*count_env)(void);
 	char		*(*variable_env)(char *var);
 	int			(*var_exist)(char *str);
@@ -117,6 +117,7 @@ int			is_parethenses(t_command *c);
 int			is_ppa(t_command *c);
 int			is_token(t_command *c);
 int			ft_count_command(t_command *c);
+int			is_in_p_pipe(t_command *c);
 void		ft_call(void);
 
 //----Terminal Methods----//
@@ -124,7 +125,7 @@ void		__count_env(void);
 char		*variable_env(char *var);
 void		update_var(char *var, char *str);
 int			var_exist(char *str);
-void		ft_command_execute(char ***commands);
+void		ft_command_execute(char ***commands, int in);
 t_env		*create_var_env(char *env);
 void		add_var_if_exist(char *var);
 void		delete_var(char	*var);

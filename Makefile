@@ -45,6 +45,7 @@ SRC_COMMANDS = 	ft_cd.c \
 				ft_double_pipe.c \
 				ft_d_and_pipe_utils.c \
 				ft_parentheses.c \
+				ft_parentheses_utils.c \
 
 SRC_TERMINAL = 	create_terminal.c \
 				create_terminal_2.c \
@@ -106,8 +107,8 @@ $(OBJ_PATH)%.o:$(SRC_PATH_COMMANDS)%.c
 	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 #$(OBJ_PATH)%.o:$(SRC_PATH_WILDCARD)%.c
-	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
+#	@mkdir -p $(OBJ_PATH)
+#	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $@ -L/usr/local/lib -I/usr/local/include -lreadline
