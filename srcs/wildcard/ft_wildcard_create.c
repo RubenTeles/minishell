@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:40:53 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 02:59:16 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 16:15:07 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**ft_wildcard(char	**command)
 	t_list			*start;
 	t_list			*list;
 
-	i = -1;
+	i = 0;
 	start = create_list(command[0]);
 	list = start;
 	while (command[++i])

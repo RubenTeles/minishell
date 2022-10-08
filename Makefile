@@ -68,14 +68,14 @@ SRC_INPUT = 	1cotes.c \
 				6free_input.c \
 				utils.c \
 
-SRC_WILDCARD = 	ft_wildcard_create.c \
+#SRC_WILDCARD = 	ft_wildcard_create.c \
 				ft_wildcard_create_2.c \
 				ft_wildcard_validation.c \
 				ft_wildcard_utils.c \
 				ft_wildcard.c \
 
 
-SRC = $(SRC_NAME) $(SRC_TERMINAL) $(SRC_STRING) $(SRC_INPUT) $(SRC_COMMANDS) $(SRC_WILDCARD)
+SRC = $(SRC_NAME) $(SRC_TERMINAL) $(SRC_STRING) $(SRC_INPUT) $(SRC_COMMANDS) # $(SRC_WILDCARD)
 
 OBJ_NAME = $(SRC:.c=.o)
 
@@ -83,7 +83,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 CC = gcc
 
-CFLAGS = -g #-lreadline -Wall -Wextra -Werror -fsanitize=address 
+CFLAGS = -g -lreadline -Wall -Wextra -Werror -fsanitize=address 
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
@@ -105,7 +105,7 @@ $(OBJ_PATH)%.o:$(SRC_PATH_COMMANDS)%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 
-$(OBJ_PATH)%.o:$(SRC_PATH_WILDCARD)%.c
+#$(OBJ_PATH)%.o:$(SRC_PATH_WILDCARD)%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< -L/usr/local/lib -I/usr/local/include -lreadline
 

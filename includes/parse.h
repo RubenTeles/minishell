@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/08 13:10:22 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 15:54:06 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_token	*ft_split_line(const char *line, int i, t_token	*start, t_token	*end);
 char	*ft_get_command(const char *line, int *idx);
 char	*ft_return_token(const char *line, int *idx, t_help *h);
 int		ft_check_pipe(const char *line, int *idx, int *j);
+int		ft_check_parents(t_token *input);
 
 //			---			            -> 3pipe.c
 //join all tokens into a command array***

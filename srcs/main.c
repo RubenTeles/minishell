@@ -36,25 +36,27 @@ void	formate_tokens_main(t_data *data)
 	j = -1;
 	while (data->comando[++j])
 	{
-		i = -1;
-		while (data->comando[j][++i])
-			data->comando[j][i] = ft_formattoken(data->comando[j][i]);
 		/*i = -1;
 		while (data->comando[j][++i])
 		{
-			if ((string())->index_char(data->comando[j][i], '*') > 0)
+			if ((string())->index_char(data->comando[j][i], '*') != -1)
 			{
 				data->comando[j] = 
 				break ;
 			}
 		}*/
+		i = -1;
+		while (data->comando[j][++i])
+			data->comando[j][i] = ft_formattoken(data->comando[j][i]);
 	}
 }
 
 int	ft_readline_while_2(t_data *data)
 {
 	(terminal())->line = ft_check_cotes((terminal())->line);
-	if (get_comando((terminal())->line, data))
+	data->input = ft_split_line((terminal())->line, 0, NULL, NULL);
+	if (!ft_multipipe(data->input) && !ft_check_parents(data->input)
+		&& get_comando((terminal())->line, data))
 	{
 		formate_tokens_main(data);
 		(terminal())->execute(data->comando);
@@ -82,7 +84,8 @@ static void	ft_readline_while(void)
 			free((terminal())->line);
 			ft_exit(0);
 		}
-		if ((string())->compare_n((terminal())->line, "", 1))
+		if ((string())->compare_n((terminal())->line, "", 1)
+			||  ft_str_is((terminal())->line, ' ', ' '))
 		{
 			free((terminal())->line);
 			continue ;

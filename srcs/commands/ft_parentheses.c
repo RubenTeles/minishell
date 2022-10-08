@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:50:27 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/04 23:06:10 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 16:20:08 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static t_command	*open_paretheses(t_command *c, t_command *aux)
 			break ;
 		aux = aux->next;
 	}
-	if (!aux)
+	/*if (!aux)
 	{
 		printf("syntax error near expected token `)'\n");
 		c->exit_status = 2;
 		return (NULL);
-	}
+	}*/
 	aux->count_cmd = c->count_cmd;
 	return (aux);
 }
@@ -83,15 +83,15 @@ static void	parentheses_open_execute(t_command *c, int in)
 
 static void	parentheses_close_execute(t_command *c, int in)
 {
-	if ((c->next && (!(is_token(c->next)) && !(is_parethenses(c->next) == 2)))
+	/*if ((c->next && (!(is_token(c->next)) && !(is_parethenses(c->next) == 2)))
 		|| (!c->prev || ((is_token(c->prev))
 				|| (is_parethenses(c->prev) == 1))))
 	{
 		printf("syntax error near unexpected token `)'\n");
 		c->exit_status = 2;
 		return ;
-	}
-	if (c->next && c->count_cmd > 0)
+	}*/
+	if (c->next)
 		c->next->execute(c->next, in);
 }
 

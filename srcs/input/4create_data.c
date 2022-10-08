@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/08 13:19:38 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 15:56:04 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	get_comando(char *line, t_data *data)
 	t_help	h;
 
 	h.j = 0;
-	data->input = ft_split_line(line, 0, NULL, NULL);
+	if (data->input == NULL)
+		data->input = ft_split_line(line, 0, NULL, NULL);
 	/*if (ft_multipipe(data->input) || ft_check_parents(data->input))
 		return (0);*/
 	data->start = ft_parameters(data->input, NULL, NULL);

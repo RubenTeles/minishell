@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:10:53 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/05 02:27:22 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/08 15:57:27 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	double_pipe_execute_3(t_command *c)
 	ft_command_execute_2();
 	free((terminal())->line);
 	(terminal())->line = line;
+	data.input = NULL;
 	get_comando((terminal())->line, &data);
 	formate_tokens_main(&data);
 	(terminal())->execute((&data)->comando);
