@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:49:25 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 22:23:31 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 00:08:26 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ t_list	*ft_wildcard_valid(t_wildcard *w, t_list *l, char *path, char *parent)
 	{
 		if (w->all == 1 || ft_valid(w, rdir->d_name, 0, 0))
 		{
-			if (w->next_dir && is_dir_type(rdir->d_type)
-				&& (rdir->d_name[0] != '.' && w->begin == NULL))
+			if (w->next_dir && is_dir_type(rdir->d_type))
 			{
+				if (rdir->d_name[0] == '.' && w->begin == NULL)
+					continue ;
 				aux = (string())->join("/", rdir->d_name);
 				path_dir = (string())->join(path, aux);
 				free(aux);

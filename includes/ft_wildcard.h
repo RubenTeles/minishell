@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:41:51 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 21:58:33 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/09 23:54:12 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	__destroy_wildcard(t_wildcard *w);
 /*---Create 2---*/
 t_wildcard	*create_wildcard(char *wildcard, int dir);
 void		create_wildcard_2(t_wildcard *w, char *wildcard);
-void		wildcard_med(t_wildcard *w, char *sub);
+char		*wildcard_med(t_wildcard *w, char *sub);
 
 /*---Validation---*/
 int		ft_valid(t_wildcard *w, char *str, int i, int aux);

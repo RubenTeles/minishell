@@ -6,13 +6,13 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:47:31 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 21:53:00 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 00:15:34 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_wildcard.h>
 
-void	wildcard_med(t_wildcard *w, char *sub)
+char	*wildcard_med(t_wildcard *w, char *sub)
 {
 	char	**aux_med;
 	char	*aux_2;
@@ -31,8 +31,9 @@ void	wildcard_med(t_wildcard *w, char *sub)
 		free(sub);
 		sub = (string())->duplicate(aux_2);
 		free(aux_2);
-		printf("Med[%i]:\t%s\n", count - 1, w->med[count - 1]);
+		printf("Med[%i]:\t%s\n", count - 1, w->med[count - 1]); //Retirar
 	}
+	return (sub);
 }
 
 void	create_wildcard_2(t_wildcard *w, char *wildcard)
@@ -48,11 +49,11 @@ void	create_wildcard_2(t_wildcard *w, char *wildcard)
 	i = 0;
 	while ((string())->index_char(&aux[i], '*') == 0)
 		i++;
-	wildcard_med(w, &aux[i]);
-	if (aux && (string())->index_char(&aux[i], '*') == -1)
+	aux = wildcard_med(w, &aux[i]);
+	if (aux && (string())->index_char(aux, '*') == -1)
 	{
-		if (&aux[i] && (string())->len(&aux[i]) > 0)
-			w->final = (string())->duplicate(&aux[i]);
+		if (aux && (string())->len(aux) > 0)
+			w->final = (string())->duplicate(aux);
 		free(aux);
 		if ((string())->index_char(wildcard, '*') == 0 && !w->final
 			&& !w->begin && !w->med)
