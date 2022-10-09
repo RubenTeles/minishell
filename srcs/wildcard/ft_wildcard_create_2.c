@@ -6,11 +6,32 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:47:31 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 00:15:34 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 00:38:14 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_wildcard.h>
+
+char	*ft_ignore_wildcard(char *str)
+{
+	char		*aux_2;
+
+	if (!str)
+		return (str);
+	while ((string())->index_char(str, '*') == 0)
+	{
+		aux_2 = (string())->sub_split_option(str, '*', 0);
+		free(str);
+		if (aux_2 && (string())->len(aux_2) == 0)
+			str = aux_2;
+		else
+		{
+			str = (string())->duplicate(aux_2);
+			free(aux_2);
+		}
+	}
+	return (str);
+}
 
 char	*wildcard_med(t_wildcard *w, char *sub)
 {
@@ -29,9 +50,10 @@ char	*wildcard_med(t_wildcard *w, char *sub)
 		free(aux_2);
 		aux_2 = (string())->sub_split_option(sub, '*', 1);
 		free(sub);
+		aux_2 = ft_ignore_wildcard(aux_2);
 		sub = (string())->duplicate(aux_2);
 		free(aux_2);
-		printf("Med[%i]:\t%s\n", count - 1, w->med[count - 1]); //Retirar
+		//printf("Med[%i]:\t%s\n", count - 1, w->med[count - 1]); //Retirar
 	}
 	return (sub);
 }
@@ -39,22 +61,20 @@ char	*wildcard_med(t_wildcard *w, char *sub)
 void	create_wildcard_2(t_wildcard *w, char *wildcard)
 {
 	char		*aux;
-	int			i;
 
 	if ((string())->index_char(wildcard, '*') > 0)
 		w->begin = (string())->sub_split_option(wildcard, '*', 0);
 	else if (w->next_dir && (string())->index_char(wildcard, '*') == -1)
 		w->begin = (string())->duplicate(wildcard);
 	aux = (string())->sub_split_option(wildcard, '*', 1);
-	i = 0;
-	while ((string())->index_char(&aux[i], '*') == 0)
-		i++;
-	aux = wildcard_med(w, &aux[i]);
+	aux = ft_ignore_wildcard(aux);
+	aux = wildcard_med(w, aux);
 	if (aux && (string())->index_char(aux, '*') == -1)
 	{
 		if (aux && (string())->len(aux) > 0)
 			w->final = (string())->duplicate(aux);
-		free(aux);
+		if (aux)
+			free(aux);
 		if ((string())->index_char(wildcard, '*') == 0 && !w->final
 			&& !w->begin && !w->med)
 			w->all = 1;
