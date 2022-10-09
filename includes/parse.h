@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/08 15:54:06 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/09 14:00:19 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,13 @@ char	*ft_exit_status(char *aux, int *j);
 int		ft_str_is(char *line, char c, char d);
 int		fisalnum(int c);
 
+//			---			            -> 7wildcards.c
+//This functions will help process of wildcards
+int		ft_iswildcard(char *token);
+
+//			---			            -> init_parse.c
+//This functions will help process of main
 void	formate_tokens_main(t_data *data);
+char	**ft_join_wildcard(char **comando, int *i);
 
 #endif

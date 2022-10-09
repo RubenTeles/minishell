@@ -67,6 +67,7 @@ SRC_INPUT = 	1cotes.c \
 				4create_data.c \
 				5format_token.c \
 				6free_input.c \
+				7wildcard.c \
 				utils.c \
 
 SRC_WILDCARD = 	ft_wildcard_create.c \
