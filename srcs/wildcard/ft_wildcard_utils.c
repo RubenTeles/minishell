@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:48:32 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 21:49:43 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 19:29:00 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ int	is_dir_type(int type)
 	if (type == DT_UNKNOWN || type == DT_FIFO || type == DT_CHR
 		|| type == DT_DIR || type == DT_BLK || type == DT_LNK
 		|| type == DT_SOCK || type == DT_WHT)
+		return (1);
+	return (0);
+}
+
+int	ft_hiden_files(t_wildcard *w, char *file)
+{
+	if ((!w->word && (file[0] == '.' && !w->begin))
+			|| (w->word && !(string())->compare(file, w->word)))
 		return (1);
 	return (0);
 }

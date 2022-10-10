@@ -99,7 +99,6 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	signal(SIGINT, action);
 	signal(SIGQUIT, action);
-	//ft_call();
 	new_terminal(env);
 	ft_readline_while();
 	return (0);

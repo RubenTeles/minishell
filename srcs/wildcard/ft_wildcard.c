@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:49:25 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 18:14:18 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 19:30:57 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ t_list	*ft_wildcard_valid(t_wildcard *w, t_list *l, char *path, char *parent)
 		{
 			if (w->next_dir && is_dir_type(rdir->d_type))
 			{
-				if ((!w->word && (rdir->d_name[0] == '.' && !w->begin))
-					|| (w->word && !(string())->compare(rdir->d_name, w->word)))
+				if (ft_hiden_files(w, rdir->d_name))
 				{
 					rdir = readdir(dir);
 					continue ;
@@ -73,8 +72,7 @@ t_list	*ft_wildcard_valid(t_wildcard *w, t_list *l, char *path, char *parent)
 			}
 			if (!w->next_dir)
 			{
-				if ((!w->word && (rdir->d_name[0] == '.' && !w->begin))
-					|| (w->word && !(string())->compare(rdir->d_name, w->word)))
+				if (ft_hiden_files(w, rdir->d_name))
 				{
 					rdir = readdir(dir);
 					continue ;

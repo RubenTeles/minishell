@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:10:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 18:01:55 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 18:56:04 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,44 +23,18 @@ int	ft_count_command(t_command *c)
 	aux = (terminal())->start;
 	while (aux && (aux != c))
 	{
-		if (len == 2 && (string())->compare_n(aux->command[0], c->command[0], 2))
+		if (len == 2
+			&& (string())->compare_n(aux->command[0], c->command[0], 2))
 			count++;
 		aux = aux->next;
 	}
 	return (count);
 }
 
-static void	double_and_execute_2(t_command *c, int in)
+void	d_a_execute_3(t_command *c, int in, char *aux_line, char *line)
 {
-	char		*line;
-	char		*aux_line;
-	char		*aux_line_2;
-	int			count;
 	t_data		data;
 
-	(void)in;
-	(void)c;
-	line = NULL;
-	count = ft_count_command(c);
-	aux_line_2 = (string())->duplicate((terminal())->line);
-	while ((string())->index_char(aux_line_2, '&') != -1 && count >= 0)
-	{
-		aux_line = (string())->sub_split_option(aux_line_2, '&', 1);
-		if (aux_line[0] == '&')
-		{
-			if (count == 0)
-			{
-				line = (string())->sub_split_option(aux_line, '&', 1);
-				free(aux_line_2);
-				free(aux_line); 
-				break ;
-			}
-			count--;
-		}
-		free(aux_line_2);
-		aux_line_2 = (string())->duplicate(aux_line);
-		free(aux_line); 
-	}
 	if (!is_in_p_pipe(c))
 		in = STDIN_FILENO;
 	aux_line = (string())->duplicate((terminal())->line);
@@ -73,6 +47,35 @@ static void	double_and_execute_2(t_command *c, int in)
 	(terminal())->execute((&data)->comando, in);
 	ft_free_data(&data, (terminal())->line);
 	(terminal())->line = aux_line;
+}
+
+static void	double_and_execute_2(t_command *c, int in, char *line)
+{
+	char		*aux_line;
+	char		*aux_line_2;
+	int			count;
+
+	count = ft_count_command(c);
+	aux_line_2 = (string())->duplicate((terminal())->line);
+	while ((string())->index_char(aux_line_2, '&') != -1 && count >= 0)
+	{
+		aux_line = (string())->sub_split_option(aux_line_2, '&', 1);
+		if (aux_line[0] == '&')
+		{
+			if (count == 0)
+			{
+				line = (string())->sub_split_option(aux_line, '&', 1);
+				free(aux_line_2);
+				free(aux_line);
+				break ;
+			}
+			count--;
+		}
+		free(aux_line_2);
+		aux_line_2 = (string())->duplicate(aux_line);
+		free(aux_line);
+	}
+	d_a_execute_3(c, in, aux_line, line);
 }
 
 static void	double_and_execute(t_command *c, int in)
@@ -95,7 +98,7 @@ static void	double_and_execute(t_command *c, int in)
 	}
 	if ((terminal())->last_exit != 0)
 		return ;
-	double_and_execute_2(c, in);
+	double_and_execute_2(c, in, 0);
 }
 
 t_command	*ft_double_and(t_command *c)

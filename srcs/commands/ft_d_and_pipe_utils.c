@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 00:53:36 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/05 18:23:51 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 18:48:08 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	is_token(t_command *c)
 		return (0);
 	len = (string())->len(c->command[0]);
 	if ((len == 1 && (string())->compare_n(c->command[0], "|", len))
-			|| (is_d_pipe_or_and(c) > 0))
+		|| (is_d_pipe_or_and(c) > 0))
 		return (1);
 	return (0);
 }
@@ -70,5 +70,5 @@ t_command	*next_d_pipe_or_and(t_command *c)
 	next = c->next;
 	while (next && !(is_d_pipe_or_and(next) > 0))
 		next = next->next;
-	return next;
+	return (next);
 }

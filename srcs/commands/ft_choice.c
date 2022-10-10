@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:25:52 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 17:47:15 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 18:47:16 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_command	*ft_choise(char **command)
 
 void	ft_command_execute_2(void)
 {
-	t_command 	*aux;
+	t_command	*aux;
 	int			status;
 
 	aux = (terminal())->start;

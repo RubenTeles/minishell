@@ -6,23 +6,14 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:53:23 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 17:54:01 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 19:21:36 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	is_in_p_pipe(t_command *c)
+t_command	*ft_close(t_command *aux, t_command *close, int on, int values)
 {
-	t_command	*aux;
-	t_command	*close;
-	int			values;
-	int			on;
-
-	aux = c;
-	values = 0;
-	on = 0;
-	close = NULL;
 	while (aux)
 	{
 		if (is_parethenses(aux) == 1)
@@ -41,6 +32,16 @@ int	is_in_p_pipe(t_command *c)
 		}
 		aux = aux->next;
 	}
+	return (close);
+}
+
+int	is_in_p_pipe(t_command *c)
+{
+	t_command	*aux;
+	t_command	*close;
+
+	aux = c;
+	close = ft_close(aux, 0, 0, 0);
 	while (close && close->next && is_parethenses(close->next) == 2)
 		close = close->next;
 	if (close && close->next && !is_ppa(close->next))

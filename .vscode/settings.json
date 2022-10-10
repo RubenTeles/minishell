@@ -10,6 +10,7 @@
         "stdio.h": "c",
         "signal.h": "c",
         "dirent.h": "c",
-        "minishell": "c"
+        "minishell": "c",
+        "ft_wildcard.h": "c"
     }
 }

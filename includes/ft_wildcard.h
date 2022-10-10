@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:41:51 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 18:15:20 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 19:30:04 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ char	**ft_new_flags(t_list *list, int i);
 t_list	*create_list(char *str);
 char	**copy_double_string_and_free(char **src, char **dest, int extra);
 int		is_dir_type(int type);
+int		ft_hiden_files(t_wildcard *w, char *file);
 
 #endif

@@ -113,12 +113,13 @@ int			left_redirect(t_command *c);
 int			\
 double_left_redirect(t_command *c, char *str, char *line, char *aux);
 int			is_d_pipe_or_and(t_command *c);
+void		ft_permission_denied(t_command *c, int in);
 int			is_parethenses(t_command *c);
 int			is_ppa(t_command *c);
 int			is_token(t_command *c);
 int			ft_count_command(t_command *c);
 int			is_in_p_pipe(t_command *c);
-void		ft_call(void);
+void		d_a_execute_3(t_command *c, int in, char *aux_line, char *line);
 
 //----Terminal Methods----//
 void		__count_env(void);

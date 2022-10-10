@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 17:41:40 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/08 18:27:05 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 19:17:11 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,11 @@ void	execute_out(t_command *c)
 		c->next->execute(c->next, fd);
 }
 
-void	execute(t_command *c, int option)//, int in)
+void	execute(t_command *c, int option)
 {
 	t_command	*nextx;
 
 	nextx = NULL;
-	/*if (c && is_in_p_pipe(c) && c->prev)
-	{
-		c->fd[0] = c->prev->fd[0];
-		c->fd[1] = c->prev->fd[1];
-	}*/
 	if (option == 0)
 	{
 		if (c->next && is_redirect_left(c->next->command[0]) > 0)
