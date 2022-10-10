@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:33:46 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 19:10:32 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 22:13:12 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	double_redirect_right_execute_2(t_command *c, int in)
 	else
 	{
 		write(c->fd[1], str, (string())->len(str));
+		write(c->fd[1], "", 1);
 		close(c->fd[1]);
 	}
 	if (str)

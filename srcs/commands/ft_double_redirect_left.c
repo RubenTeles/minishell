@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:34:08 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/07 23:41:26 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 22:14:57 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static char	*ft_hereadoc(t_command *c, char *str, char **line, char *aux)
 		*line = readline("\033[1;36m> \033[0;37m");
 		if (!*line && error_line(str))
 			return (str);
-		if ((string())->compare_n(c->command[1], *line,
-				(string())->len(c->command[1])))
+		if ((string())->compare(c->command[1], *line))
 			return (str);
 		if (!str)
 			str = (string())->join("\n", *line);
