@@ -6,7 +6,7 @@
 /*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/08 20:30:54 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:38:50 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,39 @@ int	ft_check_parents(t_token *input)
 	return (0);
 }
 
-int	ft_returnpipe(char *token, t_token *temp)
+int	ft_pipeerror(t_token *input, t_token *temp, int is_token)
 {
-	if (token)
-		printf("syntax error near unexpected token `%s´\n", token);
-	ft_free_input(temp, 1);
-	return (1);
+	int		or_and;
+
+	or_and = 0;
+	while (input != NULL)
+	{
+		if (!fstrcmp(">>", input->token) || !fstrcmp(">", input->token)
+			|| !fstrcmp("<", input->token) || !fstrcmp("<<", input->token)
+			|| !fstrcmp("|", input->token) || !fstrcmp("||", input->token)
+			|| !fstrcmp("&&", input->token))
+			is_token++;
+		else
+			is_token = 0;
+		if (!fstrcmp("&&", input->token) || !fstrcmp("||", input->token))
+			or_and++;
+		else
+			or_and = 0;
+		if ((is_token > 1 || or_and > 1) || ((!fstrcmp("&&", input
+						->token) || !fstrcmp("||", input->token)
+					|| !fstrcmp("|", input->token)) && !input->next))
+			return (ft_returnpipe(input->token, temp));
+		input = input->next;
+	}
+	return (0);
 }
 
 int	ft_multipipe(t_token *input)
 {
-	int		is_pipe;
-	int		is_token;
-	int		or_and;
 	t_token	*temp;
+	int		is_token;
 
-	is_pipe = 0;
 	is_token = 0;
-	or_and = 0;
 	temp = input;
 	if (!fstrcmp("|", input->token) || !fstrcmp("||", input->token)
 		|| !fstrcmp("&&", input->token))
@@ -66,24 +81,8 @@ int	ft_multipipe(t_token *input)
 	else
 	{
 		input = input->next;
-		while (input != NULL)
-		{
-			if (!fstrcmp("|", input->token) || !fstrcmp("||", input->token))
-				is_pipe++;
-			else
-				is_pipe = 0;
-			if (!fstrcmp(">>", input->token) || !fstrcmp(">", input->token) || !fstrcmp("<", input->token) || !fstrcmp("<<", input->token) || !fstrcmp("|", input->token) || !fstrcmp("||", input->token) || !fstrcmp("&&", input->token))
-				is_token++;
-			else
-				is_token = 0;
-			if (!fstrcmp("&&", input->token) || !fstrcmp("||", input->token))
-				or_and++;
-			else
-				or_and = 0;
-			if (is_token > 1 || or_and > 1 || is_pipe > 1 || ((!fstrcmp("&&", input->token) || !fstrcmp("||", input->token) || !fstrcmp("|", input->token)) && !input->next))
-				return (ft_returnpipe(input->token, temp));
-			input = input->next;
-		}
+		if (ft_pipeerror(input, temp, is_token))
+			return (1);
 	}
 	return (0);
 }

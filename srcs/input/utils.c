@@ -6,7 +6,7 @@
 /*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 23:35:27 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/01 20:18:30 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:44:43 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,12 @@ int	fisalnum(int c)
 		|| (c >= 'A' && c <= 'Z'))
 		return (1);
 	return (0);
+}
+
+int	ft_returnpipe(char *token, t_token *temp)
+{
+	if (token)
+		printf("syntax error near unexpected token `%s´\n", token);
+	ft_free_input(temp, 1);
+	return (1);
 }
