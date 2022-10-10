@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:49:25 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 01:50:01 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 18:14:18 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,6 @@ t_list	*ft_wildcard_valid(t_wildcard *w, t_list *l, char *path, char *parent)
 	if (w->in_dir > 0 && w->begin == 0 && w->final == 0 && w->med == 0
 		&& w->word == 0 && w->all == 0)
 		return (wildcard_empty(l, parent));
-	if (w->word && (string())->compare(w->word, "/"))
-	{
-		aux = (string())->join(parent, "/");
-		l = ft_wildcard_valid(w->next_dir, l, path, aux);
-		free(aux);
-		return (l);
-	}
 	dir = opendir(path);
 	if (!dir)
 		return (l);

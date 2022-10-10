@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:47:31 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 01:51:38 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 18:14:53 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,40 +84,53 @@ void	create_wildcard_2(t_wildcard *w, char *wildcard)
 	}
 }
 
-static void	new_wildcard(t_wildcard	*w, int dir)
+static char	*new_wildcard(t_wildcard *w, int dir, char *wildcard)
 {
+	char	*aux_wildcard;
+	int		i;
+
 	w->begin = NULL;
 	w->med = NULL;
 	w->final = NULL;
 	w->word = NULL;
+	w->all = 0;
 	w->in_dir = dir;
 	w->next_dir = NULL;
-	w->all = 0;
+	i = 0;
+	if (w->in_dir > 0 && wildcard[i] == '/')
+	{
+		while (wildcard[i] == '/')
+			i++;
+		aux_wildcard = (string())->sub_str(wildcard, i,\
+			(string())->len(wildcard) - i);
+		return (aux_wildcard);
+	}
+	return (wildcard);
 }
 
 t_wildcard	*create_wildcard(char *wildcard, int dir)
 {
 	t_wildcard	*w;
 	char		*aux;
-	int			i;
+	char		*aux_wildcard;
 
+	aux_wildcard = NULL;
 	w = malloc(sizeof(t_wildcard));
 	if (!w)
 		return (NULL);
-	new_wildcard(w, dir);
-	i = 0;
-	while ((string())->index_char(&wildcard[i], '/') == 0)
-		i++;
-	if ((string())->index_char(wildcard, '/') > 0)
+	aux_wildcard = new_wildcard(w, dir, wildcard);
+	if ((string())->index_char(aux_wildcard, '/') > 0)
 	{
-		aux = (string())->sub_split_option(wildcard, '/', 1);
+		aux = (string())->sub_split_option(aux_wildcard, '/', 1);
 		w->next_dir = create_wildcard(aux, dir + 1);
 		free(aux);
-		aux = (string())->sub_split_option(wildcard, '/', 0);
+		aux = (string())->sub_split_option(aux_wildcard, '/', 0);
 		create_wildcard_2(w, aux);
 		free(aux);
 	}
 	else
-		create_wildcard_2(w, wildcard);
+		create_wildcard_2(w, aux_wildcard);
+	if (!(string())->compare(wildcard, aux_wildcard))
+		free(aux_wildcard);
 	return (w);
 }
