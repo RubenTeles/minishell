@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:40:53 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 18:15:14 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 18:32:29 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_list	*begin(t_list *list, char *wildcard, char *path, char *parent)
 		w = create_wildcard(wildcard, 0);
 	list = ft_wildcard_valid(w, list, path, parent);
 	__destroy_wildcard(w);
+	if (parent)
+		free(parent);
 	return (list);
 }
 
