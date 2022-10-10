@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ede-alme <ede-alme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:03:08 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/09 14:00:19 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:41:03 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_token	*ft_split_line(const char *line, int i, t_token	*start, t_token	*end);
 char	*ft_get_command(const char *line, int *idx);
 char	*ft_return_token(const char *line, int *idx, t_help *h);
 int		ft_check_pipe(const char *line, int *idx, int *j);
-int		ft_check_parents(t_token *input);
 
 //			---			            -> 3pipe.c
 //join all tokens into a command array***
@@ -70,8 +69,9 @@ void	ft_make_command2(t_cms **aux, t_token **temp, int i);
 //This functions will be called to start data
 int		get_comando(char *line, t_data *data);
 int		ft_multipipe(t_token *input);
-int		ft_returnpipe(char *token, t_token *temp);
 int		ft_get_size_command(char **commands);
+int		ft_pipeerror(t_token *input, t_token *temp, int is_token);
+int		ft_check_parents(t_token *input);
 
 //			---			            -> 5format_token.c
 //This functions will change the input format of token
@@ -93,6 +93,7 @@ int		fstrcmp(const char *s1, const char *s2);
 char	*ft_exit_status(char *aux, int *j);
 int		ft_str_is(char *line, char c, char d);
 int		fisalnum(int c);
+int		ft_returnpipe(char *token, t_token *temp);
 
 //			---			            -> 7wildcards.c
 //This functions will help process of wildcards
