@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:45:03 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 01:09:26 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 18:43:56 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	ft_valid_med(char *str, char *med, int i)
 	len = (string())->len(med);
 	if (!str || !med)
 		return (0);
+	while (med[a] && str[i + a] && (med[a] == str[i + a]))
+		a++;
 	while (med[a] && str[i] && (med[a] != str[i]))
 	{
 		i++;
@@ -44,8 +46,6 @@ int	ft_valid_med(char *str, char *med, int i)
 		while (med[a] && str[i + a] && (med[a] == str[i + a]))
 			a++;
 	}
-	/*if (!str[i + a])
-		return (start);*/ //Rever no bash
 	if (a == len)
 		return (i + a - 1);
 	return (start);

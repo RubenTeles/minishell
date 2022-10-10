@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:47:31 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 18:14:53 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 18:35:56 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*wildcard_med(t_wildcard *w, char *sub)
 		aux_2 = ft_ignore_wildcard(aux_2);
 		sub = (string())->duplicate(aux_2);
 		free(aux_2);
-		//printf("Med[%i]:\t%s\n", count - 1, w->med[count - 1]); //Retirar
 	}
 	return (sub);
 }
@@ -101,7 +100,7 @@ static char	*new_wildcard(t_wildcard *w, int dir, char *wildcard)
 	{
 		while (wildcard[i] == '/')
 			i++;
-		aux_wildcard = (string())->sub_str(wildcard, i,\
+		aux_wildcard = (string())->sub_str(wildcard, i, \
 			(string())->len(wildcard) - i);
 		return (aux_wildcard);
 	}
