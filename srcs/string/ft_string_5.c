@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 23:41:10 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:41:29 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 01:29:43 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,20 @@ int	ft_isalnum(char *str)
 			continue ;
 		else
 			return (0);
+	}
+	return (1);
+}
+
+int	ft_strcmp(char*s1, char*s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
 	}
 	return (1);
 }

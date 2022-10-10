@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:45:03 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 00:37:48 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 01:09:26 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	ft_valid(t_wildcard *w, char *str, int i, int aux)
 {
 	int	a;
 
+	if (w->word)
+		return ((string())->compare(str, w->word));
 	if (w->begin)
 	{
 		aux = ft_valid_start(str, w->begin);

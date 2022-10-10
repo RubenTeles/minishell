@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:40:53 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/09 23:47:35 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 01:12:49 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	__destroy_wildcard(t_wildcard *w)
 {
 	int	i;
 
+	if (w->word)
+		free(w->word);
 	if (w->begin)
 		free(w->begin);
 	if (w->med)

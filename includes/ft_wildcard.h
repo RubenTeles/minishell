@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:41:51 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/09 23:54:12 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 00:56:59 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 typedef struct s_wildcard			t_wildcard;
 struct s_wildcard {
-	
 	char		*begin;
 	char		**med;
 	char		*final;
+	char		*word;
 	int			all;
 	int			in_dir;
 	t_wildcard	*next_dir;

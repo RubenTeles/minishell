@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:39:43 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/30 22:44:32 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 01:08:39 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,9 @@ retorna 1 se sim, ou 0 se nao.
 t_string	*string(void)
 {
 	static t_string	s = {ft_strlen, ft_split, ft_strnstr, ft_strlcpy,
-		ft_strjoin, ft_str_s_str, ft_strchr, ft_strrchr, ft_strdup, ft_strncmp,
-		ft_substr, ft_string_in_two_char, split_two_str, replace_str,
-		index_char, ft_atoi, ft_itoa, ft_isalnum};
+		ft_strjoin, ft_str_s_str, ft_strchr, ft_strrchr, ft_strdup, ft_strcmp,
+		ft_strncmp, ft_substr, ft_string_in_two_char, split_two_str,
+		replace_str, index_char, ft_atoi, ft_itoa, ft_isalnum};
 
 	return (&s);
 }

@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:38:50 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/29 23:42:14 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 01:08:04 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ struct s_string {
 	char	*(*pos_char)(const char *string, int c);
 	char	*(*pos_char_last)(const char *string, int c);
 	char	*(*duplicate)(const char *s);
+	int		(*compare)(char*s1, char*s2);
 	int		(*compare_n)(const char *str1, const char *str2, size_t n);
 	char	*(*sub_str)(char const *s, unsigned int start, size_t len);
 	char	*(*sub_str_chars)(char *str, char c1, char c2);	
@@ -53,6 +54,7 @@ char		*split_two_str(char *str, char c, int option);
 int			ft_atoi(char *str);
 char		*ft_itoa(int n);
 int			ft_isalnum(char *str);
+int			ft_strcmp(char*s1, char*s2);
 t_string	*string(void);
 
 #endif

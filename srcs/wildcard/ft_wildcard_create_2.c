@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:47:31 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 00:38:14 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 01:51:38 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ char	*wildcard_med(t_wildcard *w, char *sub)
 
 void	create_wildcard_2(t_wildcard *w, char *wildcard)
 {
-	char		*aux;
+	char	*aux;
 
 	if ((string())->index_char(wildcard, '*') > 0)
 		w->begin = (string())->sub_split_option(wildcard, '*', 0);
 	else if (w->next_dir && (string())->index_char(wildcard, '*') == -1)
-		w->begin = (string())->duplicate(wildcard);
+	{
+		w->word = (string())->duplicate(wildcard);
+		return ;
+	}
 	aux = (string())->sub_split_option(wildcard, '*', 1);
 	aux = ft_ignore_wildcard(aux);
 	aux = wildcard_med(w, aux);
@@ -86,6 +89,7 @@ static void	new_wildcard(t_wildcard	*w, int dir)
 	w->begin = NULL;
 	w->med = NULL;
 	w->final = NULL;
+	w->word = NULL;
 	w->in_dir = dir;
 	w->next_dir = NULL;
 	w->all = 0;
