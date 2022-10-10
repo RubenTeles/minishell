@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:48:32 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 19:29:00 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 21:30:33 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,13 @@ int	is_dir_type(int type)
 	return (0);
 }
 
-int	ft_hiden_files(t_wildcard *w, char *file)
+int	ft_hiden_files(t_wildcard *w, char *file, DIR *dir)
 {
 	if ((!w->word && (file[0] == '.' && !w->begin))
-			|| (w->word && !(string())->compare(file, w->word)))
+		|| (w->word && !(string())->compare(file, w->word)))
+	{
+		w->rdir = readdir(dir);
 		return (1);
+	}
 	return (0);
 }

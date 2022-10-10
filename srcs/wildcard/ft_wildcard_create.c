@@ -6,11 +6,33 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:40:53 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 18:32:29 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 21:31:40 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_wildcard.h>
+
+char	**ft_new_flags(t_list *list, int i)
+{
+	t_list	*start;
+	char	**flags;
+
+	start = list;
+	while (list && ++i)
+		list = list->next;
+	flags = malloc(sizeof(char *) * (i));
+	flags[i - 1] = NULL;
+	i = -1;
+	while (start)
+	{
+		flags[++i] = (string())->duplicate(start->command);
+		free (start->command);
+		list = start;
+		start = start->next;
+		free(list);
+	}
+	return (flags);
+}
 
 void	__destroy_wildcard(t_wildcard *w)
 {
@@ -35,7 +57,7 @@ void	__destroy_wildcard(t_wildcard *w)
 	free(w);
 }
 
-t_list	*begin(t_list *list, char *wildcard, char *path, char *parent)
+t_list	*begin(t_list *list, char *wildcard, char *path)
 {
 	t_wildcard		*w;
 	int				i;
@@ -49,14 +71,15 @@ t_list	*begin(t_list *list, char *wildcard, char *path, char *parent)
 		aux = (string())->sub_str(wildcard, i, (string())->len(wildcard) - i);
 		w = create_wildcard(aux, 0);
 		free(aux);
-		parent = (string())->sub_str(wildcard, 0, i);
+		w->parent = (string())->sub_str(wildcard, 0, i);
 	}
 	else
 		w = create_wildcard(wildcard, 0);
-	list = ft_wildcard_valid(w, list, path, parent);
+	w->path = path;
+	list = ft_wildcard_valid(w, list);
+	if (w->parent)
+		free(w->parent);
 	__destroy_wildcard(w);
-	if (parent)
-		free(parent);
 	return (list);
 }
 
@@ -74,9 +97,9 @@ char	**ft_wildcard(char	*command)
 	if ((string())->index_char(command, '*') >= 0)
 	{
 		if (command[i] == '/')
-			list = begin(list, command, "/", 0);
+			list = begin(list, command, "/");
 		else
-			list = begin(list, command, getcwd(buffer, 1001), 0);
+			list = begin(list, command, getcwd(buffer, 1001));
 	}
 	if (!start->next)
 	{

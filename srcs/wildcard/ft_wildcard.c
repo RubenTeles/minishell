@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:49:25 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 19:30:57 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 21:32:24 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,74 +31,112 @@ t_list	*ft_wildcard_new(t_list *l, char *parent, char *read_dir)
 	return (l);
 }
 
-t_list	*ft_wildcard_valid(t_wildcard *w, t_list *l, char *path, char *parent)
+t_list	*ft_wildcard_valid_3(t_wildcard *w, t_list *l, char *aux)
 {
-	DIR				*dir;
-	struct dirent	*rdir;
-	char			*aux;
-	char			*aux_2;
-	char			*path_dir;
+	aux = (string())->join("/", w->rdir->d_name);
+	w->next_dir->path = (string())->join(w->path, aux);
+	free(aux);
+	if (w->parent)
+		aux = (string())->join(w->parent, w->rdir->d_name);
+	else
+		aux = (string())->duplicate(w->rdir->d_name);
+	w->next_dir->parent = (string())->join(aux, "/");
+	free(aux);
+	l = ft_wildcard_valid(w->next_dir, l);
+	free(w->next_dir->path);
+	free(w->next_dir->parent);
+	return (l);
+}
 
-	if (w->in_dir > 0 && w->begin == 0 && w->final == 0 && w->med == 0
-		&& w->word == 0 && w->all == 0)
-		return (wildcard_empty(l, parent));
-	dir = opendir(path);
-	if (!dir)
-		return (l);
-	rdir = readdir(dir);
-	while (rdir)
+t_list	*ft_wildcard_valid_2(t_wildcard *w, t_list *l, DIR *dir)
+{
+	while (w->rdir)
 	{
-		if (w->all == 1 || ft_valid(w, rdir->d_name, 0, 0))
+		if (w->all == 1 || ft_valid(w, w->rdir->d_name, 0, 0))
 		{
-			if (w->next_dir && is_dir_type(rdir->d_type))
+			if (w->next_dir && is_dir_type(w->rdir->d_type))
 			{
-				if (ft_hiden_files(w, rdir->d_name))
-				{
-					rdir = readdir(dir);
+				if (ft_hiden_files(w, w->rdir->d_name, dir))
 					continue ;
-				}
-				aux = (string())->join("/", rdir->d_name);
-				path_dir = (string())->join(path, aux);
-				free(aux);
-				if (parent)
-					aux = (string())->join(parent, rdir->d_name);
-				else
-					aux = (string())->duplicate(rdir->d_name);
-				aux_2 = (string())->join(aux, "/");
-				free(aux);
-				l = ft_wildcard_valid(w->next_dir, l, path_dir, aux_2);
-				free(aux_2);
-				free(path_dir);
+				l = ft_wildcard_valid_3(w, l, 0);
 			}
 			if (!w->next_dir)
 			{
-				if (ft_hiden_files(w, rdir->d_name))
-				{
-					rdir = readdir(dir);
+				if (ft_hiden_files(w, w->rdir->d_name, dir))
 					continue ;
-				}
-				l = ft_wildcard_new(l, parent, rdir->d_name);
+				l = ft_wildcard_new(l, w->parent, w->rdir->d_name);
 			}
 		}
-		rdir = readdir(dir);
+		w->rdir = readdir(dir);
 	}
+	return (l);
+}
+
+t_list	*ft_wildcard_valid(t_wildcard *w, t_list *l)
+{
+	DIR	*dir;
+
+	if (w->in_dir > 0 && w->begin == 0 && w->final == 0 && w->med == 0
+		&& w->word == 0 && w->all == 0)
+		return (wildcard_empty(l, w->parent));
+	dir = opendir(w->path);
+	if (!dir)
+		return (l);
+	w->rdir = readdir(dir);
+	l = ft_wildcard_valid_2(w, l, dir);
 	closedir(dir);
 	return (l);
 }
 
-char	**ft_new_flags(t_list *list, int i)
+/* OLD
+t_list	*ft_wildcard_valid(t_wildcard *w, t_list *l)
 {
-	char	**flags;
+	DIR				*dir;
+	char			*aux;
 
-	if (list->next)
-		flags = ft_new_flags(list->next, i + 1);
-	else
+	if (w->in_dir > 0 && w->begin == 0 && w->final == 0 && w->med == 0
+		&& w->word == 0 && w->all == 0)
+		return (wildcard_empty(l, w->parent));
+	dir = opendir(w->path);
+	if (!dir)
+		return (l);
+	w->rdir = readdir(dir);
+	while (w->rdir)
 	{
-		flags = malloc(sizeof(char *) * (i + 1));
-		flags[i] = NULL;
+		if (w->all == 1 || ft_valid(w, w->rdir->d_name, 0, 0))
+		{
+			if (w->next_dir && is_dir_type(w->rdir->d_type))
+			{
+				if (ft_hiden_files(w, w->rdir->d_name))
+				{
+					w->rdir = readdir(dir);
+					continue ;
+				}
+				aux = (string())->join("/", w->rdir->d_name);
+				w->next_dir->path = (string())->join(w->path, aux);
+				free(aux);
+				if (w->parent)
+					aux = (string())->join(w->parent, w->rdir->d_name);
+				else
+					aux = (string())->duplicate(w->rdir->d_name);
+				w->next_dir->parent = (string())->join(aux, "/");
+				free(aux);
+				l = ft_wildcard_valid(w->next_dir, l);
+				free(w->next_dir->path);
+				free(w->next_dir->parent);
+			}
+			if (!w->next_dir)
+			{
+				if (ft_hiden_files(w, w->rdir->d_name))
+				{
+					w->rdir = readdir(dir);
+					continue ;
+				}
+				l = ft_wildcard_new(l, w->parent, w->rdir->d_name);
+			}
+		}
+		w->rdir = readdir(dir);
 	}
-	flags[i - 1] = (string())->duplicate(list->command);
-	free (list->command);
-	free(list);
-	return (flags);
-}
+	closedir(dir);
+	return (l);
+}*/

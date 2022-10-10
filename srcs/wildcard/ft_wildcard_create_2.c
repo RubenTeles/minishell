@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 02:47:31 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 18:35:56 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/10 20:40:24 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ static char	*new_wildcard(t_wildcard *w, int dir, char *wildcard)
 	w->all = 0;
 	w->in_dir = dir;
 	w->next_dir = NULL;
+	w->path = NULL;
+	w->parent = NULL;
 	i = 0;
 	if (w->in_dir > 0 && wildcard[i] == '/')
 	{
