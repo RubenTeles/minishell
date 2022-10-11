@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:06:35 by rteles            #+#    #+#             */
-/*   Updated: 2022/09/26 05:11:43 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/11 21:17:33 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,21 @@ void	add_var_if_exist(char *var)
 
 void	update_var(char *var, char *str)
 {
-	int		len;
-	int		len_var;
 	t_env	*aux;
 
 	aux = (terminal())->env_l;
-	len = (string())->len(var);
 	while (aux)
 	{
-		len_var = (string())->len(aux->var);
-		if (len_var == len)
+		if ((string())->compare(var, aux->var))
 		{
-			if ((string())->compare_n(var, aux->var, len))
-			{
+			if (str)
 				aux->val = (string())->replace(aux->val, str);
-				return ;
+			else
+			{
+				free(aux->val);
+				aux->val = NULL;
 			}
+			return ;
 		}
 		aux = aux->next;
 	}

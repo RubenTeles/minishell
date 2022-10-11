@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 21:12:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/10 22:12:04 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/11 21:33:44 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,24 @@
 char	*copy_file(char *buffer, char *str, int size)
 {
 	char	*aux;
+	char	*aux_2;
 	int		i;
 
-	if ((string())->len(str) == 1)
-		aux = (string())->duplicate(buffer);
-	else
-		aux = (string())->join(str, buffer);
-	free(str);
+	aux = NULL;
+	aux_2 = malloc(sizeof(char) * (size + 1));
 	i = -1;
+	aux_2[size] = '\0';
 	while (size > ++i)
+	{
+		aux_2[i] = buffer[i];
 		buffer[i] = '\0';
-	return (aux);
+	}
+	if ((string())->len(str) > 0)
+		aux = (string())->join(str, aux_2);
+	free(str);
+	if (aux)
+		return (aux);
+	return (aux_2);
 }
 
 char	*ft_str_file(int in)
