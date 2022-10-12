@@ -6,7 +6,7 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 21:12:42 by rteles            #+#    #+#             */
-/*   Updated: 2022/10/11 21:33:44 by rteles           ###   ########.fr       */
+/*   Updated: 2022/10/12 12:59:57 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,13 @@ char	*copy_file(char *buffer, char *str, int size)
 	}
 	if ((string())->len(str) > 0)
 		aux = (string())->join(str, aux_2);
-	free(str);
+	if (str)
+		free(str);
 	if (aux)
+	{
+		free(aux_2);
 		return (aux);
+	}
 	return (aux_2);
 }
 

@@ -5,123 +5,122 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 23:11:37 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/06 16:46:15 by ede-alme         ###   ########.fr       */
+/*   Created: 2022/09/25 23:26:07 by ede-alme          #+#    #+#             */
+/*   Updated: 2022/10/12 13:24:57 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void	ft_make_command2(t_cms **aux, t_token **temp, int i)
+int	ft_check_parents(t_token *input)
 {
-	while ((*temp) && (*temp)->token)
+	t_help	h;
+
+	h.i = 0;
+	h.temp = input;
+	h.j = 0;
+	while (input)
 	{
-		if (!fstrcmp("<", (*temp)->token) || !fstrcmp("<<", (*temp)->token)
-			|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token)
-			|| !fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)
-			|| !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
-			break ;
-		if (!fstrcmp("|", (*temp)->token))
-		{
-			free ((*temp)->token);
-			(*temp) = (*temp)->next;
-			break ;
-		}
-		(*aux)->commands[i++] = (*temp)->token;
-		(*temp) = (*temp)->next;
+		if (ft_istoken(input->token, h.temp, h.i, h.j))
+			return (1);
+		if (!fstrcmp("(", input->token))
+				h.i++;
+		if (!fstrcmp(")", input->token))
+				h.i--;
+		if (((!fstrcmp("&&", input->token) || !fstrcmp("||", input->token)
+					|| !fstrcmp("|", input->token) || !fstrcmp("<", input
+						->token) || !fstrcmp("<<", input->token) || !fstrcmp(">"
+						, input->token) || !fstrcmp(">>", input->token))))
+			h.j = 1;
+		else
+			h.j = 0;
+		input = input->next;
 	}
+	if (h.i != 0)
+		return (ft_returnpipe(input->token, h.temp));
+	return (0);
 }
 
-void	ft_make_command(t_cms **aux, t_token **temp)
+int	ft_pipeerror(t_token *input, t_token *temp, int is_token)
+{
+	int		or_and;
+
+	or_and = 0;
+	while (input != NULL)
+	{
+		if (!fstrcmp(">>", input->token) || !fstrcmp(">", input->token)
+			|| !fstrcmp("<", input->token) || !fstrcmp("<<", input->token)
+			|| !fstrcmp("|", input->token) || !fstrcmp("||", input->token)
+			|| !fstrcmp("&&", input->token))
+			is_token++;
+		else
+			is_token = 0;
+		if (!fstrcmp("&&", input->token) || !fstrcmp("||", input->token))
+			or_and++;
+		else
+			or_and = 0;
+		if ((is_token > 1 || or_and > 1) || ((!fstrcmp("&&", input
+						->token) || !fstrcmp("||", input->token)
+					|| !fstrcmp("|", input->token)) && !input->next))
+			return (ft_returnpipe(input->token, temp));
+		input = input->next;
+	}
+	return (0);
+}
+
+int	ft_multipipe(t_token *input)
+{
+	t_token	*temp;
+	int		is_token;
+
+	is_token = 0;
+	temp = input;
+	if (!fstrcmp("|", input->token) || !fstrcmp("||", input->token)
+		|| !fstrcmp("&&", input->token))
+		return (ft_returnpipe(input->token, temp));
+	else
+	{
+		input = input->next;
+		if (ft_pipeerror(input, temp, is_token))
+			return (1);
+	}
+	return (0);
+}
+
+int	ft_get_size_command(char **commands)
 {
 	int	i;
 
 	i = 0;
-	if (!fstrcmp("<", (*temp)->token) || !fstrcmp("<<", (*temp)->token)
-		|| !fstrcmp(">", (*temp)->token) || !fstrcmp(">>", (*temp)->token)
-		|| !fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)
-		|| !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
-	{
-		if (!fstrcmp("||", (*temp)->token) || !fstrcmp("&&", (*temp)->token)
-			|| !fstrcmp("(", (*temp)->token) || !fstrcmp(")", (*temp)->token))
-		{
-			(*aux)->commands[i++] = (*temp)->token;
-			(*temp) = (*temp)->next;
-			while ((*temp) && !fstrcmp("|", (*temp)->token))
-			{
-				free((*temp)->token);
-				(*temp) = (*temp)->next;
-			}
-			return ;
-		}
-		(*aux)->commands[i++] = (*temp)->token;
-		(*temp) = (*temp)->next;
-	}
-	ft_make_command2(aux, temp, i);
-}
-
-int	ft_count_param(t_token *temp)
-{
-	int	i;
-
-	i = 0;
-	while (temp)
-	{
-		if (!i && (!fstrcmp("||", temp->token) || !fstrcmp("&&", temp->token)
-				|| !fstrcmp("(", temp->token) || !fstrcmp(")", temp->token)))
-		{
-			i++;
-			temp = temp->next;
-			break ;
-		}
-		if ((i) && (!fstrcmp("|", temp->token) || !fstrcmp("<", temp->token)
-				|| !fstrcmp("<<", temp->token) || !fstrcmp(">", temp->token)
-				|| !fstrcmp(">>", temp->token) || !fstrcmp("||", temp->token)
-				|| !fstrcmp("&&", temp->token) || !fstrcmp("(", temp->token)
-				|| !fstrcmp(")", temp->token)))
-			break ;
+	while (commands && commands[i])
 		i++;
-		temp = temp->next;
-	}
 	return (i);
 }
 
-t_cms	*ft_parameters(t_token *tokens, t_cms *start, t_cms *end)
+int	get_comando(char *line, t_data *data)
 {
-	t_cms	*aux;
-	t_token	*temp;
-	int		i;
+	t_data	*temp;
+	t_help	h;
 
-	temp = tokens;
-	if (!tokens)
-		return (NULL);
-	i = ft_count_param(temp);
-	aux = malloc(sizeof(t_cms));
-	aux->next = NULL;
-	if (start == NULL)
-		start = aux;
-	else
-		end->next = aux;
-	end = aux;
-	aux->commands = malloc((sizeof(char *) * (i + 1)));
-	aux->commands[i] = NULL;
-	temp = tokens;
-	ft_make_command(&aux, &temp);
-	if (temp)
-		start = ft_parameters(temp, start, end);
-	return (start);
-}
-
-void	ft_malloc_comando(t_data **data, t_data temp)
-{
-	int	i;
-
-	i = 0;
-	while (temp.start)
+	h.j = 0;
+	if (data->input == NULL)
+		data->input = ft_split_line(line, 0, NULL, NULL);
+	data->start = ft_parameters(data->input, NULL, NULL);
+	temp = data;
+	ft_malloc_comando(&data, *temp);
+	while (data->start)
 	{
-		temp.start = temp.start->next;
-		i++;
+		h.i = -1;
+		if (data->start->commands && data->start->commands[0])
+			data->comando[h.j] = malloc(sizeof(char *)
+					* (ft_get_size_command(data->start->commands) + 1));
+		while ((++(h.i) + 1) && data->comando && data->comando[h.j]
+			&& data->start->commands && data->start->commands[h.i])
+			data->comando[h.j][h.i] = data->start->commands[h.i];
+		data->comando[h.j][h.i] = NULL;
+		data->start = ft_free_start(data->start);
+		(h.j)++;
 	}
-	(*data)->comando = malloc(sizeof(char **) * (i + 1));
-	(*data)->comando[i] = NULL;
+	data->comando[h.j] = NULL;
+	return (1);
 }

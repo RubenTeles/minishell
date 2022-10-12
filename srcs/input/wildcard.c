@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   7wildcard.c                                        :+:      :+:    :+:   */
+/*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 12:32:59 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/09 14:09:19 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/10/12 13:23:29 by ede-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parse.h>
+#include "parse.h"
 #include <ft_wildcard.h>
 
 char	**ft_take_wildcard(char **comando, int *i, char **new_command)

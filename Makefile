@@ -61,13 +61,14 @@ SRC_STRING = 	ft_string.c \
 				ft_string_4.c \
 				ft_string_5.c \
 				
-SRC_INPUT = 	1cotes.c \
+SRC_INPUT = 	parser.c \
+				1cotes.c \
 				2create_token.c \
 				3pipe.c \
 				4create_data.c \
-				5format_token.c \
-				6free_input.c \
-				7wildcard.c \
+				format_token.c \
+				free_input.c \
+				wildcard.c \
 				utils.c \
 
 SRC_WILDCARD = 	ft_wildcard_create.c \
