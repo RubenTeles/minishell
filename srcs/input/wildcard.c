@@ -13,6 +13,14 @@
 #include "parse.h"
 #include <ft_wildcard.h>
 
+static void	ft_free_1(char **comando, int *i, char **new_command)
+{
+	free(comando[(*i)]);
+	(*i)++;
+	free(comando);
+	free(new_command);
+}
+
 char	**ft_take_wildcard(char **comando, int *i, char **new_command)
 {
 	int		j;
@@ -21,24 +29,24 @@ char	**ft_take_wildcard(char **comando, int *i, char **new_command)
 	char	**out;
 
 	j = 0;
-	temp = (*i);
+	temp = 1;
 	parameters = 0;
 	while (comando && comando[parameters] && parameters < (*i))
 		parameters++;
+	while (comando && comando[*i + temp])
+		temp++;
 	while (new_command && new_command[j])
 		j++;
-	out = malloc(sizeof(char *) * (parameters + j + 1));
-	out[parameters + j] = NULL;
-	while (j >= 0)
-	{
+	out = malloc(sizeof(char *) * (parameters + j + temp));
+	temp++;
+	while (--temp >= 1)
+		out[parameters + temp + j - 1] = comando[*i + temp];
+	while (--j >= 0)
 		out[parameters + j] = new_command[j];
-		j--;
-	}
+	temp = (*i);
 	while (--parameters >= 0 && --temp >= 0)
 		out[parameters] = comando[temp];
-	free(comando[(*i)]);
-	free(comando);
-	free(new_command);
+	ft_free_1(comando, i, new_command);
 	return (out);
 }
 
