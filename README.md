@@ -1,47 +1,42 @@
-Shell:
-    Um shell é uma interface de usuário para acessar os serviços de um sistema operacional. Em geral, os shells dos sistemas operacionais usam uma interface de linha de comando (CLI) ou uma interface gráfica de usuário (GUI).
+# MiniShell
 
-Exemplos de tipos de Shell:
-    CLI: Comand Line Interface
-    GUI: Grafic User Interface
+### What is a shell?
+A shell is a user interface for accessing the services of an operating system. Put simply, a shell is the outermost layer of communication between the user and operating system. Allowing us to navigate and execute tasks in human-readable language.
 
-Visão Geral:
-    Em Unix, o termo Shell é mais utilizado para se referir aos programas de sistemas como meio de interação entre interface de usuário para o acesso a serviços do kernel no sistema operacional. 
-    Este é um programa que recebe, interpreta e executa os comandos de usuário, aparecendo na tela como uma linha de comandos, representada por um interpretador de comandos, que aguarda na tela os comandos do usuário. 
-    CLIs podem ser melhores para os servidores que são gerenciados por administradores.
-    GUIs oferecem simplicidade e facilidade de uso.
+#### Project
+In this project, we implemented many features that recreate a **BASH**. 
+Those include running executables from absolute or relative path, like `/usr/bin/ls` or `ls`, which are fetched from the environment PATH. It handles **pipe** redirection with as many commands as needed. It supports usage of quotes and single quotes -- including nested ones -- and environment variable expansion `$`.
+A few of the functions are "built-in", meaning we don't call the executable, but rather our own functions from inside the shell itself.
 
-Exemplos de Shell GUI:
-    Windows Shell:
-        Barra de Tarefas, Menu iniciar, Gestor de Tarefas, windows explorer.
+#### Signals:
+ `Ctrl-C` `Ctrl-\` and `Ctrl-D` to quit the program, in the same way as **bash**.
 
-Exemplos de Shell CLI:
-    Bash:
-        É o Shell CLI mais utilizado em sistemas operacionais,
-    ZSH;
-    FISH;
+#### "Built-In":
+`echo`, `pwd`, `cd`, `env`, `export`, `unset` and `exit`.
 
-Shell Script: #!/bin/MiniShell42
-    É um arquivo de texto.sh que contem comandos para que o Shell execute. Para isso o Shell terá que reconhecer os comandos guardados no arquivo.
+#### Bonus:
+`&&`, `||` and the wildcard `*` 
 
-Resumo:
-    Existem tipos diferentes de Shell, cada Shell pode ter o seu própio conjunto de ferramentas, e reconhecer certos comandos e funções. Shell então é um programa utilizado para intrepetar comandos.
+#### Extras:
+* **name**: show allways the PATH, like **bash**
+* **quotes**: if there are quotes to close, it will wait until closing.
+* **wildcard `*`**: works in all directories
 
-Funcionamento de um Shell CLI:
+```diff
+# Clone the project and access the folder
+git clone https://github.com/RubenTeles/minishell && cd minishell/
 
-Shell Init:
-    É apresentado  um prompt;
-            ->  
+# Compile the program
+make
 
-    O usuário escreve um comando e aperta enter;
-            ->
+# Run the program
+./minishell
 
-    O Shell interpreta o comando e tenta tomar as ações;
-            ->
+# Write any shell command like
+echo "hello minishell"
 
-    Um novo prompt é apresentado ao usuário;
-            ->
-                (REPL)  ->  Read--Evaluate--Print--Loop
+# Quit the program
+exit
 
-Referencia esquema de funcionamento de um Shell:
-https://whimsical.com/minishell-architecture-big-picture-7b9N8PL3qHrddbs977mQ2J
+# Well done!
+```
