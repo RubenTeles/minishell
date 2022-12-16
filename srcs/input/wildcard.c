@@ -6,20 +6,12 @@
 /*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 12:32:59 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/12/16 18:19:23 by rteles           ###   ########.fr       */
+/*   Updated: 2022/12/16 18:21:53 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include <ft_wildcard.h>
-
-static void	ft_free_1(char **comando, int *i, char **new_command)
-{
-	free(comando[(*i)]);
-	(*i)++;
-	free(comando);
-	free(new_command);
-}
 
 char	**ft_take_wildcard(char **comando, int *i, char **new_command)
 {
@@ -48,16 +40,6 @@ char	**ft_take_wildcard(char **comando, int *i, char **new_command)
 	free(comando);
 	free(new_command);
 	return (out);
-}
-
-char	**ft_join_wildcard(char **comando, int *i)
-{
-	char	**new_command;
-
-	new_command = ft_wildcard(comando[(*i)]);
-	if (new_command)
-		return (ft_take_wildcard(comando, i, new_command));
-	return (comando);
 }
 
 char	**ft_join_wildcard(char **comando, int *i)
