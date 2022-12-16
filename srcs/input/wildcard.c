@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-alme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rteles <rteles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 12:32:59 by ede-alme          #+#    #+#             */
-/*   Updated: 2022/10/12 13:23:29 by ede-alme         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:19:23 by rteles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,35 @@ char	**ft_take_wildcard(char **comando, int *i, char **new_command)
 	char	**out;
 
 	j = 0;
-	temp = 1;
+	temp = (*i);
 	parameters = 0;
 	while (comando && comando[parameters] && parameters < (*i))
 		parameters++;
-	while (comando && comando[*i + temp])
-		temp++;
 	while (new_command && new_command[j])
 		j++;
-	out = malloc(sizeof(char *) * (parameters + j + temp));
-	temp++;
-	while (--temp >= 1)
-		out[parameters + temp + j - 1] = comando[*i + temp];
-	while (--j >= 0)
+	out = malloc(sizeof(char *) * (parameters + j + 1));
+	out[parameters + j] = NULL;
+	while (j >= 0)
+	{
 		out[parameters + j] = new_command[j];
-	temp = (*i);
+		j--;
+	}
 	while (--parameters >= 0 && --temp >= 0)
 		out[parameters] = comando[temp];
-	ft_free_1(comando, i, new_command);
+	free(comando[(*i)]);
+	free(comando);
+	free(new_command);
 	return (out);
+}
+
+char	**ft_join_wildcard(char **comando, int *i)
+{
+	char	**new_command;
+
+	new_command = ft_wildcard(comando[(*i)]);
+	if (new_command)
+		return (ft_take_wildcard(comando, i, new_command));
+	return (comando);
 }
 
 char	**ft_join_wildcard(char **comando, int *i)
