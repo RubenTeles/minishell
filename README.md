@@ -3,7 +3,7 @@
 ### What is a shell?
 A shell is a user interface for accessing the services of an operating system. Put simply, a shell is the outermost layer of communication between the user and operating system. Allowing us to navigate and execute tasks in human-readable language.
 
-#### Project
+### Project
 In this project, we implemented many features that recreate a **BASH**. 
 Those include running executables from absolute or relative path, like `/usr/bin/ls` or `ls`, which are fetched from the environment PATH. It handles **pipe** redirection with as many commands as needed. It supports usage of quotes and single quotes -- including nested ones -- and environment variable expansion `$`.
 A few of the functions are "built-in", meaning we don't call the executable, but rather our own functions from inside the shell itself.
@@ -15,14 +15,18 @@ A few of the functions are "built-in", meaning we don't call the executable, but
 `echo`, `pwd`, `cd`, `env`, `export`, `unset` and `exit`.
 
 #### Bonus:
-`&&`, `||` and the wildcard `*` 
+`&&`, `||` with `()` and the wildcard `*` 
 
 #### Extras:
-* **name**: show allways the PATH, like **bash**
-* **quotes**: if there are quotes to close, it will wait until closing.
-* **wildcard `*`**: works in all directories
+* **name**: Show allways the PATH, like **bash**.
+* **quotes**: If there are quotes to close, it will wait until closing.
+* **wildcard `*`**: Works in all directories.
 
 ```diff
+# Requirements: GNU Readline Library
+# To install the readline library, open the terminal window and write
+sudo apt-get install libreadline-dev
+
 # Clone the project and access the folder
 git clone https://github.com/RubenTeles/minishell && cd minishell/
 
