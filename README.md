@@ -1,5 +1,9 @@
 # MiniShell
 
+
+https://user-images.githubusercontent.com/75394884/208167703-aaf2df36-63bc-4ab2-bc17-9df6a26c85b4.mp4
+
+
 ### What is a shell?
 A shell is a user interface for accessing the services of an operating system. Put simply, a shell is the outermost layer of communication between the user and operating system. Allowing us to navigate and execute tasks in human-readable language.
 
